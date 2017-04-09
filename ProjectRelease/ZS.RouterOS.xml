@@ -1,0 +1,424 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+ZS.RouterOS
+</name>
+</assembly>
+<members>
+<member name="T:ZS.RouterOS.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:ZS.RouterOS.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:ZS.RouterOS.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="P:ZS.RouterOS.Config.Session">
+ <summary>
+ 会话信息
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:ZS.RouterOS.Helper.ARP.ARP_ScriptText_Add(ZS.RouterOS.Helper.ARP.ARP_Model)">
+ <summary>
+ 获取添加ARP的脚本
+ </summary>
+ <param name="model"></param>
+ <returns></returns>
+</member>
+<member name="M:ZS.RouterOS.Helper.ARP.ARP_ScriptText_RemoveByIPAddress(System.String)">
+ <summary>
+ 根据IP地址生成删除脚本
+ </summary>
+ <param name="ip"></param>
+ <returns></returns>
+</member>
+<member name="M:ZS.RouterOS.Helper.ARP.ARP_ScriptText_RemoveByMacAddress(System.String)">
+ <summary>
+ 根据MAC地址生成删除脚本
+ </summary>
+ <param name="mac"></param>
+ <returns></returns>
+</member>
+<member name="M:ZS.RouterOS.Helper.ARP.ARP_Model.#ctor(System.String,System.String,System.String,System.String,System.Boolean)">
+ <summary>
+ 使用指定参数构造一个新的ARP绑定对象
+ </summary>
+ <param name="_address">IP地址</param>
+ <param name="_macAddress">物理地址</param>
+ <param name="_Interface">网卡接口名称</param>
+ <param name="_comment">备注</param>
+ <param name="_disabled">是否禁用</param>
+</member>
+<member name="P:ZS.RouterOS.Helper.ARP.ARP_Model.Address">
+ <summary>设备IP地址</summary>
+</member>
+<member name="P:ZS.RouterOS.Helper.ARP.ARP_Model.MacAddress">
+ <summary>设备物理地址</summary>
+</member>
+<member name="P:ZS.RouterOS.Helper.ARP.ARP_Model.InterfaceName">
+ <summary>网卡接口名称</summary>
+</member>
+<member name="P:ZS.RouterOS.Helper.ARP.ARP_Model.Disabled">
+ <summary>是否禁用</summary>
+</member>
+<member name="P:ZS.RouterOS.Helper.ARP.ARP_Model.Comment">
+ <summary>备注</summary>
+</member>
+<member name="T:ZS.RouterOS.Helper.DHCPServer.Leases_Model">
+ <summary>
+ DHCP绑定模型
+ </summary>
+</member>
+<member name="M:ZS.RouterOS.Helper.DHCPServer.Leases_Model.#ctor(System.String,System.String,System.String,System.String)">
+ <summary>
+ 使用指定参数构造一个新的DHCP绑定对象
+ </summary>
+ <param name="_address">IP地址</param>
+ <param name="_macAddress">MAC地址</param>
+ <param name="_server">DHCP服务器名称</param>
+ <param name="_comment">备注</param>
+</member>
+<member name="P:ZS.RouterOS.Helper.DHCPServer.Leases_Model.Address">
+ <summary>IP地址</summary>
+</member>
+<member name="P:ZS.RouterOS.Helper.DHCPServer.Leases_Model.MacAddress">
+ <summary>MAC抵制</summary>
+</member>
+<member name="P:ZS.RouterOS.Helper.DHCPServer.Leases_Model.Server">
+ <summary>DHCP服务器。注意服务器名称必须要大小写完全匹配。默认为All</summary>
+</member>
+<member name="P:ZS.RouterOS.Helper.DHCPServer.Leases_Model.LeaseTime">
+ <summary>
+ 租约时间。格式为HH:mm:ss。默认为空，即按照Server的租约时间处理。
+ </summary>
+</member>
+<member name="P:ZS.RouterOS.Helper.DHCPServer.Leases_Model.Disabled">
+ <summary>
+ 是否禁用。默认为False
+ </summary>
+</member>
+<member name="P:ZS.RouterOS.Helper.DHCPServer.Leases_Model.AlwaysBroadcast">
+ <summary>
+ 是否始终广播。默认为True
+ </summary>
+</member>
+<member name="P:ZS.RouterOS.Helper.DHCPServer.Leases_Model.Comment">
+ <summary>备注</summary>
+</member>
+<member name="M:ZS.RouterOS.Helper.DHCPServer.Leases_Print">
+ <summary>
+ 显示当前的静态DHCP列表
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:ZS.RouterOS.Helper.DHCPServer.Leases_Add(ZS.RouterOS.Helper.DHCPServer.Leases_Model,System.String@)">
+ <summary>
+ 添加1条DHCP绑定
+ </summary>
+ <param name="obj">绑定对象</param>
+ <param name="errMessage">执行消息</param>
+ <returns></returns>
+</member>
+<member name="M:ZS.RouterOS.Helper.DHCPServer.Leases_RemoveAllDynamic(System.String@)">
+ <summary>
+ 移除所有动态分配的地址
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:ZS.RouterOS.Helper.DHCPServer.Leases_ScriptText_RemoveByIPAddress(System.String)">
+ <summary>
+ 根据IP地址删除DHCP绑定的脚本。包含静态绑定和动态绑定。
+ </summary>
+ <param name="ip"></param>
+ <returns></returns>
+</member>
+<member name="M:ZS.RouterOS.Helper.DHCPServer.Leases_ScriptText_RemoveByMACAddress(System.String)">
+ <summary>
+ 根据MAC地址删除DHCP绑定的脚本。包含静态的和动态绑定的。
+ </summary>
+ <param name="mac">MAC地址</param>
+ <returns></returns>
+</member>
+<member name="M:ZS.RouterOS.Helper.DHCPServer.Leases_ScriptText_Add(ZS.RouterOS.Helper.DHCPServer.Leases_Model)">
+ <summary>
+ 根据DHCP绑定对象创建绑定添加的脚本
+ </summary>
+ <param name="model"></param>
+ <returns></returns>
+</member>
+<member name="T:ZS.RouterOS.Helper.Helper">
+ <summary>
+ 路由辅助操作。只允许1个单例
+ </summary>
+</member>
+<member name="M:ZS.RouterOS.Helper.Hotspot.IPBindings_Print">
+ <summary>
+ 显示当前的IP绑定列表
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:ZS.RouterOS.Helper.Hotspot.IPBindings_Add(ZS.RouterOS.Helper.Hotspot.IPBindings_Model,System.String@)">
+ <summary>
+ 添加一个热点绑定
+ </summary>
+ <param name="obj"></param>
+ <param name="errMessage"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:ZS.RouterOS.Helper.Hotspot.IPBindings_RemoveByServer(System.String,System.String@)">
+ <summary>
+ 删除指定服务下的IP绑定。如果不指定服务名称，则是删除所有服务的绑定数据。
+ </summary>
+ <param name="server">热点服务名称</param>
+ <returns></returns>
+</member>
+<member name="M:ZS.RouterOS.Helper.Hotspot.IPBindings_IsIpExists(ZS.RouterOS._IPAddress,System.String@)">
+ <summary>
+ 检查指定的IP地址是否存在于IP绑定列表中。
+ </summary>
+ <param name="ip"></param>
+ <returns></returns>
+</member>
+<member name="T:ZS.RouterOS.Helper.Hotspot.IPBindings_Model">
+ <summary>
+ IP绑定模型
+ </summary>
+</member>
+<member name="P:ZS.RouterOS.Helper.Hotspot.IPBindings_Model.MACAddress">
+ <summary>MAC地址</summary>
+</member>
+<member name="P:ZS.RouterOS.Helper.Hotspot.IPBindings_Model.Address">
+ <summary>IP地址范围起始IP</summary>
+</member>
+<member name="P:ZS.RouterOS.Helper.Hotspot.IPBindings_Model.ToAddress">
+ <summary>IP地址范围截至IP</summary>
+</member>
+<member name="P:ZS.RouterOS.Helper.Hotspot.IPBindings_Model.Server">
+ <summary>热点服务名称。名称是区分大小写的，所以必须与ROS中的名称完全一致</summary>
+</member>
+<member name="P:ZS.RouterOS.Helper.Hotspot.IPBindings_Model.Type">
+ <summary>网络访问授权类型</summary>
+</member>
+<member name="P:ZS.RouterOS.Helper.Hotspot.IPBindings_Model.Disabled">
+ <summary>是否禁用。默认为否</summary>
+</member>
+<member name="T:ZS.RouterOS.Helper.Hotspot.IPBindings_Model.BindingType">
+ <summary>访问限制类型</summary>
+</member>
+<member name="F:ZS.RouterOS.Helper.Hotspot.IPBindings_Model.BindingType.Blocked">
+ <summary>阻止访问</summary>
+</member>
+<member name="F:ZS.RouterOS.Helper.Hotspot.IPBindings_Model.BindingType.ByPassed">
+ <summary>授权访问</summary>
+</member>
+<member name="M:ZS.RouterOS.Helper.Script.RunScript(System.String,System.String@)">
+ <summary>
+ 执行指定名称的脚本
+ </summary>
+ <param name="scriptName">脚本名称</param>
+ <returns></returns>
+</member>
+<member name="M:ZS.RouterOS.Helper.Script.Add(ZS.RouterOS.Helper.Script_Model,System.String@)">
+ <summary>
+ 添加脚本
+ </summary>
+ <param name="m">脚本对象</param>
+ <param name="errMessage">执行消息</param>
+ <returns></returns>
+</member>
+<member name="M:ZS.RouterOS.Helper.Script.Remove(System.String,System.String@)">
+ <summary>
+ 移除指定名称的脚本
+ </summary>
+ <param name="scriptName">脚本名称</param>
+ <param name="errMessage">执行消息</param>
+ <returns></returns>
+</member>
+<member name="P:ZS.RouterOS.Helper.Script_Model.Name">
+ <summary>
+ 脚本名称
+ </summary>
+</member>
+<member name="P:ZS.RouterOS.Helper.Script_Model.Source">
+ <summary>
+ 脚本内容
+ </summary>
+</member>
+<member name="T:ZS.RouterOS.API">
+ <summary>
+ API操作
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:ZS.RouterOS.API.Execute(System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+ <summary>
+ 执行命令
+ </summary>
+ <param name="command">命令主体，如 /ip address print</param>
+ <param name="attribute">命令属性集合。例如针对 /ip address add 命令需要设置的address,network,interface等</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:ZS.RouterOS.API.EncodePassword(System.String,System.String)">
+ <summary>
+ 编码密码
+ </summary>
+ <param name="password"></param>
+ <param name="hash"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="F:ZS.RouterOS.Base.m_Session">
+ <summary>会话数据</summary>
+</member>
+<member name="T:ZS.RouterOS.ROSObjects.RMetadata">
+ <summary>
+ 标记在每个ROS对象类/属性上的原数据
+ </summary>
+</member>
+<member name="T:ZS.RouterOS.ROSObjects.RMetadataCache">
+ <summary>
+ 原数据缓存
+ </summary>
+</member>
+<member name="M:ZS.RouterOS.ROSObjects.RMetadataCache.GetMetadata``1">
+ <summary>
+ 获取指定类型的ROS对象的原数据
+ </summary>
+ <typeparam name="T"></typeparam>
+ <returns></returns>
+</member>
+<member name="P:ZS.RouterOS.ROSObjects.RObjAttribute.BaseCommand">
+ <summary>该对象的ROS基本命令行。如：/ip address。该属性应只作用于Class</summary>
+</member>
+<member name="P:ZS.RouterOS.ROSObjects.RObjAttribute.ROSName">
+ <summary>该属性在ROS中的名称</summary>
+</member>
+<member name="T:ZS.RouterOS._MACAddress">
+ <summary>
+ MAC地址类型
+ </summary>
+</member>
+<member name="M:ZS.RouterOS._MACAddress.ToString">
+ <summary>
+ 输出该类型的ROS值。即:分隔的MAC地址表示
+ </summary>
+</member>
+<member name="T:ZS.RouterOS._IPAddress">
+ <summary>
+ IP地址定义
+ </summary>
+</member>
+<member name="M:ZS.RouterOS._IPAddress.ToString">
+ <summary>
+ 输出该类型的ROS值。
+ </summary>
+</member>
+<member name="T:ZS.RouterOS._Disabled">
+ <summary>
+ 禁用属性定义
+ </summary>
+</member>
+<member name="M:ZS.RouterOS._Disabled.ToString">
+ <summary>
+ 输出该类型的ROS值。True输出为yes，False输出为no
+ </summary>
+</member>
+<member name="T:ZS.RouterOS._Comment">
+ <summary>
+ 注释
+ </summary>
+</member>
+<member name="T:ZS.RouterOS.ScriptHelper">
+ <summary>
+ 脚本生成
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="T:ZS.RouterOS.ScriptHelper.DHCP">
+ <summary>
+ DHCP脚本
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:ZS.RouterOS.ScriptHelper.DHCP.Lease_RemoveByMacAddress(System.String)">
+ <summary>
+ 根据MAC地址创建HDCP Lease的删除脚本
+ </summary>
+ <param name="mac">MAC地址</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="T:ZS.RouterOS.ScriptHelper.ARP">
+ <summary>
+ ARP脚本
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:ZS.RouterOS.ScriptHelper.ARP.RemoveByMacAddress(System.String)">
+ <summary>
+ 根据MAC地址创建arp的删除脚本
+ </summary>
+ <param name="mac">MAC地址</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="T:ZS.RouterOS.ScriptHelper.Hotspot">
+ <summary>
+ 热点
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:ZS.RouterOS.ScriptHelper.Hotspot.IPBinding_RemoveByMacAddress(System.String)">
+ <summary>
+ 根据MAC地址创建/ip hotspot ip-binding的删除脚本
+ </summary>
+ <param name="mac">MAC地址</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="T:ZS.RouterOS.Session">
+ <summary>
+ 会话信息
+ </summary>
+</member>
+<member name="P:ZS.RouterOS.Session.UserName">
+ <summary>
+ 登陆账号
+ </summary>
+</member>
+<member name="P:ZS.RouterOS.Session.Password">
+ <summary>
+ 登陆密码
+ </summary>
+</member>
+<member name="P:ZS.RouterOS.Session.HostNameOrIPAddress">
+ <summary>
+ 主机域名或者地址
+ </summary>
+</member>
+<member name="P:ZS.RouterOS.Session.Port">
+ <summary>
+ 端口。默认端口为8728
+ </summary>
+</member>
+<member name="P:ZS.RouterOS.Session.Version">
+ <summary>
+ 路由版本号
+ </summary>
+</member>
+</members>
+</doc>

@@ -1,0 +1,164 @@
+﻿<UserControl x:Class="ZS.WordAddIn.UserControls.MainTaskPan"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ZS.WordAddIn.UserControls"
+             xmlns:WPFControls="clr-namespace:ZS.WPFControls;assembly=ZS.WPFControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             Loaded="UserControl_Loaded">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/ZS.WPFControls;component/Styles/Default/Style.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="Button" BasedOn="{StaticResource Button_Normal1}">
+                <Setter Property="Margin" Value="3,3,0,0" />
+                <Setter Property="Width" Value="100" />
+                <Setter Property="Height" Value="30" />
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <TabControl>
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock>显示</TextBlock>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <Grid>
+                        <StackPanel>
+                            <ToggleButton>显示标尺</ToggleButton>
+                            <CheckBox Tag="Ruler" Checked="ShowWordItem_Checked" Unchecked="ShowWordItem_Checked">显示标尺</CheckBox>
+                            <CheckBox Tag="Gridlines" Checked="ShowWordItem_Checked" Unchecked="ShowWordItem_Checked">显示网格线</CheckBox>
+                            <Button Click="Button_Click_3">加载所有面板名称</Button>
+                            <ListView Name="listPanesName">
+
+                            </ListView>
+                        </StackPanel>
+                    </Grid>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock>段落</TextBlock>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="0">
+                            <Button Click="OnClick_Paragraph" Name="BTN_PG_SelLastPG">选择最后一段</Button>
+                            <Button Click="Button_Click" >删除注释</Button>
+                            <Button Click="Button_Click_1" >加载所有段落</Button>
+                            <Button Click="Button_Click_2" >另存图片</Button>
+                            <TextBlock Name="txtTitle" Background="White">TT</TextBlock>
+                        </WrapPanel>
+                        <ListView Name="ListData" MouseDoubleClick="ListData_MouseDoubleClick" Grid.Row="1">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding KeyText}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid>
+                </TabItem.Content>
+            </TabItem>
+
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock>图片</TextBlock>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                        <Button  Style="{DynamicResource Button_Normal1}" Width="100" Height="30" Click="OnClick_InsertShapeImage">Shape方式添加图片</Button>
+                        <TextBox Name="txtImage" Width="300"></TextBox>
+                    </StackPanel>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock>WebBrowser</TextBlock>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <DockPanel>
+                            <Button Style="{DynamicResource Button_Normal1}" Name="BTN_GoURL" DockPanel.Dock="Left" Width="90" Click="OnClick_OpenUrl">Open</Button>
+                            <Button Style="{DynamicResource Button_Normal1}" Name="BTN_InvokeScript" DockPanel.Dock="Left" Width="90" Click="OnClick_InvokeScript">Script</Button>
+                            <TextBox Name="TB_BrowserURL" DockPanel.Dock="Left" MinWidth="100"></TextBox>
+                        </DockPanel>
+                        <WebBrowser Grid.Row="0" Name="WB_Main">
+
+                        </WebBrowser>
+
+                    </Grid>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock>书签</TextBlock>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="0">
+                            <Button Name="BTN_ListBookmarks"  Click="OnClick_ListBookMarks"  HorizontalAlignment="Left">加载书签</Button>
+                            <Button Name="BTN_ReplaceBookmarkContent"   Click="OnClick_ReplaceBookmarkContent" Grid.Row="0">更换书签内容</Button>
+                            <Button Name="BTN_BK_CopyAndInsert"   Click="OnClick_BK_CopyBK" Grid.Row="0">复制书签</Button>
+                        </WrapPanel>
+                        <ListBox Name="BM_List_BookMarks" Grid.Row="1" MouseDoubleClick="BM_List_BookMarks_MouseDoubleClick"></ListBox>
+                    </Grid>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock>读取信息</TextBlock>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="0">
+                            <Button Style="{DynamicResource Button_Normal1}" Name="Test_BTN_GetUserInfo" Width="90" Click="OnClick_Test_GetUserInfo"  HorizontalAlignment="Left">读取</Button>
+                        </StackPanel>
+                        <ListBox Name="Test_List_Info" Grid.Row="1" ></ListBox>
+                    </Grid>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock>大纲</TextBlock>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="0">
+                            <Button Click="OnClick_ReadOutLine">读取大纲</Button>
+                            <Button Click="OnClick_SortParagraphs">ListParagraphs</Button>
+                        </StackPanel>
+                        <ListBox Name="List_OutLine" Grid.Row="1" ></ListBox>
+                    </Grid>
+                </TabItem.Content>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>

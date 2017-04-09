@@ -1,0 +1,669 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+ZS.Common
+</name>
+</assembly>
+<members>
+<member name="T:ZS.Common.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:ZS.Common.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:ZS.Common.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="M:ZS.Common.Computer.SetComputerName(System.String,System.String@)">
+ <summary>
+ 设置本机的计算机名
+ </summary>
+ <param name="computerName">新的计算机名</param>
+ <returns></returns>
+</member>
+<member name="M:ZS.Common.DB.CommonSqlDAL.#ctor(System.String,System.String)">
+ <summary>
+ 通过连接字符串与表名构造一个SQL Server数据库的DAL操作
+ </summary>
+ <param name="v_TableName"></param>
+ <param name="v_ConnectionString"></param>
+ <remarks></remarks>
+</member>
+<member name="M:ZS.Common.DB.CommonSqlDAL.AddByFields(System.Collections.Generic.Dictionary{System.String,System.Object},System.Data.SqlClient.SqlTransaction)">
+ <summary>
+ 根据字典向数据表添加数据。
+ </summary>
+ <param name="v_Fields"></param>
+ <param name="v_Tran"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:ZS.Common.DB.CommonSqlDAL.GetTable(System.String,System.String,System.Collections.Generic.List{System.String})">
+ <summary>
+ 查询表中指定查询条件、指定排序条件、指定字段的数据，返回DataTable
+ </summary>
+ <param name="v_Filter">查询条件。如果为空，则表示查询所有。</param>
+ <param name="v_Order">排序条件。如果为空，则表示按照默认排序。</param>
+ <param name="v_Fields">要查询的字段。如果为空，表示查询所有字段。</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:ZS.Common.DB.CommonSqlDAL.CreateSQLParameter(System.String,System.Object)">
+ <summary>
+ 创建SQL参数
+ </summary>
+ <param name="v_Name">参数名</param>
+ <param name="v_Value">值</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:ZS.Common.DB.SQLHelper.ExecuteNonQuery(System.String,System.Data.CommandType,System.String)">
+ <summary>
+ Execute a SqlCommand (that returns no resultset and takes no parameters) against the database specified in
+ the connection string.
+ e.g.: 
+ Dim result As Integer =  ExecuteNonQuery(connString, CommandType.StoredProcedure, "PublishOrders")
+ </summary>
+ <param name="connectionString">a valid connection string for a SqlConnection</param>
+ <param name="commandType">the CommandType (stored procedure, text, etc.)</param>
+ <param name="commandText">the stored procedure name or T-SQL command</param>
+ <returns>An int representing the number of rows affected by the command</returns>
+ <remarks></remarks>
+</member>
+<member name="M:ZS.Common.Drawing.Image.GetSize(System.String)">
+ <summary>
+ 获取指定路径的图片的尺寸。
+ </summary>
+ <param name="pPath">图片的本地路径</param>
+ <returns></returns>
+</member>
+<member name="M:ZS.Common.ExceptionEx.JoinWithInnerExMessage(System.Exception)">
+ <summary>
+ 将内部异常信息一起返回。以换行符分隔每条异常消息。
+ </summary>
+ <param name="ex">异常对象</param>
+ <returns></returns>
+</member>
+<member name="M:ZS.Common.ExceptionEx.JoinWithInnerExMessage(System.Exception,System.String)">
+ <summary>
+ 将内部异常信息组合为一条字符串信息返回。
+ </summary>
+ <param name="ex">异常对象</param>
+ <param name="separation">信息分隔符号。</param>
+ <returns></returns>
+</member>
+<member name="M:ZS.Common.ExceptionEx.JoinWithInnerExMessage(System.Exception,System.String,System.Boolean)">
+ <summary>
+ 将内部异常信息组合为一条字符串信息返回
+ </summary>
+ <param name="ex">异常对象</param>
+ <param name="separation">信息分隔符号。</param>
+ <param name="withStackTrace">是否包含堆栈信息</param>
+ <returns></returns>
+</member>
+<member name="T:ZS.Common.HardDevice.NetworkAdapter">
+ <summary>
+ 网络适配器信息
+ </summary>
+</member>
+<member name="M:ZS.Common.HardDevice.NetworkAdapter.GetAllMacAddress">
+ <summary>
+ 获取本机的所有网络适配器,以:做为分隔符
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:ZS.Common.ListEx.Join(System.Collections.Generic.List{System.String},System.String)">
+ <summary>
+ 将泛型集合中的字符串按照指定的连接符连接为一个字符串
+ </summary>
+ <param name="list"></param>
+ <param name="splitter">连接符号</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="F:ZS.Common.Monitor.Def.MONITORINFOF_PRIMARY">
+ <summary>
+ This is the primary display monitor.
+ </summary>
+</member>
+<member name="T:ZS.Common.Monitor.MONITOR_DEFAULTTO">
+ <summary>
+ API函数MonitorFromWindow的flag参数
+ </summary>
+</member>
+<member name="F:ZS.Common.Monitor.MONITOR_DEFAULTTO.MONITOR_DEFAULTTONULL">
+ <summary>
+ Returns NULL.
+ 返回NULL
+ </summary>
+</member>
+<member name="F:ZS.Common.Monitor.MONITOR_DEFAULTTO.MONITOR_DEFAULTTOPRIMARY">
+ <summary>
+ Returns a handle to the primary display monitor.
+ 返回代表主显示器的句柄。
+ </summary>
+</member>
+<member name="F:ZS.Common.Monitor.MONITOR_DEFAULTTO.MONITOR_DEFAULTTONEAREST">
+ <summary>
+ Returns a handle to the display monitor that is nearest to the window.
+ 返回代表最靠近窗口的显示器的句柄
+ </summary>
+</member>
+<member name="T:ZS.Common.Monitor.MONITORINFO">
+ <summary>
+ The MONITORINFO structure contains information about a display monitor.
+ The GetMonitorInfo function stores information in a MONITORINFO structure or a MONITORINFOEX structure.
+ The MONITORINFO structure is a subset of the MONITORINFOEX structure. The MONITORINFOEX structure adds a string member to contain a name for the display monitor.
+ </summary>
+ <link ref="https://msdn.microsoft.com/en-us/library/windows/desktop/dd145065(v=vs.85).aspx" />
+</member>
+<member name="F:ZS.Common.Monitor.MONITORINFO.cbSize">
+ <summary>
+ The size of the structure, in bytes.
+ Set this member to sizeof ( MONITORINFO ) before calling the GetMonitorInfo function. Doing so lets the function determine the type of structure you are passing to it.
+ </summary>
+</member>
+<member name="F:ZS.Common.Monitor.MONITORINFO.rcMonitor">
+ <summary>
+ A RECT structure that specifies the display monitor rectangle, expressed in virtual-screen coordinates. 
+ Note that if the monitor is not the primary display monitor, some of the rectangle's coordinates may be negative values.
+ </summary>
+</member>
+<member name="F:ZS.Common.Monitor.MONITORINFO.rcWork">
+ <summary>
+ A RECT structure that specifies the work area rectangle of the display monitor, expressed in virtual-screen coordinates. 
+ Note that if the monitor is not the primary display monitor, some of the rectangle's coordinates may be negative values.
+ </summary>
+</member>
+<member name="F:ZS.Common.Monitor.MONITORINFO.dwFlags">
+ <summary>
+ A set of flags that represent attributes of the display monitor.
+ </summary>
+</member>
+<member name="T:ZS.Common.Monitor.Monitor">
+ <summary>
+ 监视器操作
+ </summary>
+</member>
+<member name="M:ZS.Common.Monitor.Monitor.MonitorFromWindow(System.IntPtr,ZS.Common.Monitor.MONITOR_DEFAULTTO)">
+ <summary>
+ 获取指定句柄窗口所在的监视器句柄
+ </summary>
+ <param name="hWnd">窗口句柄</param>
+ <param name="flag">监视器识别类型</param>
+ <returns></returns>
+</member>
+<member name="M:ZS.Common.Monitor.Monitor.SetWindowToMax(System.IntPtr,System.IntPtr)">
+ <summary>
+ 设置窗口为最大化
+ </summary>
+ <param name="hWnd">窗口句柄</param>
+ <param name="lParam"></param>
+</member>
+<member name="M:ZS.Common.StringEx.ToHexString(System.String)">
+ <summary>
+ 将字符串转换为16进制字符串。该方法使用System.Text.Encoding.Default进行处理
+ 每个16进制字符之前使用\标记
+ </summary>
+ <param name="str"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:ZS.Common.StringEx.ToHexString(System.String,System.Text.Encoding)">
+ <summary>
+ 使用指定的编码格式将字符串转换为16进制。每个16进制字符之前使用\标记
+ </summary>
+ <param name="str"></param>
+ <param name="encoding"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:ZS.Common.StringEx.IsIPv4Address(System.String)">
+ <summary>
+ 验证该地址是否为一个有效的IPv4地址
+ </summary>
+ <param name="str"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:ZS.Common.StringEx.IsIPv6Address(System.String)">
+ <summary>
+ 验证该地址是否为一个有效的IPv6地址
+ </summary>
+ <param name="str"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:ZS.Common.StringEx.IsMacAddress(System.String)">
+ <summary>
+ 验证该字符串是否为一个有效的mac地址。支持如下格式：74-27-EA-F7-F6-B5或者74:27:EA:F7:F6:B5或者无分隔符7427EAF7F6B5
+ </summary>
+ <param name="str"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:ZS.Common.StringEx.IsMobilePhoneNumber(System.String)">
+ <summary>
+ 验证该字符串是否为一个有效的手机号码
+ </summary>
+ <param name="str"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:ZS.Common.StringEx.ToMD5(System.String)">
+ <summary>
+ 获取该字符串的MD5
+ </summary>
+ <param name="str"></param>
+ <returns></returns>
+</member>
+<member name="M:ZS.Common.StringEx.ToMD5(System.String,System.Text.Encoding)">
+ <summary>
+ 获取该字符串的MD5
+ </summary>
+ <param name="str"></param>
+ <param name="encoded">编码格式。</param>
+ <returns></returns>
+</member>
+<member name="M:ZS.Common.StringEx.ToListOfString(System.String,System.String,System.StringSplitOptions)">
+ <summary>
+ 将字符串按照指定的分隔符转换为泛型集合
+ </summary>
+ <param name="str"></param>
+ <param name="separator">跟个符号</param>
+ <param name="IsRemoveEmptyEntires">是否移除空内容的项目。默认为是，既如果分隔符号之间的内容为空，不添加到集合中</param>
+ <returns></returns>
+</member>
+<member name="T:ZS.Common.Structures.Monitors.MONITOR_DEFAULTTO">
+ <summary>
+ API函数MonitorFromWindow的flag参数
+ </summary>
+</member>
+<member name="F:ZS.Common.Structures.Monitors.MONITOR_DEFAULTTO.MONITOR_DEFAULTTONULL">
+ <summary>
+ Returns NULL.
+ 返回NULL
+ </summary>
+</member>
+<member name="F:ZS.Common.Structures.Monitors.MONITOR_DEFAULTTO.MONITOR_DEFAULTTOPRIMARY">
+ <summary>
+ Returns a handle to the primary display monitor.
+ 返回代表主显示器的句柄。
+ </summary>
+</member>
+<member name="F:ZS.Common.Structures.Monitors.MONITOR_DEFAULTTO.MONITOR_DEFAULTTONEAREST">
+ <summary>
+ Returns a handle to the display monitor that is nearest to the window.
+ 返回代表最靠近窗口的显示器的句柄
+ </summary>
+</member>
+<member name="T:ZS.Common.Structures.Monitors.MONITORINFO">
+ <summary>
+ The MONITORINFO structure contains information about a display monitor.
+ The GetMonitorInfo function stores information in a MONITORINFO structure or a MONITORINFOEX structure.
+ The MONITORINFO structure is a subset of the MONITORINFOEX structure. The MONITORINFOEX structure adds a string member to contain a name for the display monitor.
+ </summary>
+</member>
+<member name="F:ZS.Common.Structures.Monitors.MONITORINFO.cbSize">
+ <summary>
+ The size of the structure, in bytes.
+ Set this member to sizeof ( MONITORINFO ) before calling the GetMonitorInfo function. Doing so lets the function determine the type of structure you are passing to it.
+ </summary>
+</member>
+<member name="F:ZS.Common.Structures.Monitors.MONITORINFO.rcMonitor">
+ <summary>
+ A RECT structure that specifies the display monitor rectangle, expressed in virtual-screen coordinates. 
+ Note that if the monitor is not the primary display monitor, some of the rectangle's coordinates may be negative values.
+ </summary>
+</member>
+<member name="F:ZS.Common.Structures.Monitors.MONITORINFO.rcWork">
+ <summary>
+ A RECT structure that specifies the work area rectangle of the display monitor, expressed in virtual-screen coordinates. 
+ Note that if the monitor is not the primary display monitor, some of the rectangle's coordinates may be negative values.
+ </summary>
+</member>
+<member name="F:ZS.Common.Structures.Monitors.MONITORINFO.dwFlags">
+ <summary>
+ A set of flags that represent attributes of the display monitor.
+ </summary>
+</member>
+<member name="T:ZS.Common.Structures.Rectangle.POINT">
+ <summary>
+ The POINT structure defines the x- and y- coordinates of a point.
+ </summary>
+</member>
+<member name="T:ZS.Common.Structures.Rectangle.RECT">
+ <summary>
+ The RECT Structure defines the coordinates Of the upper-left And lower-right corners Of a rectangle.
+ </summary>
+ <link ref="https://msdn.microsoft.com/en-us/library/dd162897(v=vs.85).aspx"></link>
+</member>
+<member name="F:ZS.Common.Structures.Rectangle.RECT.left">
+ <summary>
+ The x-coordinate of the upper-left corner of the rectangle.
+ </summary>
+</member>
+<member name="F:ZS.Common.Structures.Rectangle.RECT.top">
+ <summary>
+ The y-coordinate of the upper-left corner of the rectangle.
+ </summary>
+</member>
+<member name="F:ZS.Common.Structures.Rectangle.RECT.right">
+ <summary>
+ The x-coordinate of the lower-right corner of the rectangle.
+ </summary>
+</member>
+<member name="F:ZS.Common.Structures.Rectangle.RECT.bottom">
+ <summary>
+ The y-coordinate of the lower-right corner of the rectangle.
+ </summary>
+</member>
+<member name="P:ZS.Common.Structures.Rectangle.RECT.width">
+ <summary>
+ 矩形宽度
+ </summary>
+ <returns></returns>
+</member>
+<member name="T:ZS.Common.Structures.Window.MINMAXINFO">
+ <summary>
+ Contains information about a window's maximized size and position and its minimum and maximum tracking size.
+ </summary>
+ <link ref="https://msdn.microsoft.com/en-us/library/ms632605(VS.85).aspx"></link>
+</member>
+<member name="F:ZS.Common.Structures.Window.MINMAXINFO.ptMaxSize">
+ <summary>
+ The maximized width (x member) and the maximized height (y member) of the window. 
+ For top-level windows, this value is based on the width of the primary monitor.
+ </summary>
+</member>
+<member name="F:ZS.Common.Structures.Window.MINMAXINFO.ptMaxPosition">
+ <summary>
+ The position of the left side of the maximized window (x member) and the position of the top of the maximized window (y member). 
+ For top-level windows, this value is based on the position of the primary monitor.
+ </summary>
+</member>
+<member name="F:ZS.Common.Structures.Window.MINMAXINFO.ptMinTrackSize">
+ <summary>
+ he minimum tracking width (x member) and the minimum tracking height (y member) of the window. 
+ This value can be obtained programmatically from the system metrics SM_CXMINTRACK and SM_CYMINTRACK (see the GetSystemMetrics function).
+ </summary>
+</member>
+<member name="F:ZS.Common.Structures.Window.MINMAXINFO.ptMaxTrackSize">
+ <summary>
+ The maximum tracking width (x member) and the maximum tracking height (y member) of the window. 
+ This value is based on the size of the virtual screen and can be obtained programmatically from the system metrics SM_CXMAXTRACK and SM_CYMAXTRACK (see the GetSystemMetrics function).
+ </summary>
+</member>
+<member name="M:ZS.Common.Win32API.MonitorFromWindow(System.IntPtr,System.Int32)">
+ <summary>
+ The MonitorFromWindow function retrieves a handle to the display monitor that has the largest area of intersection with the bounding rectangle of a specified window.
+ </summary>
+ <param name="hwnd">A handle to the window of interest.</param>
+ <param name="dwFlags">
+ Determines the function's return value if the window does not intersect any display monitor.
+ This parameter can be one of the following values:
+ MONITOR_DEFAULTTONEAREST:Returns a handle to the display monitor that is nearest to the window.
+ MONITOR_DEFAULTTONULL:Returns NULL.
+ MONITOR_DEFAULTTOPRIMARY:Returns a handle to the primary display monitor.
+ </param>
+ <returns>
+ If the window intersects one or more display monitor rectangles, the return value is an HMONITOR handle to the display monitor that has the largest area of intersection with the window.
+ If the window does not intersect a display monitor, the return value depends on the value of dwFlags.
+ </returns>
+ <remarks>
+ If the window is currently minimized, MonitorFromWindow uses the rectangle of the window before it was minimized.
+ </remarks>
+ <link ref="https://msdn.microsoft.com/en-us/library/windows/desktop/dd145064(v=vs.85).aspx" />
+</member>
+<member name="M:ZS.Common.Win32API.GetMonitorInfo(System.IntPtr,ZS.Common.Structures.Monitors.MONITORINFO@)">
+ <summary>
+ The GetMonitorInfo function retrieves information about a display monitor.
+ </summary>
+ <param name="hMonitor">A handle to the display monitor of interest.</param>
+ <param name="lpmi">A pointer to a MONITORINFO or MONITORINFOEX structure that receives information about the specified display monitor.
+ You must set the cbSize member of the structure to sizeof(MONITORINFO) or sizeof(MONITORINFOEX) before calling the GetMonitorInfo function. Doing so lets the function determine the type of structure you are passing to it.
+ The MONITORINFOEX structure is a superset of the MONITORINFO structure. It has one additional member: a string that contains a name for the display monitor. Most applications have no use for a display monitor name, and so can save some bytes by using a MONITORINFO structure.
+ </param>
+ <returns>
+ If the function succeeds, the return value is nonzero.
+ If the function fails, the return value is zero.
+ </returns>
+ <link ref="https://msdn.microsoft.com/en-us/library/windows/desktop/dd144901" />
+</member>
+<member name="T:ZS.Common.Win32Manager.Win32Classes.ComputerSystemHardware.InputDevice">
+ <summary>
+ 输入设备
+ </summary>
+</member>
+<member name="T:ZS.Common.Win32Manager.Win32Classes.ComputerSystemHardware.MassStorage">
+ <summary>
+ Classes in the Mass Storage subcategory represent storage devices such as hard disk drives, CD-ROM drives, and tape drives.
+ </summary>
+</member>
+<member name="T:ZS.Common.Win32Messages.Messages">
+ <summary>
+ 系统消息值定义
+ 
+ </summary>
+</member>
+<member name="F:ZS.Common.Win32Messages.Messages.WM_NCHITTEST">
+ <summary>
+ Sent to a window in order to determine what part of the window corresponds to a particular screen coordinate. 
+ This can happen, for example, when the cursor moves, when a mouse button is pressed or released, or in response to a call to a function such as WindowFromPoint. 
+ If the mouse is not captured, the message is sent to the window beneath the cursor. Otherwise, the message is sent to the window that has captured the mouse.
+ </summary>
+</member>
+<member name="F:ZS.Common.Win32Messages.Messages.WM_LBUTTONDBLCLK">
+ <summary>
+ Posted when the user double-clicks the left mouse button while the cursor is in the client area of a window. 
+ If the mouse is not captured, the message is posted to the window beneath the cursor. 
+ Otherwise, the message is posted to the window that has captured the mouse.
+ </summary>
+ <link ref="https://msdn.microsoft.com/en-us/library/windows/desktop/ms645606(v=vs.85).aspx" />
+</member>
+<member name="F:ZS.Common.Win32Messages.Messages.WM_GETMINMAXINFO">
+ <summary>
+ Sent to a window when the size or position of the window is about to change. 
+ An application can use this message to override the window's default maximized size and position, or its default minimum or maximum tracking size.
+ 当窗体的尺寸或者位置发生改变时发送给窗体。
+ 应用程序可以使用该消息重写窗体的默认最大尺寸或者位置，或者最小/最大的可拉伸尺寸。
+ </summary>
+ <link ref="https://msdn.microsoft.com/en-us/library/windows/desktop/ms632626(v=vs.85).aspx" />
+</member>
+<member name="T:ZS.Common.Win32Messages.EnumMESSAGES">
+ <summary>
+ Windows消息枚举
+ </summary>
+</member>
+<member name="F:ZS.Common.Win32Messages.EnumMESSAGES.WM_LBUTTONDBLCLK">
+ <summary>
+ Posted when the user double-clicks the left mouse button while the cursor is in the client area of a window. 
+ If the mouse is not captured, the message is posted to the window beneath the cursor. 
+ Otherwise, the message is posted to the window that has captured the mouse.
+ </summary>
+ <see ref="https://msdn.microsoft.com/en-us/library/windows/desktop/ms645606(v=vs.85).aspx"/>
+</member>
+<member name="F:ZS.Common.Win32Messages.NCHITTEST.HTBORDER">
+ <summary>
+ In the border of a window that does not have a sizing border.
+ </summary>
+</member>
+<member name="F:ZS.Common.Win32Messages.NCHITTEST.HTBOTTOM">
+ <summary>
+ In the lower-horizontal border of a resizable window (the user can click the mouse to resize the window vertically).
+ </summary>
+</member>
+<member name="F:ZS.Common.Win32Messages.NCHITTEST.HTBOTTOMLEFT">
+ <summary>
+ In the lower-left corner of a border of a resizable window (the user can click the mouse to resize the window diagonally).
+ </summary>
+</member>
+<member name="F:ZS.Common.Win32Messages.NCHITTEST.HTBOTTOMRIGHT">
+ <summary>
+ In the lower-right corner of a border of a resizable window (the user can click the mouse to resize the window diagonally).
+ </summary>
+</member>
+<member name="F:ZS.Common.Win32Messages.NCHITTEST.HTCAPTION">
+ <summary>
+ In a title bar.
+ </summary>
+</member>
+<member name="F:ZS.Common.Win32Messages.NCHITTEST.HTCLIENT">
+ <summary>
+ In a client area.
+ </summary>
+</member>
+<member name="F:ZS.Common.Win32Messages.NCHITTEST.HTCLOSE">
+ <summary>
+ In a Close button.
+ </summary>
+</member>
+<member name="F:ZS.Common.Win32Messages.NCHITTEST.HTERROR">
+ <summary>
+ On the screen background or on a dividing line between windows (same as HTNOWHERE, except that the DefWindowProc function produces a system beep to indicate an error).
+ </summary>
+</member>
+<member name="F:ZS.Common.Win32Messages.NCHITTEST.HTGROWBOX">
+ <summary>
+ In a size box (same as HTSIZE).
+ </summary>
+</member>
+<member name="F:ZS.Common.Win32Messages.NCHITTEST.HTHELP">
+ <summary>
+ In a Help button.
+ </summary>
+</member>
+<member name="F:ZS.Common.Win32Messages.NCHITTEST.HTHSCROLL">
+ <summary>
+ In a horizontal scroll bar.
+ </summary>
+</member>
+<member name="F:ZS.Common.Win32Messages.NCHITTEST.HTLEFT">
+ <summary>
+ In the left border of a resizable window (the user can click the mouse to resize the window horizontally).
+ </summary>
+</member>
+<member name="F:ZS.Common.Win32Messages.NCHITTEST.HTMENU">
+ <summary>
+ In a menu.
+ </summary>
+</member>
+<member name="F:ZS.Common.Win32Messages.NCHITTEST.HTMAXBUTTON">
+ <summary>
+ In a Maximize button.
+ </summary>
+</member>
+<member name="F:ZS.Common.Win32Messages.NCHITTEST.HTMINBUTTON">
+ <summary>
+ In a Minimize button.
+ </summary>
+</member>
+<member name="F:ZS.Common.Win32Messages.NCHITTEST.HTNOWHERE">
+ <summary>
+ On the screen background or on a dividing line between windows.
+ </summary>
+</member>
+<member name="F:ZS.Common.Win32Messages.NCHITTEST.HTREDUCE">
+ <summary>
+ In a Minimize button.
+ </summary>
+</member>
+<member name="F:ZS.Common.Win32Messages.NCHITTEST.HTRIGHT">
+ <summary>
+ In the right border of a resizable window (the user can click the mouse to resize the window horizontally).
+ </summary>
+</member>
+<member name="F:ZS.Common.Win32Messages.NCHITTEST.HTSYSMENU">
+ <summary>
+ In a window menu or in a Close button in a child window.
+ </summary>
+</member>
+<member name="F:ZS.Common.Win32Messages.NCHITTEST.HTTOP">
+ <summary>
+ In the upper-horizontal border of a window.
+ </summary>
+</member>
+<member name="F:ZS.Common.Win32Messages.NCHITTEST.HTTOPLEFT">
+ <summary>
+ In the upper-left corner of a window border.
+ </summary>
+</member>
+<member name="F:ZS.Common.Win32Messages.NCHITTEST.HTTOPRIGHT">
+ <summary>
+ In the upper-right corner of a window border.
+ </summary>
+</member>
+<member name="F:ZS.Common.Win32Messages.NCHITTEST.HTTRANSPARENT">
+ <summary>
+ In a window currently covered by another window in the same thread
+ (the message will be sent to underlying windows in the same thread until one of them returns a code that is not HTTRANSPARENT).
+ </summary>
+</member>
+<member name="F:ZS.Common.Win32Messages.NCHITTEST.HTVSCROLL">
+ <summary>
+ In the vertical scroll bar.
+ </summary>
+</member>
+<member name="F:ZS.Common.Win32Messages.NCHITTEST.HTZOOM">
+ <summary>
+ In a Maximize button.
+ </summary>
+</member>
+<member name="M:ZS.Common.ZIPAddress.IsIPAddress(System.String)">
+ <summary>
+ 检查指定的字符串是否为有效的IP地址
+ </summary>
+ <param name="ipAddress"></param>
+ <returns></returns>
+</member>
+<member name="M:ZS.Common.ZIPAddress.TryParse(System.String,ZS.Common.ZIPAddress@)">
+ <summary>
+ 尝试将指定的字符串转换为ZIPAddress类型。如果转换成功，则返回True，并通过result转换成功的对象，如果转换失败，则返回False
+ </summary>
+ <param name="source">源字符串</param>
+ <param name="result">转换后的对象</param>
+ <returns></returns>
+</member>
+<member name="T:ZS.Common.ZMACAddress">
+ <summary>
+ MAC地址对象
+ </summary>
+</member>
+<member name="M:ZS.Common.ZMACAddress.ToString">
+ <summary>
+ 输出以-分隔的MAC地址形式
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:ZS.Common.ZMACAddress.ToString(ZS.Common.ZMACAddress.SplitType)">
+ <summary>
+ 以指定的分隔符类型输出MAC地址的字符串形式
+ </summary>
+ <param name="sType"></param>
+ <returns></returns>
+</member>
+<member name="F:ZS.Common.ZMACAddress.SplitType.None">
+ <summary>
+ 无分隔符
+ </summary>
+</member>
+<member name="F:ZS.Common.ZMACAddress.SplitType.Minus">
+ <summary>
+ 以 - 分隔
+ </summary>
+</member>
+<member name="F:ZS.Common.ZMACAddress.SplitType.Colon">
+ <summary>
+ 以 : 分隔
+ </summary>
+</member>
+</members>
+</doc>

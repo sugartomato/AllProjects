@@ -1,0 +1,107 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+ZS.SMS.C123
+</name>
+</assembly>
+<members>
+<member name="T:ZS.SMS.C123.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:ZS.SMS.C123.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:ZS.SMS.C123.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="T:ZS.SMS.C123.SimpleSMSAdapter">
+ <summary>
+ C123短信网 简易短信发送接口
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="F:ZS.SMS.C123.SimpleSMSAdapter.m_UserID">
+ <summary>短信网账号</summary>
+</member>
+<member name="F:ZS.SMS.C123.SimpleSMSAdapter.m_Password">
+ <summary>短信网密码</summary>
+</member>
+<member name="M:ZS.SMS.C123.SimpleSMSAdapter.#ctor(System.String,System.String)">
+ <summary>
+ 通过用户名和密码构造一个新的短信发送对象
+ </summary>
+ <param name="userID">账号</param>
+ <param name="password">密码，是MD5加密之后的密码</param>
+ <remarks></remarks>
+</member>
+<member name="F:ZS.SMS.C123.SimpleSMSAdapter._instance">
+ <summary>单例对象</summary>
+</member>
+<member name="M:ZS.SMS.C123.SimpleSMSAdapter.Instance(System.String,System.String)">
+ <summary>
+ 返回SMS的单例对象
+ </summary>
+ <param name="userID">账号</param>
+ <param name="password">密码，是MD5加密之后的密码</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:ZS.SMS.C123.SimpleSMSAdapter.SendSMS(System.Collections.Generic.List{System.String},System.String,System.String@)">
+ <summary>
+ 针对指定的手机号码发送短信
+ </summary>
+ <param name="v_Phone">手机号码集合</param>
+ <param name="v_Message">短消息内容</param>
+ <param name="v_Error">执行失败的消息</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:ZS.SMS.C123.SimpleSMSAdapter.Get_RemainderAmount">
+ <summary>
+ 获取剩余的短信条数
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="T:ZS.SMS.C123.StandardSMSAdapter">
+ <summary>
+ C123短信平台 标准短信接口
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="F:ZS.SMS.C123.StandardSMSAdapter.m_UserID">
+ <summary>短信网账号</summary>
+</member>
+<member name="F:ZS.SMS.C123.StandardSMSAdapter.m_Password">
+ <summary>短信网密码</summary>
+</member>
+<member name="M:ZS.SMS.C123.StandardSMSAdapter.#ctor(System.String,System.String)">
+ <summary>
+ 通过用户名和密码构造一个新的短信发送对象
+ </summary>
+ <param name="userID">账号</param>
+ <param name="password">密码，是MD5加密之后的密码</param>
+ <remarks></remarks>
+</member>
+<member name="F:ZS.SMS.C123.StandardSMSAdapter._instance">
+ <summary>单例对象</summary>
+</member>
+<member name="M:ZS.SMS.C123.StandardSMSAdapter.Instance(System.String,System.String)">
+ <summary>
+ 返回SMS的单例对象
+ </summary>
+ <param name="userID">账号</param>
+ <param name="password">密码，是MD5加密之后的密码</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+</members>
+</doc>

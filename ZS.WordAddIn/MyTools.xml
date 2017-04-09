@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui" onLoad="Ribbon_Load">
+  <ribbon>
+    <tabs>
+      <tab id="TabDHD" insertAfterMso="TabHome" label="KK工具箱">
+        <group id="grpTestTools"
+               label="测试工具"
+                visible="true">
+          <labelControl label="这是一段话" id="lblTest"/>
+          <button id ="btnAddTables" label="添加表格" onAction="Click_AddTables"/>
+          <button id="btnAddRows" label="添加行" onAction="Click_AddRows"/>
+          <button id="btnTest_Form_Size" label="尺寸测试窗体" onAction="OnClick_Test"/>
+        </group>
+        <group id="grpCommon" label="通用" visible="true">
+          <toggleButton id="ZS_BTN_ShowMainPan" label="辅助面板" onAction="OnClick_ShowMainPan" size="large" getPressed="GetPressed_ShowMainPan" imageMso="ControlsGallery" />
+        </group>
+        <group id="DHD_GRP_Images"
+               label="图片处理"
+               visible="true">
+          <button id="DHD_BTN_BatchInsertImages" label="批量导入图片" onAction="OnClick_BatchInsertImages" imageMso="PictureReflectionGalleryItem"
+                  size="large"/>
+        </group>
+        <group id="DHD_GRP_Text"
+               label="文本"
+               visible="true">
+          <button id="DHD_BTN_Text_ReplaceShiftEnter" label="替换所有软回车" onAction="OnClick_OperateText" size="large" imageMso="ReviewDisplayForReview"/>
+        </group>
+        <group id="DHD_GRP_Document"
+               label="文档"
+               visible="true">
+          <button id="DHD_BTN_Doc_SaveAsPDF" label="另存为pdf" onAction="OnClick_OperateDocument" size="large" imageMso="SaveAttachments" 
+                  screentip="将当前文档另存为pdf格式文件。"
+                  supertip="默认存储于文档同目录下，同名的pdf文件。如果文档路径获取不到，则存储在桌面。"/>
+        </group>
+      </tab>
+    </tabs>
+    <qat>
+      <documentControls>
+        <separator/>
+        <control idMso="GridSettings"/>
+        <control idMso="GridSettings"/>
+      </documentControls>
+    </qat>
+  </ribbon>
+</customUI>
+

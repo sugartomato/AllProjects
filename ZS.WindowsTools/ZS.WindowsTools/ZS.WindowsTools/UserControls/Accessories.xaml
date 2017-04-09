@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="ZS.WindowsTools.UserControls.Accessories"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ZS.WindowsTools.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+
+    <WrapPanel>
+
+        <!--#region -->
+        <GroupBox>
+            <GroupBox.Header>
+                <StackPanel>
+                    <TextBlock>
+                        <Bold>GUID</Bold>
+                    </TextBlock>
+                </StackPanel>
+            </GroupBox.Header>
+            <GroupBox.Content>
+                <Grid>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Orientation="Vertical">
+                        <RadioButton GroupName="RBT_GUID" Tag="N" IsChecked="True" Checked="RadioButton_GUID_Checked">N:00000000000000000000000000000000</RadioButton>
+                        <RadioButton GroupName="RBT_GUID" Tag="D" Checked="RadioButton_GUID_Checked">D:00000000-0000-0000-0000-000000000000</RadioButton>
+                        <RadioButton GroupName="RBT_GUID" Tag="B" Checked="RadioButton_GUID_Checked">B:{00000000-0000-0000-0000-000000000000}</RadioButton>
+                        <RadioButton GroupName="RBT_GUID" Tag="P" Checked="RadioButton_GUID_Checked">P:(00000000-0000-0000-0000-000000000000)</RadioButton>
+                        <RadioButton GroupName="RBT_GUID" Tag="X" Checked="RadioButton_GUID_Checked">X:{0x00000000,0x0000,0x0000,{0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}}</RadioButton>
+
+                        <StackPanel Orientation="Horizontal">
+                            <RadioButton GroupName="RBT_Case" Tag="U" IsChecked="True" Checked="RadioButton_Case_Checked">大写</RadioButton>
+                            <RadioButton GroupName="RBT_Case" Tag="L" Checked="RadioButton_Case_Checked">小写</RadioButton>
+                        </StackPanel>
+                    </StackPanel>
+                    <Button Name="ZS_BTN_CreateGUID" Grid.Row="1" Margin="3" HorizontalAlignment="Left" Click="ZS_BTN_CreateGUID_Click">生成</Button>
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center">
+                        <Button Name="ZS_BTN_CopyGUID" Margin="3,0,3,0" Click="ZS_BTN_CopyGUID_Click">复制</Button>
+                        <TextBlock>GUID：</TextBlock>
+                        <TextBlock Name="ZS_TXT_GUID" Width="200"></TextBlock>
+                    </StackPanel>
+                </Grid>
+            </GroupBox.Content>
+        </GroupBox>
+
+        <!--#endregion-->
+
+    </WrapPanel>
+
+</UserControl>

@@ -1,0 +1,64 @@
+﻿<Window xmlns:UserControls="clr-namespace:ZS.WindowsTools.UserControls"  x:Class="ZS.WindowsTools.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ZS.WindowsTools"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525"
+        WindowStartupLocation="CenterScreen"
+        >
+    <Grid>
+        <TabControl>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel>
+                        <TextBlock>文件/文件夹</TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <StackPanel>
+                        <UserControls:FileAndFolder />
+                    </StackPanel>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel>
+                        <TextBlock>进程</TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <StackPanel>
+                        <UserControls:Process />
+                    </StackPanel>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel>
+                        <TextBlock>文件信息编辑</TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <StackPanel>
+                        <UserControls:FileInfoEdit />
+                    </StackPanel>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel>
+                        <TextBlock>辅助</TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <StackPanel>
+                        <UserControls:Accessories />
+                    </StackPanel>
+                </TabItem.Content>
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</Window>

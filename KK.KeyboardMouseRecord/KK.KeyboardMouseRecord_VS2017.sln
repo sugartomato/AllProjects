@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26014.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KK.KeyboardMouseRecord", "KK.KeyboardMouseRecord\KK.KeyboardMouseRecord.csproj", "{A338AC31-8830-47B5-851B-DC4DEA7498FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MouseKeyboardLibrary", "MouseKeyboardLibrary\MouseKeyboardLibrary.csproj", "{0BC2144C-75C4-47F3-8E61-DA0AB04DAE18}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A338AC31-8830-47B5-851B-DC4DEA7498FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A338AC31-8830-47B5-851B-DC4DEA7498FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A338AC31-8830-47B5-851B-DC4DEA7498FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A338AC31-8830-47B5-851B-DC4DEA7498FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BC2144C-75C4-47F3-8E61-DA0AB04DAE18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BC2144C-75C4-47F3-8E61-DA0AB04DAE18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BC2144C-75C4-47F3-8E61-DA0AB04DAE18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BC2144C-75C4-47F3-8E61-DA0AB04DAE18}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

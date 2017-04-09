@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{51B85041-844B-4FBF-8C7C-B61D76327D14}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ZS.Common.Win32</RootNamespace>
+    <AssemblyName>ZS.Common.Win32</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\ProjectRelease\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>E:\DHD\GIT\AllProjects\ProjectRelease\ZS.Common.Win32.XML</DocumentationFile>
+    <RegisterForComInterop>false</RegisterForComInterop>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="APISets\Win32API_KeyboardAndMouseInput.cs" />
+    <Compile Include="APISets\Win32API_Rectangles.cs" />
+    <Compile Include="APISets\Win32API_Windows.cs" />
+    <Compile Include="APISets\Win32API_Cursors.cs" />
+    <Compile Include="APISets\Win32API_WindowsMultimedia.cs" />
+    <Compile Include="Net\NetworkAdapter.cs" />
+    <Compile Include="Net\VPN.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Win32Provider\NetConnectionStatus.cs" />
+    <Compile Include="Win32Provider\ProviderHelper.cs" />
+    <Compile Include="Win32Provider\Win32BindAttribute.cs" />
+    <Compile Include="Win32Provider\Win32ProviderBase.cs" />
+    <Compile Include="Win32Provider\Win32_NetworkAdapter.cs" />
+    <Compile Include="Win32Provider\Win32_NetworkAdapterConfiguration.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="API参考资料.txt" />
+    <Content Include="API类型与CLR类型对照表.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

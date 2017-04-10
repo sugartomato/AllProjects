@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui" onLoad="Ribbon_Load">
+  <ribbon>
+    <tabs>
+      <!-- idMso对应的是 Office 内建选项卡的ID  -->
+      <tab id="TabDHD" label="KK工具箱" visible="true" insertAfterMso="TabView">
+        <group id="grpDisplay"
+               label="显示设置"
+               visible="true"
+               >
+          <checkBox id ="chkHightLightRowCloumn" label="高亮行列"
+                    onAction="CheckBox_HightLightRowColumn"
+                    screentip="是否高亮当前单元格所在的行和列。"
+                    enabled="false"/>
+          <button id="btn_Test_UnDo" label="撤销"
+                  onAction="OnClick_Test"/>
+          <button id="btn_Test_QueryTable" label="查询数据库测试" onAction="OnClick_Test"></button>
+          <button id="btn_TextResize" label="Resize函数测试" onAction="OnClick_Test"/>
+          <button id="btn_InputCheck" label="InputTest" onAction="OnClick_Test"/>
+          <toggleButton id="ZS_Toggle_ShowMainPan" label="辅助面板" size="large"
+                        getImage="Get_ControlImage"
+                        getPressed="OnClick_GetPressed_ShowMainPan"
+                        onAction="OnCLick_ShowMainPan"
+                        
+                        />
+        </group>
+
+        <group id="grpBookAndSheetOperate"
+               label="工作簿工作表"
+               visible="true">
+          <button id="ZS_BTN_ExportSheetsToFile" label="导出工作表为单文件"
+                  getImage="Get_ControlImage"
+                  onAction="OnClick_BookAndSheetOperate"
+                  screentip="将工作簿中的工作表导出为单独的文件。"
+                  supertip="如果只有1个工作表，不执行任何操作。导出的工作表以“工作簿名_工作表名”的方式命名。"
+                  size="large"
+                  />
+          <button id="ZS_BTN_MergeSheets" label="合并工作表"
+                  getImage="Get_ControlImage"
+                  onAction="OnClick_BookAndSheetOperate"
+                  screentip="导入多个Excel文件中的工作表到此工作簿中。"
+                  supertip="####"
+                   size="large"
+                 />
+          <button id="ZS_BTN_SortSheet" label="排序工作表"
+                  getImage="Get_ControlImage"
+                  onAction="OnClick_BookAndSheetOperate"
+                  screentip="排序工作表"
+                  supertip="提供单独的工作表排序界面，通过简单的方式对工作表进行排序"
+                    size="large"
+                />
+
+        </group>
+
+        <!-- 
+        ====================
+        插入组 
+        ====================
+        -->
+        <group id="grpInsert" label="插入" visible="true">
+
+          <!-- 日期时间 -->
+          <menu id="ZS_MENU_InsertDateTime" label="日时" size="large" imageMso="SlideShowRehearseTimings">
+            <button getImage="Get_ControlImage" onAction="OnClick_InsertDateTime" id="ZS_BTN_InsertDate" label="插入日期" />
+            <button getImage="Get_ControlImage" onAction="OnClick_InsertDateTime" id="ZS_BTN_InsertTime" label="插入时间" />
+            <button getImage="Get_ControlImage" onAction="OnClick_InsertDateTime" id="ZS_BTN_InsertDateTime" label="插入日期时间" />
+            <button getImage="Get_ControlImage" onAction="OnClick_InsertDateTime" id="ZS_BTN_Calendar" label="日历" />
+          </menu>
+
+          <!-- GUID -->
+          <menu id="ZS_MENU_InsertGUID"
+                label="GUID"
+                size="large"
+                imageMso="ViewWebLayoutView"
+                >
+
+            <toggleButton id="ZS_TBTN_InsertGUID_Case" label="大写" imageMso="BevelTextGallery" onAction="OnCheckChanged_GUIDCase"/>
+
+            <menuSeparator id="ZS_Separator_GUID"/>
+
+            <button id="ZS_BTN_InsertGUID_N" tag="N" imageMso="GoLeftToRight" onAction="OnClick_InsertGUID" label="00000000000000000000000000000000"/>
+            <button id="ZS_BTN_InsertGUID_D" tag="D" imageMso="GoLeftToRight" onAction="OnClick_InsertGUID" label="00000000-0000-0000-0000-000000000000"/>
+            <button id="ZS_BTN_InsertGUID_B" tag="B" imageMso="GoLeftToRight" onAction="OnClick_InsertGUID" label="{00000000-0000-0000-0000-000000000000}"/>
+            <button id="ZS_BTN_InsertGUID_P" tag="P" imageMso="GoLeftToRight" onAction="OnClick_InsertGUID" label="(00000000-0000-0000-0000-000000000000)"/>
+            <button id="ZS_BTN_InsertGUID_X" tag="X" imageMso="GoLeftToRight" onAction="OnClick_InsertGUID" label="{0x00000000,0x0000,0x0000,{0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}}"/>
+          </menu>
+
+          <!-- 前后缀 -->
+          <button id="ZS_BTN_InsertPreSuffix" 
+                  label="前缀后缀" 
+                  size="large" 
+                  imageMso="TextEffectTracking" 
+                  onAction="OnClick_InsertPreSuffix"
+                  description="在选中区域每个单元内容的前后添加指定的内容。"
+                  ></button>
+        </group>
+
+        <!-- 格式化组 -->
+        <group id="grpFormat" label="格式化" visible="true">
+          <gallery id="ZS_GLY_FormatCell"
+                   label="格式化内容"
+                   size="large"
+                   imageMso="FormatAsTableGallery"
+                   columns="1"
+                   showItemLabel="true"
+                   >
+            <item id="itm1" label="格式化为MAC" ></item>
+            <button id="ZSZSZS" label="格式化为MAC"  enabled="false"/>
+            <button id="ZS_BTN_Format_MAC_A" onAction="OnClick_FormatCellTo" tag="-" label="AA-AA-AA-AA-AA-AA" imageMso="ControlLayoutRemove"/>
+            <button id="ZS_BTN_Format_MAC_B" onAction="OnClick_FormatCellTo" tag=":" label="AA:AA:AA:AA:AA:AA" imageMso="ControlLayoutRemove"/>
+            <button id="ZS_BTN_Format_MAC_C" onAction="OnClick_FormatCellTo" tag="none" label="AAAAAAAAAAAA" imageMso="ControlLayoutRemove"/>
+          </gallery>
+
+          <gallery id="ZS_GLY_CaseConvert" label="大小写转换"
+                   size="large"
+                   imageMso="FormControlLabel"
+                   >
+            <button id="ZS_BTN_ConvertToUpperCase" onAction="OnClick_FormatCellTo" tag="upper" imageMso="A" label="转换为大写"/>
+            <button id="ZS_BTN_ConvertToLowerCase" onAction="OnClick_FormatCellTo" tag="lower" imageMso="FormControlEditBox" label="转换为小写"/>
+            <button id="ZS_BTN_ConvertToFirstCaseUpper" onAction="OnClick_FormatCellTo" tag="first" imageMso="ContentControlText" label="首字母大写"/>
+          </gallery>
+
+        </group>
+
+
+        <!-- 内容从拆分/合并组 -->
+        <group id="grpMergeAndSeparate">
+        </group>
+      </tab>
+
+      <!-- 对插入选项卡增加控件 -->
+      <tab idMso="TabInsert">
+      </tab>
+    </tabs>
+  </ribbon>
+</customUI>
+

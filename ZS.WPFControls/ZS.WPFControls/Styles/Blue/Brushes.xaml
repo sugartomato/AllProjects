@@ -1,0 +1,47 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+
+    <!--标题栏背景色-->
+    <LinearGradientBrush EndPoint="1,1" x:Key="LGBrush_TitleBar">
+        <GradientStop Color="#FF3AB6F0" Offset="0.0" />
+        <GradientStop Color="White" Offset="1.0" />
+    </LinearGradientBrush>
+    
+    
+    <!-- Brushes -->
+    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0" x:Key="brushWS1">
+        <GradientStop Color="White" Offset="0.0"></GradientStop>
+        <GradientStop Color="Silver" Offset="0.5"></GradientStop>
+    </LinearGradientBrush>
+
+
+    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1" x:Key="brushWhiteBlue">
+        <GradientStop Color="White" Offset="0.0"></GradientStop>
+        <GradientStop Color="LightBlue" Offset="0.5"></GradientStop>
+        <GradientStop Color="White" Offset="1.0"></GradientStop>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush EndPoint="0,1" x:Key="brushWhiltBlue2">
+        <GradientStop Color="White" Offset="0.0"></GradientStop>
+        <GradientStop Color="Blue" Offset="0.5"></GradientStop>
+        <GradientStop Color="White" Offset="1.0"></GradientStop>
+    </LinearGradientBrush>
+
+
+
+    <LinearGradientBrush x:Key="MinMaxButton_Over" StartPoint="0.5,0" EndPoint="0.5,1">
+        <LinearGradientBrush.GradientStops>
+            <GradientStop Color="#FF70F570" Offset="0" />
+            <GradientStop Color="#FFD1EEC7" Offset="1" />
+        </LinearGradientBrush.GradientStops>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="MinMaxButton_Pressed" StartPoint="0.5,0" EndPoint="0.5,1">
+        <LinearGradientBrush.GradientStops>
+            <GradientStop Color="#E0BBBBBB" Offset="0" />
+            <GradientStop Color="#00BBBBBB" Offset="1" />
+        </LinearGradientBrush.GradientStops>
+    </LinearGradientBrush>
+
+</ResourceDictionary>

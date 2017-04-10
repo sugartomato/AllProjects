@@ -1,0 +1,83 @@
+﻿<Window x:Class="ZS.WPFControlTest.Window3"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ZS.WPFControlTest"
+        mc:Ignorable="d"
+        Title="Window3" Height="541.486" Width="300">
+    <Window.Effect>
+        <DropShadowEffect Opacity="0.5"/>
+    </Window.Effect>
+    <Grid Background="#FF423C3C">
+        <TabControl x:Name="tabControl" TabStripPlacement="Left"  BorderThickness="3">
+            <TabControl.Resources>
+                <Style TargetType="{x:Type TabItem}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type TabItem}">
+                                <Grid>
+                                    <Border Name="Border" Background="#FF6E6C67" Margin="2,2,-8,0" BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="10">
+                                        <ContentPresenter x:Name="ContentSite" ContentSource="Header" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="2,2,12,2" RecognizesAccessKey="True"/>
+                                    </Border>
+                                    <Rectangle Height="100" Width="10" Margin="0,0,-10,0" Stroke="Black" VerticalAlignment="Bottom" HorizontalAlignment="Right" StrokeThickness="0" Fill="#FFD4D0C8"/>
+                                </Grid>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="FontWeight" Value="Bold" />
+                                        <Setter TargetName="ContentSite" Property="Width" Value="30" />
+                                        <Setter TargetName="Border" Property="Background" Value="#FFD4D0C8" />
+                                    </Trigger>
+                                    <Trigger Property="IsEnabled" Value="False">
+                                        <Setter TargetName="Border" Property="Background" Value="#FF6E6C67" />
+                                    </Trigger>
+                                    <Trigger Property="IsMouseOver" Value="true">
+                                        <Setter Property="FontWeight" Value="Bold" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="HeaderTemplate">
+                        <Setter.Value>
+                            <DataTemplate>
+                                <ContentPresenter Content="{TemplateBinding Content}">
+                                    <ContentPresenter.LayoutTransform>
+                                        <RotateTransform Angle="270" />
+                                    </ContentPresenter.LayoutTransform>
+                                </ContentPresenter>
+                            </DataTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Background" Value="#FF6E6C67" />
+                    <Setter Property="Height" Value="90" />
+                    <Setter Property="Margin" Value="0" />
+                    <Setter Property="Padding" Value="0" />
+                    <Setter Property="FontFamily" Value="DokChampa" />
+                    <Setter Property="FontSize" Value="16" />
+                    <Setter Property="VerticalAlignment" Value="Top" />
+                    <Setter Property="HorizontalAlignment" Value="Right" />
+                    <Setter Property="UseLayoutRounding" Value="False" />
+                </Style>
+                <Style x:Key="tabGrids">
+                    <!--<Setter Property="Grid.Background" Value="#FFE5E5E5" />
+                    <Setter Property="Grid.Margin" Value="6,10,10,10" />-->
+                </Style>
+            </TabControl.Resources>
+            <TabItem Header="Planner">
+                <Grid Style="{StaticResource tabGrids}"/>
+            </TabItem>
+            <TabItem Header="Section 2">
+                <Grid Style="{StaticResource tabGrids}"/>
+            </TabItem>
+            <TabItem Header="Section III">
+                <Grid Style="{StaticResource tabGrids}"/>
+            </TabItem>
+            <TabItem Header="Section 04">
+                <Grid Style="{StaticResource tabGrids}"/>
+            </TabItem>
+            <TabItem Header="Tools">
+                <Grid Style="{StaticResource tabGrids}"/>
+            </TabItem>
+        </TabControl>
+    </Grid></Window>

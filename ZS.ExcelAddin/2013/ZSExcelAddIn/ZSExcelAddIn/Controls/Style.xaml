@@ -1,0 +1,28 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:ZSExcelAddIn.Controls">
+
+    <Style TargetType="Border" x:Key="MainContainer">
+        <Setter Property="Background" Value="LightCyan"></Setter>
+    </Style>
+
+
+    <Style TargetType="{x:Type Button}">
+        <Setter Property="FontSize" Value="100"></Setter>
+        <Style.Triggers>
+            <Trigger Property="Control.IsMouseOver" Value="True">
+                <Setter Property="Background" Value="LightPink"></Setter>
+                <Setter Property="Foreground" Value="DarkBlue"></Setter>
+                <Setter Property="FontWeight" Value="Bold"></Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="ToolBar" x:Key="fixedToolBar">
+        <Setter Property="Margin" Value="0"></Setter>
+        <Setter Property="Padding" Value="0"></Setter>
+        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+    </Style>
+    
+    
+</ResourceDictionary>

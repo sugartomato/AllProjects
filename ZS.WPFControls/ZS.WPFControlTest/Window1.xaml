@@ -1,0 +1,67 @@
+﻿<WPFControls:WindowBase
+        x:Class="ZS.WPFControlTest.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ZS.WPFControlTest"
+        xmlns:WPFControls="clr-namespace:ZS.WPFControls;assembly=ZS.WPFControls"
+        mc:Ignorable="d"
+        Title="Window1" Height="300" Width="300"
+        WindowStyle="None"
+        Loaded="WindowBase_Loaded"
+        >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <TextBlock Text="{Binding ElementName=VV, Path=ActualWidth}"></TextBlock>
+            <Button Content="Button" Margin="0" Width="100" Height="30" Click="Button_Click" />
+            <Button x:Name="button" Content="Button" Click="button_Click_1"/>
+            <Button x:Name="button1" Content="Window4" Click="button1_Click"/>
+            <Button x:Name="button2" Content="Window3" Click="button2_Click"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1">
+            <TabControl>
+                <TabItem>
+                    <TabItem.Header>
+                        <TextBlock>选项卡1</TextBlock>
+                    </TabItem.Header>
+                    <TabItem.Content>
+                        <StackPanel>
+                            <Image Name="Image1"></Image>
+                        </StackPanel>
+                    </TabItem.Content>
+                </TabItem>
+                <TabItem>
+                    <TabItem.Header>
+                        <TextBlock>选项卡1</TextBlock>
+                    </TabItem.Header>
+                    <TabItem.Content>
+                        <StackPanel>
+                            <Button Style="{DynamicResource Button_Normal1}">Button1</Button>
+                            <TextBox Name="TextBox1"></TextBox>
+                        </StackPanel>
+                    </TabItem.Content>
+                </TabItem>
+                <TabItem>
+                    <TabItem.Header>
+                        <TextBlock>选项卡1</TextBlock>
+                    </TabItem.Header>
+                    <TabItem.Content>
+                        <StackPanel>
+                            <TextBox>asdfasdfasdfadfasdfadf</TextBox>
+                        </StackPanel>
+                    </TabItem.Content>
+                </TabItem>
+            </TabControl>
+        </StackPanel>
+        <StackPanel Grid.Row="2">
+            <WPFControls:WebBrowserX/>
+
+        </StackPanel>
+    </Grid>
+</WPFControls:WindowBase>

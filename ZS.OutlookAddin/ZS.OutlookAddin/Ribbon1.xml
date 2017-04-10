@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui" onLoad="Ribbon_Load">
+  <ribbon>
+    <tabs>
+      <tab id="ZS_Tab_KKTools" label="KK工具箱">
+        <group id="ZS_Group_AttachFile"
+               label="附件">
+
+          <button id="ZS_BTN_BatchSaveAttachFile"
+                  label="批量另存附件" 
+                  size="large"
+                  imageMso="OutlineWeightGallery"
+                  onAction="OnClick_BatchSaveAttachFile"
+                  ></button>
+
+          <button id="ChangeLabel"
+                  label="开始"
+                  size="large"
+                  imageMso="RecurrenceEdit"
+                  onAction="OnClick_ChangeLabel"/>
+          <labelControl id="LBLTTT"
+                        getLabel="Get_LabelSet"
+                        />
+          <button id="btnExplorerSetter"
+                  label="更换视图样式"
+                  size="large"
+                  imageMso="RecurrenceEdit"
+                  onAction="OnClick_ChangeExplorer"/>
+        </group>
+      </tab>
+    </tabs>
+  </ribbon>
+
+  <backstage>
+    <tab id="KKToolsBackStage" label="KKTools" insertAfterMso="TabInfo">
+      <firstColumn>
+        <group id="KKToolsGRP1" label="TTTT">
+          <topItems>
+            <button id="btnChangeImage" label="Do" onAction="OnClick_ChangeLabel"/>
+            <radioGroup id="rdGRP" label="设置组" getItemCount="Get_ItemCount" getItemLabel="Get_ItemLabel">
+            </radioGroup>
+          </topItems>
+        </group>
+      </firstColumn>
+    </tab>
+  </backstage>
+</customUI>
+

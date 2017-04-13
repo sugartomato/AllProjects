@@ -78,11 +78,12 @@ namespace ZS.WordAddIn
             // 这里做文档有效性判断，否则在关闭最后一个文档的时候，会引发错误。
             if (m_App != null && m_App.Documents != null && m_App.Documents.Count > 0)
             {
-
+                // 自动加载辅助面板
                 CreateMainPan();
                 m_MainPan.Visible = true;
 
-
+                // 修改文档窗口标题，显示文档路径
+                m_App.ActiveWindow.Caption = string.Format("★ {0} ★ [{1}]",  m_App.ActiveWindow.Caption, m_App.ActiveDocument.Path);
             }
         }
 
@@ -362,7 +363,7 @@ namespace ZS.WordAddIn
 
                 savePath += ".pdf";
 
-                NotifyHelper.Show(savePath);
+                //NotifyHelper.Show(savePath);
 
                 if (System.IO.File.Exists(savePath))
                 {
@@ -385,7 +386,7 @@ namespace ZS.WordAddIn
 
                 m_App.ActiveDocument.SaveAs2(savePath, FileFormat:Word.WdSaveFormat.wdFormatPDF);
 
-                System.Windows.MessageBox.Show("保存完成！");
+                System.Windows.MessageBox.Show("保存完成！\r\n" + savePath);
 
                 //System.Windows.MessageBox.Show(savePath);
             }

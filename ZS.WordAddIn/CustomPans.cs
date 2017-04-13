@@ -7,8 +7,6 @@ namespace ZS.WordAddIn
 {
     public class CustomPans
     {
-
-
         private static Dictionary<string, Microsoft.Office.Tools.CustomTaskPane> pans = new Dictionary<string, Microsoft.Office.Tools.CustomTaskPane>();
 
         /// <summary>

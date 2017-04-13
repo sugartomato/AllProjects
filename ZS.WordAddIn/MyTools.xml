@@ -11,7 +11,7 @@
           <button id="btnAddRows" label="添加行" onAction="Click_AddRows"/>
           <button id="btnTest_Form_Size" label="尺寸测试窗体" onAction="OnClick_Test"/>
         </group>
-        <group id="grpCommon" label="通用" visible="true">
+        <group id="DHD_GRP_Common" label="通用" visible="true">
           <toggleButton id="ZS_BTN_ShowMainPan" label="辅助面板" onAction="OnClick_ShowMainPan" size="large" getPressed="GetPressed_ShowMainPan" imageMso="ControlsGallery" />
         </group>
         <group id="DHD_GRP_Images"

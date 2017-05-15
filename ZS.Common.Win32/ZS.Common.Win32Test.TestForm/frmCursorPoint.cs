@@ -189,5 +189,23 @@ namespace ZS.Common.Win32Test.TestForm
         {
             (sender as Button).Text = DateTime.Now.ToString("ss:FFF");
         }
+
+        Random rd = new Random();
+        private void button5_Click(object sender, EventArgs e)
+        {
+            for (Int32 i = 0; i < 1; i++)
+            {
+                ZS.Common.Win32.API.POINT pt = new Point(0, 0);
+                // 鼠标当前绝对坐标
+                ZS.Common.Win32.API.GetCursorPos(ref pt);
+                Int32 x = rd.Next(1, 900);
+                Int32 y = rd.Next(1, 900);
+                textBox1.AppendText("从：" + pt.X + "," + pt.Y + "\r\n");
+                textBox1.AppendText("到：" + x + "," + y + "\r\n");
+
+                System.Drawing.Point pt1 = new Point(x,y);
+                ZS.Common.Win32.Mouse.MoveTo(pt1,(Int32)numericUpDown1.Value);
+            }
+        }
     }
 }

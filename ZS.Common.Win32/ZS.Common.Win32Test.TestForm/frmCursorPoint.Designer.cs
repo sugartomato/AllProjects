@@ -42,6 +42,9 @@
             this.btnTarget2 = new System.Windows.Forms.Button();
             this.btnTarget4 = new System.Windows.Forms.Button();
             this.btnTarget3 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -93,7 +96,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(2, 349);
+            this.button3.Location = new System.Drawing.Point(12, 340);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 5;
@@ -159,11 +162,35 @@
             this.btnTarget3.UseVisualStyleBackColor = true;
             this.btnTarget3.Click += new System.EventHandler(this.btnTarget2_Click);
             // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(12, 369);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.TabIndex = 12;
+            this.button5.Text = "移动鼠标2";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(107, 369);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(120, 21);
+            this.numericUpDown1.TabIndex = 13;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // frmCursorPoint
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(547, 495);
+            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.button5);
             this.Controls.Add(this.btnTarget3);
             this.Controls.Add(this.btnTarget4);
             this.Controls.Add(this.btnTarget2);
@@ -180,6 +207,7 @@
             this.Text = "frmCursorPoint";
             this.Load += new System.EventHandler(this.frmCursorPoint_Load);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.frmCursorPoint_MouseMove);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -200,5 +228,7 @@
         private System.Windows.Forms.Button btnTarget2;
         private System.Windows.Forms.Button btnTarget4;
         private System.Windows.Forms.Button btnTarget3;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
     }
 }

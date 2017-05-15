@@ -20,7 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>E:\DHD\GIT\AllProjects\ProjectRelease\ZS.Common.Win32.XML</DocumentationFile>
+    <DocumentationFile>..\..\ProjectRelease\.xml</DocumentationFile>
     <RegisterForComInterop>false</RegisterForComInterop>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -48,6 +48,7 @@
     <Compile Include="APISets\Win32API_Windows.cs" />
     <Compile Include="APISets\Win32API_Cursors.cs" />
     <Compile Include="APISets\Win32API_WindowsMultimedia.cs" />
+    <Compile Include="Mouse.cs" />
     <Compile Include="Net\NetworkAdapter.cs" />
     <Compile Include="Net\VPN.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

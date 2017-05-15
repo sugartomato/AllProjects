@@ -50,7 +50,7 @@ namespace ZS.Common.Win32Test.TestForm
         // 移动鼠标
         private void button3_Click(Object sender, EventArgs e)
         {
-            System.Threading.Thread.Sleep(2000);
+            System.Threading.Thread.Sleep(1000);
             //Int32 x = 3;
             //for(Int32 m = 0; m < 100; m++)
             //{
@@ -59,32 +59,46 @@ namespace ZS.Common.Win32Test.TestForm
             //}
 
 
-            ZS.Common.Win32.API.POINT pt = new Point(0, 0);
-            // 鼠标当前绝对坐标
-            ZS.Common.Win32.API.GetCursorPos(ref pt);
-            // 控件绝对坐标
-            System.Drawing.Point target = PointToScreen(button1.Location);
-            
-            
-
-            textBox1.AppendText(pt.X + "," + pt.Y + "\r\n");
-            textBox1.AppendText(target.X + "," + target.Y + "\r\n");
-
-
-            Int32 count = 100;
-            while(count != 0)
+            List<Button> targets = new List<Button>() { btnTarget1, btnTarget2, btnTarget3, btnTarget4,button1 };
+            for(Int32 i = 0; i < targets.Count; ++i)
             {
-                Int32 stepX = (target.X - Cursor.Position.X) / count;
-                Int32 stepY = (target.Y - Cursor.Position.Y) / count;
-                count--;
-                if(count != 0)
+                //ZS.Common.Win32.API.POINT pt = new Point(0, 0);
+                //// 鼠标当前绝对坐标
+                //ZS.Common.Win32.API.GetCursorPos(ref pt);
+                //textBox1.AppendText(pt.X + "," + pt.Y + "\r\n");
+
+                // 目标控件绝对坐标
+                System.Drawing.Point target = PointToScreen(targets[i].Location);
+                textBox1.AppendText(target.X + "," + target.Y + "\r\n");
+
+
+                Int32 count = 100;
+                while(count != 0)
                 {
-                    ZS.Common.Win32.API.mouse_event(Win32.API.MouseEvent.MOUSEEVENTF_MOVE, stepX, stepY, 0, UIntPtr.Zero);
-                    System.Threading.Thread.Sleep(1);
+                    Int32 stepX = (target.X + 5 - Cursor.Position.X) / count;
+                    Int32 stepY = (target.Y + 5 - Cursor.Position.Y) / count;
+                    count--;
+                    if(count != 0)
+                    {
+                        ZS.Common.Win32.API.mouse_event(Win32.API.MouseEvent.MOUSEEVENTF_MOVE, stepX, stepY, 0, UIntPtr.Zero);
+                        System.Threading.Thread.Sleep(3);
+                    }
                 }
+
+                //ZS.Common.Win32.API.mouse_event(Win32.API.MouseEvent.MOUSEEVENTF_MOVE, 4, 4, 0, UIntPtr.Zero);
+                ZS.Common.Win32.API.mouse_event(Win32.API.MouseEvent.MOUSEEVENTF_LEFTDOWN, 0, 0, 0, UIntPtr.Zero);
+                System.Threading.Thread.Sleep(100);
+                ZS.Common.Win32.API.mouse_event(Win32.API.MouseEvent.MOUSEEVENTF_LEFTUP, 0, 0, 0, UIntPtr.Zero);
+                Application.DoEvents();
+                System.Threading.Thread.Sleep(2000);
             }
 
-            ZS.Common.Win32.API.mouse_event(Win32.API.MouseEvent.MOUSEEVENTF_MOVE, 2, 2, 0, UIntPtr.Zero);
+
+
+
+
+
+
 
 
 
@@ -131,28 +145,28 @@ namespace ZS.Common.Win32Test.TestForm
 
             return;
 
-            Int32 k = Math.Abs(target.Y - pt.Y) / Math.Abs(target.X - pt.X);
-            textBox1.AppendText(k.ToString());
-            if(pt.Y > target.Y)
-                k = -k;
+            //Int32 k = Math.Abs(target.Y - pt.Y) / Math.Abs(target.X - pt.X);
+            //textBox1.AppendText(k.ToString());
+            //if(pt.Y > target.Y)
+            //    k = -k;
 
-            Int32 m = 0;
-            if(pt.X > target.X)
-            {
-                m = -1;
-            }
-            else
-            {
-                m = 1;
-            }
+            //Int32 m = 0;
+            //if(pt.X > target.X)
+            //{
+            //    m = -1;
+            //}
+            //else
+            //{
+            //    m = 1;
+            //}
 
-            for(Int32 i = 0; i < Math.Abs(target.X - pt.X); i++)
-            {
+            //for(Int32 i = 0; i < Math.Abs(target.X - pt.X); i++)
+            //{
 
 
-                ZS.Common.Win32.API.mouse_event(Win32.API.MouseEvent.MOUSEEVENTF_MOVE, m, k, 0, UIntPtr.Zero);
-                System.Threading.Thread.Sleep(1);
-            }
+            //    ZS.Common.Win32.API.mouse_event(Win32.API.MouseEvent.MOUSEEVENTF_MOVE, m, k, 0, UIntPtr.Zero);
+            //    System.Threading.Thread.Sleep(1);
+            //}
 
             //Int32 perX = ((target.X + this.Left) - pt.X) / 100;
             //Int32 perY = ((target.Y + this.Top) - pt.Y) / 100;
@@ -169,6 +183,11 @@ namespace ZS.Common.Win32Test.TestForm
             ZS.Common.Win32.API.GetCursorPos(ref pt);
             label1.Text = "X:" + pt.X;
             label1.Location = new Point(pt.X - this.Left,pt.Y - this.Top);
+        }
+
+        private void btnTarget2_Click(Object sender, EventArgs e)
+        {
+            (sender as Button).Text = DateTime.Now.ToString("ss:FFF");
         }
     }
 }

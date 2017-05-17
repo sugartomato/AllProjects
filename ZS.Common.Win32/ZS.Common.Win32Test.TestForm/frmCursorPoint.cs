@@ -70,20 +70,21 @@ namespace ZS.Common.Win32Test.TestForm
                 // 目标控件绝对坐标
                 System.Drawing.Point target = PointToScreen(targets[i].Location);
                 textBox1.AppendText(target.X + "," + target.Y + "\r\n");
+                ZS.Common.Win32.Mouse.MoveTo(target);
 
 
-                Int32 count = 100;
-                while(count != 0)
-                {
-                    Int32 stepX = (target.X + 5 - Cursor.Position.X) / count;
-                    Int32 stepY = (target.Y + 5 - Cursor.Position.Y) / count;
-                    count--;
-                    if(count != 0)
-                    {
-                        ZS.Common.Win32.API.mouse_event(Win32.API.MouseEvent.MOUSEEVENTF_MOVE, stepX, stepY, 0, UIntPtr.Zero);
-                        System.Threading.Thread.Sleep(3);
-                    }
-                }
+                //Int32 count = 100;
+                //while(count != 0)
+                //{
+                //    Int32 stepX = (target.X + 5 - Cursor.Position.X) / count;
+                //    Int32 stepY = (target.Y + 5 - Cursor.Position.Y) / count;
+                //    count--;
+                //    if(count != 0)
+                //    {
+                //        ZS.Common.Win32.API.mouse_event(Win32.API.MouseEvent.MOUSEEVENTF_MOVE, stepX, stepY, 0, UIntPtr.Zero);
+                //        System.Threading.Thread.Sleep(3);
+                //    }
+                //}
 
                 //ZS.Common.Win32.API.mouse_event(Win32.API.MouseEvent.MOUSEEVENTF_MOVE, 4, 4, 0, UIntPtr.Zero);
                 ZS.Common.Win32.API.mouse_event(Win32.API.MouseEvent.MOUSEEVENTF_LEFTDOWN, 0, 0, 0, UIntPtr.Zero);

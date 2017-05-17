@@ -17,7 +17,7 @@ namespace ZS.Common.Win32
         /// <param name="pt"></param>
         public static void MoveTo(System.Drawing.Point pt)
         {
-            MoveTo(pt, 80);
+            MoveTo(pt, 1);
             ////ZS.Common.Win32.API.mouse_event(Win32.API.MouseEvent.MOUSEEVENTF_MOVE, 4, 4, 0, UIntPtr.Zero);
             //ZS.Common.Win32.API.mouse_event(Win32.API.MouseEvent.MOUSEEVENTF_LEFTDOWN, 0, 0, 0, UIntPtr.Zero);
             //System.Threading.Thread.Sleep(100);
@@ -42,89 +42,63 @@ namespace ZS.Common.Win32
             }
             else if (currentPt.Y == targetPt.Y) // 纵坐标相同，既鼠标水平移动
             {
+                Int32 lastX = currentPt.X;
+                if (currentPt.X > targetPt.X) // 向左
+                {
+                    while (lastX > targetPt.X)
+                    {
+                        lastX -= step;
+                        ZS.Common.Win32.API.mouse_event(Win32.API.MouseEvent.MOUSEEVENTF_MOVE, step, 0, 0, UIntPtr.Zero);
+                        System.Threading.Thread.Sleep(delay);
+                    }
+                }
+                if (currentPt.X < targetPt.X) // 向右
+                {
+                    while (lastX < targetPt.X)
+                    {
+                        lastX += step;
+                        ZS.Common.Win32.API.mouse_event(Win32.API.MouseEvent.MOUSEEVENTF_MOVE, step, 0, 0, UIntPtr.Zero);
+                        System.Threading.Thread.Sleep(delay);
+                    }
+                }
             }
             else
             {
                 double slope = 0;
-                if (targetPt.Y > currentPt.Y && targetPt.X > currentPt.X) // 左上到右下
-                //if (true)
+                slope = Math.Abs((double)(targetPt.Y - currentPt.Y) / (targetPt.X - currentPt.X));
+                if (targetPt.X > currentPt.X)
                 {
-                    // 计算斜率
-                    slope = Math.Abs((double)(targetPt.Y - currentPt.Y) / (targetPt.X - currentPt.X));
                     Int32 lastX = currentPt.X;
-                    Int32 lastY = currentPt.Y;
                     while (lastX <= targetPt.X)
                     {
                         lastX += step;
-                        Int32 y = (Int32)(targetPt.Y - slope * (targetPt.X - lastX));
-                        ZS.Common.Win32.API.mouse_event(Win32.API.MouseEvent.MOUSEEVENTF_MOVE, step, y - lastY, 0, UIntPtr.Zero);
-                        lastY = y;
+                        Int32 stepY = (Int32)(slope * step);
+                        if (targetPt.Y < currentPt.Y)
+                        {
+                            stepY = -stepY;
+                        }
+                        ZS.Common.Win32.API.mouse_event(Win32.API.MouseEvent.MOUSEEVENTF_MOVE, step, stepY, 0, UIntPtr.Zero);
                         System.Threading.Thread.Sleep(delay);
                     }
                 }
-                if (targetPt.Y < currentPt.Y && targetPt.X < currentPt.X) // 右下到左上
+
+                if (targetPt.X < currentPt.X)
                 {
-                    // 计算斜率
-                    slope = Math.Abs((double)(targetPt.Y - currentPt.Y) / (targetPt.X - currentPt.X));
+                    step = -step;
                     Int32 lastX = currentPt.X;
-                    Int32 lastY = currentPt.Y;
                     while (lastX >= targetPt.X)
-                    {
-                        lastX += -step;
-                        Int32 y = (Int32)(targetPt.Y - slope * (targetPt.X - lastX));
-                        ZS.Common.Win32.API.mouse_event(Win32.API.MouseEvent.MOUSEEVENTF_MOVE, -step, y - lastY, 0, UIntPtr.Zero);
-                        lastY = y;
-                        System.Threading.Thread.Sleep(delay);
-                    }
-                }
-                if (targetPt.X > currentPt.X && targetPt.Y < currentPt.Y) // 左下到右上
-                {
-                    // 计算斜率
-                    slope =Math.Abs((double)(targetPt.Y - currentPt.Y) / (targetPt.X - currentPt.X));
-                    Int32 lastX = currentPt.X;
-                    Int32 lastY = currentPt.Y;
-                    while (lastX <= targetPt.X)
                     {
                         lastX += step;
-                        Int32 y = (Int32)(targetPt.Y - slope * (targetPt.X - lastX));
-                        ZS.Common.Win32.API.mouse_event(Win32.API.MouseEvent.MOUSEEVENTF_MOVE, step, y - lastY, 0, UIntPtr.Zero);
-                        lastY = y;
+                        Int32 stepY = (Int32)(slope * Math.Abs(step));
+                        if (targetPt.Y < currentPt.Y)
+                        {
+                            stepY = -stepY;
+                        }
+                        ZS.Common.Win32.API.mouse_event(Win32.API.MouseEvent.MOUSEEVENTF_MOVE, step, stepY, 0, UIntPtr.Zero);
                         System.Threading.Thread.Sleep(delay);
                     }
                 }
-
-                if (targetPt.X < currentPt.X && targetPt.Y > currentPt.Y) // 右上到左下
-                {
-                    // 计算斜率
-                    slope = Math.Abs((double)(targetPt.Y - currentPt.Y) / (targetPt.X - currentPt.X));
-                    Int32 lastX = currentPt.X;
-                    Int32 lastY = currentPt.Y;
-                    while (lastX >= targetPt.X)
-                    {
-                        lastX += -step;
-                        Int32 y = (Int32)(targetPt.Y - slope * (targetPt.X - lastX));
-                        ZS.Common.Win32.API.mouse_event(Win32.API.MouseEvent.MOUSEEVENTF_MOVE, -step, y - lastY, 0, UIntPtr.Zero);
-                        lastY = y;
-                        System.Threading.Thread.Sleep(delay);
-                    }
-                }
-
-            }
-
-            return;
-
-            System.Drawing.Point target = targetPt;
-            Int32 count = 100;
-            while (count != 0)
-            {
-                Int32 stepX = (target.X - currentPt.X) / count;
-                Int32 stepY = (target.Y - currentPt.Y) / count;
-                count--;
-                if (count != 0)
-                {
-                    ZS.Common.Win32.API.mouse_event(Win32.API.MouseEvent.MOUSEEVENTF_MOVE, stepX, stepY, 0, UIntPtr.Zero);
-                    System.Threading.Thread.Sleep(delay);
-                }
+                ZS.Common.Win32.API.SetCursorPos(targetPt.X, targetPt.Y);
             }
         }
 

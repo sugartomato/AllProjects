@@ -53,6 +53,11 @@ namespace ZSExcelAddIn
         {
             if (this.Application.ActiveWorkbook != null)
             {
+                string caption = Convert.ToString(Application.ActiveWindow.Caption);
+                if (caption != null && !caption.StartsWith("★") && !caption.EndsWith("★"))
+                {
+                    Application.ActiveWindow.Caption = string.Format("★ {0} ★ [{1}]★", Application.ActiveWindow.Caption, Application.ActiveWorkbook.Path);
+                }
                 //RuntimeDebugInfo.AppendText("当前工作簿:" + this.Application.ActiveWorkbook.FullName);
             }
         }

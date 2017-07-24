@@ -649,6 +649,31 @@
             If this flag is set, the sound is assigned to the audio session for system notification sounds. For more information, see PlaySound.
             </summary>
         </member>
+        <member name="M:ZS.Common.Win32.ContextMenu.ContextMenu.#ctor">
+            <summary>
+            构造一个新的实例
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.ContextMenu.ContextMenu.Command">
+            <summary>
+            命令行
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.ContextMenu.ContextMenu.Icon">
+            <summary>
+            图标路径
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.ContextMenu.ContextMenu.ShowName">
+            <summary>
+            菜单中显示名称
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.ContextMenu.ContextMenu.RegName">
+            <summary>
+            注册表中键名。默认以GUID命名
+            </summary>
+        </member>
         <member name="T:ZS.Common.Win32.Mouse">
             <summary>
             鼠标
@@ -755,6 +780,23 @@
             管理本机VPN
             </summary>
         </member>
+        <member name="T:ZS.Common.Win32.Query">
+            <summary>
+            信息查询
+            </summary>
+        </member>
+        <member name="M:ZS.Common.Win32.Query.GetIdentifyingNumber">
+            <summary>
+            获取计算机的序列号
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ZS.Common.Win32.Query.GetComputerName">
+            <summary>
+            获取计算机名
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:ZS.Common.Win32.Win32Provider.NetConnectionStatus">
             <summary>
             网络连接状态枚举
@@ -832,6 +874,62 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:ZS.Common.Win32.Win32Provider.Win32_ComputerSystemProduct">
+            <summary>
+            The Win32_ComputerSystemProduct WMI class represents a product. This includes software and hardware used on this computer system.
+            </summary>
+            <remarks>
+            The Win32_ComputerSystemProduct class is derived from CIM_Product.
+            </remarks>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_ComputerSystemProduct.Caption">
+            <summary>
+            Short textual description for the product.
+            This property is inherited from CIM_Product.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_ComputerSystemProduct.Description">
+            <summary>
+            Textual description of the product.
+            This property is inherited from CIM_Product.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_ComputerSystemProduct.IdentifyingNumber">
+            <summary>
+            Product identification, such as a serial number on software, a die number on a hardware chip, or (for noncommercial products) a project number.
+            This property is inherited from CIM_Product.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_ComputerSystemProduct.Name">
+            <summary>
+            Product's stock-keeping unit (SKU) information.
+            This property is inherited from CIM_Product.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_ComputerSystemProduct.SKUNumber">
+            <summary>
+            Product's stock-keeping unit (SKU) information.
+            This property is inherited from CIM_Product.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_ComputerSystemProduct.Vendor">
+            <summary>
+            Name of the product's supplier, or the entity selling the product (the manufacturer, reseller, OEM, and so on).
+            This property is inherited from CIM_Product.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_ComputerSystemProduct.Version">
+            <summary>
+            Product version information.
+            This property is inherited from CIM_Product.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_ComputerSystemProduct.UUID">
+            <summary>
+            Universally unique identifier (UUID) for this product. A UUID is a 128-bit identifier that is guaranteed to be different from other generated UUIDs. If a UUID is not available, a UUID of all zeros is used.
+            This value comes from the UUID member of the System Information structure in the SMBIOS information.
+            </summary>
+        </member>
         <member name="T:ZS.Common.Win32.Win32Provider.Win32_NetworkAdapter">
             <summary>
             
@@ -897,6 +995,11 @@
         <member name="P:ZS.Common.Win32.Win32Provider.Win32_NetworkAdapterConfiguration.IPEnabled">
             <summary>
             If TRUE, TCP/IP is bound and enabled on this network adapter.
+            </summary>
+        </member>
+        <member name="T:ZS.Common.Win32.Win32Provider.Win32_Product">
+            <summary>
+            The Win32_Product WMI class represents products as they are installed by Windows Installer. A product generally correlates to one installation package.
             </summary>
         </member>
     </members>

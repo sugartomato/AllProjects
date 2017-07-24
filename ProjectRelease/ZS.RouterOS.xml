@@ -95,7 +95,7 @@ ZS.RouterOS
  <summary>MAC抵制</summary>
 </member>
 <member name="P:ZS.RouterOS.Helper.DHCPServer.Leases_Model.Server">
- <summary>DHCP服务器。注意服务器名称必须要大小写完全匹配。默认为All</summary>
+ <summary>DHCP服务器。注意服务器名称必须要大小写完全匹配。默认为all</summary>
 </member>
 <member name="P:ZS.RouterOS.Helper.DHCPServer.Leases_Model.LeaseTime">
  <summary>
@@ -114,6 +114,12 @@ ZS.RouterOS
 </member>
 <member name="P:ZS.RouterOS.Helper.DHCPServer.Leases_Model.Comment">
  <summary>备注</summary>
+</member>
+<member name="M:ZS.RouterOS.Helper.DHCPServer.Leases_Model.ToAddScriptString">
+ <summary>
+ 将dhcp对象转化为添加DHCP的脚本程序
+ </summary>
+ <returns></returns>
 </member>
 <member name="M:ZS.RouterOS.Helper.DHCPServer.Leases_Print">
  <summary>
@@ -419,6 +425,80 @@ ZS.RouterOS
  <summary>
  路由版本号
  </summary>
+</member>
+<member name="M:ZS.RouterOS.StringEx.ToHexString(System.String)">
+ <summary>
+ 将字符串转换为16进制字符串。该方法使用System.Text.Encoding.Default进行处理
+ 每个16进制字符之前使用\标记
+ </summary>
+ <param name="str"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:ZS.RouterOS.StringEx.ToHexString(System.String,System.Text.Encoding)">
+ <summary>
+ 使用指定的编码格式将字符串转换为16进制。每个16进制字符之前使用\标记
+ </summary>
+ <param name="str"></param>
+ <param name="encoding"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:ZS.RouterOS.StringEx.IsIPv4Address(System.String)">
+ <summary>
+ 验证该地址是否为一个有效的IPv4地址
+ </summary>
+ <param name="str"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:ZS.RouterOS.StringEx.IsIPv6Address(System.String)">
+ <summary>
+ 验证该地址是否为一个有效的IPv6地址
+ </summary>
+ <param name="str"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:ZS.RouterOS.StringEx.IsMacAddress(System.String)">
+ <summary>
+ 验证该字符串是否为一个有效的mac地址。支持如下格式：74-27-EA-F7-F6-B5或者74:27:EA:F7:F6:B5或者无分隔符7427EAF7F6B5
+ </summary>
+ <param name="str"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:ZS.RouterOS.StringEx.IsMobilePhoneNumber(System.String)">
+ <summary>
+ 验证该字符串是否为一个有效的手机号码
+ </summary>
+ <param name="str"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:ZS.RouterOS.StringEx.ToMD5(System.String)">
+ <summary>
+ 获取该字符串的MD5
+ </summary>
+ <param name="str"></param>
+ <returns></returns>
+</member>
+<member name="M:ZS.RouterOS.StringEx.ToMD5(System.String,System.Text.Encoding)">
+ <summary>
+ 获取该字符串的MD5
+ </summary>
+ <param name="str"></param>
+ <param name="encoded">编码格式。</param>
+ <returns></returns>
+</member>
+<member name="M:ZS.RouterOS.StringEx.ToListOfString(System.String,System.String,System.StringSplitOptions)">
+ <summary>
+ 将字符串按照指定的分隔符转换为泛型集合
+ </summary>
+ <param name="str"></param>
+ <param name="separator">跟个符号</param>
+ <param name="IsRemoveEmptyEntires">是否移除空内容的项目。默认为是，既如果分隔符号之间的内容为空，不添加到集合中</param>
+ <returns></returns>
 </member>
 </members>
 </doc>

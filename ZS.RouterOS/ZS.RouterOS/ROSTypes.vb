@@ -7,6 +7,7 @@ Public Class _MACAddress
     Public Sub New(ByVal macAddress As String)
 
         macAddress = macAddress.Replace("-", ":")
+        macAddress = macAddress.Trim()
         If (Not System.Text.RegularExpressions.Regex.IsMatch(macAddress, "^([\da-fA-F]{2})(([:]{1}[\da-fA-F]{2}){5})$")) Then
             Throw New RosException("无效的MAC地址！")
         End If

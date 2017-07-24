@@ -48,16 +48,21 @@
     <Compile Include="APISets\Win32API_Windows.cs" />
     <Compile Include="APISets\Win32API_Cursors.cs" />
     <Compile Include="APISets\Win32API_WindowsMultimedia.cs" />
+    <Compile Include="ContextMenu\ContextMenu.cs" />
     <Compile Include="Mouse.cs" />
     <Compile Include="Net\NetworkAdapter.cs" />
     <Compile Include="Net\VPN.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Query.cs" />
     <Compile Include="Win32Provider\NetConnectionStatus.cs" />
     <Compile Include="Win32Provider\ProviderHelper.cs" />
     <Compile Include="Win32Provider\Win32BindAttribute.cs" />
     <Compile Include="Win32Provider\Win32ProviderBase.cs" />
+    <Compile Include="Win32Provider\Win32_ComputerSystem.cs" />
+    <Compile Include="Win32Provider\Win32_ComputerSystemProduct.cs" />
     <Compile Include="Win32Provider\Win32_NetworkAdapter.cs" />
     <Compile Include="Win32Provider\Win32_NetworkAdapterConfiguration.cs" />
+    <Compile Include="Win32Provider\Win32_Product.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="API参考资料.txt" />

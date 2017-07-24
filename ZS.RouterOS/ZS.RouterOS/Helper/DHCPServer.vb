@@ -38,7 +38,7 @@
             Public Property Address As _IPAddress
             ''' <summary>MAC抵制</summary>
             Public Property MacAddress As _MACAddress
-            ''' <summary>DHCP服务器。注意服务器名称必须要大小写完全匹配。默认为All</summary>
+            ''' <summary>DHCP服务器。注意服务器名称必须要大小写完全匹配。默认为all</summary>
             Public Property Server As String
             ''' <summary>
             ''' 租约时间。格式为HH:mm:ss。默认为空，即按照Server的租约时间处理。
@@ -54,6 +54,42 @@
             Public Property AlwaysBroadcast As _Disabled
             ''' <summary>备注</summary>
             Public Property Comment As String
+
+            ''' <summary>
+            ''' 将dhcp对象转化为添加DHCP的脚本程序
+            ''' </summary>
+            ''' <returns></returns>
+            Public Function ToAddScriptString()
+                Dim script As String = String.Empty
+
+                script += vbCrLf & "#RemoveScript"
+                ' 删除DHCP绑定
+                script &= vbCrLf & Leases_ScriptText_RemoveByMACAddress(Me.MacAddress.ToString())
+
+                ' 删除ARP绑定
+                script &= vbCrLf & ARP.ARP_ScriptText_RemoveByMacAddress(Me.MacAddress.ToString())
+
+
+                script &= vbCrLf & "#" & Comment
+                script &= vbCrLf & "#" & "=".PadLeft(20, "=")
+                ' 添加DHCP绑定
+                script &= vbCrLf & "#AddScript - DHCP"
+                script &= vbCrLf & String.Format(
+                    "/ip dhcp-server lease add address={0} mac-address={1} disabled=no always-broadcast=yes server={2}", Me.Address.ToString(), Me.MacAddress.ToString(), Me.Server)
+
+                If Not Me.Comment Is Nothing AndAlso Me.Comment.Length > 0 Then
+                    script &= " comment=""" & Me.Comment.ToHexString() & """"
+                End If
+
+                ' 添加ARP绑定
+                script &= vbCrLf & "#AddScript - ARP"
+                script &= vbCrLf & String.Format("/ip arp add address={0} mac-address={1} interface=LAN", Me.Address.ToString(), Me.MacAddress.ToString())
+
+                script &= vbCrLf & "#" & "=".PadLeft(20, "=")
+
+                Return script
+
+            End Function
 
         End Class
 

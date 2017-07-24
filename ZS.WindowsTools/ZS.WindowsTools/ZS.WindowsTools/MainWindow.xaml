@@ -58,6 +58,18 @@
                     </StackPanel>
                 </TabItem.Content>
             </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel>
+                        <TextBlock>右键菜单</TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <StackPanel>
+                        <UserControls:Accessories />
+                    </StackPanel>
+                </TabItem.Content>
+            </TabItem>
         </TabControl>
 
     </Grid>

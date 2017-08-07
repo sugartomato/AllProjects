@@ -14,9 +14,9 @@ namespace ZS.Common.Win32Tests.ContextMenu
         public void AddToDirBackgroundShellTest()
         {
             ZS.Common.Win32.ContextMenu.ContextMenu c = new Win32.ContextMenu.ContextMenu();
-            c.RegName = "GITBASH";
-            c.ShowName = "★Git Bash到这里";
-            c.Command = "\"C:\\Program Files\\Git\\git-bash.exe\" \"--cd=%v.\"";
+            c.RegName = "DLLTest";
+            c.ShowName = "@xxxx";
+            //c.Command = "\"C:\\Program Files\\Git\\git-bash.exe\" \"--cd=%v.\"";
             ZS.Common.Win32.ContextMenu.ContextMenu.AddToDirBackgroundShell(c);
         }
 

@@ -649,6 +649,13 @@
             If this flag is set, the sound is assigned to the audio session for system notification sounds. For more information, see PlaySound.
             </summary>
         </member>
+        <member name="M:ZS.Common.Win32.ContextMenu.ContextMenu.AddToDirBackgroundShell(ZS.Common.Win32.ContextMenu.ContextMenu)">
+            <summary>
+            添加右键菜单到目录背景的Shell，既在目录空白处点击右键出现的菜单中。
+            </summary>
+            <param name="cm"></param>
+            <returns></returns>
+        </member>
         <member name="M:ZS.Common.Win32.ContextMenu.ContextMenu.#ctor">
             <summary>
             构造一个新的实例

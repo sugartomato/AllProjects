@@ -11,6 +11,11 @@ namespace ZS.Common.Win32.ContextMenu
     {
 
         #region 静态方法
+        /// <summary>
+        /// 添加右键菜单到目录背景的Shell，既在目录空白处点击右键出现的菜单中。
+        /// </summary>
+        /// <param name="cm"></param>
+        /// <returns></returns>
         public static Boolean AddToDirBackgroundShell(ContextMenu cm)
         {
             string keyPath = @"directory\background\shell\";
@@ -32,7 +37,10 @@ namespace ZS.Common.Win32.ContextMenu
                         regT.SetValue("Icon", cm.Icon);
                     }
                     RegistryKey regCommand = regT.CreateSubKey("command");
-                    regCommand.SetValue("", cm.Command);
+                    if (!string.IsNullOrEmpty(cm.Command))
+                    {
+                        regCommand.SetValue("", cm.Command);
+                    }
 
                 }
             }

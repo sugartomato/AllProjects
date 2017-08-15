@@ -49,11 +49,13 @@
     <Compile Include="APISets\Win32API_Cursors.cs" />
     <Compile Include="APISets\Win32API_WindowsMultimedia.cs" />
     <Compile Include="ContextMenu\ContextMenu.cs" />
+    <Compile Include="InstalledApp.cs" />
     <Compile Include="Mouse.cs" />
     <Compile Include="Net\NetworkAdapter.cs" />
     <Compile Include="Net\VPN.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Query.cs" />
+    <Compile Include="RegHelper.cs" />
     <Compile Include="Win32Provider\NetConnectionStatus.cs" />
     <Compile Include="Win32Provider\ProviderHelper.cs" />
     <Compile Include="Win32Provider\Win32BindAttribute.cs" />

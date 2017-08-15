@@ -34,5 +34,25 @@ namespace ZS.Common.Win32
         }
 
 
+        #region 获取安装软件列表
+
+        /// <summary>
+        /// 获取已安装的软件列表。不包含系统组件与Windows更新
+        /// </summary>
+        /// <returns></returns>
+        public static List<InstalledApp> GetInstalledApps()
+        {
+            List<InstalledApp> result = new List<InstalledApp>();
+
+            // 注册表
+
+
+        }
+
+
+
+        #endregion
+
+
     }
 }

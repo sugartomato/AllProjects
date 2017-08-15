@@ -17,34 +17,34 @@ namespace KK.SoftSearch
         杀毒
         ====================*/
         // 360杀毒
-        private const String _Ant_360 = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\360SD\";
-        private const String _Ant_360_64bit = @"SOFTWARE\WOW6432Node\360SD\";
+        private const String m_Ant_360 = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\360SD\";
+        private const String m_Ant_360_64bit = @"SOFTWARE\WOW6432Node\360SD\";
 
         // 金山毒霸
-        private const String _Ant_JinShanDuBa = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Kingsof\";
-        private const String _Ant_JinShanDuBa_64bit = "SOFTWARE\\WOW6432Node\\Kingsoft\\antivirus\\";
+        private const String m_Ant_JinShanDuBa = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Kingsof\";
+        private const String m_Ant_JinShanDuBa_64bit = "SOFTWARE\\WOW6432Node\\Kingsoft\\antivirus\\";
 
         // 江民
-        private const String _Ant_JiangMin = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\JiangMin\";
-        private const String _Ant_JiangMin_64bit = "SOFTWARE\\WOW6432Node\\JiangMin\\";
+        private const String m_Ant_JiangMin = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\JiangMin\";
+        private const String m_Ant_JiangMin_64bit = "SOFTWARE\\WOW6432Node\\JiangMin\\";
 
         // 卡巴
 
         // 瑞星
-        private const String _Ant_RuiXing = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\RAV";
-        private const String _Ant_RuiXing_64bit = "SOFTWARE\\WOW6432Node\\RAV\\";
+        private const String m_Ant_RuiXing = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\RAV";
+        private const String m_Ant_RuiXing_64bit = "SOFTWARE\\WOW6432Node\\RAV\\";
 
         // 诺顿
-        private const String _Ant_Norton = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\NS";
-        private const String _Ant_Norton_64bit = "SOFTWARE\\WOW6432Node\\NS\\";
+        private const String m_Ant_Norton = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\NS";
+        private const String m_Ant_Norton_64bit = "SOFTWARE\\WOW6432Node\\NS\\";
 
         // 百度杀毒
-        private const String _Ant_BaiDuShaDu = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\百度杀毒";
-        private const String _Ant_BaiDuShaDu_64bit = "SOFTWARE\\WOW6432Node\\Baidu Security\\Antivirus\\";
+        private const String m_Ant_BaiDuShaDu = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\百度杀毒";
+        private const String m_Ant_BaiDuShaDu_64bit = "SOFTWARE\\WOW6432Node\\Baidu Security\\Antivirus\\";
 
         // 小红伞
-        private const String _Ant_Avira = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Avira Antivirus";
-        private const String _Ant_Avira_64bit = "SOFTWARE\\WOW6432Node\\Avira Antivirus\\";
+        private const String m_Ant_Avira = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Avira Antivirus";
+        private const String m_Ant_Avira_64bit = "SOFTWARE\\WOW6432Node\\Avira Antivirus\\";
 
 
         /*====================
@@ -53,16 +53,16 @@ namespace KK.SoftSearch
         // 金山WPS
         // WPS是先检测专业版再检测个人版。安装专业版，wps会自动卸载个人版。
         // 个人版是检测CurrentUser键值下
-        private const String _Office_WPS_Personal = @"SOFTWARE\Kingsoft\Office\6.0\Common\";
-        private const String _Office_WPS_Pro = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Kingsoft Office\";
-        private const String _Office_WPS_Pro_64bit = "SOFTWARE\\WOW6432Node\\kingsoft\\Office\\6.0\\Common\\";
+        private const String m_Office_WPS_Personal = @"SOFTWARE\Kingsoft\Office\6.0\Common\";
+        private const String m_Office_WPS_Pro = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Kingsoft Office\";
+        private const String m_Office_WPS_Pro_64bit = "SOFTWARE\\WOW6432Node\\kingsoft\\Office\\6.0\\Common\\";
 
         // 永中Office
         // 从卸载列表中检测是否存在
 
 
-        private const String _RegUninstall = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\";
-        private const String _RegUninstall_64bit = @"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\";
+        private const String m_RegUninstall = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\";
+        private const String m_RegUninstall_64bit = @"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\";
 
         #endregion
 
@@ -74,11 +74,11 @@ namespace KK.SoftSearch
         /// <returns></returns>
         public Boolean HasAnt360()
         {
-            if (IsRegValueExists(_Ant_360, "DisplayName", null))
+            if (IsRegValueExists(m_Ant_360, "DisplayName", null))
             {
                 return true;
             }
-            if (IsRegExists(_Ant_360_64bit, Microsoft.Win32.Registry.LocalMachine))
+            if (IsRegExists(m_Ant_360_64bit, Microsoft.Win32.Registry.LocalMachine))
             {
                 return true;
             }
@@ -91,11 +91,11 @@ namespace KK.SoftSearch
         /// <returns></returns>
         public Boolean HasAntJinShan()
         {
-            if (IsRegValueExists(_Ant_JinShanDuBa, "DisplayName", null))
+            if (IsRegValueExists(m_Ant_JinShanDuBa, "DisplayName", null))
             {
                 return true;
             }
-            if (IsRegExists(_Ant_JinShanDuBa_64bit, Microsoft.Win32.Registry.LocalMachine))
+            if (IsRegExists(m_Ant_JinShanDuBa_64bit, Microsoft.Win32.Registry.LocalMachine))
             {
                 return true;
             }
@@ -108,11 +108,11 @@ namespace KK.SoftSearch
         /// <returns></returns>
         public Boolean HasAntJiangMin()
         {
-            if (IsRegValueExists(_Ant_JiangMin, "DisplayName", null))
+            if (IsRegValueExists(m_Ant_JiangMin, "DisplayName", null))
             {
                 return true;
             }
-            if (IsRegExists(_Ant_JiangMin_64bit, Microsoft.Win32.Registry.LocalMachine))
+            if (IsRegExists(m_Ant_JiangMin_64bit, Microsoft.Win32.Registry.LocalMachine))
             {
                 return true;
             }
@@ -125,11 +125,11 @@ namespace KK.SoftSearch
         /// <returns></returns>
         public Boolean HasAntRuiXing()
         {
-            if (IsRegValueExists(_Ant_RuiXing, "DisplayName", null))
+            if (IsRegValueExists(m_Ant_RuiXing, "DisplayName", null))
             {
                 return true;
             }
-            if (IsRegExists(_Ant_RuiXing_64bit, Microsoft.Win32.Registry.LocalMachine))
+            if (IsRegExists(m_Ant_RuiXing_64bit, Microsoft.Win32.Registry.LocalMachine))
             {
                 return true;
             }
@@ -142,11 +142,11 @@ namespace KK.SoftSearch
         /// <returns></returns>
         public Boolean HasAntNorton()
         {
-            if (IsRegValueExists(_Ant_Norton, "DisplayName", null))
+            if (IsRegValueExists(m_Ant_Norton, "DisplayName", null))
             {
                 return true;
             }
-            if (IsRegExists(_Ant_Norton_64bit, Microsoft.Win32.Registry.LocalMachine))
+            if (IsRegExists(m_Ant_Norton_64bit, Microsoft.Win32.Registry.LocalMachine))
             {
                 return true;
             }
@@ -163,9 +163,9 @@ namespace KK.SoftSearch
         /// <returns></returns>
         public Boolean HasOffice_WPSPro()
         {
-            using (MSWin32.RegistryKey regPro1 = MSWin32.Registry.LocalMachine.OpenSubKey(_Office_WPS_Pro))
+            using (MSWin32.RegistryKey regPro1 = MSWin32.Registry.LocalMachine.OpenSubKey(m_Office_WPS_Pro))
             {
-                if (regPro1 != null && IsRegValueExists(_Office_WPS_Pro, "DisplayName", MSWin32.Registry.LocalMachine))
+                if (regPro1 != null && IsRegValueExists(m_Office_WPS_Pro, "DisplayName", MSWin32.Registry.LocalMachine))
                 {
                     string verName = regPro1.GetValue("DisplayName")?.ToString();
                     if (verName.Contains("(8."))
@@ -183,9 +183,9 @@ namespace KK.SoftSearch
                 }
             }
 
-            using (MSWin32.RegistryKey regPro2 = MSWin32.Registry.LocalMachine.OpenSubKey(_Office_WPS_Pro_64bit))
+            using (MSWin32.RegistryKey regPro2 = MSWin32.Registry.LocalMachine.OpenSubKey(m_Office_WPS_Pro_64bit))
             {
-                if (regPro2 != null && IsRegValueExists(_Office_WPS_Pro, "DisplayName", MSWin32.Registry.LocalMachine))
+                if (regPro2 != null && IsRegValueExists(m_Office_WPS_Pro, "DisplayName", MSWin32.Registry.LocalMachine))
                 {
                     string verName = regPro2.GetValue("DisplayName")?.ToString();
                     if (verName.Contains("(8."))
@@ -212,9 +212,9 @@ namespace KK.SoftSearch
         /// <returns></returns>
         public Boolean HasOffice_WPSPersonal()
         {
-            using (MSWin32.RegistryKey regKey = MSWin32.Registry.CurrentUser.OpenSubKey(_Office_WPS_Personal))
+            using (MSWin32.RegistryKey regKey = MSWin32.Registry.CurrentUser.OpenSubKey(m_Office_WPS_Personal))
             {
-                if (regKey != null && IsRegValueExists(_Office_WPS_Pro, "DisplayName", MSWin32.Registry.LocalMachine))
+                if (regKey != null && IsRegValueExists(m_Office_WPS_Pro, "DisplayName", MSWin32.Registry.LocalMachine))
                 {
                     string verName = regKey.GetValue("DisplayName")?.ToString();
                     if (verName.Contains("(8."))
@@ -241,15 +241,24 @@ namespace KK.SoftSearch
         /// <returns></returns>
         public Boolean HasOffice_YongZhong()
         {
-            string regPath = GetRegPathByValue(_RegUninstall, "DisplayName", "永中Office", null);
+            string regPath = GetRegPathByValue(m_RegUninstall, "DisplayName", "永中Office", null);
             return !string.IsNullOrEmpty(regPath);
         }
 
         public String GetMSOfficeVersion()
         {
 
+            String offVer = GetMSOfficeVersionFromUninstall(m_RegUninstall) + "," + GetMSOfficeVersionFromUninstall(m_RegUninstall_64bit);
+            return offVer.Trim(',');
+
+        }
+
+        private String GetMSOfficeVersionFromUninstall(string regKey)
+        {
+            List<String> __offList = new List<string>();
+
             // 获取年份
-            using (MSWin32.RegistryKey reg = MSWin32.Registry.LocalMachine.OpenSubKey(_RegUninstall))
+            using (MSWin32.RegistryKey reg = MSWin32.Registry.LocalMachine.OpenSubKey(regKey))
             {
                 if (reg != null)
                 {
@@ -260,14 +269,15 @@ namespace KK.SoftSearch
 
                         string subKeyText = regSubKeys[m];
                         // 检查是否存在DisplayName
-                        if (IsRegValueExists(_RegUninstall + subKeyText, "DisplayName", null))
+                        if (IsRegValueExists(m_RegUninstall + subKeyText, "DisplayName", null))
                         {
                             MSWin32.RegistryKey regTmp = reg.OpenSubKey(subKeyText);
-                            string appName = regTmp.GetValue("DisplayName")?.ToString();
-                            string appVer = regTmp.GetValue("DisplayVersion")?.ToString();
-                            string appLocation = regTmp.GetValue("InstallLocation")?.ToString();
-
-                            if(string.IsNullOrEmpty(appName) || string.IsNullOrEmpty(appVer) || string.IsNullOrEmpty(appLocation))
+                            String appName = regTmp.GetValue("DisplayName")?.ToString();
+                            String appVer = regTmp.GetValue("DisplayVersion")?.ToString();
+                            String appLocation = regTmp.GetValue("InstallLocation")?.ToString();
+                            String offVerText = String.Empty;
+                            String offBuildLab = String.Empty;
+                            if (String.IsNullOrEmpty(appName) || String.IsNullOrEmpty(appVer) || String.IsNullOrEmpty(appLocation))
                             {
                                 continue;
                             }
@@ -276,8 +286,33 @@ namespace KK.SoftSearch
                             {
                                 if (appVer.Contains("11."))
                                 {
-
+                                    offVerText = "Microsoft Office 2003";
                                 }
+                                else if (appVer.Contains("12."))
+                                {
+                                    offVerText = "Microsoft Office 2007";
+                                }
+                                else if (appVer.Contains("14."))
+                                {
+                                    offVerText = "Microsoft Office 2010";
+                                }
+                                else if (appVer.Contains("15."))
+                                {
+                                    offVerText = "Microsoft Office 2013";
+                                }
+                                else if (appVer.Contains("16."))
+                                {
+                                    offVerText = "Microsoft Office 2016";
+                                }
+
+
+                                // 获取版本类型
+                                offBuildLab = GetMSOfficeBuildLab(appName);
+                                if (!__offList.Contains(offVerText + "_" + offBuildLab))
+                                {
+                                    __offList.Add(offVerText + "_" + offBuildLab);
+                                }
+
                             }
                         }
                     }
@@ -286,8 +321,83 @@ namespace KK.SoftSearch
 
             }
 
+            if (__offList != null && __offList.Count > 0)
+            {
+                String result = String.Empty;
+                foreach (String t in __offList)
+                {
+                    result += t + ",";
+                }
+                return result.Trim(',');
+            }
+
+            return String.Empty;
+        }
 
 
+
+        /// <summary>
+        /// 根据Office显示名称识别Office版本
+        /// </summary>
+        /// <param name="officeDisplayName"></param>
+        /// <returns></returns>
+        private String GetMSOfficeBuildLab(String officeDisplayName)
+        {
+            String offLab = String.Empty;
+            if (officeDisplayName.Contains("Microsoft Office"))
+            {
+                String oName = officeDisplayName.ToLower();
+                if (oName.Contains("starter") || oName.Contains("入门级"))
+                {
+                    offLab = "入门级";
+                }
+                else if ((oName.Contains("student") && oName.Contains("teacher")) || oName.Contains("学生教师版"))
+                {
+                    offLab = "学生教师版";
+                }
+                else if (oName.Contains("standard") || oName.Contains("标准版"))
+                {
+                    offLab = "标准版";
+                }
+                else if (oName.Contains("small business") || oName.Contains("小型企业版"))
+                {
+                    offLab = "小型企业版";
+                }
+                else if (oName.Contains("professional plus") || oName.Contains("专业增强版"))
+                {
+                    offLab = "专业增强版";
+                }
+                else if (oName.Contains("professional") || oName.Contains("专业版"))
+                {
+                    offLab = "专业版";
+                }
+                else if (oName.Contains("enterprise") || oName.Contains("企业版"))
+                {
+                    offLab = "企业版";
+                }
+                else if (oName.Contains("basic") || oName.Contains("基础版"))
+                {
+                    offLab = "基础版";
+                }
+                else if ((oName.Contains("home") && oName.Contains("student")) || oName.Contains("家庭学生版"))
+                {
+                    offLab = "家庭学生版";
+                }
+                else if (oName.Contains("academic") || oName.Contains("学术版"))
+                {
+                    offLab = "学术版";
+                }
+                else if (oName.Contains("ultimate") || oName.Contains("旗舰版"))
+                {
+                    offLab = "旗舰版";
+                }
+                else if ((oName.Contains("home") && oName.Contains("business")) || oName.Contains("家庭企业版"))
+                {
+                    offLab = "家庭企业版";
+                }
+            }
+
+            return offLab;
         }
 
 
@@ -368,6 +478,7 @@ namespace KK.SoftSearch
             }
             return string.Empty;
         }
+
 
         #endregion
 

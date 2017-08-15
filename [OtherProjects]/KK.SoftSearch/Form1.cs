@@ -46,6 +46,7 @@ namespace KK.SoftSearch
                 txtOffices.Text += "WPS专业版,";
             }
 
+            txtOffices.Text += regCheck.GetMSOfficeVersion();
 
 
         }

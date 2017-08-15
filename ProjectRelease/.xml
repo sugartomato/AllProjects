@@ -804,6 +804,20 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:ZS.Common.Win32.RegHelper">
+            <summary>
+            注册表操作
+            </summary>
+        </member>
+        <member name="M:ZS.Common.Win32.RegHelper.Export(System.String,System.String,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="regPath">要导出的注册表路径。需要包含根路径。跟路径简写为：HKLM\,HKCU\,HKCR\,HKU\,HKCC\</param>
+            <param name="savePath">注册表保存路径。包含完整文件名</param>
+            <param name="overwrite">是否覆盖已存在的文件</param>
+            <returns></returns>
+        </member>
         <member name="T:ZS.Common.Win32.Win32Provider.NetConnectionStatus">
             <summary>
             网络连接状态枚举
@@ -1007,6 +1021,16 @@
         <member name="T:ZS.Common.Win32.Win32Provider.Win32_Product">
             <summary>
             The Win32_Product WMI class represents products as they are installed by Windows Installer. A product generally correlates to one installation package.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Product.InstallDate2">
+            <summary>
+            Date that this product was installed on the system. This property does not require a value to indicate that the object is installed. For more information about WMI dates and times, see Date and Time Format.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Product.InstallLocation">
+            <summary>
+            Location of the installed product.
             </summary>
         </member>
     </members>

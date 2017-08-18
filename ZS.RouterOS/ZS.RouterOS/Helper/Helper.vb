@@ -22,9 +22,13 @@
             Config.Session = session
         End Sub
 
+        Private _propDHCPServer As DHCPServer
         Public ReadOnly Property DHCPServer As DHCPServer
             Get
-                Return New DHCPServer
+                If _propDHCPServer Is Nothing Then
+                    _propDHCPServer = New DHCPServer
+                End If
+                Return _propDHCPServer
             End Get
         End Property
 

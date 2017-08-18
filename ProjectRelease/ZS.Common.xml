@@ -78,6 +78,11 @@ ZS.Common
  <returns>An int representing the number of rows affected by the command</returns>
  <remarks></remarks>
 </member>
+<member name="T:ZS.Common.Drawing.Image">
+ <summary>
+ 图片处理
+ </summary>
+</member>
 <member name="M:ZS.Common.Drawing.Image.GetSize(System.String)">
  <summary>
  获取指定路径的图片的尺寸。
@@ -118,6 +123,134 @@ ZS.Common
  <summary>
  获取本机的所有网络适配器,以:做为分隔符
  </summary>
+ <returns></returns>
+</member>
+<member name="M:ZS.Common.ImageHelper.GetSize(System.String)">
+ <summary>
+ 获取指定路径的图片的尺寸。
+ </summary>
+ <param name="path">图片的本地路径</param>
+ <returns></returns>
+</member>
+<member name="T:ZS.Common.ImageHelper.ResizeSetting">
+ <summary>
+ 图片修改尺寸设置
+ </summary>
+</member>
+<member name="P:ZS.Common.ImageHelper.ResizeSetting.TargetWidht">
+ <summary>目标尺寸宽度</summary>
+</member>
+<member name="P:ZS.Common.ImageHelper.ResizeSetting.TargetHeight">
+ <summary>目标尺寸高度</summary>
+</member>
+<member name="P:ZS.Common.ImageHelper.ResizeSetting.TargetNamePrefix">
+ <summary>目标文件名前缀</summary>
+</member>
+<member name="P:ZS.Common.ImageHelper.ResizeSetting.TargetNameSuffix">
+ <summary>目标文件名后缀</summary>
+</member>
+<member name="P:ZS.Common.ImageHelper.ResizeSetting.CompressionLevel">
+ <summary>压缩级别。范围1-100</summary>
+</member>
+<member name="P:ZS.Common.ImageHelper.ResizeSetting.ResizeMode">
+ <summary>获取或设置尺寸修改模式</summary>
+</member>
+<member name="P:ZS.Common.ImageHelper.ResizeSetting.SavedPath">
+ <summary>
+ 获取图片保存之后的路径
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:ZS.Common.ImageHelper.ResizeImagesInFolder(System.String,System.String,ZS.Common.ImageHelper.ResizeSetting)">
+ <summary>
+ 修改指定目录下的所有图片的尺寸
+ </summary>
+ <param name="folderPath"></param>
+ <param name="saveFolder"></param>
+ <param name="setting"></param>
+ <returns></returns>
+</member>
+<member name="M:ZS.Common.ImageHelper.Resize(System.String,System.String,ZS.Common.ImageHelper.ResizeSetting)">
+ <summary>
+ 重新设定图片的尺寸。如果指定的保存路径是目录，则使用原文件名保存。
+ </summary>
+ <param name="imgPath">图片路径</param>
+ <param name="savePath">保存路径。如果是以\结尾，则表示保存路径为目录，否则保存路径为完整的保存文件名。</param>
+ <param name="setting">尺寸修改配置</param>
+ <returns></returns>
+</member>
+<member name="M:ZS.Common.ImageHelper.Resize(System.String,ZS.Common.ImageHelper.ResizeSetting)">
+ <summary>
+ 压缩图片，并保存到源文件所在目录。如果未指定文件名前缀或者后缀，则自动添加后缀。
+ </summary>
+ <param name="imgPath">图片路径</param>
+ <param name="setting">尺寸修改配置</param>
+ <returns></returns>
+</member>
+<member name="T:ZS.Common.ImageHelper.ResizeType">
+ <summary>
+ 图片重置大小的方式
+ </summary>
+</member>
+<member name="F:ZS.Common.ImageHelper.ResizeType.Auto">
+ <summary>自动。既如果原始图片长度大于宽度，则按照长度缩小，长度小于宽度，则按照宽度缩小</summary>
+</member>
+<member name="M:ZS.Common.ImageHelper.Compress(System.String,System.Int64)">
+ <summary>
+ 将指定路径图片进行压缩，并保存到同目录下。
+ </summary>
+ <param name="imgPath"></param>
+ <param name="level"></param>
+ <returns></returns>
+</member>
+<member name="M:ZS.Common.ImageHelper.Compress(System.String,System.String,System.Int64)">
+ <summary>
+ 将图片按照指定级别进行压缩并保存到指定目录里。保存的文件名将添加压缩标记
+ </summary>
+ <param name="imgPath"></param>
+ <param name="savePath"></param>
+ <param name="level"></param>
+ <returns></returns>
+</member>
+<member name="M:ZS.Common.ImageHelper.DoImageCompressOfFile(System.String,System.String,System.Int64,System.Boolean)">
+ <summary>
+ 如果保存目录与原始目录不同，根据addSign确定是否添加标记到文件名。如果相同，则始终添加标记。
+ </summary>
+ <param name="imgPath"></param>
+ <param name="saveFolder"></param>
+ <param name="level"></param>
+ <param name="addSign"></param>
+ <returns></returns>
+</member>
+<member name="M:ZS.Common.ImageHelper.Compress(System.Drawing.Bitmap,System.Int64)">
+ <summary>
+ 压缩图片，返回压缩之后的内存流文件。使用Jpeg图片编码压缩
+ </summary>
+ <param name="sourceImg">原图片</param>
+ <param name="level">压缩级别</param>
+ <returns></returns>
+</member>
+<member name="M:ZS.Common.ImageHelper.Compress(System.Drawing.Bitmap,System.Int64,System.Drawing.Imaging.ImageFormat)">
+ <summary>
+ 按照指定的图片编码压缩图片，返回压缩之后的内存流文件
+ </summary>
+ <param name="sourceImg">原图片</param>
+ <param name="level">压缩级别</param>
+ <param name="imgFormat">图片格式</param>
+ <returns></returns>
+</member>
+<member name="M:ZS.Common.ImageHelper.GetEncoder(System.Drawing.Imaging.ImageFormat)">
+ <summary>
+ 根据图片格式对象获取图片的编解码器信息
+ </summary>
+ <param name="format"></param>
+ <returns></returns>
+</member>
+<member name="M:ZS.Common.ImageHelper.GetEncoder(System.String)">
+ <summary>
+ 根据图片mime类型获取图片的编解码器信息
+ </summary>
+ <param name="mimeType"></param>
  <returns></returns>
 </member>
 <member name="M:ZS.Common.ListEx.Join(System.Collections.Generic.List{System.String},System.String)">

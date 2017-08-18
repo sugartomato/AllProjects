@@ -53,8 +53,10 @@
   </Choose>
   <ItemGroup>
     <Compile Include="APISets\APITests.cs" />
+    <Compile Include="ContextMenu\ContextMenuTests.cs" />
     <Compile Include="Net\NetworkAdapterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegHelperTests.cs" />
     <Compile Include="Win32Provider\ProviderHelperTests.cs" />
   </ItemGroup>
   <ItemGroup>

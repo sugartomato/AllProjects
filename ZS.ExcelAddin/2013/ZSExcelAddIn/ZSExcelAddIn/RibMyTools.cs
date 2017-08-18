@@ -136,6 +136,7 @@ namespace ZSExcelAddIn
             {
                 case "ZS_BTN_InsertDate":
                     WriteCells(DateTime.Now.ToString("yyyy-MM-dd"));
+                    //Globals.ThisAddIn.Application.OnUndo("撤销 插入GUID", "UndoEE");
                     break;
                 case "ZS_BTN_InsertTime":
                     WriteCells(DateTime.Now.ToString("HH:mm:ss"));
@@ -329,9 +330,14 @@ namespace ZSExcelAddIn
                 //}
 
                 //Globals.ThisAddIn.Application.ActiveCell.Value = guid;
+
             }
         }
 
+        public void UndoEE()
+        {
+            MessageBox.Show("1");
+        }
         #endregion
 
         public string GetGUID(Microsoft.Office.Interop.Excel.Range currentCell)
@@ -464,7 +470,6 @@ namespace ZSExcelAddIn
         }
 
         #endregion
-
 
         #region 内容格式化
 
@@ -609,8 +614,6 @@ namespace ZSExcelAddIn
 
         #endregion
 
-
-
         #region 公共方法
 
         /// <summary>
@@ -624,8 +627,6 @@ namespace ZSExcelAddIn
         }
 
         #endregion
-
-
 
         #region 测试
 

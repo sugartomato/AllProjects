@@ -38,5 +38,31 @@ namespace ZS.Common.Win32.Win32Provider.Tests
                 Console.WriteLine(val);
             }
         }
+        [TestMethod()]
+        public void GetAllTest_Win32_Product()
+        {
+            List<Win32Provider.Win32_Product> list = Win32.Win32Provider.ProviderHelper<Win32Provider.Win32_Product>.GetAll();
+            if (list != null && list.Count > 0)
+            {
+                foreach (var o in list)
+                {
+                    Console.WriteLine(o.ToDebugString());
+                }
+            }
+        }
+
+        [TestMethod()]
+        public void GetAllTest_Win32_ComputerSystemProduct()
+        {
+            List<Win32Provider.Win32_ComputerSystemProduct> list = Win32.Win32Provider.ProviderHelper<Win32Provider.Win32_ComputerSystemProduct>.GetAll();
+            if (list != null && list.Count > 0)
+            {
+                foreach (var o in list)
+                {
+                    Console.WriteLine(o.ToDebugString());
+                }
+            }
+        }
+
     }
 }

@@ -56,6 +56,12 @@
     <Compile Include="frmCursorPoint.Designer.cs">
       <DependentUpon>frmCursorPoint.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmInstalledApps.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmInstalledApps.Designer.cs">
+      <DependentUpon>frmInstalledApps.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmNetworkAdapter.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -68,6 +74,12 @@
     <Compile Include="frmPaint.Designer.cs">
       <DependentUpon>frmPaint.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmWin32Provider.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmWin32Provider.Designer.cs">
+      <DependentUpon>frmWin32Provider.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -76,11 +88,17 @@
     <EmbeddedResource Include="frmCursorPoint.resx">
       <DependentUpon>frmCursorPoint.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmInstalledApps.resx">
+      <DependentUpon>frmInstalledApps.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmNetworkAdapter.resx">
       <DependentUpon>frmNetworkAdapter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPaint.resx">
       <DependentUpon>frmPaint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmWin32Provider.resx">
+      <DependentUpon>frmWin32Provider.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

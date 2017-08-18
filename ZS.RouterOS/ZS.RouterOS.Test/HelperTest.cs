@@ -60,6 +60,17 @@ namespace ZS.RouterOS.Test
             Console.Write(blnR);
         }
 
+        [TestMethod]
+        public void DHCPServer_Lease_ModelToAddScriptString()
+        {
+            Helper.DHCPServer.Leases_Model model = new Helper.DHCPServer.Leases_Model();
+            model.Address = new _IPAddress("10.92.3.2");
+            model.MacAddress = new _MACAddress("EC-08-6B-C2-C3-4A ");
+            model.Server = "Floor2";
+            model.Comment = "203打印服务器。设备固定IP";
+            Console.WriteLine(model.ToAddScriptString());
+        }
+
         #endregion
 
         [TestMethod]

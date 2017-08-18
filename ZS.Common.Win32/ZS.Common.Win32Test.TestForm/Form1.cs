@@ -106,5 +106,19 @@ namespace ZS.Common.Win32Test.TestForm
 
 
         }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            frmWin32Provider frm = new frmWin32Provider();
+            frm.Show();
+
+                
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            frmInstalledApps frm = new frmInstalledApps();
+            frm.Show();
+        }
     }
 }

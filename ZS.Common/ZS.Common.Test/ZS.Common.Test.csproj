@@ -39,6 +39,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <Choose>
@@ -58,6 +59,7 @@
   <ItemGroup>
     <Compile Include="Computer.cs" />
     <Compile Include="HardDevice_NetworkAdapterTest.cs" />
+    <Compile Include="ImageHelperTest.cs" />
     <Compile Include="MonitorTest.cs" />
     <Compile Include="StringExTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

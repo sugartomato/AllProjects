@@ -649,6 +649,110 @@
             If this flag is set, the sound is assigned to the audio session for system notification sounds. For more information, see PlaySound.
             </summary>
         </member>
+        <member name="M:ZS.Common.Win32.ContextMenu.ContextMenu.AddToDirBackgroundShell(ZS.Common.Win32.ContextMenu.ContextMenu)">
+            <summary>
+            添加右键菜单到目录背景的Shell，既在目录空白处点击右键出现的菜单中。
+            </summary>
+            <param name="cm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZS.Common.Win32.ContextMenu.ContextMenu.#ctor">
+            <summary>
+            构造一个新的实例
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.ContextMenu.ContextMenu.Command">
+            <summary>
+            命令行
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.ContextMenu.ContextMenu.Icon">
+            <summary>
+            图标路径
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.ContextMenu.ContextMenu.ShowName">
+            <summary>
+            菜单中显示名称
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.ContextMenu.ContextMenu.RegName">
+            <summary>
+            注册表中键名。默认以GUID命名
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.InstalledApp.IdentifyingNumber">
+            <summary>设置或获取标识符</summary>
+        </member>
+        <member name="P:ZS.Common.Win32.InstalledApp.Name">
+            <summary>设置或获取程序名</summary>
+        </member>
+        <member name="P:ZS.Common.Win32.InstalledApp.VersionString">
+            <summary>设置或获取版本号字符串</summary>
+        </member>
+        <member name="P:ZS.Common.Win32.InstalledApp.Caption">
+            <summary>设置或获取版本号</summary>
+        </member>
+        <member name="P:ZS.Common.Win32.InstalledApp.InstallLocation">
+            <summary>设置或获取版本号</summary>
+        </member>
+        <member name="P:ZS.Common.Win32.InstalledApp.Publisher">
+            <summary>设置或获取制作公司</summary>
+        </member>
+        <member name="P:ZS.Common.Win32.InstalledApp.UninstallString">
+            <summary>设置或获取卸载路径</summary>
+        </member>
+        <member name="P:ZS.Common.Win32.InstalledApp.HelpTelephone">
+            <summary>设置或获取支持电话</summary>
+        </member>
+        <member name="P:ZS.Common.Win32.InstalledApp.HelpLink">
+            <summary>设置或获取支持网站</summary>
+        </member>
+        <member name="P:ZS.Common.Win32.InstalledApp.URLInfoAbout">
+            <summary>设置或获取关于链接</summary>
+        </member>
+        <member name="P:ZS.Common.Win32.InstalledApp.InstallDate">
+            <summary>设置或获取安装日期</summary>
+        </member>
+        <member name="P:ZS.Common.Win32.InstalledApp.InstallSource">
+            <summary>设置或获取安装源</summary>
+        </member>
+        <member name="P:ZS.Common.Win32.InstalledApp.IsSystemComponent">
+            <summary>设置或获取是否为系统组件</summary>
+        </member>
+        <member name="P:ZS.Common.Win32.InstalledApp.IsInstallByWindowsInstaller">
+            <summary>设置或获取通过WindowsInstaller安装的程序</summary>
+        </member>
+        <member name="P:ZS.Common.Win32.InstalledApp.IsWindowsUpdate">
+            <summary>设置或获取是否为系统更新</summary>
+        </member>
+        <member name="P:ZS.Common.Win32.InstalledApp.ReleaseType">
+            <summary>设置或获取发布类型</summary>
+        </member>
+        <member name="P:ZS.Common.Win32.InstalledApp.Comments">
+            <summary>设置或获取说明</summary>
+        </member>
+        <member name="P:ZS.Common.Win32.InstalledApp.RegKeyPath">
+            <summary>获取该程序的注册表查找位置</summary>
+        </member>
+        <member name="T:ZS.Common.Win32.Mouse">
+            <summary>
+            鼠标
+            </summary>
+        </member>
+        <member name="M:ZS.Common.Win32.Mouse.MoveTo(System.Drawing.Point)">
+            <summary>
+            将鼠标从当前坐标移动到指定坐标。以[]毫秒的移动速度作为间隔。
+            </summary>
+            <param name="pt"></param>
+        </member>
+        <member name="M:ZS.Common.Win32.Mouse.MoveTo(System.Drawing.Point,System.Int32)">
+            <summary>
+            按照指定的速度将鼠标从当前坐标移动到指定坐标
+            </summary>
+            <param name="targetPt"></param>
+            <param name="delay">移动延迟。单位为毫秒</param>
+        </member>
         <member name="T:ZS.Common.Win32.Net.NetworkAdapter">
             <summary>
             网卡操作
@@ -737,6 +841,81 @@
             管理本机VPN
             </summary>
         </member>
+        <member name="T:ZS.Common.Win32.ObjectBase">
+            <summary>
+            对象基础类
+            </summary>
+        </member>
+        <member name="M:ZS.Common.Win32.ObjectBase.ToDebugString">
+            <summary>
+            输出该类的所有属性的名称、值、类型
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ZS.Common.Win32.ObjectBase.ToDebugString(System.String[])">
+            <summary>
+            输出该类中指定属性的的所有属性的名称、值、类型
+            </summary>
+            <param name="displayProps"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ZS.Common.Win32.Query">
+            <summary>
+            信息查询
+            </summary>
+        </member>
+        <member name="M:ZS.Common.Win32.Query.GetIdentifyingNumber">
+            <summary>
+            获取计算机的序列号
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ZS.Common.Win32.Query.GetComputerName">
+            <summary>
+            获取计算机名
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ZS.Common.Win32.Query.GetInstalledApps">
+            <summary>
+            获取已安装的软件列表。不包含系统组件与Windows更新
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ZS.Common.Win32.Query.GetAppsFromUninstallRegKey(Microsoft.Win32.RegistryKey,System.Collections.Generic.List{ZS.Common.Win32.InstalledApp}@)">
+            <summary>
+            从注册表卸载项里获取安装的程序
+            
+            </summary>
+        </member>
+        <member name="T:ZS.Common.Win32.RegHelper">
+            <summary>
+            注册表操作
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.RegHelper.RegPath_Uninstall">
+            <summary>注册表【程序列表】路径</summary>
+        </member>
+        <member name="F:ZS.Common.Win32.RegHelper.RegPath_Uninstall64">
+            <summary>注册表【程序列表64位】路径</summary>
+        </member>
+        <member name="M:ZS.Common.Win32.RegHelper.Export(System.String,System.String,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="regPath">要导出的注册表路径。需要包含根路径。跟路径简写为：HKLM\,HKCU\,HKCR\,HKU\,HKCC\</param>
+            <param name="savePath">注册表保存路径。包含完整文件名</param>
+            <param name="overwrite">是否覆盖已存在的文件</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZS.Common.Win32.RegHelper.GetValue(Microsoft.Win32.RegistryKey,System.String)">
+            <summary>
+            获取指定键值下的指定
+            </summary>
+            <param name="reg"></param>
+            <param name="valName"></param>
+            <returns></returns>
+        </member>
         <member name="T:ZS.Common.Win32.Win32Provider.NetConnectionStatus">
             <summary>
             网络连接状态枚举
@@ -750,6 +929,12 @@
         <member name="M:ZS.Common.Win32.Win32Provider.ProviderHelper`1.GetAll">
             <summary>
             获取指定的Win32类型的所有集合
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ZS.Common.Win32.Win32Provider.ProviderHelper`1.GetManagementObjectPropertiesNames(System.Management.ManagementBaseObject)">
+            <summary>
+            获取ManagementObject的属性的名称集合
             </summary>
             <returns></returns>
         </member>
@@ -813,6 +998,62 @@
             输出该类的所有属性的名称、值、类型
             </summary>
             <returns></returns>
+        </member>
+        <member name="T:ZS.Common.Win32.Win32Provider.Win32_ComputerSystemProduct">
+            <summary>
+            The Win32_ComputerSystemProduct WMI class represents a product. This includes software and hardware used on this computer system.
+            </summary>
+            <remarks>
+            The Win32_ComputerSystemProduct class is derived from CIM_Product.
+            </remarks>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_ComputerSystemProduct.Caption">
+            <summary>
+            Short textual description for the product.
+            This property is inherited from CIM_Product.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_ComputerSystemProduct.Description">
+            <summary>
+            Textual description of the product.
+            This property is inherited from CIM_Product.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_ComputerSystemProduct.IdentifyingNumber">
+            <summary>
+            Product identification, such as a serial number on software, a die number on a hardware chip, or (for noncommercial products) a project number.
+            This property is inherited from CIM_Product.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_ComputerSystemProduct.Name">
+            <summary>
+            Product's stock-keeping unit (SKU) information.
+            This property is inherited from CIM_Product.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_ComputerSystemProduct.SKUNumber">
+            <summary>
+            Product's stock-keeping unit (SKU) information.
+            This property is inherited from CIM_Product.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_ComputerSystemProduct.Vendor">
+            <summary>
+            Name of the product's supplier, or the entity selling the product (the manufacturer, reseller, OEM, and so on).
+            This property is inherited from CIM_Product.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_ComputerSystemProduct.Version">
+            <summary>
+            Product version information.
+            This property is inherited from CIM_Product.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_ComputerSystemProduct.UUID">
+            <summary>
+            Universally unique identifier (UUID) for this product. A UUID is a 128-bit identifier that is guaranteed to be different from other generated UUIDs. If a UUID is not available, a UUID of all zeros is used.
+            This value comes from the UUID member of the System Information structure in the SMBIOS information.
+            </summary>
         </member>
         <member name="T:ZS.Common.Win32.Win32Provider.Win32_NetworkAdapter">
             <summary>
@@ -879,6 +1120,21 @@
         <member name="P:ZS.Common.Win32.Win32Provider.Win32_NetworkAdapterConfiguration.IPEnabled">
             <summary>
             If TRUE, TCP/IP is bound and enabled on this network adapter.
+            </summary>
+        </member>
+        <member name="T:ZS.Common.Win32.Win32Provider.Win32_Product">
+            <summary>
+            The Win32_Product WMI class represents products as they are installed by Windows Installer. A product generally correlates to one installation package.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Product.InstallDate2">
+            <summary>
+            Date that this product was installed on the system. This property does not require a value to indicate that the object is installed. For more information about WMI dates and times, see Date and Time Format.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Product.InstallLocation">
+            <summary>
+            Location of the installed product.
             </summary>
         </member>
     </members>

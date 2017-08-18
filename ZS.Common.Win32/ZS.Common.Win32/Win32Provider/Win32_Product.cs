@@ -18,7 +18,7 @@ namespace ZS.Common.Win32.Win32Provider
         /// <summary>
         /// Date that this product was installed on the system. This property does not require a value to indicate that the object is installed. For more information about WMI dates and times, see Date and Time Format.
         /// </summary>
-        public DateTime InstallDate2 { get; set; }
+        public DateTime? InstallDate2 { get; set; }
         /// <summary>
         /// Location of the installed product.
         /// </summary>

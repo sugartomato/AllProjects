@@ -20,7 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\..\ProjectRelease\.xml</DocumentationFile>
+    <DocumentationFile>..\..\ProjectRelease\ZS.Common.Win32.xml</DocumentationFile>
     <RegisterForComInterop>false</RegisterForComInterop>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -53,6 +53,7 @@
     <Compile Include="Mouse.cs" />
     <Compile Include="Net\NetworkAdapter.cs" />
     <Compile Include="Net\VPN.cs" />
+    <Compile Include="ObjectBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Query.cs" />
     <Compile Include="RegHelper.cs" />

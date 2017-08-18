@@ -11,6 +11,7 @@ namespace ZS.Common.Win32.Win32Provider
     /// </summary>
     public static class ProviderHelper<T> where T:Win32ProviderBase,new()
     {
+        
         /// <summary>
         /// 获取指定的Win32类型的所有集合
         /// </summary>
@@ -42,6 +43,9 @@ namespace ZS.Common.Win32.Win32Provider
 
                 foreach(var o in objColl)
                 {
+                    String[] tmpProNames = GetManagementObjectPropertiesNames(o);
+                    if (tmpProNames == null || tmpProNames.Length == 0) continue;
+
                     T tmpObj = new T();
                     // 遍历属性，进行属性赋值
                     foreach(var pro in properties)
@@ -52,7 +56,26 @@ namespace ZS.Common.Win32.Win32Provider
                         }
                         else
                         {
-                            pro.SetValue(tmpObj, o.GetPropertyValue(pro.Name), null);
+                            if (tmpProNames.Contains(pro.Name))
+                            {
+                                try
+                                {
+                                    PropertyData tmpProp = o.Properties[pro.Name];
+                                    if (tmpProp.Value == null) continue;
+                                    if (tmpProp.Type == CimType.DateTime)
+                                    {
+                                        pro.SetValue(tmpObj, ManagementDateTimeConverter.ToDateTime(tmpProp.Value.ToString()), null);
+                                    }
+                                    else
+                                    {
+                                        pro.SetValue(tmpObj, o.GetPropertyValue(pro.Name), null);
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+                                    throw new ApplicationException("给属性【" + pro.Name + "】赋值失败。" + ex.Message , ex);
+                                }
+                            }
                         }
                     }
                     result.Add(tmpObj);
@@ -63,6 +86,24 @@ namespace ZS.Common.Win32.Win32Provider
 
             return null;
         }
+
+        /// <summary>
+        /// 获取ManagementObject的属性的名称集合
+        /// </summary>
+        /// <returns></returns>
+        private static String[] GetManagementObjectPropertiesNames(ManagementBaseObject obj)
+        {
+            if (obj == null) return null;
+            if (obj.Properties == null || obj.Properties.Count == 0) return null;
+            List<String> result = new List<String>();
+            foreach (var p in obj.Properties)
+            {
+                result.Add(p.Name);
+            }
+
+            return result.ToArray();
+        }
+
 
         /// <summary>
         /// 获取该Win32类型中的所有字段与数据类型对照表

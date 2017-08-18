@@ -12,6 +12,12 @@ namespace ZS.Common.Win32
     public class RegHelper
     {
 
+        /// <summary>注册表【程序列表】路径</summary>
+        public const String RegPath_Uninstall = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\";
+        /// <summary>注册表【程序列表64位】路径</summary>
+        public const String RegPath_Uninstall64 = @"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\";
+
+
         /// <summary>
         /// 
         /// </summary>
@@ -60,6 +66,17 @@ namespace ZS.Common.Win32
 
 
             return true;
+        }
+
+        /// <summary>
+        /// 获取指定键值下的指定
+        /// </summary>
+        /// <param name="reg"></param>
+        /// <param name="valName"></param>
+        /// <returns></returns>
+        public Object GetValue(Microsoft.Win32.RegistryKey reg, String valName)
+        {
+            throw new ApplicationException("未实现的方法");
         }
 
 

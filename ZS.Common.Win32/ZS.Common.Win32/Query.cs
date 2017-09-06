@@ -159,6 +159,7 @@ namespace ZS.Common.Win32
 
                             // 是否通过WindowsInstaller安装
                             tmpVal = regTmp.GetValue("WindowsInstaller");
+                            tmpModel.IsInstallByWindowsInstaller = false;
                             if (tmpVal != null)
                             {
                                 if (Convert.ToInt32(tmpVal.ToString()) == 1)
@@ -168,11 +169,20 @@ namespace ZS.Common.Win32
                             }
 
                             // 是否为系统更新
-                            // 如果键名里包含了
+                            // 如果键名里包含了 KB开始的
                             if (System.Text.RegularExpressions.Regex.IsMatch(keyName, @"KB[0-9]{6,}$"))
                             {
                                 tmpModel.IsWindowsUpdate = true;
+                                tmpModel.IsUpdate = true;
                             }
+
+                            // 其它更新
+                            // 如果里面包含了ParentKeyName并且有值
+                            if (!String.IsNullOrEmpty(regTmp.GetValue("ParentKeyName")?.ToString()))
+                            {
+                                tmpModel.IsUpdate = true;
+                            }
+
 
                             tmpModel.RegKeyPath = regKey.ToString();
 

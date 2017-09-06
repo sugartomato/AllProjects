@@ -120,5 +120,17 @@ namespace ZS.Common.Win32Test.TestForm
             frmInstalledApps frm = new frmInstalledApps();
             frm.Show();
         }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            frmWindowsMessages frm = new frmWindowsMessages();
+            frm.Show();
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            frmWindows frm = new frmWindows();
+            frm.Show();
+        }
     }
 }

@@ -80,6 +80,18 @@
     <Compile Include="frmWin32Provider.Designer.cs">
       <DependentUpon>frmWin32Provider.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmWindows.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmWindows.Designer.cs">
+      <DependentUpon>frmWindows.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmWindowsMessages.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmWindowsMessages.Designer.cs">
+      <DependentUpon>frmWindowsMessages.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -99,6 +111,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmWin32Provider.resx">
       <DependentUpon>frmWin32Provider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmWindows.resx">
+      <DependentUpon>frmWindows.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmWindowsMessages.resx">
+      <DependentUpon>frmWindowsMessages.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

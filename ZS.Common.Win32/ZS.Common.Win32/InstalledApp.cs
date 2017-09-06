@@ -12,9 +12,12 @@ namespace ZS.Common.Win32
         {
             this.Name = String.Empty;
         }
-        // 
+
+
 
         #region 属性
+        /// <summary>设置或获取标识符</summary>
+        public UInt16 AssignmentType { get; set; }
         /// <summary>设置或获取标识符</summary>
         public String IdentifyingNumber { get; set; }
         /// <summary>设置或获取程序名</summary>
@@ -23,8 +26,8 @@ namespace ZS.Common.Win32
         public String VersionString { get; set; }
         /// <summary>设置或获取版本号</summary>
         public String Caption { get; set; }
-        /// <summary>设置或获取版本号</summary>
-        public String InstallLocation { get; set; }
+        /// <summary>设置或获取软件描述</summary>
+        public String Description { get; set; }
         /// <summary>设置或获取制作公司</summary>
         public String Publisher { get; set; }
         /// <summary>设置或获取卸载路径</summary>
@@ -35,6 +38,8 @@ namespace ZS.Common.Win32
         public String HelpLink { get; set; }
         /// <summary>设置或获取关于链接</summary>
         public String URLInfoAbout { get; set; }
+        /// <summary>设置或获取版本号</summary>
+        public String InstallLocation { get; set; }
         /// <summary>设置或获取安装日期</summary>
         public DateTime? InstallDate { get; set; }
         /// <summary>设置或获取安装源</summary>
@@ -43,6 +48,8 @@ namespace ZS.Common.Win32
         public Boolean IsSystemComponent { get; set; }
         /// <summary>设置或获取通过WindowsInstaller安装的程序</summary>
         public Boolean IsInstallByWindowsInstaller { get; set; }
+        /// <summary>是否为更新。例如Windows更新或者Office更新</summary>
+        public Boolean IsUpdate { get; set; }
         /// <summary>设置或获取是否为系统更新</summary>
         public Boolean IsWindowsUpdate { get; set; }
         /// <summary>设置或获取发布类型</summary>

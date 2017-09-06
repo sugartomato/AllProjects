@@ -97,7 +97,7 @@ namespace ZS.Common.Win32
 
 
         /// <summary>
-        ///     据窗口类名或窗口标题名来获得窗口的句柄，该函数返回窗口的句柄，
+        ///     据窗口类名或窗口标题名来获得窗口的句柄，该函数返回窗口的句柄。需要注意：如果按照窗口名称查找，则窗口类名参数应设置为null，而不是""。具体见参数解释。
         ///     Retrieves a handle to the top-level window whose class name and window name match the specified strings. This function does not search child windows. This function does not perform a case-sensitive search.
         ///     To search child windows, beginning with a specified child window, use the FindWindowEx function.
         /// </summary>
@@ -298,29 +298,52 @@ namespace ZS.Common.Win32
         [DllImport("User32.dll")]
         public static extern IntPtr SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
 
-
-
         /// <summary>
-        /// An application-defined callback function used with the EnumWindows or EnumDesktopWindows function. It receives top-level window handles. The WNDENUMPROC type defines a pointer to this callback function. EnumWindowsProc is a placeholder for the application-defined function name.
+        /// An application-defined callback function used with the EnumChildWindows function. It receives the child window handles. The WNDENUMPROC type defines a pointer to this callback function. EnumChildProc is a placeholder for the application-defined function name.
         /// </summary>
         /// <param name="hwnd">
-        ///     [in]
-        ///     A handle to a top-level window.
+        ///     [in][Type: HWND]
+        ///     A handle to a child window of the parent window specified in EnumChildWindows.
         /// </param>
         /// <param name="lParam">
-        ///     [in]
-        ///     The application-defined value given in EnumWindows or EnumDesktopWindows.
+        ///      [in]
+        ///      The application-defined value given in EnumChildWindows.
         /// </param>
         /// <returns>
-        ///     To continue enumeration, the callback function must return TRUE; to stop enumeration, it must return 
+        /// To continue enumeration, the callback function must return TRUE; to stop enumeration, it must return FALSE.
         /// </returns>
         /// <remarks>
-        /// An application must register this callback function by passing its address to EnumWindows or EnumDesktopWindows.
+        /// The callback function can carry out any desired task.
+        /// An application must register this callback function by passing its address to EnumChildWindows.
         /// </remarks>
-        /// <link>
-        /// https://msdn.microsoft.com/en-us/library/ms633498(v=vs.85).aspx
-        /// </link>
-        public delegate Boolean EnumWindowsProc(IntPtr hwnd, Int32 lParam);
+        /// <link>https://msdn.microsoft.com/en-us/library/windows/desktop/ms633493(v=vs.85).aspx</link>
+        public delegate Boolean EnumChildProc(IntPtr hwnd, Int32 lParam);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="hWndParent">
+        ///     [in, optional][Type: HWND]
+        ///     A handle to the parent window whose child windows are to be enumerated. If this parameter is NULL, this function is equivalent to EnumWindows.
+        /// </param>
+        /// <param name="lpEnumFunc">
+        ///     [in][Type: WNDENUMPROC]
+        ///     A pointer to an application-defined callback function. For more information, see EnumChildProc.
+        /// </param>
+        /// <param name="lParam">
+        ///     [in][Type: LPARAM]
+        ///     An application-defined value to be passed to the callback function.
+        /// </param>
+        /// <returns>
+        /// The return value is not used.
+        /// </returns>
+        /// <remarks>
+        /// If a child window has created child windows of its own, EnumChildWindows enumerates those windows as well.
+        /// A child window that is moved or repositioned in the Z order during the enumeration process will be properly enumerated. The function does not enumerate a child window that is destroyed before being enumerated or that is created during the enumeration process.
+        /// </remarks>
+        /// <link>https://msdn.microsoft.com/en-us/library/windows/desktop/ms633494(v=vs.85).aspx</link>
+        [DllImport("User32.dll")]
+        public static extern Boolean EnumChildWindows(IntPtr hWndParent, EnumChildProc lpEnumFunc, Int32 lParam);
 
         /// <summary>
         /// Enumerates all top-level windows on the screen by passing the handle to each window, in turn, to an application-defined callback function. EnumWindows continues until the last top-level window is enumerated or the callback function returns FALSE.
@@ -351,6 +374,27 @@ namespace ZS.Common.Win32
         [DllImport("User32.dll")]
         public static extern Boolean EnumWindows(EnumWindowsProc lpEnumFunc, Int32 lParam);
 
+        /// <summary>
+        /// An application-defined callback function used with the EnumWindows or EnumDesktopWindows function. It receives top-level window handles. The WNDENUMPROC type defines a pointer to this callback function. EnumWindowsProc is a placeholder for the application-defined function name.
+        /// </summary>
+        /// <param name="hwnd">
+        ///     [in]
+        ///     A handle to a top-level window.
+        /// </param>
+        /// <param name="lParam">
+        ///     [in]
+        ///     The application-defined value given in EnumWindows or EnumDesktopWindows.
+        /// </param>
+        /// <returns>
+        ///     To continue enumeration, the callback function must return TRUE; to stop enumeration, it must return 
+        /// </returns>
+        /// <remarks>
+        /// An application must register this callback function by passing its address to EnumWindows or EnumDesktopWindows.
+        /// </remarks>
+        /// <link>
+        /// https://msdn.microsoft.com/en-us/library/ms633498(v=vs.85).aspx
+        /// </link>
+        public delegate Boolean EnumWindowsProc(IntPtr hwnd, Int32 lParam);
 
         /// <summary>
         /// Determines the visibility state of the specified window.

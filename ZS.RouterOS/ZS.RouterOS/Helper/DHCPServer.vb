@@ -1,5 +1,6 @@
 ﻿Namespace Helper
 
+    <Obsolete("使用HDCP命名空间下的方法代替此类")>
     Public Class DHCPServer
 
 

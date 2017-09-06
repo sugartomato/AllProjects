@@ -43,7 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="APISets\SystemDefinedMessages.cs" />
     <Compile Include="APISets\Win32API_KeyboardAndMouseInput.cs" />
+    <Compile Include="APISets\Win32API_MessageAndMessageQueues.cs" />
     <Compile Include="APISets\Win32API_Rectangles.cs" />
     <Compile Include="APISets\Win32API_Windows.cs" />
     <Compile Include="APISets\Win32API_Cursors.cs" />

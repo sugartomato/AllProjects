@@ -5,16 +5,35 @@ VisualStudioVersion = 15.0.26430.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KK.FileWatcher", "KK.FileWatcher.csproj", "{33E63B8B-2D05-4A76-9710-700358E1B012}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZS.Common.Win32Tests", "ZS.Common.Win32Tests\ZS.Common.Win32Tests.csproj", "{1F4CC2F1-1F18-4306-89D2-04307028764D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZS.Common.Win32Test.TestForm", "ZS.Common.Win32Test.TestForm\ZS.Common.Win32Test.TestForm.csproj", "{4D9DFF1F-3AAC-4811-8FC4-811F236ED978}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+<<<<<<< HEAD:ZS.Common.Win32/ZS.Common.Win32_VS2017CE.sln
+		{51B85041-844B-4FBF-8C7C-B61D76327D14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51B85041-844B-4FBF-8C7C-B61D76327D14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51B85041-844B-4FBF-8C7C-B61D76327D14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51B85041-844B-4FBF-8C7C-B61D76327D14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F4CC2F1-1F18-4306-89D2-04307028764D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F4CC2F1-1F18-4306-89D2-04307028764D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F4CC2F1-1F18-4306-89D2-04307028764D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F4CC2F1-1F18-4306-89D2-04307028764D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D9DFF1F-3AAC-4811-8FC4-811F236ED978}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D9DFF1F-3AAC-4811-8FC4-811F236ED978}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D9DFF1F-3AAC-4811-8FC4-811F236ED978}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D9DFF1F-3AAC-4811-8FC4-811F236ED978}.Release|Any CPU.Build.0 = Release|Any CPU
+=======
 		{33E63B8B-2D05-4A76-9710-700358E1B012}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{33E63B8B-2D05-4A76-9710-700358E1B012}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33E63B8B-2D05-4A76-9710-700358E1B012}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33E63B8B-2D05-4A76-9710-700358E1B012}.Release|Any CPU.Build.0 = Release|Any CPU
+>>>>>>> refs/remotes/origin/master:[OtherProjects]/KK.FileWatcher/KK.FileWatcher/KK.FileWatcher.sln
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

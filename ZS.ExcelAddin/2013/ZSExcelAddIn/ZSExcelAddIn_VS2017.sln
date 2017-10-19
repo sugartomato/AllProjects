@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.1.26403.7
+VisualStudioVersion = 15.0.26430.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZSExcelAddIn", "ZSExcelAddIn\ZSExcelAddIn.csproj", "{77BE29DD-E41B-4D8A-8128-4C6E91EBA5B4}"
-EndProject
-Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "ZSExcelAddInInstaller", "ZSExcelAddInInstaller\ZSExcelAddInInstaller.isproj", "{419DB239-5668-4F88-8D2D-71373E34EC6D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,16 +24,6 @@ Global
 		{77BE29DD-E41B-4D8A-8128-4C6E91EBA5B4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{77BE29DD-E41B-4D8A-8128-4C6E91EBA5B4}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
 		{77BE29DD-E41B-4D8A-8128-4C6E91EBA5B4}.SingleImage|Any CPU.Build.0 = Release|Any CPU
-		{419DB239-5668-4F88-8D2D-71373E34EC6D}.CD_ROM|Any CPU.ActiveCfg = CD_ROM
-		{419DB239-5668-4F88-8D2D-71373E34EC6D}.CD_ROM|Any CPU.Build.0 = CD_ROM
-		{419DB239-5668-4F88-8D2D-71373E34EC6D}.Debug|Any CPU.ActiveCfg = DVD-5
-		{419DB239-5668-4F88-8D2D-71373E34EC6D}.Debug|Any CPU.Build.0 = DVD-5
-		{419DB239-5668-4F88-8D2D-71373E34EC6D}.DVD-5|Any CPU.ActiveCfg = DVD-5
-		{419DB239-5668-4F88-8D2D-71373E34EC6D}.DVD-5|Any CPU.Build.0 = DVD-5
-		{419DB239-5668-4F88-8D2D-71373E34EC6D}.Release|Any CPU.ActiveCfg = SingleImage
-		{419DB239-5668-4F88-8D2D-71373E34EC6D}.Release|Any CPU.Build.0 = SingleImage
-		{419DB239-5668-4F88-8D2D-71373E34EC6D}.SingleImage|Any CPU.ActiveCfg = SingleImage
-		{419DB239-5668-4F88-8D2D-71373E34EC6D}.SingleImage|Any CPU.Build.0 = SingleImage
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

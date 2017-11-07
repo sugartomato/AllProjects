@@ -60,9 +60,11 @@
             script += vbCrLf & "#RemoveScript"
             ' 删除DHCP绑定
             script &= vbCrLf & ScriptText_RemoveByMACAddress(Me.MacAddress.ToString())
+            script &= vbCrLf & ScriptText_RemoveByIPAddress(Me.Address.ToString())
 
             ' 删除ARP绑定
             script &= vbCrLf & ARP.ScriptText_RemoveByMacAddress(Me.MacAddress.ToString())
+            script &= vbCrLf & ARP.ScriptText_RemoveByIPAddress(Me.Address.ToString())
 
 
             script &= vbCrLf & "#" & Comment

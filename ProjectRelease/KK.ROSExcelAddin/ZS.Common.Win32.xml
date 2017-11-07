@@ -4,6 +4,88 @@
         <name>ZS.Common.Win32</name>
     </assembly>
     <members>
+        <member name="T:ZS.Common.Win32.SystemDefinedMessages">
+            <summary>
+            系统定义的消息
+            </summary>
+            <remarks>
+            The system sends or posts a system-defined message when it communicates with an application. It uses these messages to control the operations of applications and to provide input and other information for applications to process. An application can also send or post system-defined messages. Applications generally use these messages to control the operation of control windows created by using preregistered window classes.
+            Each system-defined message has a unique message identifier and a corresponding symbolic constant (defined in the software development kit (SDK) header files) that states the purpose of the message. For example, the WM_PAINT constant requests that a window paint its contents.
+            Symbolic constants specify the category to which system-defined messages belong. The prefix of the constant identifies the type of window that can interpret and process the message. Following are the prefixes and their related message categories.
+            
+            </remarks>
+            <link>
+            https://msdn.microsoft.com/en-us/library/windows/desktop/ms644927(v=vs.85).aspx#app_defined
+            </link>
+        </member>
+        <member name="F:ZS.Common.Win32.SystemDefinedMessages.WM_LBUTTONDOWN">
+            <summary>
+            Posted when the user presses the left mouse button while the cursor is in the client area of a window. If the mouse is not captured, the message is posted to the window beneath the cursor. Otherwise, the message is posted to the window that has captured the mouse.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.SystemDefinedMessages.WM_LBUTTONUP">
+            <summary>
+            Posted when the user releases the left mouse button while the cursor is in the client area of a window. If the mouse is not captured, the message is posted to the window beneath the cursor. Otherwise, the message is posted to the window that has captured the mouse.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.SystemDefinedMessages.WM_SETTEXT">
+            <summary>
+            Sets the text of a window.
+            设置窗口文本
+            Parameters
+                wParam
+                    This parameter is not used.
+                lParam
+                    A pointer to a null-terminated string that is the window text.
+            Return value
+                Type: LRESULT
+                The return value is TRUE if the text is set. It is FALSE (for an edit control), LB_ERRSPACE (for a list box), or CB_ERRSPACE (for a combo box) if insufficient space is available to set the text in the edit control. It is CB_ERR if this message is sent to a combo box without an edit control.
+            </summary>
+            <remarks>
+            The DefWindowProc function sets and displays the window text. For an edit control, the text is the contents of the edit control. For a combo box, the text is the contents of the edit-control portion of the combo box. For a button, the text is the button name. For other windows, the text is the window title.
+            This message does not change the current selection in the list box of a combo box. An application should use the CB_SELECTSTRING message to select the item in a list box that matches the text in the edit control.
+            </remarks>
+        </member>
+        <member name="F:ZS.Common.Win32.SystemDefinedMessages.WM_GETTEXT">
+            <summary>
+            Copies the text that corresponds to a window into a buffer provided by the caller.
+            Parameters
+                wParam
+                    The maximum number of characters to be copied, including the terminating null character.
+                    ANSI applications may have the string in the buffer reduced in size (to a minimum of half that of the wParam value) due to conversion from ANSI to Unicode.
+                lParam
+                    A pointer to the buffer that is to receive the text.
+            Return value
+                Type: LRESULT
+                The return value is the number of characters copied, not including the terminating null character.
+            </summary>
+            <remarks>
+            The DefWindowProc function copies the text associated with the window into the specified buffer and returns the number of characters copied. Note, for non-text static controls this gives you the text with which the control was originally created, that is, the ID number. However, it gives you the ID of the non-text static control as originally created. That is, if you subsequently used a STM_SETIMAGE to change it the original ID would still be returned.
+            For an edit control, the text to be copied is the content of the edit control. For a combo box, the text is the content of the edit control (or static-text) portion of the combo box. For a button, the text is the button name. For other windows, the text is the window title. To copy the text of an item in a list box, an application can use the LB_GETTEXT message.
+            When the WM_GETTEXT message is sent to a static control with the SS_ICON style, a handle to the icon will be returned in the first four bytes of the buffer pointed to by lParam. This is true only if the WM_SETTEXT message has been used to set the icon.
+            Rich Edit: If the text to be copied exceeds 64K, use either the EM_STREAMOUT or EM_GETSELTEXT message.
+            Sending a WM_GETTEXT message to a non-text static control, such as a static bitmap or static icon control, does not return a string value. Instead, it returns zero. In addition, in early versions of Windows, applications could send a WM_GETTEXT message to a non-text static control to retrieve the control's ID. To retrieve a control's ID, applications can use GetWindowLong passing GWL_ID as the index value or GetWindowLongPtr using GWLP_ID.
+            </remarks>
+        </member>
+        <member name="F:ZS.Common.Win32.SystemDefinedMessages.WM_GETTEXTLENGTH">
+            <summary>
+            Determines the length, in characters, of the text associated with a window.
+            Parameters
+                wParam
+                    This parameter is not used and must be zero.
+                lParam
+                    This parameter is not used and must be zero.
+            Return value
+                Type: LRESULT
+                The return value is the length of the text in characters, not including the terminating null character.
+            </summary>
+            <remarks>
+            For an edit control, the text to be copied is the content of the edit control. For a combo box, the text is the content of the edit control (or static-text) portion of the combo box. For a button, the text is the button name. For other windows, the text is the window title. To determine the length of an item in a list box, an application can use the LB_GETTEXTLEN message.
+            When the WM_GETTEXTLENGTH message is sent, the DefWindowProc function returns the length, in characters, of the text. Under certain conditions, the DefWindowProc function returns a value that is larger than the actual length of the text. This occurs with certain mixtures of ANSI and Unicode, and is due to the system allowing for the possible existence of double-byte character set (DBCS) characters within the text. The return value, however, will always be at least as large as the actual length of the text; you can thus always use it to guide buffer allocation. This behavior can occur when an application uses both ANSI functions and common dialogs, which use Unicode.
+            To obtain the exact length of the text, use the WM_GETTEXT, LB_GETTEXT, or CB_GETLBTEXT messages, or the GetWindowText function.
+            Sending a WM_GETTEXTLENGTH message to a non-text static control, such as a static bitmap or static icon controlc, does not return a string value. Instead, it returns zero.
+            </remarks>
+        </member>
         <member name="T:ZS.Common.Win32.API">
             <summary>
             Win32API接口
@@ -116,6 +198,39 @@
             <summary>
             The wheel button is tilted.
             </summary>
+        </member>
+        <member name="M:ZS.Common.Win32.API.SendMessage(System.IntPtr,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Sends the specified message to a window or windows. The SendMessage function calls the window procedure for the specified window and does not return until the window procedure has processed the message.
+            To send a message and return immediately, use the SendMessageCallback or SendNotifyMessage function. To post a message to a thread's message queue and return immediately, use the PostMessage or PostThreadMessage function.
+            </summary>
+            <param name="hwnd">
+                [in][Type: HWND]
+                A handle to the window whose window procedure will receive the message. If this parameter is HWND_BROADCAST ((HWND)0xffff), the message is sent to all top-level windows in the system, including disabled or invisible unowned windows, overlapped windows, and pop-up windows; but the message is not sent to child windows.
+                Message sending is subject to UIPI. The thread of a process can send messages only to message queues of threads in processes of lesser or equal integrity level.
+            </param>
+            <param name="Msg">
+                [in][Type: UINT]
+                The message to be sent.
+                For lists of the system-provided messages, see System-Defined Messages.
+            </param>
+            <param name="wParam"></param>
+            <param name="lParam"></param>
+            <returns>
+               [Type: LRESULT]
+               The return value specifies the result of the message processing; it depends on the message sent.
+            </returns>
+            <link>https://msdn.microsoft.com/en-us/library/windows/desktop/ms644950(v=vs.85).aspx</link>
+        </member>
+        <member name="M:ZS.Common.Win32.API.SendMessage(System.IntPtr,System.Int32,System.Int32,System.Text.StringBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="hwnd"></param>
+            <param name="Msg"></param>
+            <param name="wParam"></param>
+            <param name="lParam"></param>
+            <returns></returns>
         </member>
         <member name="T:ZS.Common.Win32.API.POINT">
             <summary>
@@ -251,7 +366,7 @@
         </member>
         <member name="M:ZS.Common.Win32.API.FindWindow(System.String,System.String)">
             <summary>
-                据窗口类名或窗口标题名来获得窗口的句柄，该函数返回窗口的句柄，
+                据窗口类名或窗口标题名来获得窗口的句柄，该函数返回窗口的句柄。需要注意：如果按照窗口名称查找，则窗口类名参数应设置为null，而不是""。具体见参数解释。
                 Retrieves a handle to the top-level window whose class name and window name match the specified strings. This function does not search child windows. This function does not perform a case-sensitive search.
                 To search child windows, beginning with a specified child window, use the FindWindowEx function.
             </summary>
@@ -441,27 +556,51 @@
             When you change the parent of a window, you should synchronize the UISTATE of both windows. For more information, see WM_CHANGEUISTATE and WM_UPDATEUISTATE.
             </remarks>
         </member>
-        <member name="T:ZS.Common.Win32.API.EnumWindowsProc">
+        <member name="T:ZS.Common.Win32.API.EnumChildProc">
             <summary>
-            An application-defined callback function used with the EnumWindows or EnumDesktopWindows function. It receives top-level window handles. The WNDENUMPROC type defines a pointer to this callback function. EnumWindowsProc is a placeholder for the application-defined function name.
+            An application-defined callback function used with the EnumChildWindows function. It receives the child window handles. The WNDENUMPROC type defines a pointer to this callback function. EnumChildProc is a placeholder for the application-defined function name.
             </summary>
             <param name="hwnd">
-                [in]
-                A handle to a top-level window.
+                [in][Type: HWND]
+                A handle to a child window of the parent window specified in EnumChildWindows.
             </param>
             <param name="lParam">
-                [in]
-                The application-defined value given in EnumWindows or EnumDesktopWindows.
+                 [in]
+                 The application-defined value given in EnumChildWindows.
             </param>
             <returns>
-                To continue enumeration, the callback function must return TRUE; to stop enumeration, it must return 
+            To continue enumeration, the callback function must return TRUE; to stop enumeration, it must return FALSE.
             </returns>
             <remarks>
-            An application must register this callback function by passing its address to EnumWindows or EnumDesktopWindows.
+            The callback function can carry out any desired task.
+            An application must register this callback function by passing its address to EnumChildWindows.
             </remarks>
-            <link>
-            https://msdn.microsoft.com/en-us/library/ms633498(v=vs.85).aspx
-            </link>
+            <link>https://msdn.microsoft.com/en-us/library/windows/desktop/ms633493(v=vs.85).aspx</link>
+        </member>
+        <member name="M:ZS.Common.Win32.API.EnumChildWindows(System.IntPtr,ZS.Common.Win32.API.EnumChildProc,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="hWndParent">
+                [in, optional][Type: HWND]
+                A handle to the parent window whose child windows are to be enumerated. If this parameter is NULL, this function is equivalent to EnumWindows.
+            </param>
+            <param name="lpEnumFunc">
+                [in][Type: WNDENUMPROC]
+                A pointer to an application-defined callback function. For more information, see EnumChildProc.
+            </param>
+            <param name="lParam">
+                [in][Type: LPARAM]
+                An application-defined value to be passed to the callback function.
+            </param>
+            <returns>
+            The return value is not used.
+            </returns>
+            <remarks>
+            If a child window has created child windows of its own, EnumChildWindows enumerates those windows as well.
+            A child window that is moved or repositioned in the Z order during the enumeration process will be properly enumerated. The function does not enumerate a child window that is destroyed before being enumerated or that is created during the enumeration process.
+            </remarks>
+            <link>https://msdn.microsoft.com/en-us/library/windows/desktop/ms633494(v=vs.85).aspx</link>
         </member>
         <member name="M:ZS.Common.Win32.API.EnumWindows(ZS.Common.Win32.API.EnumWindowsProc,System.Int32)">
             <summary>
@@ -489,6 +628,28 @@
             </remarks>
             <link>
             https://msdn.microsoft.com/en-us/library/ms633497(v=vs.85).aspx
+            </link>
+        </member>
+        <member name="T:ZS.Common.Win32.API.EnumWindowsProc">
+            <summary>
+            An application-defined callback function used with the EnumWindows or EnumDesktopWindows function. It receives top-level window handles. The WNDENUMPROC type defines a pointer to this callback function. EnumWindowsProc is a placeholder for the application-defined function name.
+            </summary>
+            <param name="hwnd">
+                [in]
+                A handle to a top-level window.
+            </param>
+            <param name="lParam">
+                [in]
+                The application-defined value given in EnumWindows or EnumDesktopWindows.
+            </param>
+            <returns>
+                To continue enumeration, the callback function must return TRUE; to stop enumeration, it must return 
+            </returns>
+            <remarks>
+            An application must register this callback function by passing its address to EnumWindows or EnumDesktopWindows.
+            </remarks>
+            <link>
+            https://msdn.microsoft.com/en-us/library/ms633498(v=vs.85).aspx
             </link>
         </member>
         <member name="M:ZS.Common.Win32.API.IsWindowVisible(System.IntPtr)">
@@ -681,6 +842,9 @@
             注册表中键名。默认以GUID命名
             </summary>
         </member>
+        <member name="P:ZS.Common.Win32.InstalledApp.AssignmentType">
+            <summary>设置或获取标识符</summary>
+        </member>
         <member name="P:ZS.Common.Win32.InstalledApp.IdentifyingNumber">
             <summary>设置或获取标识符</summary>
         </member>
@@ -693,8 +857,8 @@
         <member name="P:ZS.Common.Win32.InstalledApp.Caption">
             <summary>设置或获取版本号</summary>
         </member>
-        <member name="P:ZS.Common.Win32.InstalledApp.InstallLocation">
-            <summary>设置或获取版本号</summary>
+        <member name="P:ZS.Common.Win32.InstalledApp.Description">
+            <summary>设置或获取软件描述</summary>
         </member>
         <member name="P:ZS.Common.Win32.InstalledApp.Publisher">
             <summary>设置或获取制作公司</summary>
@@ -711,6 +875,9 @@
         <member name="P:ZS.Common.Win32.InstalledApp.URLInfoAbout">
             <summary>设置或获取关于链接</summary>
         </member>
+        <member name="P:ZS.Common.Win32.InstalledApp.InstallLocation">
+            <summary>设置或获取版本号</summary>
+        </member>
         <member name="P:ZS.Common.Win32.InstalledApp.InstallDate">
             <summary>设置或获取安装日期</summary>
         </member>
@@ -722,6 +889,9 @@
         </member>
         <member name="P:ZS.Common.Win32.InstalledApp.IsInstallByWindowsInstaller">
             <summary>设置或获取通过WindowsInstaller安装的程序</summary>
+        </member>
+        <member name="P:ZS.Common.Win32.InstalledApp.IsUpdate">
+            <summary>是否为更新。例如Windows更新或者Office更新</summary>
         </member>
         <member name="P:ZS.Common.Win32.InstalledApp.IsWindowsUpdate">
             <summary>设置或获取是否为系统更新</summary>

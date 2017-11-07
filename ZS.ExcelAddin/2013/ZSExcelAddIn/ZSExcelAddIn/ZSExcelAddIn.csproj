@@ -283,13 +283,13 @@
     <None Include="ZSExcelAddIn_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\SwitchTimeScalesTo_32x32.png" />
+    <Resource Include="Resources\SwitchTimeScalesTo_32x32.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Time_32x32.png" />
+    <Resource Include="Resources\Time_32x32.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Today_32x32.png" />
+    <Resource Include="Resources\Today_32x32.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="RibMyTools.xml">
@@ -300,40 +300,40 @@
     <Resource Include="Resources\Export_16x16.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Export_32x32.png" />
+    <Resource Include="Resources\Export_32x32.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Find_16x16.png" />
+    <Resource Include="Resources\Find_16x16.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Find_32x32.png" />
+    <Resource Include="Resources\Find_32x32.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\1549_Paper_clip_blue.png" />
+    <Resource Include="Resources\1549_Paper_clip_blue.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\1549_Paper_clip_gray.png" />
+    <Resource Include="Resources\1549_Paper_clip_gray.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\1549_Paper_clip_gray_128x128.png" />
+    <Resource Include="Resources\1549_Paper_clip_gray_128x128.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\batfile.png" />
+    <Resource Include="Resources\batfile.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Gear.png" />
+    <Resource Include="Resources\Gear.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Settings.png" />
+    <Resource Include="Resources\Settings.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\settings_32.png" />
+    <Resource Include="Resources\settings_32.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Calendar_16x16.png" />
+    <Resource Include="Resources\Calendar_16x16.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Calendar_32x32.png" />
+    <Resource Include="Resources\Calendar_32x32.png" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Controls\ExportSheetsToSingleFile.xaml">
@@ -358,30 +358,30 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Show_32x32.png" />
+    <Resource Include="Resources\Show_32x32.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\AddNewDataSource_32x32.png" />
+    <Resource Include="Resources\AddNewDataSource_32x32.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\SortAsc_32x32.png" />
+    <Resource Include="Resources\SortAsc_32x32.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\2011091715530716.png" />
+    <Resource Include="Resources\2011091715530716.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\03.png" />
+    <Resource Include="Resources\03.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\book-blue-32.png" />
+    <Resource Include="Resources\book-blue-32.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\BackGroundImage\bg01.jpg" />
     <Resource Include="Resources\BackGroundImage\bg02.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\RefEditMax.bmp" />
-    <Content Include="Resources\RefEditMin.bmp" />
+    <Resource Include="Resources\RefEditMax.bmp" />
+    <Resource Include="Resources\RefEditMin.bmp" />
     <Content Include="XMLFile1.xml">
       <SubType>Designer</SubType>
     </Content>

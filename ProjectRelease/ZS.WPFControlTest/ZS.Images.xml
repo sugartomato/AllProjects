@@ -1,0 +1,54 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+ZS.Images
+</name>
+</assembly>
+<members>
+<member name="T:ZS.Images.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:ZS.Images.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:ZS.Images.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="T:ZS.Images.ImageAdapter">
+ <summary>
+ 图片读取
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="M:ZS.Images.ImageAdapter.Instance">
+ <summary>
+ 获取图片容器类的单例
+ </summary>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:ZS.Images.ImageAdapter.GetImage(System.String)">
+ <summary>
+ 获取指定名称的图片，以System.Drawing.Image形式返回。
+ </summary>
+ <param name="imgUrl">。图片路径，不包含根Image目录。例如：Actions/Add_16x16.png</param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:ZS.Images.ImageAdapter.GetImageAsStream(System.String)">
+ <summary>
+ 获取指定名称的图片，以System.IO.Stream形式返回。
+ </summary>
+ <param name="imgUrl">。图片路径，不包含根Image目录。例如：Actions/Add_16x16.png</param>
+ <returns></returns>
+</member>
+</members>
+</doc>

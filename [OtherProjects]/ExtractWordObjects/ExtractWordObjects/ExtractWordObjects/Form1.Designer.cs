@@ -32,6 +32,7 @@
             this.btnExtract = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnSelFile = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtFilePath
@@ -74,11 +75,22 @@
             this.btnSelFile.UseVisualStyleBackColor = true;
             this.btnSelFile.Click += new System.EventHandler(this.btnSelFile_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(12, 51);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "批量另存PDF";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(465, 97);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnSelFile);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnExtract);
@@ -101,6 +113,7 @@
         private System.Windows.Forms.Button btnExtract;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnSelFile;
+        private System.Windows.Forms.Button button1;
     }
 }
 

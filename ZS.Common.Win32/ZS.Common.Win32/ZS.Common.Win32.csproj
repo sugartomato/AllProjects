@@ -44,13 +44,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="APISets\SystemDefinedMessages.cs" />
+    <Compile Include="APISets\Win32API_Common.cs" />
+    <Compile Include="APISets\Win32API_HandlesAndObjects.cs" />
     <Compile Include="APISets\Win32API_KeyboardAndMouseInput.cs" />
+    <Compile Include="APISets\Win32API_Memory.cs" />
     <Compile Include="APISets\Win32API_MessageAndMessageQueues.cs" />
+    <Compile Include="APISets\Win32API_ProcessAndThread.cs" />
     <Compile Include="APISets\Win32API_Rectangles.cs" />
+    <Compile Include="APISets\Win32API_WindowClass.cs" />
     <Compile Include="APISets\Win32API_Windows.cs" />
     <Compile Include="APISets\Win32API_Cursors.cs" />
     <Compile Include="APISets\Win32API_WindowsMultimedia.cs" />
     <Compile Include="ContextMenu\ContextMenu.cs" />
+    <Compile Include="Desktop.cs" />
     <Compile Include="InstalledApp.cs" />
     <Compile Include="Mouse.cs" />
     <Compile Include="Net\NetworkAdapter.cs" />
@@ -68,6 +74,7 @@
     <Compile Include="Win32Provider\Win32_NetworkAdapter.cs" />
     <Compile Include="Win32Provider\Win32_NetworkAdapterConfiguration.cs" />
     <Compile Include="Win32Provider\Win32_Product.cs" />
+    <Compile Include="WinCtrlAPI\ListView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="API参考资料.txt" />

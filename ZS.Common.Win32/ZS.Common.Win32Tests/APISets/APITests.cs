@@ -13,8 +13,9 @@ namespace ZS.Common.Win32.Tests
         [TestMethod()]
         public void FindWindowTest()
         {
-            IntPtr hwnd = API.FindWindow(null, "无标题 - 记事本");
-            if(hwnd != IntPtr.Zero)
+            IntPtr hwnd = API.FindWindow("ProgMan", null);
+            Console.WriteLine(hwnd.ToString());
+            if (hwnd != IntPtr.Zero)
             {
                 //API.AnimateWindow(hwnd, 300, API.AnimateWindowType.AW_CENTER);
             }
@@ -36,7 +37,7 @@ namespace ZS.Common.Win32.Tests
         public Boolean enumWindowProc(IntPtr hwnd, Int32 lParam)
         {
             Boolean bln = API.IsWindowVisible(hwnd);
-            if(bln)
+            if (bln)
             {
                 Console.WriteLine(hwnd + ":" + GetWindowTest(hwnd) + "\t" + "ClassName:" + GetWindowClassName(hwnd));
             }
@@ -55,7 +56,7 @@ namespace ZS.Common.Win32.Tests
         {
             StringBuilder sb = new StringBuilder(256);
             Int32 ret = API.GetClassName(hwnd, sb, sb.Capacity);
-            if(ret != 0)
+            if (ret != 0)
             {
                 return sb.ToString();
             }
@@ -70,6 +71,26 @@ namespace ZS.Common.Win32.Tests
         {
             Boolean b = API.sndPlaySound(@"C:\Windows\Media\Ring05.wav", API.PlaySoundFlags.SND_SYNC);
             Console.WriteLine(b);
+        }
+
+        [TestMethod()]
+        public void FindWindowTest1()
+        {
+            Assert.Fail();
+        }
+
+        [TestMethod()]
+        public void GetWindowTest1()
+        {
+            IntPtr hwnd = API.FindWindow("ProgMan", null);
+            IntPtr hwnd1 = API.GetWindow(hwnd, API.GetWindowTypeEnum.GW_CHILD);
+            IntPtr hwnd2 = API.GetWindow(hwnd1, API.GetWindowTypeEnum.GW_CHILD);
+            String cName = API.GetClassName(hwnd2);
+            Console.WriteLine(cName);
+
+            Int32 itemsCount = API.SendMessage(hwnd2, SystemDefinedMessages.CommonControl.LVM_GETITEMCOUNT, 0, 0);
+            Console.WriteLine(itemsCount.ToString());
+
         }
     }
 }

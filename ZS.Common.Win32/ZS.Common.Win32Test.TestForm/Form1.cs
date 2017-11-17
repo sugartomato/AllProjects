@@ -132,5 +132,11 @@ namespace ZS.Common.Win32Test.TestForm
             frmWindows frm = new frmWindows();
             frm.Show();
         }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            frmMemory frm = new frmMemory();
+            frm.Show();
+        }
     }
 }

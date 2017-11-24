@@ -106,7 +106,7 @@ namespace ZS.Common.Win32Test.TestForm
             Desktop d = new Desktop(Desktop.GetDefaultIntptr());
             for (Int32 i = 0; i < d.GetItemsCount(); i++)
             {
-                API.POINT tmpLocation = d.GetItemLocation(i);
+                System.Drawing.Point tmpLocation = d.GetItemLocation(i);
                 WriteDebug(i + ":" + tmpLocation.X + "," + tmpLocation.Y);
             }
         }

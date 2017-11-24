@@ -68,6 +68,7 @@
     <Compile Include="Computer.vb" />
     <Compile Include="DB\CommonSqlDAL.vb" />
     <Compile Include="DB\SQLHelper.vb" />
+    <Compile Include="Debug\Log.vb" />
     <Compile Include="Drawing\Image.vb" />
     <Compile Include="ExceptionEx.vb" />
     <Compile Include="HardDevice\NetworkAdapter.vb" />

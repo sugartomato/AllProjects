@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Runtime.InteropServices;
-namespace ZS.Common.Win32
+namespace KK.SARIcon
 {
     /// <summary>
     /// 桌面

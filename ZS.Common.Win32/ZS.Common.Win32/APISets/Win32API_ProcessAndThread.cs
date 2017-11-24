@@ -163,7 +163,15 @@ namespace ZS.Common.Win32
         /// [out]
         ///     A pointer to a variable that receives the number of bytes transferred into the specified process. This parameter is optional. If lpNumberOfBytesWritten is NULL, the parameter is ignored.
         /// </param>
-        /// <returns></returns>
+        /// <returns>
+        ///     If the function succeeds, the return value is nonzero.
+        ///     If the function fails, the return value is 0 (zero). To get extended error information, call GetLastError. The function fails if the requested write operation crosses into an area of the process that is inaccessible.
+        /// </returns>
+        /// <remarks>
+        ///     WriteProcessMemory copies the data from the specified buffer in the current process to the address range of the specified process. Any process that has a handle with PROCESS_VM_WRITE and PROCESS_VM_OPERATION access to the process to be written to can call the function. Typically but not always, the process with address space that is being written to is being debugged.
+        ///     The entire area to be written to must be accessible, and if it is not accessible, the function fails.
+        /// </remarks>
+        /// <link>https://msdn.microsoft.com/en-us/library/windows/desktop/ms681674(v=vs.85).aspx</link>
         [DllImport("Kernel32.dll")]
         public extern static Boolean WriteProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, IntPtr lpBuffer, Int32 nSize, ref UInt32 lpNumberOfBytesWritten);
 

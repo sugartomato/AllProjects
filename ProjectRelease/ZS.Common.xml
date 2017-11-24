@@ -78,6 +78,46 @@ ZS.Common
  <returns>An int representing the number of rows affected by the command</returns>
  <remarks></remarks>
 </member>
+<member name="T:ZS.Common.Debug.Log">
+ <summary>
+ 日志对象
+ </summary>
+</member>
+<member name="F:ZS.Common.Debug.Log.m_Timer">
+ <summary>写日志到文本文件计时器</summary>
+</member>
+<member name="F:ZS.Common.Debug.Log.m_FileNamePrefix">
+ <summary>日志文件名后缀</summary>
+</member>
+<member name="F:ZS.Common.Debug.Log.m_FileNameSuffix">
+ <summary>日志文件名前缀</summary>
+</member>
+<member name="F:ZS.Common.Debug.Log.m_BaseDir">
+ <summary>日志存储根目录</summary>
+</member>
+<member name="F:ZS.Common.Debug.Log.m_LogMsgQueue">
+ <summary>消息队列</summary>
+</member>
+<member name="M:ZS.Common.Debug.Log.#ctor(System.String,System.String,System.String)">
+ <summary>
+ 构造一个日志对象
+ </summary>
+ <param name="baseDir"></param>
+ <param name="namePrefix"></param>
+ <param name="nameSuffix"></param>
+</member>
+<member name="M:ZS.Common.Debug.Log.Append(System.String)">
+ <summary>
+ 添加一条消息到日志
+ </summary>
+ <param name="msg"></param>
+</member>
+<member name="P:ZS.Common.Debug.Log.IsAddDatetimePrefix">
+ <summary>
+ 获取或设置是否给日志的每行添加时间前缀。默认值为True
+ </summary>
+ <returns></returns>
+</member>
 <member name="T:ZS.Common.Drawing.Image">
  <summary>
  图片处理

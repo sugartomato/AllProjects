@@ -3,92 +3,134 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Runtime.InteropServices;
-namespace ZS.Common.Win32
+namespace KK.SARIcon
 {
-    public partial class API
+    public class API
     {
+        [DllImport("User32.dll")]
+        public static extern Int32 SendMessage(IntPtr hwnd, Int32 Msg, Int32 wParam, Int32 lParam);
+        [DllImport("User32.dll")]
+        public static extern Int32 SendMessage(IntPtr hwnd, Int32 Msg, Int32 wParam, System.Text.StringBuilder lParam);
 
-        /// <summary>
-        /// Reserves, commits, or changes the state of a region of memory within the virtual address space of a specified process. The function initializes the memory it allocates to zero.
-        /// </summary>
-        /// <param name="hProcess">
-        ///  [in]
-        ///     The handle to a process. The function allocates memory within the virtual address space of this process.
-        ///     The handle must have the PROCESS_VM_OPERATION access right. For more information, see Process Security and Access Rights.
-        /// </param>
-        /// <param name="lpAddress">
-        /// [in, optional]
-        ///     The pointer that specifies a desired starting address for the region of pages that you want to allocate.
-        ///     If you are reserving memory, the function rounds this address down to the nearest multiple of the allocation granularity.
-        ///     If you are committing memory that is already reserved, the function rounds this address down to the nearest page boundary. To determine the size of a page and the allocation granularity on the host computer, use the GetSystemInfo function.
-        ///     If lpAddress is NULL, the function determines where to allocate the region.
-        ///     If this address is within an enclave that you have not initialized by calling InitializeEnclave, VirtualAllocEx allocates a page of zeros for the enclave at that address. The page must be previously uncommitted, and will not be measured with the EEXTEND instruction of the Intel Software Guard Extensions programming model.
-        ///     If the address in within an enclave that you initialized, then the allocation operation fails with the ERROR_INVALID_ADDRESS error.
-        /// </param>
-        /// <param name="dwSize">
-        /// [in]
-        ///     The size of the region of memory to allocate, in bytes.
-        ///     If lpAddress is NULL, the function rounds dwSize up to the next page boundary.
-        ///     If lpAddress is not NULL, the function allocates all pages that contain one or more bytes in the range from lpAddress to lpAddress+dwSize. This means, for example, that a 2-byte range that straddles a page boundary causes the function to allocate both pages.
-        /// </param>
-        /// <param name="flAllocationType">
-        /// [in]
-        ///     The type of memory allocation. This parameter must contain one of the following values.
-        /// </param>
-        /// <param name="flProtect">
-        /// [in]
-        ///     The memory protection for the region of pages to be allocated. If the pages are being committed, you can specify any one of the memory protection constants.
-        ///     If lpAddress specifies an address within an enclave, flProtect cannot be any of the following values:
-        ///     PAGE_NOACCESS,PAGE_GUARD,PAGE_NOCACHE,PAGE_WRITECOMBINE
-        /// </param>
-        /// <returns>
-        /// If the function succeeds, the return value is the base address of the allocated region of pages.
-        /// If the function fails, the return value is NULL. To get extended error information, call GetLastError.
-        /// </returns>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <link>https://msdn.microsoft.com/en-us/library/aa366890%28VS.85%29.aspx?f=255&MSPPError=-2147217396</link>
+        [DllImport("User32.dll")]
+        public static extern Int32 SendMessage(IntPtr hwnd, Int32 Msg, IntPtr wParam, IntPtr lParam);
+        [DllImport("User32.dll")]
+        public static extern Int32 SendMessage(IntPtr hwnd, Int32 Msg, Int32 wParam, IntPtr lParam);
+
+        [DllImport("User32.dll")]
+        public static extern IntPtr GetWindow(IntPtr hWnd, GetWindowTypeEnum uCmd);
+        [DllImport("User32.dll")]
+        public static extern Int32 GetWindowThreadProcessId(IntPtr hWnd, out Int32 lpdwProcessId);
+        [DllImport("kernel32.dll")]
+        public extern static IntPtr OpenProcess(UInt32 dwDesiredAccess, Boolean bInheritHandle, UInt32 dwProcessId);
+
+        [DllImport("Kernel32.dll")]
+        public extern static Boolean ReadProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, IntPtr lpBuffer, Int32 nSize, ref UInt32 lpNumberOfBytesRead);
+        [DllImport("Kernel32.dll")]
+        public extern static Boolean ReadProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, StringBuilder lpBuffer, Int32 nSize, ref UInt32 lpNumberOfBytesRead);
+        [DllImport("Kernel32.dll")]
+        public extern static Boolean WriteProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, IntPtr lpBuffer, Int32 nSize, ref UInt32 lpNumberOfBytesWritten);
+        [DllImport("Kernel32.dll")]
+        public static extern Int32 GetLastError();
         [DllImport("Kernel32.dll")]
         public extern static IntPtr VirtualAllocEx(IntPtr hProcess, IntPtr lpAddress, Int32 dwSize, UInt32 flAllocationType, UInt32 flProtect);
-
-        /// <summary>
-        /// Releases, decommits, or releases and decommits a region of memory within the virtual address space of a specified process.
-        /// </summary>
-        /// <param name="hProcess">
-        /// [in]
-        ///     A handle to a process. The function frees memory within the virtual address space of the process.
-        ///     The handle must have the PROCESS_VM_OPERATION access right. For more information, see Process Security and Access Rights.
-        /// </param>
-        /// <param name="lpAddress">
-        /// [in]
-        ///     A pointer to the starting address of the region of memory to be freed.
-        ///     If the dwFreeType parameter is MEM_RELEASE, lpAddress must be the base address returned by the VirtualAllocEx function when the region is reserved.
-        /// </param>
-        /// <param name="dwSize">
-        /// [in]
-        ///     The size of the region of memory to free, in bytes.
-        ///     If the dwFreeType parameter is MEM_RELEASE, dwSize must be 0 (zero). The function frees the entire region that is reserved in the initial allocation call to VirtualAllocEx.
-        ///     If dwFreeType is MEM_DECOMMIT, the function decommits all memory pages that contain one or more bytes in the range from the lpAddress parameter to (lpAddress+dwSize). This means, for example, that a 2-byte region of memory that straddles a page boundary causes both pages to be decommitted. If lpAddress is the base address returned by VirtualAllocEx and dwSize is 0 (zero), the function decommits the entire region that is allocated by VirtualAllocEx. After that, the entire region is in the reserved state.
-        /// </param>
-        /// <param name="dwFreeType">
-        /// [in]
-        ///     The type of free operation. This parameter can be one of the following values.
-        /// </param>
-        /// <returns>
-        ///     If the function succeeds, the return value is a nonzero value.
-        ///     If the function fails, the return value is 0 (zero). To get extended error information, call GetLastError.
-        /// </returns>
-        /// <remarks>
-        /// </remarks>
-        /// <link>https://msdn.microsoft.com/en-us/library/windows/desktop/aa366894%28v=vs.85%29.aspx?f=255&MSPPError=-2147217396</link>
         [DllImport("Kernel32.dll")]
         public extern static IntPtr VirtualFreeEx(IntPtr hProcess, IntPtr lpAddress, Int32 dwSize, Int32 dwFreeType);
+        [DllImport("Kernel32.dll")]
+        public extern static Boolean CloseHandle(IntPtr hObject);
+        [DllImport("User32.dll")]
+        public static extern IntPtr FindWindow(String lpClassName, String lpWindowName);
 
-        /// <summary>
-        /// 内存分配类型
-        /// </summary>
-        /// <link>https://msdn.microsoft.com/en-us/library/aa366890%28VS.85%29.aspx?f=255&MSPPError=-2147217396</link>
+
+        public const Int32 LVM_FIRST = 0x1000;
+        public const Int32 LVM_GETITEMCOUNT = LVM_FIRST + 4;
+
+        public enum GetWindowTypeEnum
+        {
+            /// <summary>
+            /// The retrieved handle identifies the child window at the top of the Z order, if the specified window is a parent window; otherwise, the retrieved handle is NULL. The function examines only child windows of the specified window. It does not examine descendant windows.
+            /// </summary>
+            GW_CHILD = 5,
+            /// <summary>
+            /// The retrieved handle identifies the enabled popup window owned by the specified window (the search uses the first such window found using GW_HWNDNEXT); otherwise, if there are no enabled popup windows, the retrieved handle is that of the specified window.
+            /// </summary>
+            GW_ENABLEDPOPUP = 6,
+            /// <summary>
+            /// The retrieved handle identifies the window of the same type that is highest in the Z order.
+            /// If the specified window is a topmost window, the handle identifies a topmost window. If the specified window is a top-level window, the handle identifies a top-level window. If the specified window is a child window, the handle identifies a sibling window.
+            /// </summary>
+            GW_HWNDFIRST = 0,
+            /// <summary>
+            /// The retrieved handle identifies the window of the same type that is lowest in the Z order.
+            /// If the specified window is a topmost window, the handle identifies a topmost window. If the specified window is a top-level window, the handle identifies a top-level window. If the specified window is a child window, the handle identifies a sibling window.
+            /// </summary>
+            GW_HWNDLAST = 1,
+            /// <summary>
+            /// The retrieved handle identifies the window below the specified window in the Z order.
+            /// If the specified window is a topmost window, the handle identifies a topmost window. If the specified window is a top-level window, the handle identifies a top-level window. If the specified window is a child window, the handle identifies a sibling window.
+            /// </summary>
+            GW_HWNDNEXT = 2,
+            /// <summary>
+            /// The retrieved handle identifies the window above the specified window in the Z order.
+            /// If the specified window is a topmost window, the handle identifies a topmost window. If the specified window is a top-level window, the handle identifies a top-level window. If the specified window is a child window, the handle identifies a sibling window.
+            /// </summary>
+            GW_HWNDPREV = 3,
+            /// <summary>
+            /// The retrieved handle identifies the specified window's owner window, if any. For more information, see Owned Windows.
+            /// </summary>
+            GW_OWNER = 4
+        }
+
+        public class ProcessSecurityAccessRight
+        {
+            /// <summary>
+            /// Required to create a process.
+            /// </summary>
+            public const UInt32 PROCESS_CREATE_PROCESS = 0x0080;
+            /// <summary>
+            /// Required to create a thread.
+            /// </summary>
+            public const UInt32 PROCESS_CREATE_THREAD = 0x0002;
+            /// <summary>
+            /// Required to duplicate a handle using DuplicateHandle.
+            /// </summary>
+            public const UInt32 PROCESS_DUP_HANDLE = 0x0040;
+            /// <summary>
+            /// Required to retrieve certain information about a process, such as its token, exit code, and priority class (see OpenProcessToken).
+            /// </summary>
+            public const UInt32 PROCESS_QUERY_INFORMATION = 0x0400;
+            public const UInt32 PROCESS_QUERY_LIMITED_INFORMATION = 0x1000;
+            public const UInt32 PROCESS_SET_INFORMATION = 0x0200;
+            /// <summary>
+            /// Required to set memory limits using SetProcessWorkingSetSize.
+            /// </summary>
+            public const UInt32 PROCESS_SET_QUOTA = 0x0100;
+            /// <summary>
+            /// Required to suspend or resume a process.
+            /// </summary>
+            public const UInt32 PROCESS_SUSPEND_RESUME = 0x0800;
+            /// <summary>
+            /// Required to terminate a process using TerminateProcess.
+            /// </summary>
+            public const UInt32 PROCESS_TERMINATE = 0x0001;
+            /// <summary>
+            /// Required to perform an operation on the address space of a process (see VirtualProtectEx and WriteProcessMemory).
+            /// </summary>
+            public const UInt32 PROCESS_VM_OPERATION = 0x0008;
+            /// <summary>
+            /// Required to read memory in a process using ReadProcessMemory.
+            /// </summary>
+            public const UInt32 PROCESS_VM_READ = 0x0010;
+            /// <summary>
+            /// Required to write to memory in a process using WriteProcessMemory.
+            /// </summary>
+            public const UInt32 PROCESS_VM_WRITE = 0x0020;
+            /// <summary>
+            /// Required to wait for the process to terminate using the wait functions.
+            /// </summary>
+            public const UInt64 SYNCHRONIZE = 0x00100000L;
+        }
+
         public class MemoryAllocationType
         {
             /// <summary>
@@ -142,10 +184,6 @@ namespace ZS.Common.Win32
 
         }
 
-        /// <summary>
-        /// The following are the memory-protection options; you must specify one of the following values when allocating or protecting a page in memory. Protection attributes cannot be assigned to a portion of a page; they can only be assigned to a whole page.
-        /// </summary>
-        /// <link>https://msdn.microsoft.com/en-us/library/aa366786%28v=vs.85%29.aspx?f=255&MSPPError=-2147217396</link>
         public class MemoryProtectionConstants
         {
             /// <summary>
@@ -164,9 +202,6 @@ namespace ZS.Common.Win32
             public const Int32 PAGE_TARGETS_NO_UPDATE = 0x40000000;
         }
 
-        /// <summary>
-        /// 内存释放类型
-        /// </summary>
         public class MemoryFreeType
         {
             /// <summary>

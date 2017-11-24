@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Runtime.InteropServices;
 
-namespace ZS.Common.Win32.WinCtrlAPI.ListView
+namespace KK.SARIcon.WinCtrlAPI.ListView
 {
     /// <summary>
     /// Specifies or receives the attributes of a list-view item. This structure has been updated to support a new mask value (LVIF_INDENT) that enables item indenting. This structure supersedes the LV_ITEM structure.
     /// </summary>
-    /// <link>https://msdn.microsoft.com/en-us/library/windows/desktop/bb774760(v=vs.85).aspx</link>
     [StructLayout(LayoutKind.Sequential)]
     public struct LVITEM
     {

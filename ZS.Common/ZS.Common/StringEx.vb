@@ -109,7 +109,7 @@ Public Module StringEx
     ''' <remarks></remarks>
     <Extension()>
     Public Function IsMobilePhoneNumber(ByVal str As String) As Boolean
-        Return System.Text.RegularExpressions.Regex.IsMatch(str, "^[1]{1}[1-9]{2}[0-9]{8}$")
+        Return System.Text.RegularExpressions.Regex.IsMatch(str, "^[1]{1}[0-9]{2}[0-9]{8}$")
     End Function
 
 #End Region

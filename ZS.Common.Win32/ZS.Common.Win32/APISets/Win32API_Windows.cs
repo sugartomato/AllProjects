@@ -125,6 +125,7 @@ namespace ZS.Common.Win32
         [DllImport("User32.dll")]
         public static extern IntPtr FindWindow(String lpClassName, String lpWindowName);
 
+        // ############################################################
         /// <summary>
         /// Retrieves a handle to a window whose class name and window name match the specified strings. The function searches child windows, beginning with the one following the specified child window. This function does not perform a case-sensitive search.
         /// </summary>
@@ -166,7 +167,7 @@ namespace ZS.Common.Win32
         [DllImport("User32.dll")]
         public static extern IntPtr FindWindowEx(IntPtr hwndParnet, IntPtr hwndChildAfter, String lpszClass, String lpszWindow);
 
-
+        // ############################################################
         /// <summary>
         /// Retrieves a handle to the desktop window. The desktop window covers the entire screen. The desktop window is the area on top of which other windows are painted.
         /// </summary>
@@ -179,6 +180,7 @@ namespace ZS.Common.Win32
         [DllImport("User32.dll")]
         public static extern IntPtr GetDesktopWindow();
 
+        // ############################################################
         /// <summary>
         /// Retrieves a handle to the foreground window (the window with which the user is currently working). The system assigns a slightly higher priority to the thread that creates the foreground window than it does to other threads.
         /// </summary>
@@ -189,6 +191,7 @@ namespace ZS.Common.Win32
         [DllImport("User32.dll")]
         public static extern IntPtr GetForegroundWindow();
 
+        // ############################################################
         /// <summary>
         /// Retrieves a handle to a window that has the specified relationship (Z-Order or owner) to the specified window.
         /// </summary>
@@ -245,7 +248,7 @@ namespace ZS.Common.Win32
             GW_OWNER = 4
         }
 
-
+        // ############################################################
         /// <summary>
         /// Copies the text of the specified window's title bar (if it has one) into a buffer. If the specified window is a control, the text of the control is copied. However, GetWindowText cannot retrieve the text of a control in another application.
         /// </summary>
@@ -280,6 +283,7 @@ namespace ZS.Common.Win32
         [DllImport("User32.dll")]
         public static extern Int32 GetWindowText(IntPtr hWnd, System.Text.StringBuilder lpString, Int32 nMaxCount);
 
+        // ############################################################
         /// <summary>
         /// Retrieves the length, in characters, of the specified window's title bar text (if the window has a title bar). If the specified window is a control, the function retrieves the length of the text within the control. However, GetWindowTextLength cannot retrieve the length of the text of an edit control in another application.
         /// </summary>
@@ -301,6 +305,7 @@ namespace ZS.Common.Win32
         [DllImport("User32.dll")]
         public static extern Int32 GetWindowTextLength(IntPtr hWnd);
 
+        // ############################################################
         /// <summary>
         /// Changes the parent window of the specified child window.
         /// </summary>
@@ -328,6 +333,7 @@ namespace ZS.Common.Win32
         [DllImport("User32.dll")]
         public static extern IntPtr SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
 
+        // ############################################################
         /// <summary>
         /// An application-defined callback function used with the EnumChildWindows function. It receives the child window handles. The WNDENUMPROC type defines a pointer to this callback function. EnumChildProc is a placeholder for the application-defined function name.
         /// </summary>
@@ -349,6 +355,7 @@ namespace ZS.Common.Win32
         /// <link>https://msdn.microsoft.com/en-us/library/windows/desktop/ms633493(v=vs.85).aspx</link>
         public delegate Boolean EnumChildProc(IntPtr hwnd, Int32 lParam);
 
+        // ############################################################
         /// <summary>
         /// 
         /// </summary>
@@ -375,6 +382,7 @@ namespace ZS.Common.Win32
         [DllImport("User32.dll")]
         public static extern Boolean EnumChildWindows(IntPtr hWndParent, EnumChildProc lpEnumFunc, Int32 lParam);
 
+        // ############################################################
         /// <summary>
         /// Enumerates all top-level windows on the screen by passing the handle to each window, in turn, to an application-defined callback function. EnumWindows continues until the last top-level window is enumerated or the callback function returns FALSE.
         /// </summary>
@@ -404,6 +412,7 @@ namespace ZS.Common.Win32
         [DllImport("User32.dll")]
         public static extern Boolean EnumWindows(EnumWindowsProc lpEnumFunc, Int32 lParam);
 
+        // ############################################################
         /// <summary>
         /// An application-defined callback function used with the EnumWindows or EnumDesktopWindows function. It receives top-level window handles. The WNDENUMPROC type defines a pointer to this callback function. EnumWindowsProc is a placeholder for the application-defined function name.
         /// </summary>
@@ -426,6 +435,7 @@ namespace ZS.Common.Win32
         /// </link>
         public delegate Boolean EnumWindowsProc(IntPtr hwnd, Int32 lParam);
 
+        // ############################################################
         /// <summary>
         /// Determines the visibility state of the specified window.
         /// </summary>
@@ -442,13 +452,32 @@ namespace ZS.Common.Win32
         /// The visibility state of a window is indicated by the WS_VISIBLE style bit. When WS_VISIBLE is set, the window is displayed and subsequent drawing into it is displayed as long as the window has the WS_VISIBLE style.
         /// Any drawing to a window with the WS_VISIBLE style will not be displayed if the window is obscured by other windows or is clipped by its parent window.
         /// </remarks>
-        /// <link>
-        /// https://msdn.microsoft.com/en-us/library/ms633530(v=vs.85).aspx
-        /// </link>
+        /// <link>https://msdn.microsoft.com/en-us/library/ms633530(v=vs.85).aspx</link>
         [DllImport("User32.dll")]
         public static extern Boolean IsWindowVisible(IntPtr hwnd);
 
+        // ############################################################
+        /// <summary>
+        /// Brings the specified window to the top of the Z order. If the window is a top-level window, it is activated. If the window is a child window, the top-level parent window associated with the child window is activated.
+        /// </summary>
+        /// <param name="hWnd">
+        /// [in][Type: HWND]
+        ///     A handle to the window to bring to the top of the Z order.
+        /// </param>
+        /// <returns>
+        /// [Type: BOOL]
+        ///     If the function succeeds, the return value is nonzero.
+        ///     If the function fails, the return value is zero. To get extended error information, call GetLastError.
+        /// </returns>
+        /// <remarks>
+        /// Use the BringWindowToTop function to uncover any window that is partially or completely obscured by other windows.
+        /// Calling this function is similar to calling the SetWindowPos function to change a window's position in the Z order. BringWindowToTop does not make a window a top-level window.
+        /// </remarks>
+        /// <link>https://msdn.microsoft.com/en-us/library/windows/desktop/ms632673(v=vs.85).aspx</link>
+        [DllImport("User32.dll")]
+        public static extern Boolean BringWindowToTop(IntPtr hWnd);
 
+        // ############################################################
         /// <summary>
         /// <para>根据窗口句柄返回其进程标识符。</para>
         /// Retrieves the identifier of the thread that created the specified window and, optionally, the identifier of the process that created the window.
@@ -468,5 +497,46 @@ namespace ZS.Common.Win32
         /// <link>https://msdn.microsoft.com/en-us/library/ms633522</link>
         [DllImport("User32.dll")]
         public static extern Int32 GetWindowThreadProcessId(IntPtr hWnd, out Int32 lpdwProcessId);
+
+
+        // ############################################################
+        /// <summary>
+        /// Retrieves a handle to the window that contains the specified physical point.
+        /// </summary>
+        /// <param name="point">
+        /// [in][Type: POINT]
+        ///     The physical coordinates of the point.
+        /// </param>
+        /// <returns>
+        /// [Type: HWND]
+        ///     A handle to the window that contains the given physical point. If no window exists at the point, this value is NULL.
+        /// </returns>
+        /// <remarks>
+        /// The WindowFromPhysicalPoint function does not retrieve a handle to a hidden or disabled window, even if the point is within the window.
+        /// </remarks>
+        /// <link>https://msdn.microsoft.com/en-us/library/windows/desktop/aa969270(v=vs.85).aspx</link>
+        [DllImport("User32.dll")]
+        public static extern IntPtr WindowFromPhysicalPoint(POINT point);
+
+        // ############################################################
+        /// <summary>
+        /// Retrieves a handle to the window that contains the specified point.
+        /// </summary>
+        /// <param name="point">
+        /// [in][Type: POINT]
+        ///     The point to be checked.
+        /// </param>
+        /// <returns>
+        /// [Type: HWND]
+        ///     The return value is a handle to the window that contains the point. If no window exists at the given point, the return value is NULL. If the point is over a static text control, the return value is a handle to the window under the static text control.
+        /// </returns>
+        /// <remarks>
+        /// The WindowFromPoint function does not retrieve a handle to a hidden or disabled window, even if the point is within the window. An application should use the ChildWindowFromPoint function for a nonrestrictive search.
+        /// </remarks>
+        /// <link>https://msdn.microsoft.com/en-us/library/windows/desktop/ms633558(v=vs.85).aspx</link>
+        [DllImport("User32.dll")]
+        public static extern IntPtr WindowFromPoint(POINT point);
+
+
     }
 }

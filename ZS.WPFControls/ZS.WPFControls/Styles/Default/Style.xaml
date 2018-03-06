@@ -317,7 +317,57 @@
             </Setter.Value>
         </Setter>
     </Style >
+    
+    <Style x:Key="Tab_Base" TargetType="TabControl">
+        <Setter Property="BorderThickness" Value="3" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TabControl">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <WrapPanel Orientation="Horizontal" Grid.Row="0" IsItemsHost="True" />
+                        <Border Grid.Row="1"
+                            BorderThickness="0"
+                            Padding="3"
+                            Margin="0,2,0,0"
+                            Background="{TemplateBinding Background}">
+                            <ContentPresenter ContentSource="SelectedContent">
+                            </ContentPresenter>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style >
 
+    <Style x:Key="TabControl_Left" TargetType="TabControl" >
+        <Setter Property="TabStripPlacement" Value="Left"></Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TabControl">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <WrapPanel Orientation="Vertical" Grid.Column="0" IsItemsHost="True" />
+                        <Border Grid.Column="1"
+                            BorderThickness="0"
+                            Padding="3"
+                            Margin="0,2,0,0"
+                            Background="{TemplateBinding Background}">
+                            <ContentPresenter ContentSource="SelectedContent">
+                            </ContentPresenter>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+ 
     <Style TargetType="TabItem">
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Template">
@@ -338,6 +388,55 @@
                                 ContentSource="Header"
                                 Margin="10,4"
                                 Grid.Row="1">
+                            </ContentPresenter>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="BorderTopMark" Property="Background" Value="Green" />
+                            <Setter TargetName="BorderTab" Property="Background" Value="LightGray" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True" SourceName="BorderTab">
+                            <Setter TargetName="BorderTopMark" Property="Background" Value="Red" />
+                            <Setter TargetName="BorderTab" Property="Background" Value="LightGray" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="TabItem_Left" TargetType="TabItem">
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="HeaderTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <ContentPresenter Content="{TemplateBinding Content}">
+                        <ContentPresenter.LayoutTransform>
+                            <RotateTransform Angle="270"></RotateTransform>
+                        </ContentPresenter.LayoutTransform>
+                    </ContentPresenter>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TabItem">
+                    <Border Name="BorderTab"
+                            CornerRadius="0,0,0,0" Margin="2,2"
+                            Background="{TemplateBinding Background}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Border Name="BorderTopMark" Grid.Column="0" Background="{TemplateBinding Background}" />
+                            <ContentPresenter
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                ContentSource="Header"
+                                Margin="10,4"
+                                Grid.Column="1">
                             </ContentPresenter>
                         </Grid>
                     </Border>

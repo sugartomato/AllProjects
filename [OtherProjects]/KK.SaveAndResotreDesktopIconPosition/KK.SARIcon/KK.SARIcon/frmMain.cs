@@ -13,6 +13,7 @@ namespace KK.SARIcon
 {
     public partial class frmMain : Form
     {
+        private Desktop m_Desktop = null;
         public frmMain()
         {
             InitializeComponent();
@@ -23,11 +24,22 @@ namespace KK.SARIcon
             try
             {
                 lblState.Text = String.Empty;
+                toolStripStatusLabel1.Alignment = ToolStripItemAlignment.Right;
+
+                WriteConsole("xml文件路径：" + Common.XMLPath);
+                //WriteConsole("桌面句柄：" + Desktop.GetDefaultIntptr());
+                if (!System.IO.File.Exists(Common.XMLPath))
+                {
+                    WriteConsole("记录文件不存在。点击保存按钮生成新的文件");
+                    btnRestoreIcon.Enabled = false;
+                }
+                m_Desktop = new Desktop();
             }
             catch (Exception ex)
             {
 
                 MessageBox.Show(ex.Message);
+                this.Dispose();
             }
         }
 
@@ -38,15 +50,26 @@ namespace KK.SARIcon
                 this.Icon = Properties.Resources.friendly_icons;
                 List<IconItem> icons = GetIcons();
 
-                lblState.Text = "获取到【" + icons.Count + "】个图标数据！";
+                WriteConsole("获取到【" + icons.Count + "】个图标数据！");
 
                 // 保存图标数据到xml文件
                 Boolean result = WriteItemsToXML(icons);
-                lblState.Text = "保存完成！";
+                if (result)
+                {
+                    lblState.Text = "保存完成！";
+                }
+                else
+                {
+                    lblState.Text = "保存失败！";
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("保存失败：" + ex.Message);
+                WriteConsole("保存失败：" + ex.Message);
+            }
+            finally
+            {
+                btnRestoreIcon.Enabled = true;
             }
         }
 
@@ -56,7 +79,6 @@ namespace KK.SARIcon
             {
                 this.Icon = Properties.Resources.hello_;
 
-                Desktop d = new Desktop(Desktop.GetDefaultIntptr());
                 List<IconItem> icons = GetIcons();
 
                 if (!System.IO.File.Exists(Common.XMLPath))
@@ -80,7 +102,7 @@ namespace KK.SARIcon
                         IconItem tmpIcon = icons.FirstOrDefault(x => x.Text == iconText);
                         if (tmpIcon != null)
                         {
-                            d.SetItemLocation(tmpIcon.Index, new Point(locationX, locationY));
+                            m_Desktop.SetItemLocation(tmpIcon.Index, new Point(locationX, locationY));
                         }
                     }
                 }
@@ -101,17 +123,24 @@ namespace KK.SARIcon
             this.Icon = Properties.Resources.friendly_icons;
 
             // 获取图标数量，遍历获取文本与坐标
-            Desktop d = new Desktop(Desktop.GetDefaultIntptr());
-            Int32 iconsCount = d.GetItemsCount();
+            WriteConsole("桌面ListView句柄：" + m_Desktop.DesktopListViewPtr.ToString());
+            WriteConsole("桌面进程ID：" + m_Desktop.DesktopProcessID);
+            WriteConsole("侦测到桌面图标数：" + m_Desktop.GetItemsCount());
+            Int32 iconsCount = m_Desktop.GetItemsCount();
             for (Int32 i = 0; i < iconsCount; i++)
             {
                 IconItem tmpIcon = new IconItem();
-                tmpIcon.Text = d.GetItemText(i);
-                tmpIcon.Location = d.GetItemLocation(i);
+                tmpIcon.Text = m_Desktop.GetItemText(i);
+                tmpIcon.Location = m_Desktop.GetItemLocation(i);
                 tmpIcon.Index = i;
                 icons.Add(tmpIcon);
             }
             return icons;
+        }
+
+        private void WriteConsole(String msg)
+        {
+            txtConsole.AppendText(msg + "\r\n");
         }
         #endregion
 

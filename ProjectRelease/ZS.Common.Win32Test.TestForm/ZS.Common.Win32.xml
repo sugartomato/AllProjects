@@ -596,7 +596,15 @@
             [out]
                 A pointer to a variable that receives the number of bytes transferred into the specified process. This parameter is optional. If lpNumberOfBytesWritten is NULL, the parameter is ignored.
             </param>
-            <returns></returns>
+            <returns>
+                If the function succeeds, the return value is nonzero.
+                If the function fails, the return value is 0 (zero). To get extended error information, call GetLastError. The function fails if the requested write operation crosses into an area of the process that is inaccessible.
+            </returns>
+            <remarks>
+                WriteProcessMemory copies the data from the specified buffer in the current process to the address range of the specified process. Any process that has a handle with PROCESS_VM_WRITE and PROCESS_VM_OPERATION access to the process to be written to can call the function. Typically but not always, the process with address space that is being written to is being debugged.
+                The entire area to be written to must be accessible, and if it is not accessible, the function fails.
+            </remarks>
+            <link>https://msdn.microsoft.com/en-us/library/windows/desktop/ms681674(v=vs.85).aspx</link>
         </member>
         <member name="T:ZS.Common.Win32.API.POINT">
             <summary>
@@ -1289,11 +1297,31 @@
         <member name="F:ZS.Common.Win32.Desktop.m_ProcessID">
             <summary>桌面ListView所属的进程ID</summary>
         </member>
+        <member name="P:ZS.Common.Win32.Desktop.DesktopPtr">
+            <summary>
+            获取桌面句柄
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Desktop.DesktopProcessID">
+            <summary>
+            获取桌面进程ID
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Desktop.DesktopListViewPtr">
+            <summary>
+            获取桌面ListView控件句柄
+            </summary>
+        </member>
         <member name="M:ZS.Common.Win32.Desktop.#ctor(System.IntPtr)">
             <summary>
-            构造
+            通过指定的句柄构造
             </summary>
             <param name="hWnd"></param>
+        </member>
+        <member name="M:ZS.Common.Win32.Desktop.#ctor">
+            <summary>
+            自动监测桌面句柄构造一个新的桌面操作
+            </summary>
         </member>
         <member name="M:ZS.Common.Win32.Desktop.GetSelectedCount">
             <summary>
@@ -1809,6 +1837,7 @@
             <summary>
             Specifies or receives the attributes of a list-view item. This structure has been updated to support a new mask value (LVIF_INDENT) that enables item indenting. This structure supersedes the LV_ITEM structure.
             </summary>
+            <link>https://msdn.microsoft.com/en-us/library/windows/desktop/bb774760(v=vs.85).aspx</link>
         </member>
         <member name="F:ZS.Common.Win32.WinCtrlAPI.ListView.LVITEM.mask">
             <summary>

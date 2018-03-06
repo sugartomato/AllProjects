@@ -57,6 +57,41 @@ Public Module StringEx
 
 #End Region
 
+#Region "数字验证/转换"
+
+    ''' <summary>
+    ''' 验证字符串是否为Int32类型
+    ''' </summary>
+    ''' <param name="str"></param>
+    ''' <returns></returns>
+    <Extension()>
+    Public Function IsInt32(ByVal str As String) As Boolean
+        If (String.IsNullOrEmpty(str)) Then Return False
+        Dim r As Int32 = 0
+        If (Int32.TryParse(str, r)) Then
+            Return True
+        End If
+        Return False
+    End Function
+
+    ''' <summary>
+    ''' 将字符串转换为Int32数字
+    ''' </summary>
+    ''' <param name="str"></param>
+    ''' <returns></returns>
+    <Extension>
+    Public Function ToInt32(ByVal str As String) As Int32
+        If (String.IsNullOrEmpty(str)) Then Throw New ArgumentNullException("空字符串无法转换为数字")
+        Dim r As Int32 = 0
+        If (Int32.TryParse(str, r)) Then
+            Return r
+        Else
+            Throw New ApplicationException("[" & str & "]为无效的数字。")
+        End If
+
+    End Function
+
+#End Region
 
 #Region "格式验证"
 
@@ -79,7 +114,7 @@ Public Module StringEx
     ''' <remarks></remarks>
     <Extension()>
     Public Function IsIPv6Address(ByVal str As String) As Boolean
-        Return True
+        Throw New ApplicationException("未实现的方法")
     End Function
 
     ''' <summary>
@@ -99,8 +134,6 @@ Public Module StringEx
         Return True
     End Function
 
-
-
     ''' <summary>
     ''' 验证该字符串是否为一个有效的手机号码
     ''' </summary>
@@ -113,7 +146,6 @@ Public Module StringEx
     End Function
 
 #End Region
-
 
 #Region "MD5"
 
@@ -166,7 +198,7 @@ Public Module StringEx
 
 #End Region
 
-#Region "转换为其它类型"
+#Region "List转换"
 
     ''' <summary>
     ''' 将字符串按照指定的分隔符转换为泛型集合
@@ -193,7 +225,32 @@ Public Module StringEx
 
     End Function
 
+    ''' <summary>
+    ''' 将字符串按照指定的分隔符转换为Int类型的泛型集合
+    ''' </summary>
+    ''' <param name="str">要转换的字符串</param>
+    ''' <param name="separaotr">分隔符</param>
+    ''' <param name="IsDropEmpty">是否跳过空内容。默认为True。如果不跳过空内容，遇到空内容时引发异常。</param>
+    ''' <returns></returns>
+    <Extension>
+    Public Function ToListOfInt32(ByVal str As String, ByVal separaotr As String, Optional ByVal IsDropEmpty As Boolean = True) As List(Of Int32)
+        If (String.IsNullOrEmpty(str)) Then
+            Return Nothing
+        End If
 
+        Dim arr As String() = str.Split(separaotr)
+        If (arr.Length > 0) Then
+            Dim result As New List(Of Int32)
+            For Each s In arr
+                If Not s.IsInt32 Then
+                    Throw New ApplicationException("[" & s & "]不是有效地数字")
+                End If
+                result.Add(s.ToInt32())
+            Next
+            Return result
+        End If
+        Return Nothing
+    End Function
 
 #End Region
 

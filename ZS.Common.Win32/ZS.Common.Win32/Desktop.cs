@@ -17,8 +17,46 @@ namespace ZS.Common.Win32
         /// <summary>桌面ListView所属的进程ID</summary>
         private Int32 m_ProcessID = 0;
 
+        #region 属性
+
         /// <summary>
-        /// 构造
+        /// 获取桌面句柄
+        /// </summary>
+        public IntPtr DesktopPtr
+        {
+            get
+            {
+                return m_DesktopPtr;
+            }
+        }
+        /// <summary>
+        /// 获取桌面进程ID
+        /// </summary>
+        public Int32 DesktopProcessID
+        {
+            get
+            {
+                return m_ProcessID;
+            }
+        }
+        /// <summary>
+        /// 获取桌面ListView控件句柄
+        /// </summary>
+        public IntPtr DesktopListViewPtr
+        {
+            get
+            {
+                return m_ListViewPtr;
+            }
+        }
+
+
+        #endregion
+
+        #region 构造
+
+        /// <summary>
+        /// 通过指定的句柄构造
         /// </summary>
         /// <param name="hWnd"></param>
         public Desktop(IntPtr hWnd)
@@ -34,6 +72,43 @@ namespace ZS.Common.Win32
                 API.GetWindowThreadProcessId(m_ListViewPtr, out m_ProcessID);
             }
         }
+
+        /// <summary>
+        /// 自动监测桌面句柄构造一个新的桌面操作
+        /// </summary>
+        public Desktop()
+        {
+            // 先尝试通过Progman来查找，如果找不到SysListView32，就通过WorkerW来找
+            m_DesktopPtr = API.FindWindow("Progman", null);
+            if (m_DesktopPtr != IntPtr.Zero)
+            {
+                m_ListViewPtr = API.GetWindow(m_DesktopPtr, API.GetWindowTypeEnum.GW_CHILD);
+                m_ListViewPtr = API.GetWindow(m_ListViewPtr, API.GetWindowTypeEnum.GW_CHILD);
+            }
+
+            // 尝试通过WorkerW来查找
+            IntPtr workerWPtr = IntPtr.Zero;
+            while (m_ListViewPtr == IntPtr.Zero)
+            {
+                workerWPtr = API.FindWindowEx(IntPtr.Zero, workerWPtr, "WorkerW", null);
+                if (workerWPtr == IntPtr.Zero) break;
+                m_DesktopPtr = workerWPtr;
+                IntPtr shellDLLPtr = API.FindWindowEx(workerWPtr, IntPtr.Zero, "SHELLDLL_DefView", null);
+                if (shellDLLPtr == IntPtr.Zero) continue;
+                m_ListViewPtr = API.FindWindowEx(shellDLLPtr, IntPtr.Zero, "SysListView32", null);
+            }
+
+            if (m_ListViewPtr == IntPtr.Zero)
+            {
+                throw new ApplicationException("未能找到桌面句柄，无法完成初始化。");
+            }
+
+            // 根据ListView控件句柄获取其所在的进程的ID
+            API.GetWindowThreadProcessId(m_ListViewPtr, out m_ProcessID);
+        }
+
+        #endregion
+
 
         /// <summary>
         /// 获取桌面上的选择的数量

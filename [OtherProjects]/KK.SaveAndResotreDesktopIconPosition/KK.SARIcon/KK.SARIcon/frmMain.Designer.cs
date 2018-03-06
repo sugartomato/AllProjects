@@ -31,12 +31,16 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.btnSaveIcon = new System.Windows.Forms.Button();
             this.btnRestoreIcon = new System.Windows.Forms.Button();
-            this.lblState = new System.Windows.Forms.Label();
+            this.txtConsole = new System.Windows.Forms.TextBox();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.lblState = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnSaveIcon
             // 
-            this.btnSaveIcon.Location = new System.Drawing.Point(39, 12);
+            this.btnSaveIcon.Location = new System.Drawing.Point(13, 21);
             this.btnSaveIcon.Name = "btnSaveIcon";
             this.btnSaveIcon.Size = new System.Drawing.Size(110, 50);
             this.btnSaveIcon.TabIndex = 0;
@@ -46,7 +50,7 @@
             // 
             // btnRestoreIcon
             // 
-            this.btnRestoreIcon.Location = new System.Drawing.Point(169, 12);
+            this.btnRestoreIcon.Location = new System.Drawing.Point(13, 77);
             this.btnRestoreIcon.Name = "btnRestoreIcon";
             this.btnRestoreIcon.Size = new System.Drawing.Size(110, 50);
             this.btnRestoreIcon.TabIndex = 1;
@@ -54,23 +58,47 @@
             this.btnRestoreIcon.UseVisualStyleBackColor = true;
             this.btnRestoreIcon.Click += new System.EventHandler(this.btnRestoreIcon_Click);
             // 
+            // txtConsole
+            // 
+            this.txtConsole.Location = new System.Drawing.Point(129, 12);
+            this.txtConsole.Multiline = true;
+            this.txtConsole.Name = "txtConsole";
+            this.txtConsole.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtConsole.Size = new System.Drawing.Size(213, 157);
+            this.txtConsole.TabIndex = 3;
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblState,
+            this.toolStripStatusLabel1});
+            this.statusStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            this.statusStrip1.Location = new System.Drawing.Point(0, 186);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(354, 22);
+            this.statusStrip1.TabIndex = 4;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
             // lblState
             // 
-            this.lblState.AutoSize = true;
-            this.lblState.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblState.ForeColor = System.Drawing.Color.Blue;
-            this.lblState.Location = new System.Drawing.Point(37, 71);
             this.lblState.Name = "lblState";
-            this.lblState.Size = new System.Drawing.Size(31, 12);
-            this.lblState.TabIndex = 2;
+            this.lblState.Size = new System.Drawing.Size(32, 17);
             this.lblState.Text = "就绪";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(57, 17);
+            this.toolStripStatusLabel1.Text = "By DHD";
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(322, 101);
-            this.Controls.Add(this.lblState);
+            this.ClientSize = new System.Drawing.Size(354, 208);
+            this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.txtConsole);
             this.Controls.Add(this.btnRestoreIcon);
             this.Controls.Add(this.btnSaveIcon);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -80,6 +108,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "桌面图标位置保存与恢复";
             this.Load += new System.EventHandler(this.Form_Load);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -89,7 +119,10 @@
 
         private System.Windows.Forms.Button btnSaveIcon;
         private System.Windows.Forms.Button btnRestoreIcon;
-        private System.Windows.Forms.Label lblState;
+        private System.Windows.Forms.TextBox txtConsole;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel lblState;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
     }
 }
 

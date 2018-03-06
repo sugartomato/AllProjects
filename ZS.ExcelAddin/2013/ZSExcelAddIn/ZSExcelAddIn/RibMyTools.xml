@@ -86,10 +86,10 @@
           </menu>
 
           <!-- 前后缀 -->
-          <button id="ZS_BTN_InsertPreSuffix" 
-                  label="前缀后缀" 
-                  size="large" 
-                  imageMso="TextEffectTracking" 
+          <button id="ZS_BTN_InsertPreSuffix"
+                  label="前缀后缀"
+                  size="large"
+                  imageMso="TextEffectTracking"
                   onAction="OnClick_InsertPreSuffix"
                   description="在选中区域每个单元内容的前后添加指定的内容。"
                   ></button>
@@ -126,6 +126,10 @@
         <!-- 内容从拆分/合并组 -->
         <group id="grpMergeAndSeparate">
         </group>
+        <!-- 调试组 -->
+        <group id="ZS_GRP_Debug" imageMso="FileCompactAndRepairDatabase" label="调试">
+          <button id="ZS_BTN_ListAllCommand" label="列举命令" size="large" onAction="OnClick_Debug" imageMso="DocumentPanelTemplate"/>
+        </group>
       </tab>
 
       <!-- 对插入选项卡增加控件 -->
@@ -133,5 +137,27 @@
       </tab>
     </tabs>
   </ribbon>
+  <!-- 
+  ############################################################
+  右键菜单区域
+  ############################################################
+  -->
+  <contextMenus>
+    <!-- 表格对象单元格右键菜单 -->
+    <contextMenu idMso="ContextMenuListRange">
+      <menu id="ZS_ContextMenuListRange_InsertDateTime" label="插入日期时间" imageMso="SlideShowRehearseTimings" insertAfterMso="Copy">
+        <button id="ZS_ContextMenuListRange_InsertDate" getImage="Get_ControlImage" label="插入日期" onAction="OnClick_InsertDateTime"/>
+        <button id="ZS_ContextMenuListRange_InsertTime" getImage="Get_ControlImage" label="插入时间" onAction="OnClick_InsertDateTime"/>
+      </menu>
+    </contextMenu>
+    <!-- 普通单元格右键菜单 -->
+    <contextMenu idMso="ContextMenuCell">
+      <menu id="ZS_ContextMenuCell_InsertDateTime" label="插入日期时间" imageMso="SlideShowRehearseTimings" insertAfterMso="Copy">
+        <button id="ZS_ContextMenuCell_InsertDate" getImage="Get_ControlImage" label="插入日期" onAction="OnClick_InsertDateTime"/>
+        <button id="ZS_ContextMenuCell_InsertTime" getImage="Get_ControlImage" label="插入时间" onAction="OnClick_InsertDateTime"/>
+      </menu>
+    </contextMenu>
+
+  </contextMenus>
 </customUI>
 

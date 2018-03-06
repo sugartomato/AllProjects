@@ -22,8 +22,7 @@ namespace ZS.Common.Win32.Tests
         [TestMethod()]
         public void GetItemsCountTest()
         {
-            IntPtr hwnd = Desktop.GetDefaultIntptr();
-            Desktop d = new Desktop(hwnd);
+            Desktop d = new Desktop();
             Int32 t = d.GetItemsCount();
             Console.WriteLine(t.ToString());
         }

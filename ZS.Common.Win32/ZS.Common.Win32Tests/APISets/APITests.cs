@@ -92,5 +92,60 @@ namespace ZS.Common.Win32.Tests
             Console.WriteLine(itemsCount.ToString());
 
         }
+
+        [TestMethod()]
+        public void BringWindowToTopTest()
+        {
+            IntPtr hwnd = API.FindWindow(null, "设备和打印机");
+            if (hwnd != IntPtr.Zero)
+            {
+                Boolean result = API.BringWindowToTop(hwnd);
+                Console.WriteLine(result.ToString());
+            }
+            else
+            {
+                Console.WriteLine("未找到窗口！");
+            }
+        }
+
+        [TestMethod()]
+        public void WindowFromPhysicalPointTest()
+        {
+            API.POINT pt = new API.POINT(200, 200);
+            IntPtr ptr = API.WindowFromPhysicalPoint(pt);
+            if (ptr != IntPtr.Zero)
+            {
+                Int32 txtLength = API.GetWindowTextLength(ptr);
+                StringBuilder sb = new StringBuilder("",txtLength + 2);
+                Int32 tCount = API.GetWindowText(ptr, sb, sb.Capacity);
+                Console.WriteLine(sb.ToString());
+                Console.WriteLine("获取文本数：" + tCount);
+
+            }
+            else
+            {
+                Console.WriteLine("未找到窗口！");
+            }
+        }
+
+        [TestMethod()]
+        public void WindowFromPointTest()
+        {
+            API.POINT pt = new API.POINT(200, 200);
+            IntPtr ptr = API.WindowFromPoint(pt);
+            if (ptr != IntPtr.Zero)
+            {
+                Int32 txtLength = API.GetWindowTextLength(ptr);
+                StringBuilder sb = new StringBuilder("", txtLength + 2);
+                Int32 tCount = API.GetWindowText(ptr, sb, sb.Capacity);
+                Console.WriteLine(sb.ToString());
+                Console.WriteLine("获取文本数：" + tCount);
+
+            }
+            else
+            {
+                Console.WriteLine("未找到窗口！");
+            }
+        }
     }
 }

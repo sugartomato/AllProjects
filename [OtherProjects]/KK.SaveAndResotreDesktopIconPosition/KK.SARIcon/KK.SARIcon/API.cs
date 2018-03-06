@@ -40,6 +40,8 @@ namespace KK.SARIcon
         public extern static Boolean CloseHandle(IntPtr hObject);
         [DllImport("User32.dll")]
         public static extern IntPtr FindWindow(String lpClassName, String lpWindowName);
+        [DllImport("User32.dll")]
+        public static extern IntPtr FindWindowEx(IntPtr hwndParnet, IntPtr hwndChildAfter, String lpszClass, String lpszWindow);
 
 
         public const Int32 LVM_FIRST = 0x1000;

@@ -28,6 +28,22 @@
             Posted when the user releases the left mouse button while the cursor is in the client area of a window. If the mouse is not captured, the message is posted to the window beneath the cursor. Otherwise, the message is posted to the window that has captured the mouse.
             </summary>
         </member>
+        <member name="F:ZS.Common.Win32.SystemDefinedMessages.WM_MOUSEMOVE">
+            <summary>
+            Posted to a window when the cursor moves. If the mouse is not captured, the message is posted to the window that contains the cursor. Otherwise, the message is posted to the window that has captured the mouse.
+            Parameters
+                wParam
+                    Indicates whether various virtual keys are down. This parameter can be one or more of the following values.
+                lParam
+                    The low-order word specifies the x-coordinate of the cursor. The coordinate is relative to the upper-left corner of the client area.
+                    The high-order word specifies the y-coordinate of the cursor. The coordinate is relative to the upper-left corner of the client area.
+            Return value
+                Type: LRESULT
+                The return value is TRUE if the text is set. It is FALSE (for an edit control), LB_ERRSPACE (for a list box), or CB_ERRSPACE (for a combo box) if insufficient space is available to set the text in the edit control. It is CB_ERR if this message is sent to a combo box without an edit control.
+            </summary>
+            <remarks>
+            </remarks>
+        </member>
         <member name="F:ZS.Common.Win32.SystemDefinedMessages.WM_SETTEXT">
             <summary>
             Sets the text of a window.
@@ -48,6 +64,7 @@
         </member>
         <member name="F:ZS.Common.Win32.SystemDefinedMessages.WM_GETTEXT">
             <summary>
+            获取窗口文本
             Copies the text that corresponds to a window into a buffer provided by the caller.
             Parameters
                 wParam
@@ -69,6 +86,7 @@
         </member>
         <member name="F:ZS.Common.Win32.SystemDefinedMessages.WM_GETTEXTLENGTH">
             <summary>
+            获取窗口文本长度
             Determines the length, in characters, of the text associated with a window.
             Parameters
                 wParam

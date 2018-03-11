@@ -49,5 +49,26 @@ namespace ZS.Common.Test
                 Console.WriteLine(s);
             }
         }
+
+        [TestMethod]
+        public void ToListOfInt32Test()
+        {
+            string str = "1,2,3,4,5,5,6,7,7,a";
+            List<Int32> r = null;
+            r = str.ToListOfInt32(",");
+
+            foreach (Int32 s in r)
+            {
+                Console.WriteLine(s);
+            }
+        }
+
+
+        [TestMethod]
+        public void IsInt32Test()
+        {
+            Console.WriteLine("aa".IsInt32());
+        }
+
     }
 }

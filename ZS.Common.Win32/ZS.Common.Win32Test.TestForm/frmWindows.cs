@@ -22,10 +22,11 @@ namespace ZS.Common.Win32Test.TestForm
             // 获取父窗口
 
             IntPtr parentWindow = ZS.Common.Win32.API.FindWindow(null, txtWindowTitleA.Text);
-            txtConsole.AppendText("父窗口句柄" + parentWindow.ToString() + "\n");
+            AppendText("父窗口句柄:" + parentWindow.ToString());
             if (parentWindow == IntPtr.Zero)
             {
-                MessageBox.Show("未找到窗口,将传递null值");
+                MessageBox.Show("未找到父窗口");
+                return;
             }
 
             ZS.Common.Win32.API.EnumChildWindows(parentWindow, new Win32.API.EnumChildProc(EnumProc), 0);
@@ -35,15 +36,27 @@ namespace ZS.Common.Win32Test.TestForm
 
         private Boolean EnumProc(IntPtr hwnd, Int32 lparam)
         {
-            AppendText(hwnd.ToString());
+            AppendText("子窗口句柄：" + hwnd.ToString());
 
             if (hwnd != IntPtr.Zero)
             {
+
+                // 找到该句柄的窗
+                StringBuilder sb = new StringBuilder(512);
+                String className = Win32.API.GetClassName(hwnd);
+                //Int32 count = Win32.API.GetClassName(hwnd, sb, sb.Length);
+                if (className.Length > 0)
+                {
+                    AppendText("子窗口Class：" + className);
+                }
+                else
+                {
+                    AppendText("未找到子窗口Class名");
+                }
                 // 给找到的窗口设置文本
 
-                StringBuilder sb = new StringBuilder();
-                sb.AppendLine(DateTime.Now.ToLongDateString() + "程序设置");
-                ZS.Common.Win32.API.SendMessage(hwnd, ZS.Common.Win32.SystemDefinedMessages.WM_SETTEXT, 0, sb);
+                //sb.AppendLine(DateTime.Now.ToLongDateString() + "程序设置");
+                //ZS.Common.Win32.API.SendMessage(hwnd, ZS.Common.Win32.SystemDefinedMessages.WM_SETTEXT, 0, sb);
 
             }
 
@@ -56,7 +69,7 @@ namespace ZS.Common.Win32Test.TestForm
             txtConsole.AppendText(text);
             if (newLine)
             {
-                txtConsole.AppendText("\n");
+                txtConsole.AppendText("\r\n");
             }
         }
 

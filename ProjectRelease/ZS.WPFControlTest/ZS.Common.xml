@@ -78,6 +78,46 @@ ZS.Common
  <returns>An int representing the number of rows affected by the command</returns>
  <remarks></remarks>
 </member>
+<member name="T:ZS.Common.Debug.Log">
+ <summary>
+ 日志对象
+ </summary>
+</member>
+<member name="F:ZS.Common.Debug.Log.m_Timer">
+ <summary>写日志到文本文件计时器</summary>
+</member>
+<member name="F:ZS.Common.Debug.Log.m_FileNamePrefix">
+ <summary>日志文件名后缀</summary>
+</member>
+<member name="F:ZS.Common.Debug.Log.m_FileNameSuffix">
+ <summary>日志文件名前缀</summary>
+</member>
+<member name="F:ZS.Common.Debug.Log.m_BaseDir">
+ <summary>日志存储根目录</summary>
+</member>
+<member name="F:ZS.Common.Debug.Log.m_LogMsgQueue">
+ <summary>消息队列</summary>
+</member>
+<member name="M:ZS.Common.Debug.Log.#ctor(System.String,System.String,System.String)">
+ <summary>
+ 构造一个日志对象
+ </summary>
+ <param name="baseDir"></param>
+ <param name="namePrefix"></param>
+ <param name="nameSuffix"></param>
+</member>
+<member name="M:ZS.Common.Debug.Log.Append(System.String)">
+ <summary>
+ 添加一条消息到日志
+ </summary>
+ <param name="msg"></param>
+</member>
+<member name="P:ZS.Common.Debug.Log.IsAddDatetimePrefix">
+ <summary>
+ 获取或设置是否给日志的每行添加时间前缀。默认值为True
+ </summary>
+ <returns></returns>
+</member>
 <member name="T:ZS.Common.Drawing.Image">
  <summary>
  图片处理
@@ -359,6 +399,20 @@ ZS.Common
  <returns></returns>
  <remarks></remarks>
 </member>
+<member name="M:ZS.Common.StringEx.IsInt32(System.String)">
+ <summary>
+ 验证字符串是否为Int32类型
+ </summary>
+ <param name="str"></param>
+ <returns></returns>
+</member>
+<member name="M:ZS.Common.StringEx.ToInt32(System.String)">
+ <summary>
+ 将字符串转换为Int32数字
+ </summary>
+ <param name="str"></param>
+ <returns></returns>
+</member>
 <member name="M:ZS.Common.StringEx.IsIPv4Address(System.String)">
  <summary>
  验证该地址是否为一个有效的IPv4地址
@@ -413,6 +467,15 @@ ZS.Common
  <param name="str"></param>
  <param name="separator">跟个符号</param>
  <param name="IsRemoveEmptyEntires">是否移除空内容的项目。默认为是，既如果分隔符号之间的内容为空，不添加到集合中</param>
+ <returns></returns>
+</member>
+<member name="M:ZS.Common.StringEx.ToListOfInt32(System.String,System.String,System.Boolean)">
+ <summary>
+ 将字符串按照指定的分隔符转换为Int类型的泛型集合
+ </summary>
+ <param name="str">要转换的字符串</param>
+ <param name="separaotr">分隔符</param>
+ <param name="IsDropEmpty">是否跳过空内容。默认为True。如果不跳过空内容，遇到空内容时引发异常。</param>
  <returns></returns>
 </member>
 <member name="T:ZS.Common.Structures.Monitors.MONITOR_DEFAULTTO">

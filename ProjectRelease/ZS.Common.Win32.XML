@@ -104,11 +104,122 @@
             Sending a WM_GETTEXTLENGTH message to a non-text static control, such as a static bitmap or static icon controlc, does not return a string value. Instead, it returns zero.
             </remarks>
         </member>
+        <member name="T:ZS.Common.Win32.SystemDefinedMessages.CommonControl">
+            <summary>
+            系统公共控件消息
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.SystemDefinedMessages.CommonControl.LVM_FIRST">
+            <summary>
+             ListView messages
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.SystemDefinedMessages.CommonControl.LVM_GETITEMCOUNT">
+            <summary>
+            Retrieves the number of items in a list-view control. You can send this message explicitly or by using the ListView_GetItemCount macro.
+            [wParam]
+                Must be zero.
+            [lParam]
+                Must be zero.
+            [Return value]
+                Returns the number of items.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.SystemDefinedMessages.CommonControl.LVM_GETITEMTEXT">
+            <summary>
+            Retrieves the text of a list-view item or subitem. You can send this message explicitly or by using the ListView_GetItemText macro.
+            [wParam]
+                Index of the list-view item.
+            [lParam]
+                Pointer to an LVITEM structure. To retrive the item text, set iSubItem to zero. To retrieve the text of a subitem, set iSubItem to the subitem's index. The pszText member points to a buffer that receives the text. The cchTextMax member specifies the number of characters in the buffer.
+            [Return value]
+                If you send this message explicitly, it returns the number of characters in the pszText member of the LVITEM structure.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.SystemDefinedMessages.CommonControl.LVM_GETITEM">
+            <summary>
+            Retrieves some or all of a list-view item's attributes. You can send this message explicitly or by using the ListView_GetItem macro.
+            [wParam]
+                Must be zero.
+            [lParam]
+                Pointer to an LVITEM structure that specifies the information to retrieve and receives information about the list-view item.
+            [Return value]
+                Returns TRUE if successful, or FALSE otherwise.
+            [Remarks]   
+                When the LVM_GETITEM message is sent, the iItem and iSubItem members identify the item or subitem to retrieve information about and the mask member specifies which attributes to retrieve. For a list of possible values, see the description of the LVITEM structure.
+                If the LVIF_TEXT flag is set in the mask member of the LVITEM structure, the pszText member must point to a valid buffer and the cchTextMax member must be set to the number of characters in that buffer. Applications should not assume that the text will necessarily be placed in the specified buffer. The control may instead change the pszText member of the structure to point to the new text, rather than place it in the buffer.
+                If the mask member specifies the LVIF_STATE value, the stateMask member must specify the item state bits to retrieve. On output, the state member contains the values of the specified state bits.
+            </summary>
+        </member>
+        <!-- 对于成员“F:ZS.Common.Win32.SystemDefinedMessages.CommonControl.LVM_SETITEMPOSITION”忽略有格式错误的 XML 注释 -->
+        <member name="F:ZS.Common.Win32.SystemDefinedMessages.CommonControl.LVM_GETITEMPOSITION">
+            <summary>
+            Retrieves the position of a list-view item. You can send this message explicitly or by using the ListView_GetItemPosition macro.
+            [wParam]
+                Index of the list-view item.
+            [lParam]
+                Pointer to a POINT structure that receives the position of the item's upper-left corner, in view coordinates.
+            [Return value]
+                Returns TRUE if successful, or FALSE otherwise.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.SystemDefinedMessages.CommonControl.LVM_GETSELECTEDCOUNT">
+            <summary>
+            Determines the number of selected items in a list-view control. You can send this message explicitly or by using the ListView_GetSelectedCount macro.
+            [wParam]
+                Must be zero.
+            [lParam]
+                Must be zero.
+            [Return value]
+                Returns the number of selected items.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.SystemDefinedMessages.CommonControl.LVM_SETITEMSTATE">
+            <summary>
+            Changes the state of an item in a list-view control. You can send this message explicitly or by using the ListView_SetItemState macro.
+            [wParam]
+                Index of the list-view item. If this parameter is -1, then the state change is applied to all items..
+            [lParam]
+                Pointer to an LVITEM structure. The stateMask member specifies which state bits to change, and the state member contains the new values for those bits. The other members are ignored.
+            [Return value]
+                If you send this message explicitly, it returns TRUE if successful or FALSE otherwise.
+            [Remarks]
+                An item's state value includes a set of bit flags that indicate the item's state. The state value can also include image list indexes that indicate the item's state image and overlay image.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.SystemDefinedMessages.CommonControl.LVIF_TEXT">
+            <summary>
+            The pszText member is valid or must be set.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.SystemDefinedMessages.CommonControl.LVIF_IMAGE">
+            <summary>
+            The iImage member is valid or must be set.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.SystemDefinedMessages.CommonControl.LVIF_PARAM">
+            <summary>
+            The lParam member is valid or must be set.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.SystemDefinedMessages.CommonControl.LVIF_STATE">
+            <summary>
+            The state member is valid or must be set.
+            </summary>
+        </member>
         <member name="T:ZS.Common.Win32.API">
             <summary>
             Win32API接口
             </summary>
         </member>
+        <member name="M:ZS.Common.Win32.API.GetLastError">
+            <summary>
+            Retrieves the calling thread's last-error code value. The last-error code is maintained on a per-thread basis. Multiple threads do not overwrite each other's last-error code.
+            </summary>
+            <returns></returns>
+            <link>https://msdn.microsoft.com/en-us/library/ms679360(VS.85).aspx</link>
+        </member>
+        <!-- 对于成员“M:ZS.Common.Win32.API.CloseHandle(System.IntPtr)”忽略有格式错误的 XML 注释 -->
         <member name="M:ZS.Common.Win32.API.mouse_event(ZS.Common.Win32.API.MouseEvent,System.Int32,System.Int32,System.Int32,System.UIntPtr)">
             <summary>
             The mouse_event function synthesizes mouse motion and button clicks.
@@ -217,6 +328,87 @@
             The wheel button is tilted.
             </summary>
         </member>
+        <!-- 对于成员“M:ZS.Common.Win32.API.VirtualAllocEx(System.IntPtr,System.IntPtr,System.Int32,System.UInt32,System.UInt32)”忽略有格式错误的 XML 注释 -->
+        <!-- 对于成员“M:ZS.Common.Win32.API.VirtualFreeEx(System.IntPtr,System.IntPtr,System.Int32,System.Int32)”忽略有格式错误的 XML 注释 -->
+        <!-- 对于成员“T:ZS.Common.Win32.API.MemoryAllocationType”忽略有格式错误的 XML 注释 -->
+        <member name="F:ZS.Common.Win32.API.MemoryAllocationType.MEM_COMMIT">
+            <summary>
+            Allocates memory charges (from the overall size of memory and the paging files on disk) for the specified reserved memory pages. The function also guarantees that when the caller later initially accesses the memory, the contents will be zero. Actual physical pages are not allocated unless/until the virtual addresses are actually accessed.
+            To reserve and commit pages in one step, call VirtualAllocEx with MEM_COMMIT | MEM_RESERVE.
+            Attempting to commit a specific address range by specifying MEM_COMMIT without MEM_RESERVE and a non-NULL lpAddress fails unless the entire range has already been reserved. The resulting error code is ERROR_INVALID_ADDRESS.
+            An attempt to commit a page that is already committed does not cause the function to fail. This means that you can commit pages without first determining the current commitment state of each page.
+            If lpAddress specifies an address within an enclave, flAllocationType must be MEM_COMMIT.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.MemoryAllocationType.MEM_RESERVE">
+            <summary>
+            Reserves a range of the process's virtual address space without allocating any actual physical storage in memory or in the paging file on disk.
+            You commit reserved pages by calling VirtualAllocEx again with MEM_COMMIT. To reserve and commit pages in one step, call VirtualAllocEx with MEM_COMMIT | MEM_RESERVE.
+            Other memory allocation functions, such as malloc and LocalAlloc, cannot use reserved memory until it has been released.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.MemoryAllocationType.MEM_RESET">
+            <summary>
+            Indicates that data in the memory range specified by lpAddress and dwSize is no longer of interest. The pages should not be read from or written to the paging file. However, the memory block will be used again later, so it should not be decommitted. This value cannot be used with any other value.
+            Using this value does not guarantee that the range operated on with MEM_RESET will contain zeros. If you want the range to contain zeros, decommit the memory and then recommit it.
+            When you use MEM_RESET, the VirtualAllocEx function ignores the value of fProtect. However, you must still set fProtect to a valid protection value, such as PAGE_NOACCESS.
+            VirtualAllocEx returns an error if you use MEM_RESET and the range of memory is mapped to a file. A shared view is only acceptable if it is mapped to a paging file.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.MemoryAllocationType.MEM_RESET_UNDO">
+            <summary>
+            MEM_RESET_UNDO should only be called on an address range to which MEM_RESET was successfully applied earlier. It indicates that the data in the specified memory range specified by lpAddress and dwSize is of interest to the caller and attempts to reverse the effects of MEM_RESET. If the function succeeds, that means all data in the specified address range is intact. If the function fails, at least some of the data in the address range has been replaced with zeroes.
+            This value cannot be used with any other value. If MEM_RESET_UNDO is called on an address range which was not MEM_RESET earlier, the behavior is undefined. When you specify MEM_RESET, the VirtualAllocEx function ignores the value of flProtect. However, you must still set flProtect to a valid protection value, such as PAGE_NOACCESS.
+            Windows Server 2008 R2, Windows 7, Windows Server 2008, Windows Vista, Windows Server 2003 and Windows XP:  The MEM_RESET_UNDO flag is not supported until Windows 8 and Windows Server 2012.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.MemoryAllocationType.MEM_LARGE_PAGES">
+            <summary>
+            Allocates memory using large page support.
+            The size and alignment must be a multiple of the large-page minimum. To obtain this value, use the GetLargePageMinimum function.
+            If you specify this value, you must also specify MEM_RESERVE and MEM_COMMIT.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.MemoryAllocationType.MEM_PHYSICAL">
+            <summary>
+            Reserves an address range that can be used to map Address Windowing Extensions (AWE) pages.
+            This value must be used with MEM_RESERVE and no other values.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.MemoryAllocationType.MEM_TOP_DOWN">
+            <summary>
+            Allocates memory at the highest possible address. This can be slower than regular allocations, especially when there are many allocations.
+            </summary>
+        </member>
+        <!-- 对于成员“T:ZS.Common.Win32.API.MemoryProtectionConstants”忽略有格式错误的 XML 注释 -->
+        <member name="F:ZS.Common.Win32.API.MemoryProtectionConstants.PAGE_EXECUTE">
+            <summary>
+            Enables execute access to the committed region of pages. An attempt to write to the committed region results in an access violation.
+            This flag is not supported by the CreateFileMapping function.
+            </summary>
+        </member>
+        <member name="T:ZS.Common.Win32.API.MemoryFreeType">
+            <summary>
+            内存释放类型
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.MemoryFreeType.MEM_DECOMMIT">
+            <summary>
+            Decommits the specified region of committed pages. After the operation, the pages are in the reserved state.
+            The function does not fail if you attempt to decommit an uncommitted page. This means that you can decommit a range of pages without first determining their current commitment state.
+            Do not use this value with MEM_RELEASE.
+            The MEM_DECOMMIT value is not supported when the lpAddress parameter provides the base address for an enclave.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.MemoryFreeType.MEM_RELEASE">
+            <summary>
+            Releases the specified region of pages. After the operation, the pages are in the free state.
+            If you specify this value, dwSize must be 0 (zero), and lpAddress must point to the base address returned by the VirtualAllocEx function when the region is reserved. The function fails if either of these conditions is not met.
+            If any pages in the region are committed currently, the function first decommits, and then releases them.
+            The function does not fail if you attempt to release pages that are in different states, some reserved and some committed. This means that you can release a range of pages without first determining the current commitment state.
+            Do not use this value with MEM_DECOMMIT.
+            </summary>
+        </member>
         <member name="M:ZS.Common.Win32.API.SendMessage(System.IntPtr,System.Int32,System.Int32,System.Int32)">
             <summary>
             Sends the specified message to a window or windows. The SendMessage function calls the window procedure for the specified window and does not return until the window procedure has processed the message.
@@ -249,6 +441,170 @@
             <param name="wParam"></param>
             <param name="lParam"></param>
             <returns></returns>
+        </member>
+        <member name="M:ZS.Common.Win32.API.OpenProcess(System.UInt32,System.Boolean,System.UInt32)">
+            <summary>
+            Opens an existing local process object.
+            </summary>
+            <param name="dwDesiredAccess">
+            [in]
+                The access to the process object. This access right is checked against the security descriptor for the process. This parameter can be one or more of the process access rights.
+                If the caller has enabled the SeDebugPrivilege privilege, the requested access is granted regardless of the contents of the security descriptor.
+            </param>
+            <param name="bInheritHandle">
+            [in]
+                If this value is TRUE, processes created by this process will inherit the handle. Otherwise, the processes do not inherit this handle.
+            </param>
+            <param name="dwProcessId">
+            [in]
+                The identifier of the local process to be opened.
+                If the specified process is the System Process (0x00000000), the function fails and the last error code is ERROR_INVALID_PARAMETER. If the specified process is the Idle process or one of the CSRSS processes, this function fails and the last error code is ERROR_ACCESS_DENIED because their access restrictions prevent user-level code from opening them.
+                If you are using GetCurrentProcessId as an argument to this function, consider using GetCurrentProcess instead of OpenProcess, for improved performance.
+            </param>
+            <returns>
+                If the function succeeds, the return value is an open handle to the specified process.
+                If the function fails, the return value is NULL. To get extended error information, call GetLastError.
+            </returns>
+            <remarks>
+                To open a handle to another local process and obtain full access rights, you must enable the SeDebugPrivilege privilege. For more information, see Changing Privileges in a Token.
+                The handle returned by the OpenProcess function can be used in any function that requires a handle to a process, such as the wait functions, provided the appropriate access rights were requested.
+                When you are finished with the handle, be sure to close it using the CloseHandle function.
+            </remarks>
+            <link>https://msdn.microsoft.com/en-us/library/windows/desktop/ms684320(v=vs.85).aspx</link>
+        </member>
+        <member name="T:ZS.Common.Win32.API.ProcessSecurityAccessRight">
+            <summary>
+            The Microsoft Windows security model enables you to control access to process objects. For more information about security, see Access-Control Model.
+            When a user logs in, the system collects a set of data that uniquely identifies the user during the authentication process, and stores it in an access token. This access token describes the security context of all processes associated with the user. The security context of a process is the set of credentials given to the process or the user account that created the process.
+            You can use a token to specify the current security context for a process using the CreateProcessWithTokenW function. You can specify a security descriptor for a process when you call the CreateProcess, CreateProcessAsUser, or CreateProcessWithLogonW function. If you specify NULL, the process gets a default security descriptor. The ACLs in the default security descriptor for a process come from the primary or impersonation token of the creator.
+            To retrieve a process's security descriptor, call the GetSecurityInfo function. To change a process's security descriptor, call the SetSecurityInfo function.
+            The valid access rights for process objects include the standard access rights and some process-specific access rights. The following table lists the standard access rights used by all objects.
+            </summary>
+            <link>https://msdn.microsoft.com/en-us/library/windows/desktop/ms684880(v=vs.85).aspx</link>
+        </member>
+        <member name="F:ZS.Common.Win32.API.ProcessSecurityAccessRight.PROCESS_CREATE_PROCESS">
+            <summary>
+            Required to create a process.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.ProcessSecurityAccessRight.PROCESS_CREATE_THREAD">
+            <summary>
+            Required to create a thread.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.ProcessSecurityAccessRight.PROCESS_DUP_HANDLE">
+            <summary>
+            Required to duplicate a handle using DuplicateHandle.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.ProcessSecurityAccessRight.PROCESS_QUERY_INFORMATION">
+            <summary>
+            Required to retrieve certain information about a process, such as its token, exit code, and priority class (see OpenProcessToken).
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.ProcessSecurityAccessRight.PROCESS_SET_QUOTA">
+            <summary>
+            Required to set memory limits using SetProcessWorkingSetSize.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.ProcessSecurityAccessRight.PROCESS_SUSPEND_RESUME">
+            <summary>
+            Required to suspend or resume a process.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.ProcessSecurityAccessRight.PROCESS_TERMINATE">
+            <summary>
+            Required to terminate a process using TerminateProcess.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.ProcessSecurityAccessRight.PROCESS_VM_OPERATION">
+            <summary>
+            Required to perform an operation on the address space of a process (see VirtualProtectEx and WriteProcessMemory).
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.ProcessSecurityAccessRight.PROCESS_VM_READ">
+            <summary>
+            Required to read memory in a process using ReadProcessMemory.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.ProcessSecurityAccessRight.PROCESS_VM_WRITE">
+            <summary>
+            Required to write to memory in a process using WriteProcessMemory.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.ProcessSecurityAccessRight.SYNCHRONIZE">
+            <summary>
+            Required to wait for the process to terminate using the wait functions.
+            </summary>
+        </member>
+        <member name="M:ZS.Common.Win32.API.ReadProcessMemory(System.IntPtr,System.IntPtr,System.IntPtr,System.Int32,System.UInt32@)">
+            <summary>
+            Reads data from an area of memory in a specified process. The entire area to be read must be accessible or the operation fails.
+            </summary>
+            <param name="hProcess">
+            [in]
+                A handle to the process with memory that is being read. The handle must have PROCESS_VM_READ access to the process.
+            </param>
+            <param name="lpBaseAddress">
+            [in]
+                A pointer to the base address in the specified process from which to read. Before any data transfer occurs, the system verifies that all data in the base address and memory of the specified size is accessible for read access, and if it is not accessible the function fails. 
+            </param>
+            <param name="lpBuffer">
+            [out]
+                A pointer to a buffer that receives the contents from the address space of the specified process.
+            </param>
+            <param name="nSize">
+            [in]
+                The number of bytes to be read from the specified process.
+            </param>
+            <param name="lpNumberOfBytesRead">
+            [out]
+                A pointer to a variable that receives the number of bytes transferred into the specified buffer. If lpNumberOfBytesRead is NULL, the parameter is ignored.
+            </param>
+            <returns>
+                If the function succeeds, the return value is nonzero.
+                If the function fails, the return value is 0 (zero). To get extended error information, call GetLastError.
+                The function fails if the requested read operation crosses into an area of the process that is inaccessible.
+            </returns>
+            <remarks>
+            ReadProcessMemory copies the data in the specified address range from the address space of the specified process into the specified buffer of the current process. Any process that has a handle with PROCESS_VM_READ access can call the function.
+            The entire area to be read must be accessible, and if it is not accessible, the function fails.
+            </remarks>
+            <link>https://msdn.microsoft.com/en-us/library/windows/desktop/ms680553(v=vs.85).aspx</link>
+        </member>
+        <member name="M:ZS.Common.Win32.API.WriteProcessMemory(System.IntPtr,System.IntPtr,System.IntPtr,System.Int32,System.UInt32@)">
+            <summary>
+            Writes data to an area of memory in a specified process. The entire area to be written to must be accessible or the operation fails.
+            </summary>
+            <param name="hProcess">
+            [in]
+                A handle to the process memory to be modified. The handle must have PROCESS_VM_WRITE and PROCESS_VM_OPERATION access to the process.
+            </param>
+            <param name="lpBaseAddress">
+            [in]
+                A pointer to the base address in the specified process to which data is written. Before data transfer occurs, the system verifies that all data in the base address and memory of the specified size is accessible for write access, and if it is not accessible, the function fails.
+            </param>
+            <param name="lpBuffer">
+            [in]
+                A pointer to the buffer that contains data to be written in the address space of the specified process.
+            </param>
+            <param name="nSize">
+            [in]
+                he number of bytes to be written to the specified process.
+            </param>
+            <param name="lpNumberOfBytesWritten">
+            [out]
+                A pointer to a variable that receives the number of bytes transferred into the specified process. This parameter is optional. If lpNumberOfBytesWritten is NULL, the parameter is ignored.
+            </param>
+            <returns>
+                If the function succeeds, the return value is nonzero.
+                If the function fails, the return value is 0 (zero). To get extended error information, call GetLastError. The function fails if the requested write operation crosses into an area of the process that is inaccessible.
+            </returns>
+            <remarks>
+                WriteProcessMemory copies the data from the specified buffer in the current process to the address range of the specified process. Any process that has a handle with PROCESS_VM_WRITE and PROCESS_VM_OPERATION access to the process to be written to can call the function. Typically but not always, the process with address space that is being written to is being debugged.
+                The entire area to be written to must be accessible, and if it is not accessible, the function fails.
+            </remarks>
+            <link>https://msdn.microsoft.com/en-us/library/windows/desktop/ms681674(v=vs.85).aspx</link>
         </member>
         <member name="T:ZS.Common.Win32.API.POINT">
             <summary>
@@ -289,6 +645,38 @@
             提供System.Drawing.Point到POINT的隐式转换
             </summary>
             <param name="pt"></param>
+        </member>
+        <member name="M:ZS.Common.Win32.API.GetClassName(System.IntPtr,System.Text.StringBuilder,System.Int32)">
+            <summary>
+            Retrieves the name of the class to which the specified window belongs.
+            </summary>
+            <param name="hwnd">
+                [in][Type: HWND]
+                A handle to the window and, indirectly, the class to which the window belongs.
+            </param>
+            <param name="lpClassName">
+                [out][Type: LPTSTR]
+                The class name string.
+            </param>
+            <param name="nMaxCount">
+                [int][Type: int]
+                The length of the lpClassName buffer, in characters. The buffer must be large enough to include the terminating null character; otherwise, the class name string is truncated to nMaxCount-1 characters.
+            </param>
+            <returns>
+                [Type: int]
+                If the function succeeds, the return value is the number of characters copied to the buffer, not including the terminating null character.
+                If the function fails, the return value is zero. To get extended error information, call GetLastError.
+            </returns>
+            <link>
+            https://msdn.microsoft.com/en-us/library/ms633582(v=vs.85).aspx
+            </link>
+        </member>
+        <member name="M:ZS.Common.Win32.API.GetClassName(System.IntPtr)">
+            <summary>
+            获取指定句柄的Class名
+            </summary>
+            <param name="hWnd"></param>
+            <returns></returns>
         </member>
         <member name="M:ZS.Common.Win32.API.AnimateWindow(System.IntPtr,System.Int32,ZS.Common.Win32.API.AnimateWindowType)">
             <summary>
@@ -470,6 +858,66 @@
             The return value is a handle to the foreground window. The foreground window can be NULL in certain circumstances, such as when a window is losing activation.
             </returns>
         </member>
+        <member name="M:ZS.Common.Win32.API.GetWindow(System.IntPtr,ZS.Common.Win32.API.GetWindowTypeEnum)">
+            <summary>
+            Retrieves a handle to a window that has the specified relationship (Z-Order or owner) to the specified window.
+            </summary>
+            <param name="hWnd">
+            [in]
+            Type: HWND
+            A handle to a window. The window handle retrieved is relative to this window, based on the value of the uCmd parameter.
+            </param>
+            <param name="uCmd">
+            [in]
+            Type: UINT
+            The relationship between the specified window and the window whose handle is to be retrieved. This parameter can be one of the following values.
+            </param>
+            <returns></returns>
+        </member>
+        <member name="T:ZS.Common.Win32.API.GetWindowTypeEnum">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.GetWindowTypeEnum.GW_CHILD">
+            <summary>
+            The retrieved handle identifies the child window at the top of the Z order, if the specified window is a parent window; otherwise, the retrieved handle is NULL. The function examines only child windows of the specified window. It does not examine descendant windows.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.GetWindowTypeEnum.GW_ENABLEDPOPUP">
+            <summary>
+            The retrieved handle identifies the enabled popup window owned by the specified window (the search uses the first such window found using GW_HWNDNEXT); otherwise, if there are no enabled popup windows, the retrieved handle is that of the specified window.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.GetWindowTypeEnum.GW_HWNDFIRST">
+            <summary>
+            The retrieved handle identifies the window of the same type that is highest in the Z order.
+            If the specified window is a topmost window, the handle identifies a topmost window. If the specified window is a top-level window, the handle identifies a top-level window. If the specified window is a child window, the handle identifies a sibling window.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.GetWindowTypeEnum.GW_HWNDLAST">
+            <summary>
+            The retrieved handle identifies the window of the same type that is lowest in the Z order.
+            If the specified window is a topmost window, the handle identifies a topmost window. If the specified window is a top-level window, the handle identifies a top-level window. If the specified window is a child window, the handle identifies a sibling window.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.GetWindowTypeEnum.GW_HWNDNEXT">
+            <summary>
+            The retrieved handle identifies the window below the specified window in the Z order.
+            If the specified window is a topmost window, the handle identifies a topmost window. If the specified window is a top-level window, the handle identifies a top-level window. If the specified window is a child window, the handle identifies a sibling window.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.GetWindowTypeEnum.GW_HWNDPREV">
+            <summary>
+            The retrieved handle identifies the window above the specified window in the Z order.
+            If the specified window is a topmost window, the handle identifies a topmost window. If the specified window is a top-level window, the handle identifies a top-level window. If the specified window is a child window, the handle identifies a sibling window.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.GetWindowTypeEnum.GW_OWNER">
+            <summary>
+            The retrieved handle identifies the specified window's owner window, if any. For more information, see Owned Windows.
+            </summary>
+        </member>
         <member name="M:ZS.Common.Win32.API.GetWindowText(System.IntPtr,System.Text.StringBuilder,System.Int32)">
             <summary>
             Copies the text of the specified window's title bar (if it has one) into a buffer. If the specified window is a control, the text of the control is copied. However, GetWindowText cannot retrieve the text of a control in another application.
@@ -522,31 +970,6 @@
             Under certain conditions, the GetWindowTextLength function may return a value that is larger than the actual length of the text. This occurs with certain mixtures of ANSI and Unicode, and is due to the system allowing for the possible existence of double-byte character set (DBCS) characters within the text. The return value, however, will always be at least as large as the actual length of the text; you can thus always use it to guide buffer allocation. This behavior can occur when an application uses both ANSI functions and common dialogs, which use Unicode. It can also occur when an application uses the ANSI version of GetWindowTextLength with a window whose window procedure is Unicode, or the Unicode version of GetWindowTextLength with a window whose window procedure is ANSI. For more information on ANSI and ANSI functions, see Conventions for Function Prototypes.
             To obtain the exact length of the text, use the WM_GETTEXT, LB_GETTEXT, or CB_GETLBTEXT messages, or the GetWindowText function.
             </remarks>
-        </member>
-        <member name="M:ZS.Common.Win32.API.GetClassName(System.IntPtr,System.Text.StringBuilder,System.Int32)">
-            <summary>
-            Retrieves the name of the class to which the specified window belongs.
-            </summary>
-            <param name="hwnd">
-                [in][Type: HWND]
-                A handle to the window and, indirectly, the class to which the window belongs.
-            </param>
-            <param name="lpClassName">
-                [out][Type: LPTSTR]
-                The class name string.
-            </param>
-            <param name="nMaxCount">
-                [int][Type: int]
-                The length of the lpClassName buffer, in characters. The buffer must be large enough to include the terminating null character; otherwise, the class name string is truncated to nMaxCount-1 characters.
-            </param>
-            <returns>
-                [Type: int]
-                If the function succeeds, the return value is the number of characters copied to the buffer, not including the terminating null character.
-                If the function fails, the return value is zero. To get extended error information, call GetLastError.
-            </returns>
-            <link>
-            https://msdn.microsoft.com/en-us/library/ms633582(v=vs.85).aspx
-            </link>
         </member>
         <member name="M:ZS.Common.Win32.API.SetParent(System.IntPtr,System.IntPtr)">
             <summary>
@@ -687,9 +1110,26 @@
             The visibility state of a window is indicated by the WS_VISIBLE style bit. When WS_VISIBLE is set, the window is displayed and subsequent drawing into it is displayed as long as the window has the WS_VISIBLE style.
             Any drawing to a window with the WS_VISIBLE style will not be displayed if the window is obscured by other windows or is clipped by its parent window.
             </remarks>
-            <link>
-            https://msdn.microsoft.com/en-us/library/ms633530(v=vs.85).aspx
-            </link>
+            <link>https://msdn.microsoft.com/en-us/library/ms633530(v=vs.85).aspx</link>
+        </member>
+        <member name="M:ZS.Common.Win32.API.BringWindowToTop(System.IntPtr)">
+            <summary>
+            Brings the specified window to the top of the Z order. If the window is a top-level window, it is activated. If the window is a child window, the top-level parent window associated with the child window is activated.
+            </summary>
+            <param name="hWnd">
+            [in][Type: HWND]
+                A handle to the window to bring to the top of the Z order.
+            </param>
+            <returns>
+            [Type: BOOL]
+                If the function succeeds, the return value is nonzero.
+                If the function fails, the return value is zero. To get extended error information, call GetLastError.
+            </returns>
+            <remarks>
+            Use the BringWindowToTop function to uncover any window that is partially or completely obscured by other windows.
+            Calling this function is similar to calling the SetWindowPos function to change a window's position in the Z order. BringWindowToTop does not make a window a top-level window.
+            </remarks>
+            <link>https://msdn.microsoft.com/en-us/library/windows/desktop/ms632673(v=vs.85).aspx</link>
         </member>
         <member name="M:ZS.Common.Win32.API.GetWindowThreadProcessId(System.IntPtr,System.Int32@)">
             <summary>
@@ -708,7 +1148,41 @@
                 [Type: DWORD]
                 The return value is the identifier of the thread that created the window.
             </returns>
-            <see cref="!:https://msdn.microsoft.com/en-us/library/ms633522"/>
+            <link>https://msdn.microsoft.com/en-us/library/ms633522</link>
+        </member>
+        <member name="M:ZS.Common.Win32.API.WindowFromPhysicalPoint(ZS.Common.Win32.API.POINT)">
+            <summary>
+            Retrieves a handle to the window that contains the specified physical point.
+            </summary>
+            <param name="point">
+            [in][Type: POINT]
+                The physical coordinates of the point.
+            </param>
+            <returns>
+            [Type: HWND]
+                A handle to the window that contains the given physical point. If no window exists at the point, this value is NULL.
+            </returns>
+            <remarks>
+            The WindowFromPhysicalPoint function does not retrieve a handle to a hidden or disabled window, even if the point is within the window.
+            </remarks>
+            <link>https://msdn.microsoft.com/en-us/library/windows/desktop/aa969270(v=vs.85).aspx</link>
+        </member>
+        <member name="M:ZS.Common.Win32.API.WindowFromPoint(ZS.Common.Win32.API.POINT)">
+            <summary>
+            Retrieves a handle to the window that contains the specified point.
+            </summary>
+            <param name="point">
+            [in][Type: POINT]
+                The point to be checked.
+            </param>
+            <returns>
+            [Type: HWND]
+                The return value is a handle to the window that contains the point. If no window exists at the given point, the return value is NULL. If the point is over a static text control, the return value is a handle to the window under the static text control.
+            </returns>
+            <remarks>
+            The WindowFromPoint function does not retrieve a handle to a hidden or disabled window, even if the point is within the window. An application should use the ChildWindowFromPoint function for a nonrestrictive search.
+            </remarks>
+            <link>https://msdn.microsoft.com/en-us/library/windows/desktop/ms633558(v=vs.85).aspx</link>
         </member>
         <member name="M:ZS.Common.Win32.API.GetCursorPos(ZS.Common.Win32.API.POINT@)">
             <summary>
@@ -859,6 +1333,91 @@
             <summary>
             注册表中键名。默认以GUID命名
             </summary>
+        </member>
+        <member name="T:ZS.Common.Win32.Desktop">
+            <summary>
+            桌面
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Desktop.m_DesktopPtr">
+            <summary>桌面窗口句柄</summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Desktop.m_ListViewPtr">
+            <summary>ListView控件句柄</summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Desktop.m_ProcessID">
+            <summary>桌面ListView所属的进程ID</summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Desktop.DesktopPtr">
+            <summary>
+            获取桌面句柄
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Desktop.DesktopProcessID">
+            <summary>
+            获取桌面进程ID
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Desktop.DesktopListViewPtr">
+            <summary>
+            获取桌面ListView控件句柄
+            </summary>
+        </member>
+        <member name="M:ZS.Common.Win32.Desktop.#ctor(System.IntPtr)">
+            <summary>
+            通过指定的句柄构造
+            </summary>
+            <param name="hWnd"></param>
+        </member>
+        <member name="M:ZS.Common.Win32.Desktop.#ctor">
+            <summary>
+            自动监测桌面句柄构造一个新的桌面操作
+            </summary>
+        </member>
+        <member name="M:ZS.Common.Win32.Desktop.GetSelectedCount">
+            <summary>
+            获取桌面上的选择的数量
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ZS.Common.Win32.Desktop.GetItemsCount">
+            <summary>
+            获取桌面上的图标数量
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ZS.Common.Win32.Desktop.GetItemText(System.Int32)">
+            <summary>
+            获取制定图标的文本
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ZS.Common.Win32.Desktop.GetItemLocation(System.Int32)">
+            <summary>
+            获取指定图标的坐标
+            </summary>
+            <param name="itemIndex"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZS.Common.Win32.Desktop.SetItemLocation(System.Int32,System.Drawing.Point)">
+            <summary>
+            设置图标坐标
+            </summary>
+            <param name="itemIndex"></param>
+            <param name="location"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZS.Common.Win32.Desktop.SelectItem(System.Int32)">
+            <summary>
+            选择指定项
+            </summary>
+            <param name="itemIndex"></param>
+        </member>
+        <member name="M:ZS.Common.Win32.Desktop.GetDefaultIntptr">
+            <summary>
+            获取默认桌面句柄
+            </summary>
+            <returns></returns>
         </member>
         <member name="P:ZS.Common.Win32.InstalledApp.AssignmentType">
             <summary>设置或获取标识符</summary>
@@ -1323,6 +1882,45 @@
         <member name="P:ZS.Common.Win32.Win32Provider.Win32_Product.InstallLocation">
             <summary>
             Location of the installed product.
+            </summary>
+        </member>
+        <member name="T:ZS.Common.Win32.WinCtrlAPI.ListView.LVITEM">
+            <summary>
+            Specifies or receives the attributes of a list-view item. This structure has been updated to support a new mask value (LVIF_INDENT) that enables item indenting. This structure supersedes the LV_ITEM structure.
+            </summary>
+            <link>https://msdn.microsoft.com/en-us/library/windows/desktop/bb774760(v=vs.85).aspx</link>
+        </member>
+        <member name="F:ZS.Common.Win32.WinCtrlAPI.ListView.LVITEM.mask">
+            <summary>
+            Set of flags that specify which members of this structure contain data to be set or which members are being requested. This member can have one or more of the following flags set:
+            LVIF_COLFMT,LVIF_COLUMNS,LVIF_DI_SETITEM,LVIF_GROUPID,LVIF_IMAGE,LVIF_INDENT,LVIF_NORECOMPUTE,LVIF_PARAM,LVIF_STATE,LVIF_TEXT
+            
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.WinCtrlAPI.ListView.LVITEM.iItem">
+            <summary>
+            Zero-based index of the item to which this structure refers.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.WinCtrlAPI.ListView.LVITEM.pszText">
+            <summary>
+            If the structure specifies item attributes, pszText is a pointer to a null-terminated string containing the item text. When responding to an LVN_GETDISPINFO notification, be sure that this pointer remains valid until after the next notification has been received.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.WinCtrlAPI.ListView.LVITEM.cchTextMax">
+            <summary>
+            Number of TCHARs in the buffer pointed to by pszText, including the terminating NULL.
+            This member is only used when the structure receives item attributes. It is ignored when the structure specifies item attributes. For example, cchTextMax is ignored during LVM_SETITEM and LVM_INSERTITEM. It is read-only during LVN_GETDISPINFO and other LVN_ notifications.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.WinCtrlAPI.ListView.LVITEM.lParam">
+            <summary>
+            Value specific to the item. If you use the LVM_SORTITEMS message, the list-view control passes this value to the application-defined comparison function. You can also use the LVM_FINDITEM message to search a list-view control for an item with a specified lParam value.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.WinCtrlAPI.ListView.LVITEM.iIndent">
+            <summary>
+            Version 4.70. Number of image widths to indent the item. A single indentation equals the width of an item image. Therefore, the value 1 indents the item by the width of one image, the value 2 indents by two images, and so on. Note that this field is supported only for items. Attempting to set subitem indentation will cause the calling function to fail.
             </summary>
         </member>
     </members>

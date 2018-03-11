@@ -1,0 +1,346 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>KK.WX</name>
+    </assembly>
+    <members>
+        <member name="T:KK.WX.AppDebugError">
+            <summary>
+            调试信息记录与输出
+            </summary>
+        </member>
+        <member name="P:KK.WX.AppDebugError.ClassName">
+            <summary>错误类名</summary>
+        </member>
+        <member name="P:KK.WX.AppDebugError.MethodName">
+            <summary>错误方法名</summary>
+        </member>
+        <member name="P:KK.WX.AppDebugError.ErrContent">
+            <summary>错误内容</summary>
+        </member>
+        <member name="P:KK.WX.AppDebugError.ExTime">
+            <summary>发生时间</summary>
+        </member>
+        <member name="T:KK.WX.Config">
+            <summary>
+            微信接口配置
+            </summary>
+        </member>
+        <member name="F:KK.WX.Config.m_Timer_UpdateToken">
+            <summary>从微信服务器更新Token定时器</summary>
+        </member>
+        <member name="F:KK.WX.Config.m_Timer_UpdateTokenFromUrl">
+            <summary>从指定URL器更新Token定时器</summary>
+        </member>
+        <member name="M:KK.WX.Config.Init(System.String,System.String,System.String)">
+            <summary>
+            初始化配置，访问微信服务器更新AccessToken
+            </summary>
+            <param name="appID">开发者ID</param>
+            <param name="appSecret">开发者密码</param>
+            <param name="openID">该公众号的OpenID</param>
+        </member>
+        <member name="M:KK.WX.Config.Init(System.String,System.String,System.String,System.String)">
+            <summary>
+            初始化配置，访问指定的URL获取AccessToken
+            </summary>
+            <param name="appID">开发者ID</param>
+            <param name="appSecret">开发者密码</param>
+            <param name="openID">该公众号的OpenID</param>
+            <param name="upAccessTokenUrl"></param>
+        </member>
+        <member name="P:KK.WX.Config.AccessToken">
+            <summary>
+            获取AccessToken
+            </summary>
+        </member>
+        <member name="P:KK.WX.Config.MyOpenID">
+            <summary>获取该微信公众号的openid</summary>
+        </member>
+        <member name="P:KK.WX.Config.AppID">
+            <summary>获取微信开发者APPID</summary>
+        </member>
+        <member name="P:KK.WX.Config.UpdateTokenUrl">
+            <summary>获取Token的地址</summary>
+        </member>
+        <member name="P:KK.WX.Config.AppSecret">
+            <summary>获取微信开发者APP密码</summary>
+        </member>
+        <member name="P:KK.WX.Config.AccessTokenError">
+            <summary>获取AccessToken失败时的消息 </summary>
+        </member>
+        <member name="M:KK.WX.Config.UpdateAccessToken">
+            <summary>
+            线程内直接通过微信服务器更新AccessToken
+            </summary>
+        </member>
+        <member name="M:KK.WX.Config.UpdateAccessTokenFromUrl">
+            <summary>
+            通过URL更新AccessToken
+            </summary>
+        </member>
+        <member name="T:KK.WX.Messages.EventMessage">
+            <summary>
+            事件消息
+            </summary>
+        </member>
+        <member name="P:KK.WX.Messages.EventMessage.Event">
+            <summary>
+            事件类型。
+            </summary>
+        </member>
+        <member name="P:KK.WX.Messages.EventMessage.EventKey">
+            <summary>事件Key</summary>
+        </member>
+        <member name="M:KK.WX.Messages.EventMessage.Parse(System.String,KK.WX.Messages.EventMessage@)">
+            <summary>
+            尝试将XML文档转换为消息类型对象
+            </summary>
+            <param name="msg"></param>
+            <param name="o"></param>
+            <returns></returns>
+        </member>
+        <member name="P:KK.WX.Messages.MessageBase.ToUserName">
+            <summary>接收方</summary>
+        </member>
+        <member name="P:KK.WX.Messages.MessageBase.FromUserName">
+            <summary>发送方</summary>
+        </member>
+        <member name="P:KK.WX.Messages.MessageBase.CreateTime">
+            <summary>创建时间</summary>
+        </member>
+        <member name="P:KK.WX.Messages.MessageBase.MsgType">
+            <summary>消息类型</summary>
+        </member>
+        <member name="M:KK.WX.Messages.MessageBase.Parse(System.String,KK.WX.Messages.MessageBase@)">
+            <summary>
+            尝试将XML文档转换为基本消息类型对象
+            </summary>
+            <param name="msg"></param>
+            <param name="o"></param>
+            <returns></returns>
+        </member>
+        <member name="T:KK.WX.Messages.TemplateMessage">
+            <summary>
+            模板消息
+            </summary>
+        </member>
+        <member name="F:KK.WX.Messages.TemplateMessage.TemplateID_HYFQCGTZ">
+            <summary>
+            会议发起成功通知。k1：主题，k2:地点，k3:时间,k4:会议室
+            </summary>
+        </member>
+        <member name="F:KK.WX.Messages.TemplateMessage.TemplateID_HYTZ">
+            <summary>
+            会议通知。k1:会议时间，k2:会议地点
+            </summary>
+        </member>
+        <member name="F:KK.WX.Messages.TemplateMessage.TemplateID_CLJGTZ">
+            <summary>
+            处理结果通知。k1:处理状态,k2:处理时间
+            </summary>
+        </member>
+        <member name="F:KK.WX.Messages.TemplateMessage.TemplateID_FWSQTX">
+            <summary>
+            服务申请提醒。k1:类型,k2:时间,k3:会议室
+            </summary>
+        </member>
+        <member name="F:KK.WX.Messages.TemplateMessage.TemplateID_RWKSTX">
+            <summary>
+            任务开始提醒。k1:项目名称,k2:任务名称,k3:任务开始日期
+            </summary>
+        </member>
+        <member name="F:KK.WX.Messages.TemplateMessage.TemplateID_ZBTX">
+            <summary>
+            值班提醒。k1:带班领导，k2:值班人员，k3:值班时间
+            </summary>
+        </member>
+        <member name="F:KK.WX.Messages.TemplateMessage.TemplateID_My_HYSDJTX">
+            <summary>
+            会议室登记提醒。k1:会议主题，k2:会议时间，k3:会议地点，k4:与会人员，k5:登记人
+            </summary>
+        </member>
+        <member name="F:KK.WX.Messages.TemplateMessage.TemplateID_My_HYTZ">
+            <summary>
+            会议通知。K1:主题，k2:时间,k3:地点，k4:召集人
+            </summary>
+        </member>
+        <member name="P:KK.WX.Messages.TemplateMessage.ToUser">
+            <summary>接收人ID，必须</summary>
+        </member>
+        <member name="P:KK.WX.Messages.TemplateMessage.TemplateID">
+            <summary>模板ID，必须</summary>
+        </member>
+        <member name="P:KK.WX.Messages.TemplateMessage.Url">
+            <summary>模板跳转链接。</summary>
+        </member>
+        <member name="P:KK.WX.Messages.TemplateMessage.MiniProgram">
+            <summary>跳小程序所需数据，不需跳小程序可不用传该数据。</summary>
+        </member>
+        <member name="P:KK.WX.Messages.TemplateMessage.Data">
+            <summary>模板数据的Json字符串格式</summary>
+        </member>
+        <member name="M:KK.WX.Messages.TemplateMessage.GenerateDataJson(KK.WX.Messages.TemplateMessage.DataValue,KK.WX.Messages.TemplateMessage.DataValue,KK.WX.Messages.TemplateMessage.DataValue[])">
+            <summary>
+            生成模板消息的data部分json
+            </summary>
+            <param name="first"></param>
+            <param name="remark"></param>
+            <param name="keys"></param>
+            <returns></returns>
+        </member>
+        <member name="M:KK.WX.Messages.TemplateMessage.GenerateMiniProgramJson(System.String,System.String)">
+            <summary>
+            生成模板消息miniprogram部分JSON
+            </summary>
+            <param name="appid"></param>
+            <param name="pagePath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:KK.WX.Messages.TemplateMessage.Send(KK.WX.Messages.TemplateMessage,System.String@)">
+            <summary>
+            发送模板消息
+            </summary>
+            <param name="msg"></param>
+            <param name="errMsg"></param>
+            <returns></returns>
+        </member>
+        <member name="T:KK.WX.Messages.TemplateMessage.DataValue">
+            <summary>
+            模板消息值对
+            </summary>
+        </member>
+        <member name="M:KK.WX.Messages.TemplateMessage.DataValue.#ctor">
+            <summary>
+            构造
+            </summary>
+        </member>
+        <member name="M:KK.WX.Messages.TemplateMessage.DataValue.#ctor(System.String)">
+            <summary>
+            构造
+            </summary>
+        </member>
+        <member name="M:KK.WX.Messages.TemplateMessage.DataValue.#ctor(System.String,System.String)">
+            <summary>
+            构造
+            </summary>
+            <param name="value"></param>
+            <param name="color"></param>
+        </member>
+        <member name="M:KK.WX.Messages.TemplateMessage.DataValue.#ctor(System.String,System.Drawing.Color)">
+            <summary>
+            构造
+            </summary>
+            <param name="value"></param>
+            <param name="color"></param>
+        </member>
+        <member name="P:KK.WX.Messages.TemplateMessage.DataValue.Value">
+            <summary>
+            值
+            </summary>
+        </member>
+        <member name="P:KK.WX.Messages.TemplateMessage.DataValue.Color">
+            <summary>
+            文本颜色。 默认为蓝色
+            </summary>
+        </member>
+        <member name="M:KK.WX.Messages.TextMessage.ToReplyXML">
+            <summary>
+            将消息对象转换为微信回复的文本消息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:KK.WX.Messages.TextMessage.CreateReply(System.String,System.String)">
+            <summary>
+            创建回复消息文本
+            </summary>
+            <param name="content">消息内容</param>
+            <param name="toUser">接收人ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:KK.WX.Messages.TextMessage.SendCustomMsg(KK.WX.Messages.TextMessage)">
+            <summary>
+            给指定的微信账号推送消息发送文本类型的客服消息
+            </summary>
+            <param name="msg"></param>
+            <returns></returns>
+        </member>
+        <member name="M:KK.WX.Messages.TextMessage.SendCustomMsg(System.String,System.String)">
+            <summary>
+            给指定的微信账号推送消息发送文本类型的客服消息
+            </summary>
+            <param name="msg">消息内容</param>
+            <returns></returns>
+        </member>
+        <member name="T:KK.WX.UrlHelper">
+            <summary>
+            地址帮助
+            </summary>
+        </member>
+        <!-- 对于成员“M:KK.WX.UrlHelper.GetWXAuthRedirectUrl(System.String)”忽略有格式错误的 XML 注释 -->
+        <member name="M:KK.WX.UrlHelper.GetWXAuthRedirectUrl(System.String,System.String,System.String)">
+            <summary>
+            生成微信网页授权跳转链接
+            </summary>
+            <param name="target">跳转目标</param>
+            <param name="scope">scope参数</param>
+            <param name="state">state参数</param>
+            <returns></returns>
+        </member>
+        <member name="T:KK.WX.Users.User">
+            <summary>
+            微信用户
+            </summary>
+        </member>
+        <member name="P:KK.WX.Users.User.IsSubscribe">
+            <summary>
+            是否已订阅
+            </summary>
+        </member>
+        <member name="P:KK.WX.Users.User.OpenID">
+            <summary>
+            微信标识
+            </summary>
+        </member>
+        <member name="P:KK.WX.Users.User.Nickname">
+            <summary>
+            昵称
+            </summary>
+        </member>
+        <member name="P:KK.WX.Users.User.City">
+            <summary>
+            所在城市
+            </summary>
+        </member>
+        <member name="T:KK.WX.WXDefine">
+            <summary>
+            微信定义
+            </summary>
+        </member>
+        <member name="T:KK.WX.WXDefine.MsgType">
+            <summary>
+            消息类型
+            </summary>
+        </member>
+        <member name="F:KK.WX.WXDefine.MsgType.Text">
+            <summary>消息类型-文本</summary>
+        </member>
+        <member name="F:KK.WX.WXDefine.MsgType.Event">
+            <summary>消息类型-事件</summary>
+        </member>
+        <member name="T:KK.WX.WXDefine.Event">
+            <summary>
+            事件类型
+            </summary>
+        </member>
+        <member name="F:KK.WX.WXDefine.Event.Subscribe">
+            <summary>事件-订阅</summary>
+        </member>
+        <member name="F:KK.WX.WXDefine.Event.Unsubscribe">
+            <summary>事件-取消订阅</summary>
+        </member>
+        <member name="F:KK.WX.WXDefine.Event.Click">
+            <summary>事件-点击</summary>
+        </member>
+    </members>
+</doc>

@@ -42,6 +42,11 @@ namespace ZS.Common.Win32
         [DllImport("User32.dll")]
         public static extern Int32 SendMessage(IntPtr hwnd, Int32 Msg, Int32 wParam, System.Text.StringBuilder lParam);
 
+        [DllImport("User32.dll")]
+        public static extern Int32 SendMessage(IntPtr hwnd, Int32 Msg, IntPtr wParam, IntPtr lParam);
+        [DllImport("User32.dll")]
+        public static extern Int32 SendMessage(IntPtr hwnd, Int32 Msg, Int32 wParam, IntPtr lParam);
+
 
     }
 }

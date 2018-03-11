@@ -76,37 +76,6 @@ namespace ZSExcelAddIn
 
         }
 
-        // 根据控件ID获取控件的图标回调
-        public System.Drawing.Bitmap Get_ControlImage(Office.IRibbonControl ctrl)
-        {
-            switch (ctrl.Id)
-            {
-                // 插入日期时间部分按钮
-                case "ZS_BTN_InsertDate":
-                    return new System.Drawing.Bitmap(Properties.Resources.Today_32x32);
-                case "ZS_BTN_InsertTime":
-                    return new System.Drawing.Bitmap(Properties.Resources.Time_32x32);
-                case "ZS_BTN_InsertDateTime":
-                    return new System.Drawing.Bitmap(Properties.Resources.Calendar_32x32);
-                case "ZS_BTN_Calendar":
-                    return new System.Drawing.Bitmap(Properties.Resources.SwitchTimeScalesTo_32x32);
-
-                // 显示设置
-                case "ZS_Toggle_ShowMainPan":
-                    return new System.Drawing.Bitmap(Properties.Resources.Show_32x32);
-
-                // 工作表工作簿操作部分按钮
-                case "ZS_BTN_ExportSheetsToFile":  // 导出工作表为单文件
-                    return new System.Drawing.Bitmap(Properties.Resources.Export_32x32);
-                case "ZS_BTN_MergeSheets":
-                    return new System.Drawing.Bitmap(Properties.Resources.AddNewDataSource_32x32);
-                case "ZS_BTN_SortSheet":
-                    return new System.Drawing.Bitmap(Properties.Resources.SortAsc_32x32);
-
-                default:
-                    return new System.Drawing.Bitmap(Properties.Resources.settings_32);
-            }
-        }
 
 
 
@@ -135,10 +104,14 @@ namespace ZSExcelAddIn
             switch (ctrl.Id)
             {
                 case "ZS_BTN_InsertDate":
+                case "ZS_ContextMenuCell_InsertDate":
+                case "ZS_ContextMenuListRange_InsertDate":
                     WriteCells(DateTime.Now.ToString("yyyy-MM-dd"));
                     //Globals.ThisAddIn.Application.OnUndo("撤销 插入GUID", "UndoEE");
                     break;
                 case "ZS_BTN_InsertTime":
+                case "ZS_ContextMenuCell_InsertTime":
+                case "ZS_ContextMenuListRange_InsertTime":
                     WriteCells(DateTime.Now.ToString("HH:mm:ss"));
                     break;
                 case "ZS_BTN_InsertDateTime":
@@ -296,7 +269,6 @@ namespace ZSExcelAddIn
 
         #endregion
 
-
         #region 插入 - GUID
 
 
@@ -370,8 +342,6 @@ namespace ZSExcelAddIn
         }
 
         #endregion
-
-
 
         #region 单元格内容批量处理
 
@@ -617,6 +587,47 @@ namespace ZSExcelAddIn
         #region 公共方法
 
         /// <summary>
+        /// 控件图标获取回调
+        /// </summary>
+        /// <param name="ctrl"></param>
+        /// <returns></returns>
+        public System.Drawing.Bitmap Get_ControlImage(Office.IRibbonControl ctrl)
+        {
+            switch (ctrl.Id)
+            {
+                // 插入日期时间部分按钮
+                case "ZS_BTN_InsertDate":
+                case "ZS_ContextMenuCell_InsertDate":
+                case "ZS_ContextMenuListRange_InsertDate":
+                    return new System.Drawing.Bitmap(Properties.Resources.Today_32x32);
+                case "ZS_BTN_InsertTime":
+                case "ZS_ContextMenuCell_InsertTime":
+                case "ZS_ContextMenuListRange_InsertTime":
+                    return new System.Drawing.Bitmap(Properties.Resources.Time_32x32);
+                case "ZS_BTN_InsertDateTime":
+                    return new System.Drawing.Bitmap(Properties.Resources.Calendar_32x32);
+                case "ZS_BTN_Calendar":
+                    return new System.Drawing.Bitmap(Properties.Resources.SwitchTimeScalesTo_32x32);
+
+                // 显示设置
+                case "ZS_Toggle_ShowMainPan":
+                    return new System.Drawing.Bitmap(Properties.Resources.Show_32x32);
+
+                // 工作表工作簿操作部分按钮
+                case "ZS_BTN_ExportSheetsToFile":  // 导出工作表为单文件
+                    return new System.Drawing.Bitmap(Properties.Resources.Export_32x32);
+                case "ZS_BTN_MergeSheets":
+                    return new System.Drawing.Bitmap(Properties.Resources.AddNewDataSource_32x32);
+                case "ZS_BTN_SortSheet":
+                    return new System.Drawing.Bitmap(Properties.Resources.SortAsc_32x32);
+
+                default:
+                    return new System.Drawing.Bitmap(Properties.Resources.settings_32);
+            }
+        }
+
+
+        /// <summary>
         /// 获取当前活动单元格区域的地址
         /// </summary>
         /// <returns></returns>
@@ -628,7 +639,7 @@ namespace ZSExcelAddIn
 
         #endregion
 
-        #region 测试
+        #region 测试/调试
 
         public void OnClick_Test(Office.IRibbonControl ctrl)
         {
@@ -688,6 +699,69 @@ namespace ZSExcelAddIn
                     break;
             }
         }
+
+        /// <summary>
+        /// 调试组按钮点击事件
+        /// </summary>
+        /// <param name="ctrl"></param>
+        public void OnClick_Debug(Office.IRibbonControl ctrl)
+        {
+            switch (ctrl.Id)
+            {
+                case "ZS_BTN_ListAllCommand":
+                    ListAllCommands();
+                    break;
+                default:
+                    MessageBox.Show("未指定处理分支：" + ctrl.Id);
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// 枚举所有命令，写到一个新的工作表里
+        /// </summary>
+        private void ListAllCommands()
+        {
+            try
+            {
+                List<String> result = new List<string>();
+                // 
+                Office.CommandBars cmds = Globals.ThisAddIn.Application.CommandBars;
+                if (cmds.Count > 0)
+                {
+                    foreach (Office.CommandBar cmd in cmds)
+                    {
+                        result.Add(cmd.Name + "|" + cmd.Id);
+                        if (cmd.Controls.Count > 0)
+                        {
+                            foreach (Office.CommandBarControl ctrl in cmd.Controls)
+                            {
+                                GetCommandBarControls(ctrl, "", result);
+                            }
+                        }
+                    }
+                }
+
+                Excel.Worksheet sheet = (Excel.Worksheet)Globals.ThisAddIn.Application.ActiveWorkbook.Worksheets.Add();
+                for(Int32 i = 0;i<result.Count;i++)
+                {
+                    sheet.Range["A" + (i + 1)].Value = result[i];
+                }
+                //sheet.Range["A1:A" + result.Count].Value = result.ToArray();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("列举命令异常：" + ex.Message + ex.StackTrace);
+            }
+        }
+
+        private void GetCommandBarControls(Office.CommandBarControl ctrl, String tab, List<String> result)
+        {
+            tab += "\t";
+            result.Add(ctrl.Id + "|" + ctrl.Caption + "|" + ctrl.Parent.Name + "|" + ctrl.Control);
+        }
+
 
         public void ToUnDo()
         {

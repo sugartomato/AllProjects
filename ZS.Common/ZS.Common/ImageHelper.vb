@@ -168,16 +168,16 @@ Public Class ImageHelper
             Throw New ArgumentNullException("要修改的图片【" & imgPath & "】不存在。", "imgPath")
         End If
 
-        If setting.TargetWidht <= 0 AndAlso setting.TargetHeight <= 0 Then
-            Throw New ApplicationException("必须指定目标尺寸的宽度或者长度")
-        End If
+        'If setting.TargetWidht <= 0 AndAlso setting.TargetHeight <= 0 Then
+        '    Throw New ApplicationException("必须指定目标尺寸的宽度或者长度")
+        'End If
 
         If setting.ResizeMode = ResizeType.FixedWidth AndAlso setting.TargetWidht <= 0 Then
-            Throw New ApplicationException("固定宽度模式，必须指定修改的高度")
+            Throw New ApplicationException("固定宽度模式，必须指定目标宽度")
         End If
 
         If setting.ResizeMode = ResizeType.FixedHeight AndAlso setting.TargetHeight <= 0 Then
-            Throw New ApplicationException("固定高度模式，必须指定修改的高度")
+            Throw New ApplicationException("固定高度模式，必须指定目标高度")
         End If
 
 
@@ -250,6 +250,9 @@ Public Class ImageHelper
                     setting.TargetHeight = _imgSource.Height
                     tmpWidht = (_imgSource.Width * setting.TargetHeight) / _imgSource.Height
                 End If
+            Case Else
+                tmpWidht = _imgSource.Width
+                tmpHeight = _imgSource.Height
         End Select
 
         _targetSize = New System.Drawing.Size(tmpWidht, tmpHeight)
@@ -359,11 +362,18 @@ Public Class ImageHelper
     ''' 图片重置大小的方式
     ''' </summary>
     Public Enum ResizeType
-        ''' <summary>自动。既如果原始图片长度大于宽度，则按照长度缩小，长度小于宽度，则按照宽度缩小</summary>
+        ''' <summary>自动处理。</summary>
         Auto
+        ''' <summary>
+        ''' 高度固定模式，缩小或者放大图片。按照指定的高度，根据原图尺寸计算新的宽度。
+        ''' </summary>
         FixedHeight
+        ''' <summary>
+        ''' 宽固定模式，缩小或者放大图片。按照指定的宽度，根据原图尺寸计算新的高度。
+        ''' </summary>
         FixedWidth
         BothHeightAndWidth
+
     End Enum
 
 

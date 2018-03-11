@@ -39,6 +39,10 @@ namespace KK.WX.Messages
         /// 值班提醒。k1:带班领导，k2:值班人员，k3:值班时间
         /// </summary>
         public const String TemplateID_ZBTX = "_a5HLzS1-DjaNOviSvZvUYhiegNWGUhZsPsDs1qfQs4";
+        /// <summary>
+        /// 工作任务提醒。k1:提醒内容,k2:时间
+        /// </summary>
+        public const String TemplateID_GZRWTX = "TLOrhW_x3v_rU3T--jwXAmkE2bfx4gJuyNUpJirRPRE";
 
         /// <summary>
         /// 会议室登记提醒。k1:会议主题，k2:会议时间，k3:会议地点，k4:与会人员，k5:登记人

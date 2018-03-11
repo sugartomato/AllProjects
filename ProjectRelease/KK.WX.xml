@@ -155,6 +155,11 @@
             值班提醒。k1:带班领导，k2:值班人员，k3:值班时间
             </summary>
         </member>
+        <member name="F:KK.WX.Messages.TemplateMessage.TemplateID_GZRWTX">
+            <summary>
+            工作任务提醒。k1:提醒内容,k2:时间
+            </summary>
+        </member>
         <member name="F:KK.WX.Messages.TemplateMessage.TemplateID_My_HYSDJTX">
             <summary>
             会议室登记提醒。k1:会议主题，k2:会议时间，k3:会议地点，k4:与会人员，k5:登记人

@@ -9,13 +9,13 @@ using System.Windows.Forms;
 
 namespace KK.FileWatcher
 {
-    public partial class Form1 : Form
+    public partial class frmMain : Form
     {
 
         private System.IO.FileSystemWatcher m_Watcher;
         private delegate void WriteMessageDelegate(string text, Color color);
         private WriteMessageDelegate WriteMessage;
-        public Form1()
+        public frmMain()
         {
             InitializeComponent();
         }
@@ -26,6 +26,8 @@ namespace KK.FileWatcher
                 RiseWatchStatus();
                 this.TopMost = chkTopMost.Checked;
                 WriteMessage = new WriteMessageDelegate(DoWriteMessage);
+
+                SetControlState();
             }
             catch (Exception ex)
             {
@@ -37,7 +39,10 @@ namespace KK.FileWatcher
         {
             try
             {
+                WriteMessage("正在退出文档监视器。。。", Color.DeepSkyBlue);
                 m_Watcher.EnableRaisingEvents = false;
+                m_Watcher = null;
+
             }
             catch (Exception)
             {
@@ -67,24 +72,54 @@ namespace KK.FileWatcher
                 {
                     m_Watcher = new System.IO.FileSystemWatcher();
                     m_Watcher.Path = txtFolder.Text;
-                    m_Watcher.IncludeSubdirectories = true;
                     m_Watcher.Filter = "*.*";
-                    m_Watcher.Created += M_Watcher_Created;
-                    m_Watcher.Renamed += M_Watcher_Renamed;
-                    m_Watcher.Changed += M_Watcher_Changed;
-                    m_Watcher.Deleted += M_Watcher_Deleted;
-                    
-
+                    if (chkWatchCreate.Checked) m_Watcher.Created += M_Watcher_Created;
+                    if (chkWatchRename.Checked) m_Watcher.Renamed += M_Watcher_Renamed;
+                    if (chkWatchChange.Checked) m_Watcher.Changed += M_Watcher_Changed;
+                    if (chkWatchDelete.Checked) m_Watcher.Deleted += M_Watcher_Deleted;
                     m_Watcher.EnableRaisingEvents = true;
-
+                }
+                else
+                {
+                    m_Watcher.Created -= M_Watcher_Created;
+                    m_Watcher.Renamed -= M_Watcher_Renamed;
+                    m_Watcher.Changed -= M_Watcher_Changed;
+                    m_Watcher.Deleted -= M_Watcher_Deleted;
+                    if (chkWatchCreate.Checked) m_Watcher.Created += M_Watcher_Created;
+                    if (chkWatchRename.Checked) m_Watcher.Renamed += M_Watcher_Renamed;
+                    if (chkWatchChange.Checked) m_Watcher.Changed += M_Watcher_Changed;
+                    if (chkWatchDelete.Checked) m_Watcher.Deleted += M_Watcher_Deleted;
+                    m_Watcher.EnableRaisingEvents = true;
                 }
 
+                m_Watcher.IncludeSubdirectories = chkIncludeSubDir.Checked;
                 RiseWatchStatus();
             }
             catch (Exception ex)
             {
                 WriteMessage("监视启动异常：" + ex.Message, Color.Red);
-                throw;
+            }
+            finally
+            {
+                SetControlState();
+            }
+        }
+
+        private void btnStop_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                m_Watcher.EnableRaisingEvents = false;
+                RiseWatchStatus();
+            }
+            catch (Exception ex)
+            {
+                WriteMessage("监视停止异常：" + ex.Message, Color.Red);
+            }
+
+            finally
+            {
+                SetControlState();
             }
         }
 
@@ -115,15 +150,10 @@ namespace KK.FileWatcher
             txtConsole.AppendText(text + "\r\n");
             txtConsole.Select(start, txtConsole.Text.Length);
             txtConsole.SelectionColor = color;
-            txtConsole.Select(txtConsole.Text.Length,0);
-            
+            txtConsole.Select(txtConsole.Text.Length, 0);
+
         }
 
-        private void btnStop_Click(object sender, EventArgs e)
-        {
-            m_Watcher.EnableRaisingEvents = false;
-            RiseWatchStatus();
-        }
 
 
         private void checkTopMost_CheckedChanged(object sender, EventArgs e)
@@ -143,6 +173,13 @@ namespace KK.FileWatcher
                 lblIsRunning.Text = "运行中";
                 lblIsRunning.ForeColor = Color.Green;
             }
+        }
+
+        private void SetControlState()
+        {
+            btnStart.Enabled = m_Watcher == null ? true : !m_Watcher.EnableRaisingEvents;
+            btnStop.Enabled = m_Watcher == null ? true : m_Watcher.EnableRaisingEvents;
+            panOptions.Enabled = m_Watcher == null ? true : !m_Watcher.EnableRaisingEvents;
         }
 
     }

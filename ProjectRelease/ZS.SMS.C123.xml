@@ -62,7 +62,23 @@ ZS.SMS.C123
  <param name="v_Message">短消息内容</param>
  <param name="v_Error">执行失败的消息</param>
  <returns></returns>
- <remarks></remarks>
+ <remarks>
+     2018/3/23
+         平台接口方式改变，此为新的发送方式
+ </remarks>
+</member>
+<member name="M:ZS.SMS.C123.SimpleSMSAdapter.SendSMS_(System.Collections.Generic.List{System.String},System.String,System.String@)">
+ <summary>
+ 针对指定的手机号码发送短信
+ </summary>
+ <param name="v_Phone">手机号码集合</param>
+ <param name="v_Message">短消息内容</param>
+ <param name="v_Error">执行失败的消息</param>
+ <returns></returns>
+ <remarks>
+     2018/3/23
+         平台接口方式改变，这个旧的发送方式不再有效
+ </remarks>
 </member>
 <member name="M:ZS.SMS.C123.SimpleSMSAdapter.Get_RemainderAmount">
  <summary>

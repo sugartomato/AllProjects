@@ -54,7 +54,6 @@ namespace KK.WX.Messages
         public const String TemplateID_My_HYTZ = "JEJWDZYuW32OhwHVbz_IiRyb6J67bGEr6wigfBwa5VY";
         #endregion
 
-
         /// <summary>接收人ID，必须</summary>
         public String ToUser { get; set; } = String.Empty;
         /// <summary>模板ID，必须</summary>

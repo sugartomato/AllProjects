@@ -57,8 +57,77 @@ Public Class SimpleSMSAdapter
     ''' <param name="v_Message">短消息内容</param>
     ''' <param name="v_Error">执行失败的消息</param>
     ''' <returns></returns>
-    ''' <remarks></remarks>
+    ''' <remarks>
+    '''     2018/3/23
+    '''         平台接口方式改变，此为新的发送方式
+    ''' </remarks>
     Public Function SendSMS(ByVal v_Phone As List(Of String), ByVal v_Message As String, ByRef v_Error As String) As Boolean
+        Dim strPhones As String = String.Empty
+        Dim strBaseUrl As String = "http://api.qirui.com:7891/mt"
+        Dim strPostData As String = "uid=" & m_UserID & "&pwd=" & m_Password
+        Dim objHttpRequest As System.Net.HttpWebRequest = Nothing
+        Dim objHttpResponse As System.Net.HttpWebResponse = Nothing
+
+        v_Message = "【首开志信】" & v_Message
+
+        ' 生成发送的手机号码
+        If (v_Phone Is Nothing OrElse v_Phone.Count = 0) Then
+            Return False
+        End If
+        strPostData &= "&mobile="
+        For i As Int32 = 0 To v_Phone.Count - 1
+            strPhones &= v_Phone(i) & ","
+        Next
+        strPhones = strPhones.Trim(",")
+
+        Dim template As String = "?dc=15&un={0}&pw={1}&da={2}&sm={3}&tf=3&rf=2&rd=1"
+        Dim url As String = strBaseUrl & String.Format(template, m_UserID, m_Password, strPhones, System.Web.HttpUtility.UrlEncode(v_Message, System.Text.Encoding.UTF8))
+
+        Try
+            objHttpRequest = System.Net.HttpWebRequest.Create(url)
+            objHttpRequest.Method = "GET"
+            objHttpResponse = objHttpRequest.GetResponse()
+            Dim state As System.Net.HttpStatusCode = objHttpResponse.StatusCode
+
+            ' 请求执行成功时，获取返回的状态消息。
+            If (state = Net.HttpStatusCode.OK) Then
+                Dim str As String = GetWebResponseString(objHttpResponse)
+
+                v_Error = str
+                str = str.Replace(" ", "")
+                If str.Contains("""id""") Then
+                    v_Error = System.Text.RegularExpressions.Regex.Match(str, "(?<=""id"":"").+(?="")").Value
+                    Return True
+                Else
+                    v_Error = System.Text.RegularExpressions.Regex.Match(str, "(?<=""r"":"").+(?="")").Value
+                    v_Error = MessageDefine.GetMessage(v_Error)
+                    Return False
+                End If
+            Else
+                v_Error = "执行发送请求失败。代码：" & state.ToString()
+                Return False
+            End If
+        Catch ex As Exception
+            Throw New ApplicationException("执行发送程序异常。", ex)
+        Finally
+            objHttpResponse = Nothing
+            objHttpRequest = Nothing
+        End Try
+
+    End Function
+
+    ''' <summary>
+    ''' 针对指定的手机号码发送短信
+    ''' </summary>
+    ''' <param name="v_Phone">手机号码集合</param>
+    ''' <param name="v_Message">短消息内容</param>
+    ''' <param name="v_Error">执行失败的消息</param>
+    ''' <returns></returns>
+    ''' <remarks>
+    '''     2018/3/23
+    '''         平台接口方式改变，这个旧的发送方式不再有效
+    ''' </remarks>
+    Private Function SendSMS_(ByVal v_Phone As List(Of String), ByVal v_Message As String, ByRef v_Error As String) As Boolean
 
         Dim strPhones As String = String.Empty
         Dim strBaseUrl As String = "http://dxhttp.c123.cn/tx/"
@@ -125,7 +194,7 @@ Public Class SimpleSMSAdapter
     ''' <returns></returns>
     ''' <remarks></remarks>
     Public Function Get_RemainderAmount() As Int32
-        Dim strBaseUrl As String = "http://dxhttp.c123.cn/mm/?uid=" & m_UserID & "&pwd=" & m_Password
+        Dim strBaseUrl As String = String.Format("http://api.qirui.com:7891/bi?dc=8&un={0}&pw={1}&tf=3&rf=2&fs=1", m_UserID, m_Password)
         Dim objHttpRequest As System.Net.HttpWebRequest = Nothing
         Dim objHttpResponse As System.Net.HttpWebResponse = Nothing
 
@@ -137,14 +206,15 @@ Public Class SimpleSMSAdapter
             Dim state As System.Net.HttpStatusCode = objHttpResponse.StatusCode
             If (state = Net.HttpStatusCode.OK) Then
                 Dim str As String = GetWebResponseString(objHttpResponse)
-                ' 替换掉默认返回的分隔符。用默认的分隔符进行分割，数组就是三个，中间会产生一个空字符串。
-                str = str.Replace("||", "-")
-                ' 接口返回的格式为 状态码||剩余可发短信条数，例如 100||22348
-                Dim arrCount As String() = str.Split("-")
-                If arrCount.Length = 2 Then
-                    Return Int32.Parse(arrCount(1))
+
+                str = str.Replace(" ", "")
+                If str.Contains("""bl""") Then
+                    str = System.Text.RegularExpressions.Regex.Match(str, "(?<=""bl"":"").+(?="")").Value
+                    Return Int32.Parse(str)
                 Else
-                    Throw New ApplicationException("获取的短信剩余条数不是有效的数字。" & str)
+                    str = System.Text.RegularExpressions.Regex.Match(str, "(?<=""r"":"").+(?="")").Value
+                    str = MessageDefine.GetMessage(str)
+                    Throw New ApplicationException("获取剩余短信条数失败，网站错误信息：" & str)
                 End If
 
             Else
@@ -152,7 +222,7 @@ Public Class SimpleSMSAdapter
             End If
 
         Catch ex As Exception
-            Throw New ApplicationException("获取短信剩余条数失败。", ex)
+            Throw New ApplicationException("获取短信剩余条数异常。", ex)
         Finally
             objHttpResponse = Nothing
             objHttpRequest = Nothing

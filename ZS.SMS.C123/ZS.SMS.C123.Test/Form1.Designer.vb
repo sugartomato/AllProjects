@@ -26,20 +26,22 @@ Partial Class Form1
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
+        Me.txtCellPhone = New System.Windows.Forms.TextBox()
+        Me.txtMsg = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(104, 65)
+        Me.Button1.Location = New System.Drawing.Point(67, 130)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 23)
         Me.Button1.TabIndex = 0
-        Me.Button1.Text = "Button1"
+        Me.Button1.Text = "发送"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(46, 131)
+        Me.Button2.Location = New System.Drawing.Point(35, 284)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(75, 23)
         Me.Button2.TabIndex = 1
@@ -48,7 +50,7 @@ Partial Class Form1
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(160, 120)
+        Me.Button3.Location = New System.Drawing.Point(116, 301)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(75, 23)
         Me.Button3.TabIndex = 2
@@ -57,18 +59,35 @@ Partial Class Form1
         '
         'Button4
         '
-        Me.Button4.Location = New System.Drawing.Point(242, 248)
+        Me.Button4.Location = New System.Drawing.Point(269, 328)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(75, 23)
         Me.Button4.TabIndex = 3
         Me.Button4.Text = "Button4"
         Me.Button4.UseVisualStyleBackColor = True
         '
+        'txtCellPhone
+        '
+        Me.txtCellPhone.Location = New System.Drawing.Point(67, 12)
+        Me.txtCellPhone.Name = "txtCellPhone"
+        Me.txtCellPhone.Size = New System.Drawing.Size(143, 21)
+        Me.txtCellPhone.TabIndex = 4
+        '
+        'txtMsg
+        '
+        Me.txtMsg.Location = New System.Drawing.Point(67, 51)
+        Me.txtMsg.Multiline = True
+        Me.txtMsg.Name = "txtMsg"
+        Me.txtMsg.Size = New System.Drawing.Size(217, 62)
+        Me.txtMsg.TabIndex = 5
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(430, 363)
+        Me.Controls.Add(Me.txtMsg)
+        Me.Controls.Add(Me.txtCellPhone)
         Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Button2)
@@ -76,11 +95,13 @@ Partial Class Form1
         Me.Name = "Form1"
         Me.Text = "Form1"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents Button2 As System.Windows.Forms.Button
     Friend WithEvents Button3 As System.Windows.Forms.Button
     Friend WithEvents Button4 As System.Windows.Forms.Button
-
+    Friend WithEvents txtCellPhone As TextBox
+    Friend WithEvents txtMsg As TextBox
 End Class

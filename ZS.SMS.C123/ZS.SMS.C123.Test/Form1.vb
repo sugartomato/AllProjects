@@ -2,12 +2,14 @@
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
-        Dim obj As ZS.SMS.C123.SimpleSMSAdapter = ZS.SMS.C123.SimpleSMSAdapter.Instance("501006770001", "6e6e334fb000a7b89fcdd2487379c414")
+        Dim obj As ZS.SMS.C123.SimpleSMSAdapter = ZS.SMS.C123.SimpleSMSAdapter.Instance("501006770001", "69c20b1e0a6a5ea54985030dd452b510")
         Dim strError As String = String.Empty
         Dim mm As List(Of String) = New List(Of String)()
-        mm.Add("15801524452")
+        mm.Add(txtCellPhone.Text)
 
-        obj.SendSMS(mm, ".Net短信发送测试!@#$%^&*()_+\|[]{};'/?.,<>", strError)
+        Dim isSuccess As Boolean = obj.SendSMS(mm, txtMsg.Text, strError)
+        MsgBox(isSuccess)
+        MsgBox(strError)
 
     End Sub
 
@@ -18,7 +20,7 @@
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         Try
-            Dim obj As ZS.SMS.C123.SimpleSMSAdapter = ZS.SMS.C123.SimpleSMSAdapter.Instance("501006770001", "6e6e334fb000a7b89fcdd2487379c414")
+            Dim obj As ZS.SMS.C123.SimpleSMSAdapter = ZS.SMS.C123.SimpleSMSAdapter.Instance("501006770001", "69c20b1e0a6a5ea54985030dd452b510")
             Dim count As Int32 = obj.Get_RemainderAmount()
             MessageBox.Show(count)
         Catch ex As Exception

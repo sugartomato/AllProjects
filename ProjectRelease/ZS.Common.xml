@@ -165,6 +165,23 @@ ZS.Common
  </summary>
  <returns></returns>
 </member>
+<member name="T:ZS.Common.HttpHelper.HttpHelper">
+ <summary>
+ HTTP请求帮助类
+ </summary>
+</member>
+<member name="M:ZS.Common.HttpHelper.HttpHelper.GetHTML(System.String)">
+ <summary>
+ 请求指定地址，并获取对应的HTML字符串
+ </summary>
+ <param name="url"></param>
+ <returns></returns>
+</member>
+<member name="T:ZS.Common.HttpHelper.RequestSetting">
+ <summary>
+ HTTP请求配置
+ </summary>
+</member>
 <member name="M:ZS.Common.ImageHelper.GetSize(System.String)">
  <summary>
  获取指定路径的图片的尺寸。
@@ -233,7 +250,17 @@ ZS.Common
  </summary>
 </member>
 <member name="F:ZS.Common.ImageHelper.ResizeType.Auto">
- <summary>自动。既如果原始图片长度大于宽度，则按照长度缩小，长度小于宽度，则按照宽度缩小</summary>
+ <summary>自动处理。</summary>
+</member>
+<member name="F:ZS.Common.ImageHelper.ResizeType.FixedHeight">
+ <summary>
+ 高度固定模式，缩小或者放大图片。按照指定的高度，根据原图尺寸计算新的宽度。
+ </summary>
+</member>
+<member name="F:ZS.Common.ImageHelper.ResizeType.FixedWidth">
+ <summary>
+ 宽固定模式，缩小或者放大图片。按照指定的宽度，根据原图尺寸计算新的高度。
+ </summary>
 </member>
 <member name="M:ZS.Common.ImageHelper.Compress(System.String,System.Int64)">
  <summary>

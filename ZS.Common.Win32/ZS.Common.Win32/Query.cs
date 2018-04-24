@@ -11,7 +11,7 @@ namespace ZS.Common.Win32
     public class Query
     {
         /// <summary>
-        /// 获取计算机的序列号
+        /// 获取计算机的厂家序列号
         /// </summary>
         /// <returns></returns>
         public static string GetIdentifyingNumber()
@@ -31,6 +31,20 @@ namespace ZS.Common.Win32
         public static string GetComputerName()
         {
             return Environment.MachineName;
+        }
+
+        /// <summary>
+        /// 获取计算机描述
+        /// </summary>
+        /// <returns></returns>
+        public static String GetComputerDescription()
+        {
+            List<Win32Provider.Win32_OperatingSystem> list = Win32.Win32Provider.ProviderHelper<Win32Provider.Win32_OperatingSystem>.GetAll();
+            if (list != null && list.Count > 0)
+            {
+                return list[0].Description;
+            }
+            return String.Empty;
         }
 
 
@@ -138,11 +152,15 @@ namespace ZS.Common.Win32
 
                             // 是否为系统组件
                             Object tmpVal = regTmp.GetValue("SystemComponent");
-                            if (tmpVal != null)
+                            if (tmpVal != null && !String.IsNullOrEmpty(tmpVal.ToString()))
                             {
-                                if (Convert.ToInt32(tmpVal.ToString()) == 1)
+                                Int32 k = 0;
+                                if (Int32.TryParse(tmpVal.ToString(), out k))
                                 {
-                                    tmpModel.IsSystemComponent = true;
+                                    if (k == 1)
+                                    {
+                                        tmpModel.IsSystemComponent = true;
+                                    }
                                 }
                             }
 

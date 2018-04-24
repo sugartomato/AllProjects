@@ -73,7 +73,10 @@
     <Compile Include="Win32Provider\Win32_ComputerSystemProduct.cs" />
     <Compile Include="Win32Provider\Win32_NetworkAdapter.cs" />
     <Compile Include="Win32Provider\Win32_NetworkAdapterConfiguration.cs" />
+    <Compile Include="Win32Provider\Win32_OperatingSystem.cs" />
     <Compile Include="Win32Provider\Win32_Product.cs" />
+    <Compile Include="Win32Provider\Win32_Service.cs" />
+    <Compile Include="Win32Provider\Win32_StartupCommand.cs" />
     <Compile Include="WinCtrlAPI\ListView.cs" />
   </ItemGroup>
   <ItemGroup>

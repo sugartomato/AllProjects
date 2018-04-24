@@ -125,14 +125,16 @@ namespace ZS.Common.Win32.Net
             strIndex = strIndex.Substring(strIndex.Length - 4);
 
             // 网卡格式。长度为12。剔除里面的-或者：
-            pMacAddress = pMacAddress.Trim().Replace(":", "").Replace("-", "").Replace(" ","");
-            pMacAddress = pMacAddress.ToUpper();
-            if(pMacAddress.Length > 0 && pMacAddress.Length != 12)
+            if (!String.IsNullOrEmpty(pMacAddress) && pMacAddress.Length > 0)
+            {
+                pMacAddress = pMacAddress.Trim().Replace(":", "").Replace("-", "").Replace(" ", "");
+                pMacAddress = pMacAddress.ToUpper();
+            }
+            if (pMacAddress.Length > 0 && pMacAddress.Length != 12)
             {
                 throw new ApplicationException("无效的MAC地址");
             }
 
-    
             Reg.RegistryKey regRoot = Reg.Registry.LocalMachine.OpenSubKey(@"System\CurrentControlSet\Control\Class\{4d36e972-e325-11ce-bfc1-08002be10318}\" + strIndex, true);
             Reg.RegistryKey regParams = regRoot.OpenSubKey(@"Ndi\params\NetworkAddress", true);
 
@@ -144,13 +146,13 @@ namespace ZS.Common.Win32.Net
                 regParams.SetValue("Default", "");
             }
 
-            if(!string.IsNullOrEmpty(pMacAddress))
+            if(!string.IsNullOrEmpty(pMacAddress) && pMacAddress.Length > 0)
             {
                 regRoot.SetValue("NetworkAddress", pMacAddress);
                 regParams.SetValue("Default", pMacAddress);
             }
 
-            Console.WriteLine(regRoot.GetValue("InfPath").ToString());
+            //Console.WriteLine(regRoot.GetValue("InfPath").ToString());
             return true;
         }
 
@@ -172,7 +174,6 @@ namespace ZS.Common.Win32.Net
         }
 
         #endregion
-
 
         #region 获取MAC地址
 
@@ -294,7 +295,6 @@ namespace ZS.Common.Win32.Net
         }
 
         #endregion
-
 
         #region 网卡启用/禁用
 

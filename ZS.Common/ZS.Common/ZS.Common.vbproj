@@ -72,6 +72,9 @@
     <Compile Include="Drawing\Image.vb" />
     <Compile Include="ExceptionEx.vb" />
     <Compile Include="HardDevice\NetworkAdapter.vb" />
+    <Compile Include="HttpHelper\HttpContent.vb" />
+    <Compile Include="HttpHelper\HttpHelper.vb" />
+    <Compile Include="HttpHelper\RequestSetting.vb" />
     <Compile Include="ImageHelper.vb" />
     <Compile Include="ListEx.vb" />
     <Compile Include="Monitor\Def.vb" />

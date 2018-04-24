@@ -1110,9 +1110,26 @@
             The visibility state of a window is indicated by the WS_VISIBLE style bit. When WS_VISIBLE is set, the window is displayed and subsequent drawing into it is displayed as long as the window has the WS_VISIBLE style.
             Any drawing to a window with the WS_VISIBLE style will not be displayed if the window is obscured by other windows or is clipped by its parent window.
             </remarks>
-            <link>
-            https://msdn.microsoft.com/en-us/library/ms633530(v=vs.85).aspx
-            </link>
+            <link>https://msdn.microsoft.com/en-us/library/ms633530(v=vs.85).aspx</link>
+        </member>
+        <member name="M:ZS.Common.Win32.API.BringWindowToTop(System.IntPtr)">
+            <summary>
+            Brings the specified window to the top of the Z order. If the window is a top-level window, it is activated. If the window is a child window, the top-level parent window associated with the child window is activated.
+            </summary>
+            <param name="hWnd">
+            [in][Type: HWND]
+                A handle to the window to bring to the top of the Z order.
+            </param>
+            <returns>
+            [Type: BOOL]
+                If the function succeeds, the return value is nonzero.
+                If the function fails, the return value is zero. To get extended error information, call GetLastError.
+            </returns>
+            <remarks>
+            Use the BringWindowToTop function to uncover any window that is partially or completely obscured by other windows.
+            Calling this function is similar to calling the SetWindowPos function to change a window's position in the Z order. BringWindowToTop does not make a window a top-level window.
+            </remarks>
+            <link>https://msdn.microsoft.com/en-us/library/windows/desktop/ms632673(v=vs.85).aspx</link>
         </member>
         <member name="M:ZS.Common.Win32.API.GetWindowThreadProcessId(System.IntPtr,System.Int32@)">
             <summary>
@@ -1132,6 +1149,40 @@
                 The return value is the identifier of the thread that created the window.
             </returns>
             <link>https://msdn.microsoft.com/en-us/library/ms633522</link>
+        </member>
+        <member name="M:ZS.Common.Win32.API.WindowFromPhysicalPoint(ZS.Common.Win32.API.POINT)">
+            <summary>
+            Retrieves a handle to the window that contains the specified physical point.
+            </summary>
+            <param name="point">
+            [in][Type: POINT]
+                The physical coordinates of the point.
+            </param>
+            <returns>
+            [Type: HWND]
+                A handle to the window that contains the given physical point. If no window exists at the point, this value is NULL.
+            </returns>
+            <remarks>
+            The WindowFromPhysicalPoint function does not retrieve a handle to a hidden or disabled window, even if the point is within the window.
+            </remarks>
+            <link>https://msdn.microsoft.com/en-us/library/windows/desktop/aa969270(v=vs.85).aspx</link>
+        </member>
+        <member name="M:ZS.Common.Win32.API.WindowFromPoint(ZS.Common.Win32.API.POINT)">
+            <summary>
+            Retrieves a handle to the window that contains the specified point.
+            </summary>
+            <param name="point">
+            [in][Type: POINT]
+                The point to be checked.
+            </param>
+            <returns>
+            [Type: HWND]
+                The return value is a handle to the window that contains the point. If no window exists at the given point, the return value is NULL. If the point is over a static text control, the return value is a handle to the window under the static text control.
+            </returns>
+            <remarks>
+            The WindowFromPoint function does not retrieve a handle to a hidden or disabled window, even if the point is within the window. An application should use the ChildWindowFromPoint function for a nonrestrictive search.
+            </remarks>
+            <link>https://msdn.microsoft.com/en-us/library/windows/desktop/ms633558(v=vs.85).aspx</link>
         </member>
         <member name="M:ZS.Common.Win32.API.GetCursorPos(ZS.Common.Win32.API.POINT@)">
             <summary>
@@ -1562,13 +1613,19 @@
         </member>
         <member name="M:ZS.Common.Win32.Query.GetIdentifyingNumber">
             <summary>
-            获取计算机的序列号
+            获取计算机的厂家序列号
             </summary>
             <returns></returns>
         </member>
         <member name="M:ZS.Common.Win32.Query.GetComputerName">
             <summary>
             获取计算机名
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ZS.Common.Win32.Query.GetComputerDescription">
+            <summary>
+            获取计算机描述
             </summary>
             <returns></returns>
         </member>
@@ -1818,6 +1875,77 @@
             If TRUE, TCP/IP is bound and enabled on this network adapter.
             </summary>
         </member>
+        <member name="T:ZS.Common.Win32.Win32Provider.Win32_OperatingSystem">
+            <summary>
+            The Win32_OperatingSystem WMI class represents a Windows-based operating system installed on a computer.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_OperatingSystem.BootDevice">
+            <summary>
+            Name of the disk drive from which the Windows operating system starts.
+            Example: "\\Device\Harddisk0"
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_OperatingSystem.BuildNumber">
+            <summary>
+            Build number of an operating system. It can be used for more precise version information than product release version numbers.
+            Example: "1381"
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_OperatingSystem.Caption">
+            <summary>
+            Short description of the object—a one-line string. The string includes the operating system version. For example, "Microsoft Windows 7 Enterprise ". This property can be localized.
+            Windows Vista and Windows 7:  This property may contain trailing characters. For example, the string "Microsoft Windows 7 Enterprise " (trailing space included) may be necessary to retrieve information using this property.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_OperatingSystem.CSDVersion">
+            <summary>
+            NULL-terminated string that indicates the latest service pack installed on a computer. If no service pack is installed, the string is NULL.
+            Example: "Service Pack 3"
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_OperatingSystem.CSName">
+            <summary>
+            Name of the scoping computer system.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_OperatingSystem.Description">
+            <summary>
+            Description of the Windows operating system. Some user interfaces for example, those that allow editing of this description, limit its length to 48 characters.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_OperatingSystem.InstallDate">
+            <summary>
+            Date object was installed. This property does not require a value to indicate that the object is installed.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_OperatingSystem.LastBootUpTime">
+            <summary>
+            Date and time the operating system was last restarted.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_OperatingSystem.Name">
+            <summary>
+            Operating system instance within a computer system.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_OperatingSystem.SerialNumber">
+            <summary>
+            Operating system product serial identification number.
+            Example: "10497-OEM-0031416-71674"
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_OperatingSystem.SuiteMask">
+            <summary>
+            Version number of the operating system.
+            Example: "4.0"
+            </summary>
+        </member>
+        <member name="T:ZS.Common.Win32.Win32Provider.Win32_OperatingSystem_SuiteMaskEnum">
+            <summary>
+            Bit flags that identify the product suites available on the system.
+            </summary>
+        </member>
         <member name="T:ZS.Common.Win32.Win32Provider.Win32_Product">
             <summary>
             The Win32_Product WMI class represents products as they are installed by Windows Installer. A product generally correlates to one installation package.
@@ -1831,6 +1959,342 @@
         <member name="P:ZS.Common.Win32.Win32Provider.Win32_Product.InstallLocation">
             <summary>
             Location of the installed product.
+            </summary>
+        </member>
+        <member name="T:ZS.Common.Win32.Win32Provider.Win32_Service">
+            <summary>
+             represents a service on a computer system running Windows.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.AcceptPause">
+            <summary>
+            获取服务是否可以被暂停
+            Indicates whether the service can be paused.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.AcceptStop">
+            <summary>
+            获取服务是否可以被停止
+            Indicates whether the service can be stopped.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.Caption">
+            <summary>
+            Short description of the service —a one-line string.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.CheckPoint">
+            <summary>
+            Value that the service increments periodically to report its progress during a long start, stop, pause, or continue operation. For example, the service increments this value as it completes each step of its initialization when it is starting up. The user interface program that invokes the operation on the service uses this value to track the progress of the service during a lengthy operation. This value is not valid and should be zero when the service does not have a start, stop, pause, or continue operation pending.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.CreationClassName">
+            <summary>
+            Name of the first concrete class to appear in the inheritance chain used in the creation of an instance. When used with the other key properties of the class, this property allows all instances of this class and its subclasses to be uniquely identified.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.DelayedAutoStart">
+            <summary>
+            If True, the service is started after other auto-start services are started plus a short delay.
+            </summary>
+            <remarks>
+            Windows Server 2012 R2, Windows 8.1, Windows Server 2012, Windows 8, Windows Server 2008 R2, Windows 7, Windows Server 2008, and Windows Vista:  This property is not supported before Windows Server 2016 Technical Preview and Windows 10.
+            </remarks>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.Description">
+            <summary>
+            Description of the object.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.DesktopInteract">
+            <summary>
+            Indicates whether the service can create or communicate with windows on the desktop, and thus interact in some way with a user. Interactive services must run under the Local System account. Most services are not interactive; that is, they do not communicate with the user in any way.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.DisplayName">
+            <summary>
+            Name of the service as viewed in the Services snap-in. 
+            This string has a maximum length of 256 characters. Note that the display name and the service name (which is stored in the registry) are not always the same. For example, the DHCP Client service has the service name Dhcp but the display name DHCP Client. The name is case-preserved in the Service Control Manager. However, DisplayName comparisons are always case-insensitive.
+            Constraint: Accepts the same value as the Name property.
+            Example: "Atdisk"
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.ErrorControl">
+            <summary>
+            Severity of the error if this service fails to start during startup. The value indicates the action taken by the startup program if failure occurs. All errors are logged by the computer system.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.ExitCode">
+            <summary>
+            Windows error code that defines errors encountered in starting or stopping the service. This property is set to ERROR_SERVICE_SPECIFIC_ERROR (1066) when the error is unique to the service represented by this class, and information about the error is available in the ServiceSpecificExitCode property. The service sets this value to NO_ERROR when running, and again upon normal termination.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.InstallDate">
+            <summary>
+            Date object is installed. This property does not require a value to indicate that the object is installed.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.Name">
+            <summary>
+            Unique identifier of the service that provides an indication of the functionality that is managed.This functionality is described in the Description property of the object.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.PathName">
+            <summary>
+            Fully qualified path to the service binary file that implements the service.
+            Example: "\SystemRoot\System32\drivers\afd.sys"
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.ProcessId">
+            <summary>
+            Process identifier of the service.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.ServiceSpecificExitCode">
+            <summary>
+            Service-specific error code for errors that occur while the service is either starting or stopping. The exit codes are defined by the service represented by this class. This value is only set when the ExitCode property value is ERROR_SERVICE_SPECIFIC_ERROR (1066).
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.ServiceType">
+            <summary>
+            Type of service provided to calling processes.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.Started">
+            <summary>
+            Indicates whether or not the service is started.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.StartMode">
+            <summary>
+            Start mode of the Windows base service.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.StartName">
+            <summary>
+            Account name under which a service runs. Depending on the service type, the account name may be in the form of "DomainName\Username" or UPN format ("Username@DomainName"). The service process is logged by using one of these two forms when it runs. If the account belongs to the built-in domain, then ".\Username" can be specified. For kernel or system-level drivers, StartName contains the driver object name (that is, "\FileSystem\Rdr" or "\Driver\Xns") which the I/O system uses to load the device driver. Additionally, if NULL is specified, the driver runs with a default object name created by the I/O system based on the service name.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.State">
+            <summary>
+            Current state of the base service.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.Status">
+            <summary>
+            Current status of the object. 
+            Various operational and nonoperational statuses can be defined. 
+            Operational statuses include: "OK", "Degraded", and "Pred Fail" (an element, such as a SMART-enabled hard disk drive, may be functioning properly but predicting a failure in the near future). Nonoperational statuses include: "Error", "Starting", "Stopping", and "Service". The latter, "Service", could apply during mirror-resilvering of a disk, reload of a user permissions list, or other administrative work. Not all such work is online, yet the managed element is neither "OK" nor in one of the other states.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.SystemCreationClassName">
+            <summary>
+            Type name of the system that hosts this service.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.SystemName">
+            <summary>
+            Name of the system that hosts this service.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.TagId">
+            <summary>
+            Unique tag value for this service in the group. A value of 0 (zero) indicates that the service does not have a tag. A tag can be used to order service startup within a load order group by specifying a tag order vector in the registry located at:
+            HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\    GroupOrderList
+            Tags are only evaluated for Kernel Driver and File System Driver start type services that have Boot or System start modes.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.WaitHint">
+            <summary>
+            Estimated time required, in milliseconds, for a pending start, stop, pause, or continue operation. After the specified time has elapsed, the service makes its next call to the SetServiceStatus method with either an incremented CheckPoint value or a change in CurrentState. If the amount of time specified by WaitHint passes, and CheckPoint has not been incremented, or CurrentState has not changed, the service control manager or service control program assumes that an error has occurred.
+            </summary>
+        </member>
+        <member name="T:ZS.Common.Win32.Win32Provider.Win32_Service.ServiceTypeDef">
+            <summary>
+            服务类型定义
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.ServiceTypeDef.KernelDriver">
+            <summary></summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.ServiceTypeDef.FileSystemDriver">
+            <summary></summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.ServiceTypeDef.Adapter">
+            <summary></summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.ServiceTypeDef.RecognizerDriver">
+            <summary></summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.ServiceTypeDef.OwnProcess">
+            <summary></summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.ServiceTypeDef.ShareProcess">
+            <summary></summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.ServiceTypeDef.InteractiveProcess">
+            <summary></summary>
+        </member>
+        <member name="T:ZS.Common.Win32.Win32Provider.Win32_Service.StartModeDef">
+            <summary>
+            服务启动模式定义
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StartModeDef.Boot">
+            <summary>Device driver started by the operating system loader (valid only for driver services).</summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StartModeDef.System">
+            <summary>Device driver started by the operating system initialization process. This value is valid only for driver services.</summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StartModeDef.Auto">
+            <summary>Service to be started automatically by the service control manager during system startup. Auto services are started even if a user does not log on.</summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StartModeDef.Manual">
+            <summary>ervice to be started by the Service Control Manager when a process calls the StartService method. These services do not start unless a user logs on and starts them.</summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StartModeDef.Disabled">
+            <summary>Service that cannot be started until its StartMode is changed to either Auto or Manual.</summary>
+        </member>
+        <member name="T:ZS.Common.Win32.Win32Provider.Win32_Service.StateDef">
+            <summary>
+            服务state定义
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StateDef.Stopped">
+            <summary>已停止</summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StateDef.StartPending">
+            <summary></summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StateDef.StopPending">
+            <summary></summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StateDef.Running">
+            <summary></summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StateDef.Continue_Pending">
+            <summary></summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StateDef.PausePending">
+            <summary></summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StateDef.Paused">
+            <summary></summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StateDef.Unknown">
+            <summary></summary>
+        </member>
+        <member name="T:ZS.Common.Win32.Win32Provider.Win32_Service.StatusDef">
+            <summary>
+            服务status定义
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StatusDef.OK">
+            <summary></summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StatusDef.Error">
+            <summary></summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StatusDef.Degraded">
+            <summary></summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StatusDef.Unknown">
+            <summary></summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StatusDef.PredFail">
+            <summary></summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StatusDef.Starting">
+            <summary></summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StatusDef.Stopping">
+            <summary></summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StatusDef.Service">
+            <summary></summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StatusDef.Stressed">
+            <summary></summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StatusDef.NonRecover">
+            <summary></summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StatusDef.NoContact">
+            <summary></summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StatusDef.LostComm">
+            <summary></summary>
+        </member>
+        <member name="T:ZS.Common.Win32.Win32Provider.Win32_StartupCommand">
+            <summary>
+            represents a command that runs automatically when a user logs onto the computer system.
+            </summary>
+            <remarks>
+            Computer startup does not end after the operating system has been loaded. 
+            Instead, the Windows operating system can be configured so that startup commands are run each time Windows starts. 
+            Startup commands are stored in the registry or as part of the user profile and are used to automatically start specified scripts or applications each time Windows is loaded.
+            In most cases, autostart programs are useful; they ensure that certain applications, such as antivirus tools, are automatically started and run each time Windows is loaded. However, autostart programs also can be responsible for problems such as:
+                Computers that take an exceptionally long time to start. This might be the result of a large number of applications that must be started each time Windows starts.
+                Applications that are represented in the Taskbar or in Task Manager, even though the user did not start them. Although these applications do not necessarily cause problems, they can result in help desk calls from users who are confused as to where these programs came from and why they are running.
+                Computers experiencing problems even when they seem idle. These problems are often traced to startup commands that are running when no one is aware that they are running.
+            
+            Identifying the applications and scripts that automatically run at startup is an important but difficult administrative task, because startup commands can be stored in many different locations:
+                HKLM\Software\Microsoft\Windows\CurrentVersion\Run
+                HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnce
+                HKCU\Software\Microsoft\Windows\CurrentVersion\Run
+                HKCU\Software\Microsoft\Windows\CurrentVersion\RunOnce
+                HKU\ProgID\Software\Microsoft\Windows\CurrentVersion\Run
+                systemdrive\Documents and Settings\All Users\Start Menu\Programs\Startup
+                systemdrive\Documents and Settings\username\Start Menu\Programs\Startup
+                
+            You can use the WMI Win32_StartupCommand class to enumerate autostart programs regardless of where the information is stored.
+            The calling process that uses this class must have the SE_RESTORE_NAME privilege on the computer in which the registry resides. For example, if you enumerate this class on the local computer, the account under which your application runs must have this privilege. For more information, see Executing Privileged Operations.
+            You can change the registry values where Win32_StartupCommand obtains data by calling the WMI System Registry Provider methods in script or in C++. For more information, see Modifying the System Registry.
+            </remarks>
+            <link>
+            https://msdn.microsoft.com/en-us/library/aa394464(v=vs.85).aspx
+            </link>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_StartupCommand.Caption">
+            <summary>
+            Short textual description of the current object.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_StartupCommand.Command">
+            <summary>
+            Command run by the startup command.
+            WMI obtains this data from the registry key
+            HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_StartupCommand.Description">
+            <summary>
+            Textual description of the current object.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_StartupCommand.SettingID">
+            <summary>
+            Identifier by which the current object is known.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_StartupCommand.Location">
+            <summary>
+            Path where the startup command resides on the disk file system.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_StartupCommand.Name">
+            <summary>
+            File name of the startup command.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_StartupCommand.User">
+            <summary>
+            User name for whom this startup command will run.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_StartupCommand.UserSID">
+            <summary>
+            The UserSID property indicates the SID of the user for whom this startup command will run. That User property may be empty but UserSID still has a value if the user name can't be resolved (like in the case of a deleted user). The property is helpful to distinguish between commands associated w/ two different users with unresolved names. It may be NULL when the command is associated with items not actually identifying a user like All Users.
             </summary>
         </member>
         <member name="T:ZS.Common.Win32.WinCtrlAPI.ListView.LVITEM">

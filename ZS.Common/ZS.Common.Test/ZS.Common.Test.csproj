@@ -60,6 +60,7 @@
     <Compile Include="Computer.cs" />
     <Compile Include="Debug\LogTest.cs" />
     <Compile Include="HardDevice_NetworkAdapterTest.cs" />
+    <Compile Include="HttpHelperTest.cs" />
     <Compile Include="ImageHelperTest.cs" />
     <Compile Include="MonitorTest.cs" />
     <Compile Include="StringExTest.cs" />

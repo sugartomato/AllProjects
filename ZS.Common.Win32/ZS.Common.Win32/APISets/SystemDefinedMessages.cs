@@ -51,7 +51,6 @@ namespace ZS.Common.Win32
 
         #endregion
 
-
         #region Scroll Bar Notifications
 
 
@@ -59,6 +58,16 @@ namespace ZS.Common.Win32
         #endregion
 
         #region Window Messages
+
+        /// <summary>
+        /// Sent when an application requests that a window be created by calling the CreateWindowEx or CreateWindow function. (The message is sent before the function returns.) The window procedure of the new window receives this message after the window is created, but before the window becomes visible.
+        /// [Parameters]
+        ///     wParam
+        ///         This parameter is not used.
+        ///     lParam
+        ///         A pointer to a CREATESTRUCT structure that contains information about the window being created.
+        /// </summary>
+        public const Int32 WM_CREATE = 0x0001;
 
         /// <summary>
         /// Sets the text of a window.
@@ -119,6 +128,42 @@ namespace ZS.Common.Win32
         /// Sending a WM_GETTEXTLENGTH message to a non-text static control, such as a static bitmap or static icon controlc, does not return a string value. Instead, it returns zero.
         /// </remarks>
         public const Int32 WM_GETTEXTLENGTH = 0x000E;
+
+        /// <summary>
+        /// Sent to a window to retrieve a handle to the large or small icon associated with a window. The system displays the large icon in the ALT+TAB dialog, and the small icon in the window caption.
+        /// A window receives this message through its WindowProc function.
+        /// [Parameters]
+        ///     wParam
+        ///         The type of icon being retrieved. This parameter can be one of the following values.
+        ///     lParam
+        ///         The DPI of the icon being retrieved. This can be used to provide different icons depending on the icon size.
+        /// </summary>
+        public const Int32 WM_GETICON = 0x007F;
+
+        #endregion
+
+        #region Windows Shell Messages
+
+        /// <summary>
+        /// Sent when the user drops a file on the window of an application that has registered itself as a recipient of dropped files.
+        /// Parameters
+        ///     hDrop = (WPARAM) (HDROP) hDrop
+        ///         A handle to an internal structure describing the dropped files. Pass this handle DragFinish, DragQueryFile, or DragQueryPoint to retrieve information about the dropped files.
+        ///     lParam
+        ///         Must be zero.
+        ///  Return Value
+        ///     An application should return zero if it processes this message.
+        /// </summary>
+        public const Int32 WM_DROPFILES = 0x0233;
+
+        #endregion
+
+        #region Clipboard/剪切板
+
+        /// <summary>
+        /// An application sends a WM_CUT message to an edit control or combo box to delete (cut) the current selection, if any, in the edit control and copy the deleted text to the clipboard in CF_TEXT format.
+        /// </summary>
+        public const Int32 WM_CUT = 0x0300;
 
 
         #endregion

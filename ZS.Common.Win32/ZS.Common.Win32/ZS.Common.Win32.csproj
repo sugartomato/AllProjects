@@ -45,7 +45,9 @@
   <ItemGroup>
     <Compile Include="APISets\SystemDefinedMessages.cs" />
     <Compile Include="APISets\Win32API_Common.cs" />
+    <Compile Include="APISets\Win32API_DynamicLinkLibrary.cs" />
     <Compile Include="APISets\Win32API_HandlesAndObjects.cs" />
+    <Compile Include="APISets\Win32API_Hooks.cs" />
     <Compile Include="APISets\Win32API_KeyboardAndMouseInput.cs" />
     <Compile Include="APISets\Win32API_Memory.cs" />
     <Compile Include="APISets\Win32API_MessageAndMessageQueues.cs" />

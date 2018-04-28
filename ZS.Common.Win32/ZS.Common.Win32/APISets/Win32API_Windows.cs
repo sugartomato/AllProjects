@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Text;
 namespace ZS.Common.Win32
 {
     using System.Runtime.InteropServices;
@@ -282,6 +282,19 @@ namespace ZS.Common.Win32
         /// </remarks>
         [DllImport("User32.dll")]
         public static extern Int32 GetWindowText(IntPtr hWnd, System.Text.StringBuilder lpString, Int32 nMaxCount);
+
+        /// <summary>
+        /// 获取指定窗口的标题
+        /// </summary>
+        /// <param name="hWnd"></param>
+        /// <returns></returns>
+        public static String GetWindowText(IntPtr hWnd)
+        {
+            Int32 txtLength = GetWindowTextLength(hWnd);
+            StringBuilder sb = new StringBuilder("", txtLength + 2);
+            Int32 tCount = API.GetWindowText(hWnd, sb, sb.Capacity);
+            return sb.ToString();
+        }
 
         // ############################################################
         /// <summary>

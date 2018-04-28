@@ -65,5 +65,37 @@ namespace ZS.Common.Win32Test.TestForm
             MessageBox.Show(sb.ToString());
             txtWindowTitle.Text = sb.ToString();
         }
+
+
+        protected override void WndProc(ref Message m)
+        {
+            try
+            {
+                if (m.Msg == ZS.Common.Win32.SystemDefinedMessages.WM_DROPFILES)
+                {
+                    //MessageBox.Show(m.WParam);
+                    MessageBox.Show("拖拽文件！");
+                }
+                else
+                {
+                    
+                    base.WndProc(ref m);
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void frmWindowsMessages_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

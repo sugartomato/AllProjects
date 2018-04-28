@@ -33,6 +33,9 @@
             this.txtWindowTitle = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.txtConsole = new System.Windows.Forms.TextBox();
+            this.button3 = new System.Windows.Forms.Button();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -73,17 +76,40 @@
             // 
             // txtConsole
             // 
+            this.txtConsole.AllowDrop = true;
             this.txtConsole.Location = new System.Drawing.Point(12, 89);
             this.txtConsole.Multiline = true;
             this.txtConsole.Name = "txtConsole";
-            this.txtConsole.Size = new System.Drawing.Size(289, 222);
+            this.txtConsole.Size = new System.Drawing.Size(132, 222);
             this.txtConsole.TabIndex = 4;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(343, 24);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 5;
+            this.button3.Text = "钩子";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(161, 89);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 23;
+            this.dataGridView1.Size = new System.Drawing.Size(257, 256);
+            this.dataGridView1.TabIndex = 6;
             // 
             // frmWindowsMessages
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(430, 357);
+            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.txtConsole);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.txtWindowTitle);
@@ -91,6 +117,8 @@
             this.Controls.Add(this.button1);
             this.Name = "frmWindowsMessages";
             this.Text = "frmWindowsMessages";
+            this.Load += new System.EventHandler(this.frmWindowsMessages_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -103,5 +131,7 @@
         private System.Windows.Forms.TextBox txtWindowTitle;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox txtConsole;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }

@@ -103,7 +103,7 @@ namespace KK.WechatAuto
             String result = String.Empty;
             if (response == null) return String.Empty;
             AddCookies(response.Cookies);
-            using (System.IO.StreamReader sr = new System.IO.StreamReader(response.GetResponseStream()))
+            using (System.IO.StreamReader sr = new System.IO.StreamReader(response.GetResponseStream(),System.Text.Encoding.UTF8))
             {
                 result = sr.ReadToEnd();
                 sr.Close();

@@ -57,5 +57,25 @@ namespace KK.WechatAuto
         /// </summary>
         public static System.Collections.Queue DebugMessage { get; set; } = new System.Collections.Queue();
         public static System.Collections.Queue UserMessage { get; set; } = new System.Collections.Queue();
+
+        /// <summary>
+        /// 返回随机的程序执行间隔，单位为毫秒
+        /// </summary>
+        /// <param name="minSec"></param>
+        /// <param name="maxSec"></param>
+        /// <returns></returns>
+        public static Int32 RandomSleep(Int32 minSec, Int32 maxSec)
+        {
+            return (Int32)TimeSpan.FromSeconds(new Random().Next(minSec, maxSec)).TotalMilliseconds;
+        }
+
+        /// <summary>
+        /// 在5-15秒之间随机返回一个时间间隔，单位为毫秒。
+        /// </summary>
+        /// <returns></returns>
+        public static Int32 RandomSleep()
+        {
+            return RandomSleep(5, 15);
+        }
     }
 }

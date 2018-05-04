@@ -42,7 +42,7 @@ namespace KK.WechatAuto
                 dataGridView1.DoubleBufferedGrid(true);
 
                 m_Timer_OutputLog = new Timer();
-                m_Timer_OutputLog.Interval = 200;
+                m_Timer_OutputLog.Interval = 20;
                 m_Timer_OutputLog.Tick += M_Timer_OutputLog_Tick;
                 m_Timer_OutputLog.Enabled = true;
 
@@ -58,14 +58,14 @@ namespace KK.WechatAuto
 
         private void Login()
         {
-            GC.Collect();
 
             pictureBox1.Image = null;
             dataGridView1.DataSource = null;
-            lblState.Text = "";
+            SetStateText("");
             m_IsRunSyncCheck = false;
 
             m_Session = new Session();
+            // 浏览器标识
             if (!String.IsNullOrEmpty(txtUseragent.Text))
             {
                 m_Session.UserAgent = txtUseragent.Text;
@@ -89,7 +89,7 @@ namespace KK.WechatAuto
             {
                 string qrCodeUrl = "https://login.weixin.qq.com/qrcode/";
                 m_Session.uuid = Regex.Match(_responseText, "(?<=window\\.QRLogin\\.uuid = \").{1,}(?=\";)").Value;
-                WriteLog("获取到的二维码标识：" + m_Session.uuid,true);
+                WriteLog("获取到的二维码标识：" + m_Session.uuid, true);
 
                 // 获取二维码
                 _request = m_Session.CreateRequest(qrCodeUrl + m_Session.uuid);
@@ -127,148 +127,157 @@ namespace KK.WechatAuto
                     Int64 _stamp = Common.GetTimeStamp();
                     String _stampf = Common.GetTimeStampF(_stamp);
                     _requestUrl = $"https://login.wx.qq.com/cgi-bin/mmwebwx-bin/login?loginicon=true&uuid={ m_Session.uuid }&tip=0&r={_stampf}&_={_stamp.ToString()}";
+#if LOCALTEST
                     WriteLog(_requestUrl);
+#endif
 
                     _request = m_Session.CreateRequest(_requestUrl);
                     using (_response = (HttpWebResponse)_request.GetResponse())
                     {
+                        _responseText = m_Session.GetResponseString(_response);
+                        WriteLog("[登陆检查]HTTP请求返回结果：" + _responseText);
                         if (_response.StatusCode != HttpStatusCode.OK)
                         {
                             WriteLog("[登陆检查]HTTP加载错误，http请求状态：" + _response.StatusCode);
                         }
-                        _responseText = m_Session.GetResponseString(_response);
-                        WriteLog("[登陆检查]HTTP请求返回结果：" + _responseText);
+
+                        // window.code
+                        // 400 二维码已过期
+                        String code = Regex.Match(_responseText, "(?<=window\\.code=).{1,}?(?=;)").Value;
+                        switch (code)
+                        {
+                            case "201": // 已扫码，等待确认。window.userAvatar为已扫描的用户的头像
+                                String imgStr = Regex.Match(_responseText, "(?<=;window\\.userAvatar = \').{1,}(?=\';)").Value;
+                                imgStr = imgStr.Replace("data:img/jpg;base64,", "");
+                                pictureBox1.Image = Common.ConvertFromBase64String(imgStr);
+                                SetStateText("已扫描，等待移动端确认！");
+                                break;
+                            case "200": // 移动端已确认，执行登陆。
+                                SetStateText("移动端已确认，开始登录！");
+                                String redirectUrl = Regex.Match(_responseText, "(?<=window\\.redirect_uri=\").{1,}(?=\";)").Value;
+                                if (redirectUrl.StartsWith("https://wx.qq.com/"))
+                                {
+                                    m_Session.WXVer = "wx";
+                                }
+                                else
+                                {
+                                    m_Session.WXVer = "wx2";
+                                }
+                                try
+                                {
+                                    WriteLog(redirectUrl);
+                                    redirectUrl += "&fun=new&version=v2";
+                                    _request = m_Session.CreateRequest(redirectUrl);
+                                    using (_response = (HttpWebResponse)_request.GetResponse())
+                                    {
+                                        if (_response.StatusCode != HttpStatusCode.OK)
+                                        {
+                                            WriteLog("[登陆后跳转]HTTP加载错误，http请求状态：" + _response.StatusCode);
+                                        }
+                                        _responseText = m_Session.GetResponseString(_response);
+                                        _response.Close();
+                                        WriteLog("[登陆后跳转]HTTP请求返回结果：" + _responseText);
+                                    }
+
+                                    // 尝试将值转换为xml
+                                    XElement root = XElement.Parse(_responseText);
+                                    String errCode = root.Element("ret").Value;
+                                    WriteLog(errCode);
+                                    if (errCode != "0")
+                                    {
+                                        WriteLog("登陆失败，错误消息：" + root.Element("message").Value, false);
+                                        SetStateText("登陆失败！");
+                                        return;
+                                    }
+                                    else
+                                    {
+                                        // 获取成功相关的值
+                                        m_Session.skey = root.Element("skey").Value;
+                                        m_Session.wxsid = root.Element("wxsid").Value;
+                                        m_Session.wxuin = root.Element("wxuin").Value;
+                                        m_Session.pass_ticket = root.Element("pass_ticket").Value;
+                                        m_Session.isgrayscale = root.Element("isgrayscale").Value;
+
+                                        // 获取初始化数据
+                                        System.Threading.Thread.Sleep(3000);
+                                        _requestUrl = $"https://{m_Session.WXVer}.qq.com/cgi-bin/mmwebwx-bin/webwxinit?r={Common.GetTimeStampF()}&lang=zh_CN&pass_ticket={m_Session.pass_ticket}";
+                                        WriteLog(_requestUrl);
+
+                                        _request = m_Session.CreateRequest(_requestUrl);
+                                        _request.Method = "POST";
+
+
+                                        String reqStr = JsonConvert.SerializeObject(m_Session.BaseRequest);
+                                        reqStr = "{\"BaseRequest\":" + reqStr + "}";
+                                        byte[] b = System.Text.Encoding.UTF8.GetBytes(reqStr);
+                                        _request.ContentLength = b.Length;
+                                        using (System.IO.Stream s = _request.GetRequestStream())
+                                        {
+                                            s.Write(b, 0, b.Length);
+                                            s.Close();
+                                        };
+
+                                        using (_response = (HttpWebResponse)_request.GetResponse())
+                                        {
+                                            if (_response.StatusCode != HttpStatusCode.OK)
+                                            {
+                                                WriteLog("[微信初始化信息]加载错误，http请求状态：" + _response.StatusCode);
+                                            }
+                                            _responseText = m_Session.GetResponseString(_response);
+                                            WriteLog("[微信初始化信息]HTTP请求返回结果：" + _responseText);
+                                            _response.Close();
+                                        };
+
+                                        if (_responseText.Contains("BaseResponse\":"))
+                                        {
+                                            // 转换为json对象
+                                            // 获取当前用户数据
+                                            JObject obj = JsonConvert.DeserializeObject<JObject>(_responseText);
+                                            if (obj["User"] != null)
+                                            {
+                                                m_Session.CurrentUser = JsonConvert.DeserializeObject<WXContact>(obj["User"].ToString());
+                                                WriteLog("获取到当前用户对象。用户ID：" + m_Session.CurrentUser.UserName);
+
+                                                LoadContacts();
+                                                this.Invoke(new EventHandler(delegate { dataGridView1.DataSource = m_Session.Contacts; }));
+                                            }
+
+                                            // 初始化Sync数据
+                                            if (obj["SyncKey"] != null)
+                                            {
+                                                m_Session.SyncKey = JsonConvert.DeserializeObject<SyncKey>(obj["SyncKey"].ToString());
+                                                WriteLog("获取到SyncKey数据");
+                                            }
+
+                                            // 加载登陆访问线程
+                                            m_IsRunSyncCheck = true;
+                                            Task.Factory.StartNew(delegate { SyncCheck(); });
+
+                                            SetStateText("已登陆！");
+                                        }
+
+                                    }
+
+                                }
+                                catch (Exception ex)
+                                {
+                                    WriteLog("[微信跳转HTTP请求]异常：" + ex.Message + ex.StackTrace);
+                                }
+                                finally
+                                {
+                                    // 释放资源
+                                }
+                                return;
+                            case "408": // 等待扫描
+                                break;
+                            case "400": // 二维码失效
+                                WriteLog("二维码失效，重新加载。");
+                                Login();
+                                return;
+                        }
                         _response.Close();
                     };
 
-                    // 表示已经扫描，等待确认。window.userAvatar为已扫描的用户的头像
-                    if (_responseText.Contains("window.code=201") && _responseText.Contains("window.userAvatar"))
-                    {
-                        String imgStr = Regex.Match(_responseText, "(?<=;window\\.userAvatar = \').{1,}(?=\';)").Value;
-                        imgStr = imgStr.Replace("data:img/jpg;base64,", "");
-                        pictureBox1.Image = Common.ConvertFromBase64String(imgStr);
-                        SetStateText("已扫描，等待移动端确认！");
-                    }
-
-                    // window.code
-                    // 400 二维码已过期
-
-                    if (_responseText.Contains("window.code=200"))
-                    {
-                        SetStateText("移动端已确认，开始登录！");
-                        String redirectUrl = Regex.Match(_responseText, "(?<=window\\.redirect_uri=\").{1,}(?=\";)").Value;
-                        if (redirectUrl.StartsWith("https://wx.qq.com/"))
-                        {
-                            m_Session.WXVer = "wx";
-                        }
-                        else
-                        {
-                            m_Session.WXVer = "wx2";
-                        }
-                        try
-                        {
-                            WriteLog(redirectUrl);
-                            redirectUrl += "&fun=new&version=v2";
-                            _request = m_Session.CreateRequest(redirectUrl);
-                            using (_response = (HttpWebResponse)_request.GetResponse())
-                            {
-                                if (_response.StatusCode != HttpStatusCode.OK)
-                                {
-                                    WriteLog("[登陆后跳转]HTTP加载错误，http请求状态：" + _response.StatusCode);
-                                }
-                                _responseText = m_Session.GetResponseString(_response);
-                                _response.Close();
-                                WriteLog("[登陆后跳转]HTTP请求返回结果：" + _responseText);
-                            }
-
-                            // 尝试将值转换为xml
-                            XElement root = XElement.Parse(_responseText);
-                            String errCode = root.Element("ret").Value;
-                            WriteLog(errCode);
-                            if (errCode != "0")
-                            {
-                                WriteLog("登陆失败，错误消息：" + root.Element("message").Value, false);
-                                SetStateText("登陆失败！");
-                                return;
-                            }
-                            else
-                            {
-                                // 获取成功相关的值
-                                m_Session.skey = root.Element("skey").Value;
-                                m_Session.wxsid = root.Element("wxsid").Value;
-                                m_Session.wxuin = root.Element("wxuin").Value;
-                                m_Session.pass_ticket = root.Element("pass_ticket").Value;
-                                m_Session.isgrayscale = root.Element("isgrayscale").Value;
-
-                                // 获取初始化数据
-                                System.Threading.Thread.Sleep(3000);
-                                _requestUrl = $"https://{m_Session.WXVer}.qq.com/cgi-bin/mmwebwx-bin/webwxinit?r={Common.GetTimeStampF()}&lang=zh_CN&pass_ticket={m_Session.pass_ticket}";
-                                WriteLog(_requestUrl);
-
-                                _request = m_Session.CreateRequest(_requestUrl);
-                                _request.Method = "POST";
-
-
-                                String reqStr = JsonConvert.SerializeObject(m_Session.BaseRequest);
-                                reqStr = "{\"BaseRequest\":" + reqStr + "}";
-                                byte[] b = System.Text.Encoding.UTF8.GetBytes(reqStr);
-                                _request.ContentLength = b.Length;
-                                using (System.IO.Stream s = _request.GetRequestStream())
-                                {
-                                    s.Write(b, 0, b.Length);
-                                    s.Close();
-                                };
-
-                                using (_response = (HttpWebResponse)_request.GetResponse())
-                                {
-                                    if (_response.StatusCode != HttpStatusCode.OK)
-                                    {
-                                        WriteLog("[微信初始化信息]加载错误，http请求状态：" + _response.StatusCode);
-                                    }
-                                    _responseText = m_Session.GetResponseString(_response);
-                                    WriteLog("[微信初始化信息]HTTP请求返回结果：" + _responseText);
-                                };
-
-                                if (_responseText.Contains("BaseResponse\":"))
-                                {
-                                    // 转换为json对象
-                                    // 获取当前用户数据
-                                    JObject obj = JsonConvert.DeserializeObject<JObject>(_responseText);
-                                    if (obj["User"] != null)
-                                    {
-                                        m_Session.CurrentUser = JsonConvert.DeserializeObject<WXContact>(obj["User"].ToString());
-                                        WriteLog("获取到当前用户对象。用户ID：" + m_Session.CurrentUser.UserName);
-
-                                        LoadContacts();
-                                        this.Invoke(new EventHandler(delegate { dataGridView1.DataSource = m_Session.Contacts; }));
-                                    }
-
-                                    // 初始化Sync数据
-                                    if (obj["SyncKey"] != null)
-                                    {
-                                        m_Session.SyncKey = JsonConvert.DeserializeObject<SyncKey>(obj["SyncKey"].ToString());
-                                        WriteLog("获取到SyncKey数据");
-                                    }
-
-                                    // 加载登陆访问线程
-                                    Task.Factory.StartNew(delegate { SyncCheck(); });
-
-                                    SetStateText("已登陆！");
-                                }
-
-                            }
-
-                        }
-                        catch (Exception ex)
-                        {
-                            WriteLog("[微信跳转HTTP请求]异常：" + ex.Message + ex.StackTrace);
-                        }
-                        finally
-                        {
-                            // 释放资源
-                        }
-                        return;
-                    }
 
                     System.Threading.Thread.Sleep(3000);
                 }
@@ -294,7 +303,7 @@ namespace KK.WechatAuto
             {
                 try
                 {
-                    _url = $"https://wx2.qq.com/cgi-bin/mmwebwx-bin/webwxsync?sid={m_Session.wxsid}&skey={m_Session.skey}&lang=zh_CN&pass_ticket={m_Session.pass_ticket}";
+                    _url = $"https://{m_Session.WXVer}.qq.com/cgi-bin/mmwebwx-bin/webwxsync?sid={m_Session.wxsid}&skey={m_Session.skey}&lang=zh_CN&pass_ticket={m_Session.pass_ticket}";
                     _request = m_Session.CreateRequest(_url);
                     _request.Method = "POST";
 
@@ -328,12 +337,12 @@ namespace KK.WechatAuto
                             Int32 ret = Int32.Parse(obj["BaseResponse"]["Ret"].ToString());
                             if (ret != 0)
                             {
-
-                                this.Invoke(new EventHandler(delegate { lblState.Text = "轮询错误代码：" + ret; }));
+                                SetStateText("错误代码：" + ret);
                                 WriteLog($"轮询失败第{_errCount + 1}次，错误代码：{ret}", false);
-                                if (_errCount > 5)
+                                if (_errCount + 1 > 5)
                                 {
                                     WriteLog("多次尝试失败，重新登陆！", false);
+                                    SetStateText("等待扫码");
                                     this.Invoke(new EventHandler(delegate { Login(); }));
                                     return;
                                 }
@@ -411,7 +420,7 @@ namespace KK.WechatAuto
         /// <summary>
         /// 上传媒体文件,如果上传成功，返回获取到的MediaID，否则，返回String.Empty
         /// </summary>
-        private String UploadMedia(String file, String receiver,Int32 fileIndex = 0)
+        private String UploadMedia(String file, String receiver, Int32 fileIndex = 0)
         {
             String toUser = receiver;
             System.Net.ServicePointManager.DefaultConnectionLimit = 100;
@@ -485,15 +494,14 @@ namespace KK.WechatAuto
             return _result;
         }
 
-        private void SendImageMsg(String receiver, String file, Int32 fileIndex = 0)
+        private String SendImageMsg(String receiver, String file, Int32 fileIndex = 0)
         {
-            String mediaID = UploadMedia(file, receiver);
-            if (mediaID == null)
+            String mediaID = UploadMedia(file, receiver, fileIndex);
+            String _responseText = String.Empty;
+            if (String.IsNullOrEmpty(mediaID) || mediaID.Length == 0)
             {
-                WriteLog("文件[" + file + "]上传失败！");
-                return;
+                return "文件[" + file + "]上传失败！";
             }
-            System.Threading.Thread.Sleep(500);
 
             //String _url = m_Session.WXUrlStart + "cgi-bin/mmwebwx-bin/webwxsendmsgimg?fun=async&f=json&lang=zh_CN&pass_ticket=" + m_Session.pass_ticket;
             String _url = $"https://{m_Session.WXVer}.qq.com/cgi-bin/mmwebwx-bin/webwxsendmsgimg?fun=async&f=json&lang=zh_CN&pass_ticket={m_Session.pass_ticket}";
@@ -513,19 +521,28 @@ namespace KK.WechatAuto
             reStream.Write(b, 0, b.Length);
             reStream.Close();
 
-            HttpWebResponse response = (HttpWebResponse)_request.GetResponse();
-            m_Session.AddCookies(response.Cookies);
-            if (response.StatusCode != HttpStatusCode.OK)
-            {
-                WriteLog("[发送图片消息]加载错误，http请求状态：" + response.StatusCode);
+
+            using (HttpWebResponse response = (HttpWebResponse)_request.GetResponse()) {
+                _responseText = m_Session.GetResponseString(response);
+                if (response.StatusCode != HttpStatusCode.OK)
+                {
+                    return "[发送图片消息]加载错误，http请求状态：" + response.StatusCode;
+                }
+
+                // 尝试请求结果转换为对象
+                if (_responseText.Contains("BaseResponse"))
+                {
+                    MessageResponse repObj = JsonConvert.DeserializeObject<MessageResponse>(_responseText);
+                    if (repObj.BaseResponse.Ret != 0)
+                    {
+                        return "图片消息发送失败。服务器返回错误代码：" + repObj.BaseResponse.Ret;
+                    }
+                }
+
+                response.Close();
             }
 
-            System.IO.StreamReader sr = new System.IO.StreamReader(response.GetResponseStream());
-            String result = sr.ReadToEnd();
-            sr.Close();
-            response.Close();
-            WriteLog("[发送图片消息]HTTP请求返回结果：" + result);
-
+            return string.Empty;
         }
 
         /// <summary>
@@ -533,11 +550,12 @@ namespace KK.WechatAuto
         /// </summary>
         /// <param name="toUser"></param>
         /// <param name="content"></param>
-        private void SendTextMsg(String toUser, String content)
+        private String SendTextMsg(String toUser, String content)
         {
-            HttpWebRequest request = WebRequest.CreateHttp($"https://{m_Session.WXVer}.qq.com/cgi-bin/mmwebwx-bin/webwxsendmsg?lang=zh_CN&pass_ticket=" + m_Session.pass_ticket);
-            request.CookieContainer = m_Session.CookieContainer;
-            request.Method = "POST";
+            String _responseText = String.Empty;
+            HttpWebRequest _request = WebRequest.CreateHttp($"https://{m_Session.WXVer}.qq.com/cgi-bin/mmwebwx-bin/webwxsendmsg?lang=zh_CN&pass_ticket=" + m_Session.pass_ticket);
+            _request.CookieContainer = m_Session.CookieContainer;
+            _request.Method = "POST";
 
             // 创建请求参数
             MessageRequest reqPar = new MessageRequest();
@@ -548,25 +566,33 @@ namespace KK.WechatAuto
             String reqParStr = JsonConvert.SerializeObject(reqPar);
 
             byte[] b = System.Text.Encoding.UTF8.GetBytes(reqParStr);
-            request.ContentLength = b.Length;
-            System.IO.Stream reStream = request.GetRequestStream();
+            _request.ContentLength = b.Length;
+            System.IO.Stream reStream = _request.GetRequestStream();
             reStream.Write(b, 0, b.Length);
             reStream.Close();
 
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-            m_Session.AddCookies(response.Cookies);
-            if (response.StatusCode != HttpStatusCode.OK)
+            using (HttpWebResponse response = (HttpWebResponse)_request.GetResponse())
             {
-                WriteLog("[发送消息]加载错误，http请求状态：" + response.StatusCode);
+                _responseText = m_Session.GetResponseString(response);
+                if (response.StatusCode != HttpStatusCode.OK)
+                {
+                    return "[发送文本消息]加载错误，http请求状态：" + response.StatusCode;
+                }
+
+                // 尝试请求结果转换为对象
+                if (_responseText.Contains("BaseResponse"))
+                {
+                    MessageResponse repObj = JsonConvert.DeserializeObject<MessageResponse>(_responseText);
+                    if (repObj.BaseResponse.Ret != 0)
+                    {
+                        return "[发送文本消息]失败。服务器返回错误代码：" + repObj.BaseResponse.Ret;
+                    }
+                }
+
+                response.Close();
             }
 
-            System.IO.StreamReader sr = new System.IO.StreamReader(response.GetResponseStream());
-            String result = sr.ReadToEnd();
-            sr.Close();
-            response.Close();
-            WriteLog("[发送消息]HTTP请求返回结果：" + result);
-
-
+            return string.Empty;
         }
 
         public bool AcceptAllCertifications(object sender, System.Security.Cryptography.X509Certificates.X509Certificate certification, System.Security.Cryptography.X509Certificates.X509Chain chain, System.Net.Security.SslPolicyErrors sslPolicyErrors)
@@ -628,7 +654,6 @@ namespace KK.WechatAuto
         }
         #endregion
 
-
         #region 单步调试
 
         private void button1_Click(object sender, EventArgs e)
@@ -661,15 +686,15 @@ namespace KK.WechatAuto
         {
             try
             {
-                List<String> users = GetSelReceivers();
+                Dictionary<String, String> users = GetSelReceivers();
                 List<String> files = GetSelFiles();
                 if (users != null && files != null)
                 {
-                    foreach (string user in users)
+                    foreach (var user in users)
                     {
                         foreach (string file in files)
                         {
-                            SendImageMsg(user, file);
+                            SendImageMsg(user.Key, file);
                         }
                     }
                 }
@@ -686,12 +711,12 @@ namespace KK.WechatAuto
         {
             try
             {
-                List<String> users = GetSelReceivers();
+                Dictionary<String, String> users = GetSelReceivers();
                 if (users != null)
                 {
-                    foreach (string user in users)
+                    foreach (var user in users)
                     {
-                        SendTextMsg(user, txtMessage.Text);
+                        SendTextMsg(user.Key, txtMessage.Text);
                     }
                 }
 
@@ -796,47 +821,7 @@ namespace KK.WechatAuto
         {
             try
             {
-                WriteLog("开始发送消息。。。", false);
-
-                // 验证登陆状态
-
-                String _txtMsg = txtMessage.Text;
-
-                // 获取文本
-
-                // 获取图片
-                List<String> _files = GetSelFiles();
-
-                // 获取接收人
-                List<String> _receivers = GetSelReceivers();
-
-                // 执行发送
-                if (_receivers != null && _receivers.Count > 0)
-                {
-                    WriteLog($"共有[{_receivers.Count}]个接收人,[{(_files!=null?_files.Count:0)}]个文件",false);
-                    foreach (String receiver in _receivers)
-                    {
-                        // 发送图片
-                        if (_files != null && _files.Count > 0)
-                        {
-                            for (Int32 i = 0; i < _files.Count; i++)
-                            {
-                                // 判断文件类型，选择按照图片发送还是文件发送
-
-                                SendImageMsg(receiver, _files[i], i);
-                            }
-                        }
-                        // 发送文本
-                        if (!String.IsNullOrEmpty(_txtMsg) && _txtMsg.Length > 0)
-                        {
-                            SendTextMsg(receiver, _txtMsg);
-                        }
-
-                        System.Threading.Thread.Sleep(3000);
-                    }
-
-                    WriteLog("发送完毕！",false);
-                }
+                Task.Factory.StartNew(SendMessage);
 
             }
             catch (Exception ex)
@@ -845,14 +830,87 @@ namespace KK.WechatAuto
             }
         }
 
+        private void SendMessage()
+        {
+            try
+            {
+                WriteLog("开始发送消息。。。", false);
+                String _errMsg = String.Empty;
+                // 验证登陆状态
+
+                // 获取文本
+                String _txtMsg = String.Empty;
+                this.Invoke(new EventHandler(delegate { _txtMsg = txtMessage.Text; }));
+
+                // 获取文件
+                List<String> _files = GetSelFiles();
+
+                // 获取接收人
+                Dictionary<String, String> _receivers = GetSelReceivers();
+
+                // 执行发送
+                if (_receivers != null && _receivers.Count > 0)
+                {
+                    WriteLog($"共有[{_receivers.Count}]个接收人,[{(_files != null ? _files.Count : 0)}]个文件", false);
+                    foreach (var receiver in _receivers)
+                    {
+                        WriteLog($"向[{receiver.Value}]发送文件。", false);
+                        // 发送图片
+                        if (_files != null && _files.Count > 0)
+                        {
+                            for (Int32 i = 0; i < _files.Count; i++)
+                            {
+                                // 判断文件类型，选择按照图片发送还是文件发送
+                                WriteLog($"开始发送文件[{_files[i]}]。", false);
+                                _errMsg = SendImageMsg(receiver.Key, _files[i], i);
+                                if (!String.IsNullOrEmpty(_errMsg))
+                                {
+                                    WriteLog($"文件[{_files[i]}]发送失败:" + _errMsg, false);
+                                }
+                                else
+                                {
+                                    WriteLog($"文件[{_files[i]}]发送成功！", false);
+                                }
+                                System.Threading.Thread.Sleep(Common.RandomSleep());
+                            }
+                        }
+                        WriteLog($"向[{receiver.Value}]发送文本消息。", false);
+                        System.Threading.Thread.Sleep(Common.RandomSleep());
+                        // 发送文本
+                        if (!String.IsNullOrEmpty(_txtMsg) && _txtMsg.Length > 0)
+                        {
+                            _errMsg = SendTextMsg(receiver.Key, _txtMsg);
+                            if (!String.IsNullOrEmpty(_errMsg))
+                            {
+                                WriteLog($"文本消息发送失败:" + _errMsg, false);
+                            }
+                            else
+                            {
+                                WriteLog($"文本消息发送成功！", false);
+                            }
+                        }
+
+                        System.Threading.Thread.Sleep(Common.RandomSleep());
+                    }
+
+                    WriteLog("发送完毕！", false);
+                }
+            }
+            catch (Exception ex)
+            {
+                WriteLog("消息发送线程内异常：" + ex.Message);
+            }
+        }
+
         /// <summary>
         /// 获取设置的联系人。
         /// </summary>
         /// <returns></returns>
-        private List<String> GetSelReceivers()
+        private Dictionary<String, String> GetSelReceivers()
         {
-            List<String> result = new List<string>();
-            String all = txtReceivers.Text;
+            Dictionary<String, String> result = new Dictionary<String, String>();
+            String all = String.Empty;
+            this.Invoke(new EventHandler(delegate { all = txtReceivers.Text; }));
             String[] allARr = all.Split(new char[] { '\r', '\n' });
 
             if (allARr != null && allARr.Length > 0)
@@ -864,7 +922,7 @@ namespace KK.WechatAuto
                         String userName = m_Session.Contacts.FirstOrDefault(x => x.RemarkName == remarkName || x.NickName == remarkName)?.UserName;
                         if (!String.IsNullOrEmpty(userName))
                         {
-                            result.Add(userName);
+                            result.Add(userName, remarkName);
                         }
                     }
                 }
@@ -879,9 +937,11 @@ namespace KK.WechatAuto
         private List<String> GetSelFiles()
         {
             List<String> _files = new List<string>();
-            if (listFiles.Items.Count > 0)
+            ListBox.ObjectCollection coll = null;
+            this.Invoke(new EventHandler(delegate { coll = listFiles.Items; }));
+            if (coll.Count > 0)
             {
-                foreach (var item in listFiles.Items)
+                foreach (var item in coll)
                 {
                     _files.Add(item.ToString());
                 }
@@ -889,9 +949,39 @@ namespace KK.WechatAuto
             return _files;
         }
 
+        /// <summary>
+        /// 获取文本消息
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnGetText_Click(object sender, EventArgs e)
+        {
+            HttpWebRequest _request = null;
+            HttpWebResponse _response = null;
+            String _responseText = String.Empty;
+
+            try
+            {
+                _request = m_Session.CreateRequest(txtMessageUrl.Text);
+                using (_response = (HttpWebResponse)_request.GetResponse())
+                {
+                    _responseText = m_Session.GetResponseString(_response);
+                    if (_response.StatusCode == HttpStatusCode.OK)
+                    {
+                        txtMessage.Text = _responseText;
+                    }
+                    _response.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                WriteLog("[获取消息]异常：" + ex.Message);
+            }
+        }
+
         #endregion
 
- 
+
 
         private void CheckedChanged_ContactType(object sender, EventArgs e)
         {
@@ -909,10 +999,10 @@ namespace KK.WechatAuto
                             dataGridView1.DataSource = m_Session.Contacts;
                             break;
                         case "group":
-                            dataGridView1.DataSource = m_Session.Contacts.FindAll(x=>x.UserName.StartsWith("@@"));
+                            dataGridView1.DataSource = m_Session.Contacts.FindAll(x => x.UserName.StartsWith("@@"));
                             break;
                         case "friend":
-                            dataGridView1.DataSource = m_Session.Contacts.FindAll(x=> !x.UserName.StartsWith("@@"));
+                            dataGridView1.DataSource = m_Session.Contacts.FindAll(x => !x.UserName.StartsWith("@@"));
                             break;
                         case "subscribe":
                             //dataGridView1.DataSource = m_Session.Contacts.All(x=>x.VerifyFlag);
@@ -932,5 +1022,6 @@ namespace KK.WechatAuto
             frm.Session = m_Session;
             frm.Show();
         }
+
     }
 }

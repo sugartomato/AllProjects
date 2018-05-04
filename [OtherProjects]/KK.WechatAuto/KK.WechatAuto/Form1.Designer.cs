@@ -36,6 +36,7 @@
             this.btnSendTextMsg = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnViewSession = new System.Windows.Forms.Button();
             this.btnSendImageMsg = new System.Windows.Forms.Button();
             this.txtMessage = new System.Windows.Forms.RichTextBox();
             this.listFiles = new System.Windows.Forms.ListBox();
@@ -55,7 +56,8 @@
             this.rbtUser = new System.Windows.Forms.RadioButton();
             this.rbtGroup = new System.Windows.Forms.RadioButton();
             this.lblState = new System.Windows.Forms.Label();
-            this.btnViewSession = new System.Windows.Forms.Button();
+            this.txtMessageUrl = new System.Windows.Forms.TextBox();
+            this.btnGetText = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -143,6 +145,17 @@
             this.panel1.Size = new System.Drawing.Size(82, 469);
             this.panel1.TabIndex = 7;
             // 
+            // btnViewSession
+            // 
+            this.btnViewSession.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnViewSession.Location = new System.Drawing.Point(3, 429);
+            this.btnViewSession.Name = "btnViewSession";
+            this.btnViewSession.Size = new System.Drawing.Size(75, 35);
+            this.btnViewSession.TabIndex = 5;
+            this.btnViewSession.Text = "Session";
+            this.btnViewSession.UseVisualStyleBackColor = true;
+            this.btnViewSession.Click += new System.EventHandler(this.btnViewSession_Click);
+            // 
             // btnSendImageMsg
             // 
             this.btnSendImageMsg.Location = new System.Drawing.Point(2, 85);
@@ -158,7 +171,7 @@
             this.txtMessage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtMessage.Location = new System.Drawing.Point(11, 261);
             this.txtMessage.Name = "txtMessage";
-            this.txtMessage.Size = new System.Drawing.Size(363, 116);
+            this.txtMessage.Size = new System.Drawing.Size(363, 89);
             this.txtMessage.TabIndex = 9;
             this.txtMessage.Text = "";
             // 
@@ -166,14 +179,14 @@
             // 
             this.listFiles.FormattingEnabled = true;
             this.listFiles.ItemHeight = 12;
-            this.listFiles.Location = new System.Drawing.Point(11, 412);
+            this.listFiles.Location = new System.Drawing.Point(11, 448);
             this.listFiles.Name = "listFiles";
-            this.listFiles.Size = new System.Drawing.Size(363, 124);
+            this.listFiles.Size = new System.Drawing.Size(363, 88);
             this.listFiles.TabIndex = 12;
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(56, 381);
+            this.button5.Location = new System.Drawing.Point(56, 415);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 30);
             this.button5.TabIndex = 13;
@@ -247,7 +260,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(9, 390);
+            this.label3.Location = new System.Drawing.Point(9, 433);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(41, 12);
             this.label3.TabIndex = 20;
@@ -348,22 +361,31 @@
             this.lblState.TabIndex = 25;
             this.lblState.Text = "就绪";
             // 
-            // btnViewSession
+            // txtMessageUrl
             // 
-            this.btnViewSession.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnViewSession.Location = new System.Drawing.Point(3, 429);
-            this.btnViewSession.Name = "btnViewSession";
-            this.btnViewSession.Size = new System.Drawing.Size(75, 35);
-            this.btnViewSession.TabIndex = 5;
-            this.btnViewSession.Text = "Session";
-            this.btnViewSession.UseVisualStyleBackColor = true;
-            this.btnViewSession.Click += new System.EventHandler(this.btnViewSession_Click);
+            this.txtMessageUrl.Location = new System.Drawing.Point(11, 356);
+            this.txtMessageUrl.Name = "txtMessageUrl";
+            this.txtMessageUrl.Size = new System.Drawing.Size(282, 21);
+            this.txtMessageUrl.TabIndex = 26;
+            this.txtMessageUrl.Text = "http://www.sk-zx.com/userfiles/wxmsg/kk.txt";
+            // 
+            // btnGetText
+            // 
+            this.btnGetText.Location = new System.Drawing.Point(299, 354);
+            this.btnGetText.Name = "btnGetText";
+            this.btnGetText.Size = new System.Drawing.Size(75, 23);
+            this.btnGetText.TabIndex = 27;
+            this.btnGetText.Text = "获取消息";
+            this.btnGetText.UseVisualStyleBackColor = true;
+            this.btnGetText.Click += new System.EventHandler(this.btnGetText_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1136, 548);
+            this.Controls.Add(this.btnGetText);
+            this.Controls.Add(this.txtMessageUrl);
             this.Controls.Add(this.lblState);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.btnClearConsole);
@@ -428,6 +450,8 @@
         private System.Windows.Forms.RadioButton rbtSubscribe;
         private System.Windows.Forms.Label lblState;
         private System.Windows.Forms.Button btnViewSession;
+        private System.Windows.Forms.TextBox txtMessageUrl;
+        private System.Windows.Forms.Button btnGetText;
     }
 }
 

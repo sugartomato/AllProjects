@@ -23,12 +23,6 @@
                 <ResourceDictionary Source="/ZSExcelAddIn;component/Controls/Style.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
 
-            <Style x:Key="BTNStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
-                <Style.Setters>
-                    <Setter Property="Height" Value="30"></Setter>
-                    <Setter Property="Width" Value="100"/>
-                </Style.Setters>
-            </Style>
             <Style x:Key="ButtonPanel" TargetType="{x:Type WrapPanel}">
                 <Style.Setters>
                     <Setter Property="HorizontalAlignment" Value="Right"/>
@@ -52,43 +46,65 @@
             <WrapPanel Grid.Row="0" Margin="5,0,0,0" Orientation="Horizontal" VerticalAlignment="Center">
                 <Label>存储目录：</Label>
                 <Label Name="ZS_LBL_SaveFolder" Margin="3,0,0,0" FontWeight="Bold"></Label>
-                <Button Name="ZS_BTN_SelectFolder" Width="50" Margin="3,0,0,0">浏览..</Button>
+                <Button Name="ZS_BTN_SelectFolder" Width="100" Margin="3,0,0,0">浏览..</Button>
             </WrapPanel>
         </Border>
 
-        <!--#region 导出附加条件 -->
-        <ListView Grid.Row="1" Name="ZS_List_Setting" VerticalAlignment="Center" BorderBrush="Transparent">
-            <WrapPanel VerticalAlignment="Center">
-                <CheckBox Name="ZS_CHK_IsAddWorkBookName">添加工作簿名称到新文件前缀</CheckBox>
-                <TextBox Name="ZS_Text_FileNamePrefix" Margin="5,0,0,0" MinWidth="100"></TextBox>
-            </WrapPanel>
-            <CheckBox Name="ZS_CHK_IsCreateSubFolder">
-                <CheckBox.Content>
-                    建立子目录
-                </CheckBox.Content>
-                <CheckBox.ToolTip>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" FontSize="14" Margin="0,0,0,5">将文件存放到子目录</TextBlock>
-                        <TextBlock>
-                            在选定的保存位置，以工作簿名称创建子目录，将导出的工作表存放到该目录中。
-                        </TextBlock>
-                        <StackPanel>
-                            <TextBlock>aadfasdasdfads</TextBlock>
-                            <CheckBox>不在显示</CheckBox>
-                        </StackPanel>
-                    </StackPanel>
-                </CheckBox.ToolTip>
+        <StackPanel Orientation="Vertical" Grid.Row="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-            </CheckBox>
-            <CheckBox Name="ZS_CHK_IsOverWrite">覆盖已存在的文件</CheckBox>
-            <CheckBox Name="ZS_CHK_OpenFolderAfterFinish">完成后打开</CheckBox>
-        </ListView>
-        <!--#endregion-->
+                <StackPanel Grid.Column="0">
+                    <!--#region 导出附加条件 -->
+
+                    <ListView Grid.Row="1" Name="ZS_List_Setting" VerticalAlignment="Center" BorderBrush="Transparent">
+                        <WrapPanel VerticalAlignment="Center">
+                            <CheckBox Name="ZS_CHK_IsAddWorkBookName">添加工作簿名称到新文件前缀</CheckBox>
+                            <TextBox Name="ZS_Text_FileNamePrefix" Margin="5,0,0,0" MinWidth="100"></TextBox>
+                        </WrapPanel>
+                        <CheckBox Name="ZS_CHK_IsCreateSubFolder">
+                            <CheckBox.Content>
+                                建立子目录
+                            </CheckBox.Content>
+                            <CheckBox.ToolTip>
+                                <StackPanel>
+                                    <TextBlock FontWeight="Bold" FontSize="14" Margin="0,0,0,5">将文件存放到子目录</TextBlock>
+                                    <TextBlock>
+                            在选定的保存位置，以工作簿名称创建子目录，将导出的工作表存放到该目录中。
+                                    </TextBlock>
+                                    <StackPanel>
+                                        <TextBlock>aadfasdasdfads</TextBlock>
+                                        <CheckBox>不在显示</CheckBox>
+                                    </StackPanel>
+                                </StackPanel>
+                            </CheckBox.ToolTip>
+
+                        </CheckBox>
+                        <CheckBox Name="ZS_CHK_IsOverWrite">覆盖已存在的文件</CheckBox>
+                        <CheckBox Name="ZS_CHK_OpenFolderAfterFinish">完成后打开</CheckBox>
+                    </ListView>
+                    <!--#endregion-->
+                </StackPanel>
+                <StackPanel Grid.Column="1">
+                    <ToolBar>
+                        <Button>全选</Button>
+                        <Button>反选</Button>
+                    </ToolBar>
+                    <ListView x:Name="ZS_LIST_SheetName">
+                        
+                    </ListView>
+                </StackPanel>
+            </Grid>
+                
+        </StackPanel>
 
         <WrapPanel Grid.Row="2" HorizontalAlignment="Right" Orientation="Horizontal">
             <StackPanel Margin="4" Orientation="Horizontal">
-                <Button Name="ZS_BTN_DoExport" Click="BTN_DoExport_Click" Style="{StaticResource BTNStyle}">导出</Button>
-                <Button Name="ZS_BTN_Exit" Margin="5,0,0,0" Click="BTN_Exit_Click" Style="{StaticResource BTNStyle}">关闭</Button>
+                <Button Name="ZS_BTN_DoExport" Click="BTN_DoExport_Click">导出</Button>
+                <Button Name="ZS_BTN_Exit" Margin="5,0,0,0" Click="BTN_Exit_Click">关闭</Button>
             </StackPanel>
         </WrapPanel>
 

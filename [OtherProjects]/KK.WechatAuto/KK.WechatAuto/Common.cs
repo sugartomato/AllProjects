@@ -55,8 +55,7 @@ namespace KK.WechatAuto
         /// <summary>
         /// 调试信息
         /// </summary>
-        public static System.Collections.Queue DebugMessage { get; set; } = new System.Collections.Queue();
-        public static System.Collections.Queue UserMessage { get; set; } = new System.Collections.Queue();
+        public static System.Collections.Queue UserMessages { get; set; } = new System.Collections.Queue();
 
         /// <summary>
         /// 返回随机的程序执行间隔，单位为毫秒

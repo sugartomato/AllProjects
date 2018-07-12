@@ -35,7 +35,7 @@ using Excel = Microsoft.Office.Interop.Excel;
 namespace ZSExcelAddIn
 {
     [ComVisible(true)]
-    public class RibMyTools : Office.IRibbonExtensibility
+    public partial  class RibMyTools : Office.IRibbonExtensibility
     {
         private Office.IRibbonUI ribbon;
         // 调试信息显示用户控件
@@ -637,138 +637,37 @@ namespace ZSExcelAddIn
             return rng.Address;
         }
 
-        #endregion
-
-        #region 测试/调试
-
-        public void OnClick_Test(Office.IRibbonControl ctrl)
+        private Excel.Workbook _ActiveBook
         {
-            Excel.Worksheet _thisSheet = (Excel.Worksheet)Globals.ThisAddIn.Application.ActiveSheet;
-
-            switch(ctrl.Id)
+            get
             {
-                case "btn_Test_UnDo":
-                    //Globals.ThisAddIn.Application.Undo();
-                    Globals.ThisAddIn.Application.OnUndo("撤销这个", "ToUnDo");
-
-                    break;
-                case "btn_Test_QueryTable":
-
-
-                    System.Data.SqlClient.SqlConnectionStringBuilder ssb = new System.Data.SqlClient.SqlConnectionStringBuilder();
-                    ssb.UserID = "oasa";
-                    ssb.Password = "lixinyue112233";
-                    ssb.InitialCatalog = "oa";
-                    ssb.DataSource = "10.90.0.2";
-
-                    
-
-                    string sqlString = "OLEDB;Provider=SQLOLEDB.1;Persist Security Info=True;User ID=oasa;Initial Catalog=OA;Data Source=10.90.0.2;Use Procedure for Prepare=1;Auto Translate=Tru";
-                   
-                    Excel.ListObjects listObjects = _thisSheet.ListObjects;
-                    Excel.ListObject listObject = listObjects.AddEx(Excel.XlListObjectSourceType.xlSrcExternal,
-                        sqlString,
-                        Type.Missing,
-                        Excel.XlYesNoGuess.xlYes,
-                        _thisSheet.Range["$A$2"],
-                        Type.Missing);
-                    Excel.QueryTable queryTable = listObject.QueryTable;
-                    queryTable.CommandType = Excel.XlCmdType.xlCmdSql;
-                    queryTable.CommandText = _thisSheet.Range["A1"].Value;
-                    queryTable.AdjustColumnWidth = true;
-                    queryTable.Refresh();
-                    break;
-
-                case "btn_TextResize":
-                    Excel.Range oldRng = _thisSheet.Range["A3:F3"];
-                    MessageBox.Show("旧区域地址：" + oldRng.Address);
-                    Excel.Range newRng = oldRng.Resize[oldRng.Rows.Count+2,oldRng.Columns.Count];
-                    MessageBox.Show("新区域地址：" + newRng.Address);
-
-
-                   
-
-                    break;
-                case "btn_InputCheck":
-
-                    object f = _thisSheet.Application.InputBox("输入一个，测试bool");
-
-                    MessageBox.Show(f.ToString() == "1" ? "有效":"都是无效");
-
-
-                    break;
+                if (Globals.ThisAddIn.Application == null || Globals.ThisAddIn.Application.ActiveWorkbook == null) return null;
+                return (Excel.Workbook)Globals.ThisAddIn.Application.ActiveWorkbook;
             }
         }
 
-        /// <summary>
-        /// 调试组按钮点击事件
-        /// </summary>
-        /// <param name="ctrl"></param>
-        public void OnClick_Debug(Office.IRibbonControl ctrl)
+        private Excel.Worksheet _ActiveSheet
         {
-            switch (ctrl.Id)
+            get
             {
-                case "ZS_BTN_ListAllCommand":
-                    ListAllCommands();
-                    break;
-                default:
-                    MessageBox.Show("未指定处理分支：" + ctrl.Id);
-                    break;
+                if (Globals.ThisAddIn.Application == null || Globals.ThisAddIn.Application.ActiveWorkbook == null) return null;
+                return (Excel.Worksheet)Globals.ThisAddIn.Application.ActiveSheet;
             }
         }
 
-        /// <summary>
-        /// 枚举所有命令，写到一个新的工作表里
-        /// </summary>
-        private void ListAllCommands()
+
+        private void ShowError(String msg)
         {
-            try
-            {
-                List<String> result = new List<string>();
-                // 
-                Office.CommandBars cmds = Globals.ThisAddIn.Application.CommandBars;
-                if (cmds.Count > 0)
-                {
-                    foreach (Office.CommandBar cmd in cmds)
-                    {
-                        result.Add(cmd.Name + "|" + cmd.Id);
-                        if (cmd.Controls.Count > 0)
-                        {
-                            foreach (Office.CommandBarControl ctrl in cmd.Controls)
-                            {
-                                GetCommandBarControls(ctrl, "", result);
-                            }
-                        }
-                    }
-                }
-
-                Excel.Worksheet sheet = (Excel.Worksheet)Globals.ThisAddIn.Application.ActiveWorkbook.Worksheets.Add();
-                for(Int32 i = 0;i<result.Count;i++)
-                {
-                    sheet.Range["A" + (i + 1)].Value = result[i];
-                }
-                //sheet.Range["A1:A" + result.Count].Value = result.ToArray();
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("列举命令异常：" + ex.Message + ex.StackTrace);
-            }
+            MessageBox.Show(msg, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private void GetCommandBarControls(Office.CommandBarControl ctrl, String tab, List<String> result)
+        private void ShowInfo(String msg)
         {
-            tab += "\t";
-            result.Add(ctrl.Id + "|" + ctrl.Caption + "|" + ctrl.Parent.Name + "|" + ctrl.Control);
-        }
-
-
-        public void ToUnDo()
-        {
-            MessageBox.Show("1");
+            MessageBox.Show(msg, "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         #endregion
+
 
     }
 

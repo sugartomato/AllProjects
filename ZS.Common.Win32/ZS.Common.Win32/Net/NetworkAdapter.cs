@@ -138,22 +138,29 @@ namespace ZS.Common.Win32.Net
             Reg.RegistryKey regRoot = Reg.Registry.LocalMachine.OpenSubKey(@"System\CurrentControlSet\Control\Class\{4d36e972-e325-11ce-bfc1-08002be10318}\" + strIndex, true);
             Reg.RegistryKey regParams = regRoot.OpenSubKey(@"Ndi\params\NetworkAddress", true);
 
-            string[] valNames = regRoot.GetValueNames();
-            //先删除
-            if(valNames.Contains("NetworkAddress"))
+            if (regParams != null)
             {
-                regRoot.DeleteValue("NetworkAddress");
-                regParams.SetValue("Default", "");
-            }
+                string[] valNames = regRoot.GetValueNames();
+                //先删除
+                if (valNames.Contains("NetworkAddress"))
+                {
+                    regRoot.DeleteValue("NetworkAddress");
+                    regParams.SetValue("Default", "");
+                }
 
-            if(!string.IsNullOrEmpty(pMacAddress) && pMacAddress.Length > 0)
+                if (!string.IsNullOrEmpty(pMacAddress) && pMacAddress.Length > 0)
+                {
+                    regRoot.SetValue("NetworkAddress", pMacAddress);
+                    regParams.SetValue("Default", pMacAddress);
+                }
+
+                //Console.WriteLine(regRoot.GetValue("InfPath").ToString());
+                return true;
+            }
+            else
             {
-                regRoot.SetValue("NetworkAddress", pMacAddress);
-                regParams.SetValue("Default", pMacAddress);
+                throw new ApplicationException("没有找到键值：" + regParams.ToString());
             }
-
-            //Console.WriteLine(regRoot.GetValue("InfPath").ToString());
-            return true;
         }
 
         /// <summary>

@@ -40,7 +40,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.rangeSelector1 = new ZSExcelAddIn.Controls.RangeSelector();
-            this.label2 = new System.Windows.Forms.Label();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblState = new System.Windows.Forms.ToolStripStatusLabel();
             this.groupBox1.SuspendLayout();
@@ -111,7 +110,7 @@
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(100, 35);
             this.btnCancel.TabIndex = 7;
-            this.btnCancel.Text = "取消(&C)";
+            this.btnCancel.Text = "关闭(&C)";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
@@ -148,7 +147,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.chkPre);
             this.groupBox1.Controls.Add(this.rangeSelector1);
             this.groupBox1.Controls.Add(this.chkSuffix);
@@ -172,15 +170,6 @@
             this.rangeSelector1.Size = new System.Drawing.Size(315, 21);
             this.rangeSelector1.TabIndex = 14;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(235, 105);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(41, 12);
-            this.label2.TabIndex = 15;
-            this.label2.Text = "label2";
-            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -194,7 +183,7 @@
             // lblState
             // 
             this.lblState.Name = "lblState";
-            this.lblState.Size = new System.Drawing.Size(59, 17);
+            this.lblState.Size = new System.Drawing.Size(56, 17);
             this.lblState.Text = "处理状态";
             // 
             // PreSuffixInsert
@@ -237,7 +226,6 @@
         private System.Windows.Forms.Label label1;
         private RangeSelector rangeSelector1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel lblState;
     }

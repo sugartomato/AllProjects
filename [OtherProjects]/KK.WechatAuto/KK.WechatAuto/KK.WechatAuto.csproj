@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="BaseRequest.cs" />
     <Compile Include="BaseResponse.cs" />
+    <Compile Include="Message.cs" />
     <Compile Include="MessageResponse.cs" />
     <Compile Include="Common.cs" />
     <Compile Include="DataGridViewEx.cs" />

@@ -39,7 +39,7 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panelChkFileExt = new System.Windows.Forms.Panel();
             this.chkExGIF = new System.Windows.Forms.CheckBox();
             this.chkExBMP = new System.Windows.Forms.CheckBox();
             this.chkExPNG = new System.Windows.Forms.CheckBox();
@@ -53,7 +53,7 @@
             this.bgWorker = new System.ComponentModel.BackgroundWorker();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.panelChkFileExt.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -171,7 +171,7 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.panel1);
+            this.groupBox2.Controls.Add(this.panelChkFileExt);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.lblCompressLevel);
             this.groupBox2.Controls.Add(this.trackBar1);
@@ -182,17 +182,17 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "压缩选项";
             // 
-            // panel1
+            // panelChkFileExt
             // 
-            this.panel1.Controls.Add(this.chkExGIF);
-            this.panel1.Controls.Add(this.chkExBMP);
-            this.panel1.Controls.Add(this.chkExPNG);
-            this.panel1.Controls.Add(this.chkExJPG);
-            this.panel1.Controls.Add(this.chkExJPEG);
-            this.panel1.Location = new System.Drawing.Point(17, 83);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(387, 100);
-            this.panel1.TabIndex = 5;
+            this.panelChkFileExt.Controls.Add(this.chkExGIF);
+            this.panelChkFileExt.Controls.Add(this.chkExBMP);
+            this.panelChkFileExt.Controls.Add(this.chkExPNG);
+            this.panelChkFileExt.Controls.Add(this.chkExJPG);
+            this.panelChkFileExt.Controls.Add(this.chkExJPEG);
+            this.panelChkFileExt.Location = new System.Drawing.Point(17, 83);
+            this.panelChkFileExt.Name = "panelChkFileExt";
+            this.panelChkFileExt.Size = new System.Drawing.Size(387, 100);
+            this.panelChkFileExt.TabIndex = 5;
             // 
             // chkExGIF
             // 
@@ -339,8 +339,8 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.panelChkFileExt.ResumeLayout(false);
+            this.panelChkFileExt.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -367,7 +367,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblCompressLevel;
         private System.Windows.Forms.CheckBox chkExJPG;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panelChkFileExt;
         private System.Windows.Forms.CheckBox chkExBMP;
         private System.Windows.Forms.CheckBox chkExPNG;
         private System.Windows.Forms.CheckBox chkExJPEG;

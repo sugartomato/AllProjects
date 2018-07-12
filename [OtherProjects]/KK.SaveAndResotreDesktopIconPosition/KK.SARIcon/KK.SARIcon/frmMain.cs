@@ -50,6 +50,7 @@ namespace KK.SARIcon
                 this.Icon = Properties.Resources.friendly_icons;
                 List<IconItem> icons = GetIcons();
 
+
                 WriteConsole("获取到【" + icons.Count + "】个图标数据！");
 
                 // 保存图标数据到xml文件
@@ -116,6 +117,30 @@ namespace KK.SARIcon
             }
         }
 
+        private void btnListIcons_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                List<IconItem> icons = GetIcons();
+                WriteConsole("获取到【" + icons.Count + "】个图标数据！");
+                foreach (IconItem icon in icons)
+                {
+                    WriteConsole(icon.Index + ":" + icon.Text);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                WriteConsole("列举图标失败：" + ex.Message);
+            }
+        }
+
+        private void btnClearConsole_Click(object sender, EventArgs e)
+        {
+            txtConsole.Clear();
+        }
+
+
         #region 公共处理
         private List<IconItem> GetIcons()
         {
@@ -177,6 +202,5 @@ namespace KK.SARIcon
         }
 
         #endregion
-
     }
 }

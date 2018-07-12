@@ -110,6 +110,16 @@ namespace KK.ImageCompress
                     Log("指定的目录：[" + txtFolder.Text + "]不存在");
                     return;
                 }
+                // 获取要处理的后缀名
+                Control.ControlCollection chks = panelChkFileExt.Controls;
+                foreach (var chk in chks)
+                {
+                    CheckBox t = (CheckBox)chk;
+                    if (t.Checked)
+                    {
+                        o.FileExts.Add(t.Tag.ToString().ToLower());
+                    }
+                }
 
                 o.RootFolder = txtFolder.Text;
 
@@ -130,10 +140,6 @@ namespace KK.ImageCompress
             {
 
                 throw;
-            }
-            finally
-            {
-                Log("处理完成！", LogType.Success);
             }
         }
 
@@ -161,6 +167,7 @@ namespace KK.ImageCompress
         private class Options
         {
             public String RootFolder { get; set; }
+            public List<String> FileExts { get; set; } = new List<string>();
             
             public ZS.Common.ImageHelper.ResizeSetting ResizeSetting { get; set; }
         }
@@ -172,7 +179,7 @@ namespace KK.ImageCompress
             string[] files = System.IO.Directory.GetFiles(option.RootFolder);
             foreach (String file in files)
             {
-                if (m_FileExt.Contains(System.IO.Path.GetExtension(file)))
+                if (option.FileExts.Contains(System.IO.Path.GetExtension(file).ToLower()))
                 {
                     this.Invoke(LogWriter, "[处理]" +file, LogType.Warning);
                     ZS.Common.ImageHelper.Resize(file, option.ResizeSetting);
@@ -187,7 +194,7 @@ namespace KK.ImageCompress
 
         private void bgWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            Log("处理完成！");
+            Log("处理完成！", LogType.Success);
         }
 
 
@@ -208,11 +215,11 @@ namespace KK.ImageCompress
             }
             if (c.Checked)
             {
-                m_FileExt.Add(t);
+                m_FileExt.Add(t.ToLower());
             }
             else
             {
-                m_FileExt.Remove(t);
+                m_FileExt.Remove(t.ToLower());
             }
         }
     }

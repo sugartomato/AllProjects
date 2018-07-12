@@ -42,8 +42,6 @@ namespace ZS.Common.Win32.Win32Provider
         public string Status { get; set; }
         public UInt16 StatusInfo { get; set; }
 
-
-
         #region 方法
 
         /// <summary>
@@ -114,6 +112,26 @@ namespace ZS.Common.Win32.Win32Provider
             }
 
         }
+        #endregion
+
+        #region 定义
+
+        /// <summary>Ethernet 802.3</summary>
+        public const String AdapterType_Ethernet8023 = "Ethernet 802.3";
+        public const String AdapterType_TokenRing8025 = "Token Ring 802.5";
+        public const String AdapterType_FDDI = "Fiber Distributed Data Interface (FDDI)";
+        public const String AdapterType_WAN = "Wide Area Network (WAN)";
+        public const String AdapterType_LocalTalk = "LocalTalk";
+        public const String AdapterType_EthernetusingDIXheaderformat = "Ethernet using DIX header format";
+        public const String AdapterType_ARCNET = "ARCNET";
+        public const String AdapterType_ARCNET8782 = "ARCNET (878.2)";
+        public const String AdapterType_ATM = "ATM";
+        public const String AdapterType_Wireless = "Wireless";
+        public const String AdapterType_InfraredWireless = "Infrared Wireless";
+        public const String AdapterType_Bpc = "Bpc";
+        public const String AdapterType_CoWan = "CoWan";
+        public const String AdapterType_1394 = "1394";
+
         #endregion
     }
 }

@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+
+#region Office
+using Excel = Microsoft.Office.Interop.Excel;
+using Office = Microsoft.Office.Core;
+#endregion
+
 namespace ZSExcelAddIn
 {
     public class Common
@@ -36,6 +42,20 @@ namespace ZSExcelAddIn
             return sheet.Name;
         }
 
+        /// <summary>
+        /// 获取当前活动工作簿的所有工作表名
+        /// </summary>
+        /// <returns></returns>
+        public static List<String> GetSheetNamesOfActiveBook()
+        {
+            Excel.Workbook book = (Excel.Workbook)Globals.ThisAddIn.Application.ActiveWorkbook;
+            List<String> result = new List<string>();
+            foreach (var sheet in book.Sheets)
+            {
+                result.Add((sheet as Excel.Worksheet).Name);
+            }
+            return result;
+        }
 
 
         public class TreeViewItemBase : INotifyPropertyChanged

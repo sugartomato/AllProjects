@@ -38,13 +38,33 @@ namespace ZSExcelAddIn.Controls
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            ZS_LBL_SaveFolder.Content = Globals.ThisAddIn.Application.ActiveWorkbook.Path;
-
-            // 文件名前缀
-            ZS_Text_FileNamePrefix.Text = Globals.ThisAddIn.Application.ActiveWorkbook.Name;
-            if (ZS_Text_FileNamePrefix.Text.IndexOf('.') > 0)
+            try
             {
-                ZS_Text_FileNamePrefix.Text = ZS_Text_FileNamePrefix.Text.Substring(0, ZS_Text_FileNamePrefix.Text.LastIndexOf('.'));
+                ZS_LBL_SaveFolder.Content = Globals.ThisAddIn.Application.ActiveWorkbook.Path;
+
+                // 文件名前缀
+                ZS_Text_FileNamePrefix.Text = Globals.ThisAddIn.Application.ActiveWorkbook.Name;
+                if (ZS_Text_FileNamePrefix.Text.IndexOf('.') > 0)
+                {
+                    ZS_Text_FileNamePrefix.Text = ZS_Text_FileNamePrefix.Text.Substring(0, ZS_Text_FileNamePrefix.Text.LastIndexOf('.'));
+                }
+
+                // 加载工作表列表
+                List<String> sheetNames = Common.GetSheetNamesOfActiveBook();
+                if (sheetNames != null & sheetNames.Count > 0)
+                {
+                    foreach (var sn in sheetNames)
+                    {
+                        CheckBox chk = new CheckBox();
+                        ZS_LIST_SheetName.
+                    }
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
 

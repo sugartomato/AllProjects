@@ -14,7 +14,6 @@ namespace ZSExcelAddIn.Controls
     {
 
         private Excel.Application m_xlApp;
-        private Excel.Workbook m_xlBook;
         private Excel.Worksheet m_xlSheet;
 
         /// <summary>
@@ -212,13 +211,33 @@ namespace ZSExcelAddIn.Controls
                                 if (this.IsIgnorEmptyCell) break;
                             }
 
-                            val = this.Prefix + val + this.Suffix;
+                            if (chkPre.Checked)
+                            {
+                                val = this.Prefix + val;
+                            }
+                            if (chkSuffix.Checked)
+                            {
+                                if (chkSameAsPre.Checked)
+                                {
+                                    val = val + this.Prefix;
+                                }
+                                else
+                                {
+                                    val = val + this.Suffix;
+                                }
+                            }
+
                             c.Value = val;
 
-                            lblState.Text = "处理第【" + _cellCount.ToString() + "】个单元格；";
+                            WriteStateText("处理第【" + _cellCount.ToString() + "】个单元格；");
                             Application.DoEvents();
 
                         }
+                        WriteStateText("处理完成！");
+                    }
+                    else
+                    {
+                        WriteStateText("未选择任何区域！");
                     }
                 }
 
@@ -227,8 +246,6 @@ namespace ZSExcelAddIn.Controls
             {
                 MessageBox.Show("添加执行错误：" + ex.Message);
             }
-
-
 
         }
 
@@ -261,9 +278,9 @@ namespace ZSExcelAddIn.Controls
                         {
                             // 主要任务处理
                             Excel.Range c = (Excel.Range)selRang.Cells[i];
-
+                            if (c.Value == null) break;
                             string val = Convert.ToString(c.Value);
-                            if (val == null || val.ToString().Length == 0)
+                            if (val.Length == 0)
                             {
                                 if (this.IsIgnorEmptyCell) break;
                             }
@@ -281,17 +298,18 @@ namespace ZSExcelAddIn.Controls
 
                             c.Value = val;
                         }
+                        WriteStateText("处理完成！");
+                    }
+                    else
+                    {
+                        WriteStateText("未选择任何区域！");
                     }
                 }
-
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show("移除执行错误：" + ex.Message);
             }
-
-
         }
 
         /// <summary>
@@ -304,5 +322,10 @@ namespace ZSExcelAddIn.Controls
             this.Close();
         }
 
+        private void WriteStateText(String msg)
+        {
+            lblState.Text = msg;
+            Application.DoEvents();
+        }
     }
 }

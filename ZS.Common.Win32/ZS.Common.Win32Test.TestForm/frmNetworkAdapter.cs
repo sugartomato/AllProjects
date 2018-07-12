@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Net.NetworkInformation;
 
 namespace ZS.Common.Win32Test.TestForm
 {
@@ -98,6 +99,26 @@ namespace ZS.Common.Win32Test.TestForm
                 foreach(var item in list)
                 {
                     txtConsole.AppendText(item.ToDebugString());
+                }
+            }
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            txtConsole.AppendText("=".PadLeft(10, '='));
+
+            NetworkInterface[] nics = NetworkInterface.GetAllNetworkInterfaces();
+            if (nics != null && nics.Length > 0)
+            {
+                foreach (NetworkInterface nic in nics)
+                {
+                    txtConsole.AppendText("Id:" + nic.Id + "\r\n");
+                    txtConsole.AppendText("Description:" + nic.Description + "\r\n");
+                    txtConsole.AppendText("NetworkInterfaceType:" + nic.NetworkInterfaceType + "\r\n");
+                    txtConsole.AppendText("OperationalStatus:" + nic.OperationalStatus + "\r\n");
+                    txtConsole.AppendText("Speed:" + nic.Speed + "\r\n");
+                    txtConsole.AppendText("SupportsMulticast:" + nic.SupportsMulticast + "\r\n");
+                    txtConsole.AppendText("IsReceiveOnly:" + nic.IsReceiveOnly + "\r\n");
                 }
             }
         }

@@ -212,7 +212,7 @@ namespace KK.FileBackup
             try
             {
                 WriteMsg("开始备份");
-                if(gridMain.Rows.Count > 0)
+                if (gridMain.Rows.Count > 0)
                 {
                     m_SMTPSetting = new SMTPSetting();
                     m_SMTPSetting.Host = txtServerUrl.Text.Trim();
@@ -220,10 +220,15 @@ namespace KK.FileBackup
                     m_SMTPSetting.Account = txtMailAccount.Text.Trim();
                     m_SMTPSetting.Password = txtPassword.Text.Trim();
 
-                    foreach(DataGridViewRow row in gridMain.Rows)
+                    foreach (DataGridViewRow row in gridMain.Rows)
                     {
                         SendMail(row.Cells[2].Value.ToString());
                     }
+                }
+                else
+                {
+                    WriteMsg("没有可备份内容！");
+                    return;
                 }
 
                 WriteMsg("发送完成！");

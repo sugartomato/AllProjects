@@ -3,7 +3,7 @@
   <ribbon>
     <tabs>
       <!-- idMso对应的是 Office 内建选项卡的ID  -->
-      <tab id="TabDHD" label="KK工具箱" visible="true" insertAfterMso="TabView">
+      <tab id="TabDHD" label="【KK工具箱】" visible="true" insertAfterMso="TabView">
         <group id="grpDisplay"
                label="显示设置"
                visible="true"
@@ -129,6 +129,13 @@
         <!-- 调试组 -->
         <group id="ZS_GRP_Debug" imageMso="FileCompactAndRepairDatabase" label="调试">
           <button id="ZS_BTN_ListAllCommand" label="列举命令" size="large" onAction="OnClick_Debug" imageMso="DocumentPanelTemplate"/>
+          <button id="ZS_BTN_ListResource" label="列举资源" size="large" onAction="OnClick_Debug" imageMso="DocumentPanelTemplate" ></button>
+          <button id="ZS_BTN_LoadExcelInResource" label="加载资源中Excel文件" size="large" onAction="OnClick_Debug" imageMso="DocumentPanelTemplate" ></button>
+          <button id="ZS_BTN_Test_ListDllPath" label="列举路径" size="large" onAction="OnClick_Debug" imageMso="OutlineWeightGallery" screentip="列举获取dll路径的各种方式"></button>
+        </group>
+        <!-- 有趣的 -->
+        <group id="ZS_GRP_Funny" imageMso="HappyFace" label="这个有趣的">
+          <button id="ZS_BTN_Funny_PicToRange" label="图片转个像素" onAction="OnClick_Funny" imageMso="ViewDisplayInHighContrast" size="large" screentip="按像素读取图片并设置Excel单元格颜色。一个单元格对应一个像素。" keytip="KK"/>
         </group>
       </tab>
 

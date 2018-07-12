@@ -26,15 +26,16 @@ namespace KK.WechatAuto
         private Session m_Session = null;
         private Timer m_Timer_OutputLog = null;
         private Boolean m_IsRunSyncCheck = false;
+        private Int32 m_IntervalMin = 3;
+        private Int32 m_IntervalMax = 10;
+        private Int32 m_IntervalUsers = 20;
 
         private void Form1_Load(object sender, EventArgs e)
         {
             try
             {
-                txtState.Text = String.Empty;
                 listFiles.Items.Clear();
                 txtUseragent.Text = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.117 Safari/537.36";
-                txtState.Text = "";
                 txtReceivers.Clear();
                 txtMessage.Clear();
                 txtConsole.Clear();
@@ -400,16 +401,24 @@ namespace KK.WechatAuto
                 {
                     Newtonsoft.Json.Linq.JObject jobj = Newtonsoft.Json.JsonConvert.DeserializeObject<Newtonsoft.Json.Linq.JObject>(_responseText);
                     m_Session.Contacts = JsonConvert.DeserializeObject<List<WXContact>>(jobj["MemberList"].ToString());
+                    if (m_Session.Contacts != null && m_Session.Contacts.Count > 0)
+                    {
+                        WriteLog($"获取到[{m_Session.Contacts.Count}]个联系人！", false, Message.MessageType.Success);
+                    }
+                    else
+                    {
+                        WriteLog($"获取到[{m_Session.Contacts.Count}]个联系人！", false, Message.MessageType.Warning);
+                    }
                 }
                 else
                 {
                     m_Session.Contacts = null;
+                    WriteLog("联系人获取失败！", false, Message.MessageType.Error);
                 }
-                WriteLog("联系人信息获取完毕！", false);
             }
             catch (Exception ex)
             {
-                WriteLog("联系人信息获取失败！", false);
+                WriteLog("联系人信息获取异常：" + ex.Message, false, Message.MessageType.Error);
                 WriteLog("[联系人信息获取]异常：" + ex.Message + ex.StackTrace);
             }
             Application.DoEvents();
@@ -602,26 +611,43 @@ namespace KK.WechatAuto
 
         #region 界面消息
 
-        private void WriteLog(String msg, Boolean isDebug = true)
+        private void WriteLog(String msg, Boolean isDebug = true,Message.MessageType msgType = Message.MessageType.Information)
         {
-            Common.DebugMessage.Enqueue(msg);
-            if (!isDebug)
-            {
-                Common.UserMessage.Enqueue(msg);
-            }
+            Message message = new Message(msg,isDebug, msgType);
+
+            Common.UserMessages.Enqueue(message);
         }
 
         private void M_Timer_OutputLog_Tick(object sender, EventArgs e)
         {
             try
             {
-                if (Common.DebugMessage.Count > 0)
+                if (Common.UserMessages.Count > 0)
                 {
-                    txtConsole.AppendText(Common.DebugMessage.Dequeue() + "\r\n");
-                }
-                if (Common.UserMessage.Count > 0)
-                {
-                    txtState.AppendText(Common.UserMessage.Dequeue() + "\r\n");
+                    Message msg = (Message)Common.UserMessages.Dequeue();
+                    txtConsole.AppendText(msg.Text + "\r\n");
+                    if (!msg.IsDebug)
+                    {
+                        Int32 startIndex = txtExInfo.Text.Length;
+                        txtExInfo.AppendText(msg.Text + "\r\n");
+                        Int32 endIndex = txtExInfo.Text.Length;
+                        txtExInfo.Select(startIndex, endIndex);
+                        switch (msg.MsgType)
+                        {
+                            case Message.MessageType.Error:
+                                txtExInfo.SelectionColor = Color.Red;
+                                break;
+                            case Message.MessageType.Success:
+                                txtExInfo.SelectionColor = Color.Green;
+                                break;
+                            case Message.MessageType.Warning:
+                                txtExInfo.SelectionColor = Color.Orange;
+                                break;
+                            default:
+                                break;
+                        }
+                        txtExInfo.Select(txtExInfo.Text.Length, 1);
+                    }
                 }
 
             }
@@ -814,6 +840,12 @@ namespace KK.WechatAuto
             }
         }
 
+        private void btnClearFiles_Click(object sender, EventArgs e)
+        {
+            listFiles.Items.Clear();
+        }
+
+
         #region 消息发送
 
 
@@ -821,6 +853,9 @@ namespace KK.WechatAuto
         {
             try
             {
+                m_IntervalMin = (Int32)nudIntervalMin.Value;
+                m_IntervalMax = (Int32)nudIntervalMax.Value;
+                m_IntervalUsers = (Int32)nudIntervalUsers.Value;
                 Task.Factory.StartNew(SendMessage);
 
             }
@@ -834,7 +869,7 @@ namespace KK.WechatAuto
         {
             try
             {
-                WriteLog("开始发送消息。。。", false);
+                WriteLog("开始发送消息。。。", false, Message.MessageType.Warning);
                 String _errMsg = String.Empty;
                 // 验证登陆状态
 
@@ -851,10 +886,10 @@ namespace KK.WechatAuto
                 // 执行发送
                 if (_receivers != null && _receivers.Count > 0)
                 {
-                    WriteLog($"共有[{_receivers.Count}]个接收人,[{(_files != null ? _files.Count : 0)}]个文件", false);
+                    WriteLog($"共有【{_receivers.Count}】个接收人,[{(_files != null ? _files.Count : 0)}]个文件", false, Message.MessageType.Warning);
                     foreach (var receiver in _receivers)
                     {
-                        WriteLog($"向[{receiver.Value}]发送文件。", false);
+                        WriteLog($"向【{receiver.Value}】发送文件。", false);
                         // 发送图片
                         if (_files != null && _files.Count > 0)
                         {
@@ -865,35 +900,35 @@ namespace KK.WechatAuto
                                 _errMsg = SendImageMsg(receiver.Key, _files[i], i);
                                 if (!String.IsNullOrEmpty(_errMsg))
                                 {
-                                    WriteLog($"文件[{_files[i]}]发送失败:" + _errMsg, false);
+                                    WriteLog($"文件[{_files[i]}]发送失败:" + _errMsg, false, Message.MessageType.Error);
                                 }
                                 else
                                 {
-                                    WriteLog($"文件[{_files[i]}]发送成功！", false);
+                                    WriteLog($"文件[{_files[i]}]发送成功！", false, Message.MessageType.Success);
                                 }
-                                System.Threading.Thread.Sleep(Common.RandomSleep());
+                                SleepForMsg();
                             }
                         }
-                        WriteLog($"向[{receiver.Value}]发送文本消息。", false);
-                        System.Threading.Thread.Sleep(Common.RandomSleep());
+                        WriteLog($"向【{receiver.Value}】发送文本消息。", false);
+                        SleepForMsg();
                         // 发送文本
                         if (!String.IsNullOrEmpty(_txtMsg) && _txtMsg.Length > 0)
                         {
                             _errMsg = SendTextMsg(receiver.Key, _txtMsg);
                             if (!String.IsNullOrEmpty(_errMsg))
                             {
-                                WriteLog($"文本消息发送失败:" + _errMsg, false);
+                                WriteLog($"文本消息发送失败:" + _errMsg, false, Message.MessageType.Error);
                             }
                             else
                             {
-                                WriteLog($"文本消息发送成功！", false);
+                                WriteLog($"文本消息发送成功！", false,Message.MessageType.Success);
                             }
                         }
 
-                        System.Threading.Thread.Sleep(Common.RandomSleep());
+                        SleepForUser();
                     }
 
-                    WriteLog("发送完毕！", false);
+                    WriteLog("全部发送完毕！", false);
                 }
             }
             catch (Exception ex)
@@ -901,6 +936,16 @@ namespace KK.WechatAuto
                 WriteLog("消息发送线程内异常：" + ex.Message);
             }
         }
+
+        private void SleepForMsg()
+        {
+            System.Threading.Thread.Sleep(Common.RandomSleep(m_IntervalMin,m_IntervalMax));
+        }
+        private void SleepForUser()
+        {
+            System.Threading.Thread.Sleep((Int32)TimeSpan.FromSeconds(m_IntervalUsers).TotalMilliseconds);
+        }
+
 
         /// <summary>
         /// 获取设置的联系人。
@@ -980,8 +1025,6 @@ namespace KK.WechatAuto
         }
 
         #endregion
-
-
 
         private void CheckedChanged_ContactType(object sender, EventArgs e)
         {

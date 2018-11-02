@@ -96,6 +96,7 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>
     </DocumentationFile>
+    <RegisterForComInterop>false</RegisterForComInterop>
   </PropertyGroup>
   <!--
     This section defines properties that are set when the "Release" configuration is selected.
@@ -199,6 +200,18 @@
     <Compile Include="Controls\ExportSheetsToSingleFile.xaml.cs">
       <DependentUpon>ExportSheetsToSingleFile.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\frmFocus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\frmFocus.Designer.cs">
+      <DependentUpon>frmFocus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\frmTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\frmTest.Designer.cs">
+      <DependentUpon>frmTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\MergeSheets.xaml.cs">
       <DependentUpon>MergeSheets.xaml</DependentUpon>
     </Compile>
@@ -238,6 +251,7 @@
     <Compile Include="Controls\SortWorkSheets.xaml.cs">
       <DependentUpon>SortWorkSheets.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MyFunctions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -249,6 +263,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ExecuteProgress.resx">
       <DependentUpon>ExecuteProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\frmFocus.resx">
+      <DependentUpon>frmFocus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\frmTest.resx">
+      <DependentUpon>frmTest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\PreSuffixInsert.resx">
       <DependentUpon>PreSuffixInsert.cs</DependentUpon>
@@ -263,9 +283,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Ribbon1.resx">
-      <DependentUpon>Ribbon1.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config" />
     <EmbeddedResource Include="Images\用印记录_20180529143455.xlsx" />
@@ -284,12 +301,6 @@
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
-    </Compile>
-    <Compile Include="Ribbon1.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Ribbon1.Designer.cs">
-      <DependentUpon>Ribbon1.cs</DependentUpon>
     </Compile>
     <Compile Include="RibMyTools.cs" />
     <Compile Include="RibMyTools_Debug.cs" />
@@ -407,9 +418,11 @@
     <Resource Include="Resources\RefEditMax.bmp" />
     <Resource Include="Resources\RefEditMin.bmp" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Images\bg01.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Calculator.ico" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -423,6 +436,12 @@
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>EFBF1BC9860161DB6DF9B4C692632B9C1F4754E5</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>ZSExcelAddIn_TemporaryKey.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <!-- Include the build rules for a C# project. -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

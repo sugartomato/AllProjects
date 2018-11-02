@@ -20,65 +20,92 @@ namespace ZSExcelAddIn
 
         public void OnClick_Test(Office.IRibbonControl ctrl)
         {
-            Excel.Worksheet _thisSheet = (Excel.Worksheet)Globals.ThisAddIn.Application.ActiveSheet;
+			try
+			{
+				Excel.Worksheet _thisSheet = (Excel.Worksheet)Globals.ThisAddIn.Application.ActiveSheet;
 
-            switch (ctrl.Id)
-            {
-                case "btn_Test_UnDo":
-                    //Globals.ThisAddIn.Application.Undo();
-                    Globals.ThisAddIn.Application.OnUndo("撤销这个", "ToUnDo");
+				switch (ctrl.Id)
+				{
+					case "btn_Test_UnDo":
+						//Globals.ThisAddIn.Application.Undo();
+						Globals.ThisAddIn.Application.OnUndo("撤销这个", "ToUnDo");
 
-                    break;
-                case "btn_Test_QueryTable":
-
-
-                    System.Data.SqlClient.SqlConnectionStringBuilder ssb = new System.Data.SqlClient.SqlConnectionStringBuilder();
-                    ssb.UserID = "oasa";
-                    ssb.Password = "lixinyue112233";
-                    ssb.InitialCatalog = "oa";
-                    ssb.DataSource = "10.90.0.2";
+						break;
+					case "btn_Test_QueryTable":
 
 
-
-                    string sqlString = "OLEDB;Provider=SQLOLEDB.1;Persist Security Info=True;User ID=oasa;Initial Catalog=OA;Data Source=10.90.0.2;Use Procedure for Prepare=1;Auto Translate=Tru";
-
-                    Excel.ListObjects listObjects = _thisSheet.ListObjects;
-                    Excel.ListObject listObject = listObjects.AddEx(Excel.XlListObjectSourceType.xlSrcExternal,
-                        sqlString,
-                        Type.Missing,
-                        Excel.XlYesNoGuess.xlYes,
-                        _thisSheet.Range["$A$2"],
-                        Type.Missing);
-                    Excel.QueryTable queryTable = listObject.QueryTable;
-                    queryTable.CommandType = Excel.XlCmdType.xlCmdSql;
-                    queryTable.CommandText = _thisSheet.Range["A1"].Value;
-                    queryTable.AdjustColumnWidth = true;
-                    queryTable.Refresh();
-                    break;
-
-                case "btn_TextResize":
-                    Excel.Range oldRng = _thisSheet.Range["A3:F3"];
-                    ShowInfo("旧区域地址：" + oldRng.Address);
-                    Excel.Range newRng = oldRng.Resize[oldRng.Rows.Count + 2, oldRng.Columns.Count];
-                    ShowInfo("新区域地址：" + newRng.Address);
-
-                    break;
-                case "btn_InputCheck":
-
-                    object f = _thisSheet.Application.InputBox("输入一个，测试bool");
-
-                    ShowInfo(f.ToString() == "1" ? "有效" : "都是无效");
+						System.Data.SqlClient.SqlConnectionStringBuilder ssb = new System.Data.SqlClient.SqlConnectionStringBuilder();
+						ssb.UserID = "oasa";
+						ssb.Password = "lixinyue112233";
+						ssb.InitialCatalog = "oa";
+						ssb.DataSource = "10.90.0.2";
 
 
-                    break;
-            }
+
+						string sqlString = "OLEDB;Provider=SQLOLEDB.1;Persist Security Info=True;User ID=oasa;Initial Catalog=OA;Data Source=10.90.0.2;Use Procedure for Prepare=1;Auto Translate=Tru";
+
+						Excel.ListObjects listObjects = _thisSheet.ListObjects;
+						Excel.ListObject listObject = listObjects.AddEx(Excel.XlListObjectSourceType.xlSrcExternal,
+							sqlString,
+							Type.Missing,
+							Excel.XlYesNoGuess.xlYes,
+							_thisSheet.Range["$A$2"],
+							Type.Missing);
+						Excel.QueryTable queryTable = listObject.QueryTable;
+						queryTable.CommandType = Excel.XlCmdType.xlCmdSql;
+						queryTable.CommandText = _thisSheet.Range["A1"].Value;
+						queryTable.AdjustColumnWidth = true;
+						queryTable.Refresh();
+						break;
+
+					case "btn_TextResize":
+						Excel.Range oldRng = _thisSheet.Range["A3:F3"];
+						ShowInfo("旧区域地址：" + oldRng.Address);
+						Excel.Range newRng = oldRng.Resize[oldRng.Rows.Count + 2, oldRng.Columns.Count];
+						ShowInfo("新区域地址：" + newRng.Address);
+
+						break;
+					case "btn_InputCheck":
+
+						object f = _thisSheet.Application.InputBox("输入一个，测试bool");
+
+						ShowInfo(f.ToString() == "1" ? "有效" : "都是无效");
+
+						break;
+
+					case "ZS_BTN_Test_ShowForm":
+						Test_ShowCoverForm();
+						break;
+					case "ZS_BTN_Test_TestForm":
+						Controls.frmTest frm = new Controls.frmTest();
+						frm.Show();
+						break;
+					default:
+						System.Windows.Forms.MessageBox.Show("未指定的分支");
+						break;
+				}
+			}
+			catch (Exception)
+			{
+
+				throw;
+			}
         }
 
-        /// <summary>
-        /// 调试组按钮点击事件
-        /// </summary>
-        /// <param name="ctrl"></param>
-        public void OnClick_Debug(Office.IRibbonControl ctrl)
+
+		private void Test_ShowCoverForm()
+		{
+			Controls.frmFocus frm = new Controls.frmFocus();
+			frm.Show();
+		}
+
+		#endregion
+
+		/// <summary>
+		/// 调试组按钮点击事件
+		/// </summary>
+		/// <param name="ctrl"></param>
+		public void OnClick_Debug(Office.IRibbonControl ctrl)
         {
             switch (ctrl.Id)
             {
@@ -221,7 +248,6 @@ namespace ZSExcelAddIn
             ShowInfo("1");
         }
 
-        #endregion
 
 
 

@@ -43,47 +43,78 @@
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Accessibility" version="4.0.0.0" publicKeyToken="B03F5F7F11D50A3A" language="neutral" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
       <assemblyIdentity name="Microsoft.CSharp" version="4.0.0.0" publicKeyToken="B03F5F7F11D50A3A" language="neutral" />
     </dependentAssembly>
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
-      <assemblyIdentity name="stdole" version="7.0.3300.0" publicKeyToken="B03F5F7F11D50A3A" language="neutral" />
+      <assemblyIdentity name="Microsoft.VisualBasic" version="10.0.0.0" publicKeyToken="B03F5F7F11D50A3A" language="neutral" />
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="KK.ROSExcelAddin.dll" size="17408">
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="mscorlib" version="4.0.0.0" publicKeyToken="B77A5C561934E089" language="neutral" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="System" version="4.0.0.0" publicKeyToken="B77A5C561934E089" language="neutral" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="System.Core" version="4.0.0.0" publicKeyToken="B77A5C561934E089" language="neutral" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="System.Data" version="4.0.0.0" publicKeyToken="B77A5C561934E089" language="neutral" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="System.Data.DataSetExtensions" version="4.0.0.0" publicKeyToken="B77A5C561934E089" language="neutral" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="System.Drawing" version="4.0.0.0" publicKeyToken="B03F5F7F11D50A3A" language="neutral" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="System.Management" version="4.0.0.0" publicKeyToken="B03F5F7F11D50A3A" language="neutral" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="System.Windows.Forms" version="4.0.0.0" publicKeyToken="B77A5C561934E089" language="neutral" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="System.Xml" version="4.0.0.0" publicKeyToken="B77A5C561934E089" language="neutral" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="System.Xml.Linq" version="4.0.0.0" publicKeyToken="B77A5C561934E089" language="neutral" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="KK.ROSExcelAddin.dll" size="18432">
       <assemblyIdentity name="KK.ROSExcelAddin" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>61StIYNA/ZN+dRtBX7eTokPTSAw=</dsig:DigestValue>
-      </hash>
-    </dependentAssembly>
-  </dependency>
-  <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.Office.Tools.dll" size="16048">
-      <assemblyIdentity name="Microsoft.Office.Tools" version="10.0.0.0" publicKeyToken="B03F5F7F11D50A3A" language="neutral" processorArchitecture="msil" />
-      <hash>
-        <dsig:Transforms>
-          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-        </dsig:Transforms>
-        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>PsbU5rBsvHHpkeJ/xhVwSvHzHBQ=</dsig:DigestValue>
-      </hash>
-    </dependentAssembly>
-  </dependency>
-  <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.Office.Tools.Common.dll" size="92344">
-      <assemblyIdentity name="Microsoft.Office.Tools.Common" version="10.0.0.0" publicKeyToken="B03F5F7F11D50A3A" language="neutral" processorArchitecture="msil" />
-      <hash>
-        <dsig:Transforms>
-          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-        </dsig:Transforms>
-        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>D3z+bJ/djXizBmvFKKliWAjzizc=</dsig:DigestValue>
+        <dsig:DigestValue>SxKxOJLA6NJVDAxVvqqN849lGgE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -136,14 +167,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ZS.Common.Win32.dll" size="37888">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ZS.Common.Win32.dll" size="57344">
       <assemblyIdentity name="ZS.Common.Win32" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>YC5HiNcCY5Ji5ejaKiCpkRSOdHk=</dsig:DigestValue>
+        <dsig:DigestValue>SlhBU/oX85i8UgLd2nA/Npvxzz0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -194,4 +225,4 @@
       </vstov4:customizations>
     </vstav3:application>
   </vstav3:addIn>
-<publisherIdentity name="CN=SKUser-PC\SKUser" issuerKeyHash="548658884835886be2016af772576a9251e5bf16" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>mJQARx4iXYUuJ3RL2MTy4jaXADs=</DigestValue></Reference></SignedInfo><SignatureValue>eYu/KQi3/QT7DBJFz9GmP5gBbsW0g4WkT0fwc2p7aGBm9JcQIx6sW1ZpearOs/qhueFlF6y2Pu4nEq0gHpFZUOQqLa2upJjetoEUQ+eidtFdeDYrwyMT0epmfVen7jSIESZOt1R63VFwELD+S8vz8i10emBs8kWPXa8KH5aTdDs=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>uuUNmOfnHzKH0QhL9B8livj6QGQUGtTt021lyqmY/krEzafjpis3TeZjGL5u2ShKrk23e1FNCza+XEgNKRI1/Biut+kUSEh3iKT1A3oqmglrMjAvHcNCjWuva3ZvZR1lveP/2RWLiKBnN8Q9iUMFUqNKDA3BdOLQuP277oKBSfk=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="3b009736e2f2c4d84b74272e855d221e47009498" Description="" Url=""><as:assemblyIdentity name="KK.ROSExcelAddin.dll" version="1.0.0.0" publicKeyToken="d39e5988d578c0b0" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=SKUser-PC\SKUser</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>a16yOMdkYWkFx8tXC8Nd59LxPZ4=</DigestValue></Reference></SignedInfo><SignatureValue>k7X2KPyY+Izw9c6PZFmyULVgQYb+anxMF+H7zkwp63uro+fRyzeXRLoU+HX8n7rZ0zwYl8g8LWkWt7wEZCvYxpvt6mK6Y2xb+6fRMIAX9sj86eL+9t/5iheuKCNeQTpR+AgWZarllborWSZgOek4R+c4ma40xYYfOM5+Cb6jccc=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>uuUNmOfnHzKH0QhL9B8livj6QGQUGtTt021lyqmY/krEzafjpis3TeZjGL5u2ShKrk23e1FNCza+XEgNKRI1/Biut+kUSEh3iKT1A3oqmglrMjAvHcNCjWuva3ZvZR1lveP/2RWLiKBnN8Q9iUMFUqNKDA3BdOLQuP277oKBSfk=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB2TCCAUKgAwIBAgIQHJ7cuwgY8K5EHz6lmWHVSDANBgkqhkiG9w0BAQUFADArMSkwJwYDVQQDHiAAUwBLAFUAcwBlAHIALQBQAEMAXABTAEsAVQBzAGUAcjAeFw0xNzA4MjEwODA2NDdaFw0xODA4MjExNDA2NDdaMCsxKTAnBgNVBAMeIABTAEsAVQBzAGUAcgAtAFAAQwBcAFMASwBVAHMAZQByMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC65Q2Y5+cfMofRCEv0HyWK+PpAZBQa1O3TbWXKqZj+SsTNp+OmKzdN5mMYvm7ZKEquTbd7UU0LNr5cSA0pEjX8GK636RRISHeIpPUDeiqaCWsyMC8dw0KNa69rdm9lHWW94//ZFYuIoGc3xD2JQwVSo0oMDcF04tC4/bvugoFJ+QIDAQABMA0GCSqGSIb3DQEBBQUAA4GBAGzpVFMikG429mlNQiexgwijbXp8DaiXMssd9E9Rj4DYWYRODfuQoIhAWpHgTfNXELLdUkoYN+ZYl/BJVf0B1KBrvDMFct9N3Bp0EyZTFSdN7aqthEmih0b8kUtiGf8wmUAIA3xRl1LD0A1ELuJr3hXA4tVgo2h0B2d+saqx/RWI</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>
+<publisherIdentity name="CN=SKUser-PC\SKUser" issuerKeyHash="548658884835886be2016af772576a9251e5bf16" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>BygazkXKm/GF9+gttn7/s0DHdCs=</DigestValue></Reference></SignedInfo><SignatureValue>AQD6CC1e0sfLVH+uX4h96CvJ2nO77X4RO93Nm0GF/5LiJ3a1DSraM0k6NiWzUSRvf1LAYwIsFYGMD87kgOYPXPlCP1pQawRvdLQAoeTI0hEDCeJDB3bc5yWdyxtdEYzm3W5VU5vcEQoB0n9Os2rt+S681A0hwqT/e6qQQBss2uM=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>uuUNmOfnHzKH0QhL9B8livj6QGQUGtTt021lyqmY/krEzafjpis3TeZjGL5u2ShKrk23e1FNCza+XEgNKRI1/Biut+kUSEh3iKT1A3oqmglrMjAvHcNCjWuva3ZvZR1lveP/2RWLiKBnN8Q9iUMFUqNKDA3BdOLQuP277oKBSfk=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="2b74c740b3ff7eb62de8f785f19bca45ce1a2807" Description="" Url=""><as:assemblyIdentity name="KK.ROSExcelAddin.dll" version="1.0.0.0" publicKeyToken="d39e5988d578c0b0" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=SKUser-PC\SKUser</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>8tr2Sq6ApvDw9/GQzoMfKZ6+dus=</DigestValue></Reference></SignedInfo><SignatureValue>FtMgVuc2zKRA+MwjkQIquw+KaxJ6hMAAJwAz1EqnhPVhpCtnXFEVeI+i6aRg+LlM7vdPSTCvl77qtdE9VpEpAc2Iwp9zGNTk9fZdTStdDd4kABQXQ3Zcw9Uunal8jH6ClYnCC3+2+R5IKAyBhnUeC+2hQrZlHtsMssNVSzGF2W0=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>uuUNmOfnHzKH0QhL9B8livj6QGQUGtTt021lyqmY/krEzafjpis3TeZjGL5u2ShKrk23e1FNCza+XEgNKRI1/Biut+kUSEh3iKT1A3oqmglrMjAvHcNCjWuva3ZvZR1lveP/2RWLiKBnN8Q9iUMFUqNKDA3BdOLQuP277oKBSfk=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB2TCCAUKgAwIBAgIQHJ7cuwgY8K5EHz6lmWHVSDANBgkqhkiG9w0BAQUFADArMSkwJwYDVQQDHiAAUwBLAFUAcwBlAHIALQBQAEMAXABTAEsAVQBzAGUAcjAeFw0xNzA4MjEwODA2NDdaFw0xODA4MjExNDA2NDdaMCsxKTAnBgNVBAMeIABTAEsAVQBzAGUAcgAtAFAAQwBcAFMASwBVAHMAZQByMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC65Q2Y5+cfMofRCEv0HyWK+PpAZBQa1O3TbWXKqZj+SsTNp+OmKzdN5mMYvm7ZKEquTbd7UU0LNr5cSA0pEjX8GK636RRISHeIpPUDeiqaCWsyMC8dw0KNa69rdm9lHWW94//ZFYuIoGc3xD2JQwVSo0oMDcF04tC4/bvugoFJ+QIDAQABMA0GCSqGSIb3DQEBBQUAA4GBAGzpVFMikG429mlNQiexgwijbXp8DaiXMssd9E9Rj4DYWYRODfuQoIhAWpHgTfNXELLdUkoYN+ZYl/BJVf0B1KBrvDMFct9N3Bp0EyZTFSdN7aqthEmih0b8kUtiGf8wmUAIA3xRl1LD0A1ELuJr3hXA4tVgo2h0B2d+saqx/RWI</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>

@@ -81,6 +81,8 @@ namespace ZS.Common.Win32.Win32Provider
 
         /// <summary>
         /// 启用网卡。需要管理员权限运行
+        /// 最低客户端系统：WindowsVista
+        /// 最低服务器系统：Windows Server2008
         /// </summary>
         /// <returns></returns>
         public Boolean Enable()

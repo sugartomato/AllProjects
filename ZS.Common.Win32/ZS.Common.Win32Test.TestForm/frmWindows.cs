@@ -100,5 +100,46 @@ namespace ZS.Common.Win32Test.TestForm
         {
             txtConsole.Clear();
         }
-    }
+
+		private void btnEnumWindows_Click(object sender, EventArgs e)
+		{
+			Win32.API.EnumWindows(new Win32.API.EnumWindowsProc(DoEnumWindows), 0);
+		}
+
+		private Boolean DoEnumWindows(IntPtr hwnd, Int32 index)
+		{
+			Boolean bln = Win32.API.IsWindowVisible(hwnd);
+			if (bln)
+			{
+				txtConsole.AppendText(hwnd + ":" + Win32.API.GetWindowText(hwnd) + "\r\n");
+			}
+			return true;
+		}
+
+		private void button4_Click(object sender, EventArgs e)
+		{
+			IntPtr parentWindow = ZS.Common.Win32.API.FindWindow(null, txtWindowTitleA.Text);
+			AppendText("父窗口句柄:" + parentWindow.ToString());
+			if (parentWindow == IntPtr.Zero)
+			{
+				MessageBox.Show("未找到父窗口");
+				return;
+			}
+
+			ZS.Common.Win32.API.EnumChildWindows(parentWindow, new Win32.API.EnumChildProc(EnumProcSetControlText), 0);
+
+			AppendText("完成！");
+		}
+		private Boolean EnumProcSetControlText(IntPtr hwnd, Int32 lparam)
+		{
+			StringBuilder sb = new StringBuilder();
+			sb.Append(txtControlText.Text);
+
+			//Int32 re = ZS.Common.Win32.API.SendMessage(hwnd, ZS.Common.Win32.SystemDefinedMessages.WM_SETTEXT, sb.Capacity, sb);
+			Int32 re = ZS.Common.Win32.API.SendMessage(hwnd, ZS.Common.Win32.SystemDefinedMessages.WM_SETTEXT, IntPtr.Zero, txtControlText.Text);
+			AppendText("消息发送结果：" + re);
+			return true;
+		}
+
+	}
 }

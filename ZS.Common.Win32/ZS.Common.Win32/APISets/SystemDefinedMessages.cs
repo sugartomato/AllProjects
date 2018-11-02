@@ -140,21 +140,21 @@ namespace ZS.Common.Win32
         /// </summary>
         public const Int32 WM_GETICON = 0x007F;
 
-        #endregion
+		#endregion
 
-        #region Windows Shell Messages
+		#region Windows Shell Messages
 
-        /// <summary>
-        /// Sent when the user drops a file on the window of an application that has registered itself as a recipient of dropped files.
-        /// Parameters
-        ///     hDrop = (WPARAM) (HDROP) hDrop
-        ///         A handle to an internal structure describing the dropped files. Pass this handle DragFinish, DragQueryFile, or DragQueryPoint to retrieve information about the dropped files.
-        ///     lParam
-        ///         Must be zero.
-        ///  Return Value
-        ///     An application should return zero if it processes this message.
-        /// </summary>
-        public const Int32 WM_DROPFILES = 0x0233;
+		/// <summary>
+		/// Sent when the user drops a file on the window of an application that has registered itself as a recipient of dropped files.
+		/// Parameters
+		///     hDrop = (WPARAM) (HDROP) hDrop
+		///         A handle to an internal structure describing the dropped files. Pass this handle DragFinish, DragQueryFile, or DragQueryPoint to retrieve information about the dropped files.
+		///     lParam
+		///         Must be zero.
+		///  Return Value
+		///     An application should return zero if it processes this message.
+		/// </summary>
+		public const Int32 WM_DROPFILES = 0x0233;
 
         #endregion
 

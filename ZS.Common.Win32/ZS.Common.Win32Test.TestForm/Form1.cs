@@ -54,11 +54,19 @@ namespace ZS.Common.Win32Test.TestForm
 
         private void button1_Click(Object sender, EventArgs e)
         {
-            ZS.Common.Win32.API.AnimateWindow(this.Handle, 200, Win32.API.AnimateWindowType.AW_HIDE|Win32.API.AnimateWindowType.AW_BLEND);
+			ZS.Common.Win32.API.AnimateWindow(this.Handle, 200, Win32.API.AnimateWindowType.AW_HIDE | Win32.API.AnimateWindowType.AW_BLEND);
             this.Close();
         }
 
-        private void button2_Click(Object sender, EventArgs e)
+		private void button5_Click(Object sender, EventArgs e)
+		{
+
+			ZS.Common.Win32.API.AnimateWindow(this.Handle, 200, Win32.API.AnimateWindowType.AW_VER_POSITIVE| Win32.API.AnimateWindowType.AW_HIDE|Win32.API.AnimateWindowType.AW_SLIDE);
+			//System.Threading.Thread.Sleep(1000);
+			this.WindowState = FormWindowState.Minimized;
+		}
+
+		private void button2_Click(Object sender, EventArgs e)
         {
             frmCursorPoint frm = new frmCursorPoint();
             frm.Show();
@@ -91,11 +99,6 @@ namespace ZS.Common.Win32Test.TestForm
             frm.Show();
         }
 
-        private void button5_Click(Object sender, EventArgs e)
-        {
-
-            this.WindowState = FormWindowState.Minimized;
-        }
 
         // 绘图
         private void button6_Click(Object sender, EventArgs e)

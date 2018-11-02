@@ -56,7 +56,7 @@ namespace ZSExcelAddIn.Controls
                     foreach (var sn in sheetNames)
                     {
                         CheckBox chk = new CheckBox();
-                        ZS_LIST_SheetName.
+                        //ZS_LIST_SheetName.
                     }
                 }
 

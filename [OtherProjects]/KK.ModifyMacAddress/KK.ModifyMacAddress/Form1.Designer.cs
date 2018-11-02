@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.listConnIDS = new System.Windows.Forms.ListBox();
             this.txtCurrentMac = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -36,15 +37,16 @@
             this.btnGenerateMac = new System.Windows.Forms.Button();
             this.btnChange = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // listConnIDS
             // 
             this.listConnIDS.FormattingEnabled = true;
             this.listConnIDS.ItemHeight = 12;
-            this.listConnIDS.Location = new System.Drawing.Point(12, 12);
+            this.listConnIDS.Location = new System.Drawing.Point(12, 24);
             this.listConnIDS.Name = "listConnIDS";
-            this.listConnIDS.Size = new System.Drawing.Size(262, 136);
+            this.listConnIDS.Size = new System.Drawing.Size(262, 124);
             this.listConnIDS.TabIndex = 0;
             this.listConnIDS.SelectedIndexChanged += new System.EventHandler(this.listConnIDS_SelectedIndexChanged);
             // 
@@ -52,7 +54,7 @@
             // 
             this.txtCurrentMac.Location = new System.Drawing.Point(77, 164);
             this.txtCurrentMac.Name = "txtCurrentMac";
-            this.txtCurrentMac.Size = new System.Drawing.Size(120, 21);
+            this.txtCurrentMac.Size = new System.Drawing.Size(110, 21);
             this.txtCurrentMac.TabIndex = 1;
             // 
             // label1
@@ -77,44 +79,60 @@
             // 
             this.txtTargetMac.Location = new System.Drawing.Point(77, 195);
             this.txtTargetMac.Name = "txtTargetMac";
-            this.txtTargetMac.Size = new System.Drawing.Size(120, 21);
+            this.txtTargetMac.Size = new System.Drawing.Size(110, 21);
             this.txtTargetMac.TabIndex = 3;
             // 
             // btnGenerateMac
             // 
-            this.btnGenerateMac.Location = new System.Drawing.Point(199, 193);
+            this.btnGenerateMac.Location = new System.Drawing.Point(193, 193);
             this.btnGenerateMac.Name = "btnGenerateMac";
-            this.btnGenerateMac.Size = new System.Drawing.Size(75, 23);
+            this.btnGenerateMac.Size = new System.Drawing.Size(81, 23);
             this.btnGenerateMac.TabIndex = 5;
-            this.btnGenerateMac.Text = "随机生成";
+            this.btnGenerateMac.Text = "随机生成(&R)";
             this.btnGenerateMac.UseVisualStyleBackColor = true;
             this.btnGenerateMac.Click += new System.EventHandler(this.btnGenerateMac_Click);
             // 
             // btnChange
             // 
+            this.btnChange.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnChange.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnChange.Location = new System.Drawing.Point(104, 232);
             this.btnChange.Name = "btnChange";
             this.btnChange.Size = new System.Drawing.Size(83, 45);
             this.btnChange.TabIndex = 6;
             this.btnChange.Text = "修改并重连";
-            this.btnChange.UseVisualStyleBackColor = true;
+            this.btnChange.UseVisualStyleBackColor = false;
             this.btnChange.Click += new System.EventHandler(this.btnChange_Click);
             // 
             // button1
             // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.button1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button1.ForeColor = System.Drawing.Color.Black;
             this.button1.Location = new System.Drawing.Point(193, 232);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(83, 45);
             this.button1.TabIndex = 7;
-            this.button1.Text = "关闭";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Text = "关闭(&C)";
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label3.Location = new System.Drawing.Point(10, 9);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(57, 12);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "网卡列表";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(288, 292);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnChange);
             this.Controls.Add(this.btnGenerateMac);
@@ -124,11 +142,14 @@
             this.Controls.Add(this.txtCurrentMac);
             this.Controls.Add(this.listConnIDS);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.HelpButton = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "MAC地址修改器";
+            this.Text = "MAC地址修改器 - DHD";
+            this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.Form1_HelpButtonClicked);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -145,6 +166,7 @@
         private System.Windows.Forms.Button btnGenerateMac;
         private System.Windows.Forms.Button btnChange;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label3;
     }
 }
 

@@ -58,6 +58,27 @@ namespace KK.ModifyMacAddress
                 {
                     listConnIDS.Items.Add(connIDs[i]);
                 }
+
+                // 尝试获取活动网卡
+                try
+                {
+                    string activeConnID = ZS.Common.Win32.Net.NetworkAdapter.GetActiveConnectionID();
+                    if (!String.IsNullOrEmpty(activeConnID) && listConnIDS.Items.Count > 0)
+                    {
+                        for (Int32 i = 0; i < listConnIDS.Items.Count; i++)
+                        {
+                            if (listConnIDS.Items[i].ToString() == activeConnID)
+                            {
+                                listConnIDS.SelectedIndex = i;
+                                return;
+                            }
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                }
+
             }
             catch (Exception ex)
             {
@@ -67,7 +88,7 @@ namespace KK.ModifyMacAddress
 
         private void ShowError(String msg)
         {
-            MessageBox.Show(msg);
+            MessageBox.Show(msg,"错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         private void ShowInfo(String msg)
         {
@@ -118,7 +139,14 @@ namespace KK.ModifyMacAddress
             try
             {
                 String connID = listConnIDS.SelectedItem.ToString();
-                String mac = txtTargetMac.Text;
+                String mac = txtTargetMac.Text.ToUpper();
+
+                if (mac == txtCurrentMac.Text.ToUpper())
+                {
+                    ShowError("目标MAC与原始MAC相同！");
+                    return;
+                }
+
                 this.Enabled = false;
                 Boolean result = ZS.Common.Win32.Net.NetworkAdapter.ModifyMacAddress_ByConnectionID(connID, mac);
                 if (result)
@@ -168,6 +196,12 @@ namespace KK.ModifyMacAddress
             {
                 this.Enabled = true;
             }
+        }
+
+        private void Form1_HelpButtonClicked(object sender, CancelEventArgs e)
+        {
+            frmHelp frm = new frmHelp();
+            frm.ShowDialog();
         }
     }
 }

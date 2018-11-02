@@ -191,8 +191,6 @@ namespace ZSExcelAddIn
 
         #region 显示设置
 
-
-
         // 向当前窗口的调试信息界面写入信息
         private void WriteRuntimeInfo(string text)
         {
@@ -310,22 +308,22 @@ namespace ZSExcelAddIn
         {
             MessageBox.Show("1");
         }
-        #endregion
+		public string GetGUID(Microsoft.Office.Interop.Excel.Range currentCell)
+		{
+			string guid = System.Guid.NewGuid().ToString("N");
+			if (_GUIDToUpper) guid = guid.ToUpper();
+			return guid;
+		}
 
-        public string GetGUID(Microsoft.Office.Interop.Excel.Range currentCell)
-        {
-            string guid = System.Guid.NewGuid().ToString("N");
-            if (_GUIDToUpper) guid = guid.ToUpper();
-            return guid;
-        }
+		#endregion
 
-        #region 插入 - 前缀后缀
+		#region 插入 - 前缀后缀
 
-        /// <summary>
-        /// 插入前缀后缀点击事件
-        /// </summary>
-        /// <param name="ctrl"></param>
-        public void OnClick_InsertPreSuffix(Office.IRibbonControl ctrl)
+		/// <summary>
+		/// 插入前缀后缀点击事件
+		/// </summary>
+		/// <param name="ctrl"></param>
+		public void OnClick_InsertPreSuffix(Office.IRibbonControl ctrl)
         {
             try
             {
@@ -582,16 +580,48 @@ namespace ZSExcelAddIn
         }
 
 
-        #endregion
+		#endregion
 
-        #region 公共方法
+		#region 快捷方式
 
-        /// <summary>
-        /// 控件图标获取回调
-        /// </summary>
-        /// <param name="ctrl"></param>
-        /// <returns></returns>
-        public System.Drawing.Bitmap Get_ControlImage(Office.IRibbonControl ctrl)
+		/// <summary>
+		/// 启动系统工具
+		/// </summary>
+		/// <param name="ctrl"></param>
+		public void OnClick_Shortcut(Office.IRibbonControl ctrl)
+		{
+			switch (ctrl.Id)
+			{
+				case "ZS_BTN_Start_Calculator":
+					StartProcess("calc");
+					break;
+				case "ZS_BTN_Start_Notepad":
+					StartProcess("notepad");
+					break;
+				default:
+					break;
+			}
+		}
+
+		private void StartProcess(String processName)
+		{
+			System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+			startInfo.FileName = processName;
+			startInfo.UseShellExecute = true;
+			startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
+			System.Diagnostics.Process.Start(startInfo);
+		}
+
+		#endregion
+
+		#region 公共方法
+
+		/// <summary>
+		/// 控件图标获取回调
+		/// </summary>
+		/// <param name="ctrl"></param>
+		/// <returns></returns>
+		public System.Drawing.Bitmap Get_ControlImage(Office.IRibbonControl ctrl)
         {
             switch (ctrl.Id)
             {
@@ -620,8 +650,10 @@ namespace ZSExcelAddIn
                     return new System.Drawing.Bitmap(Properties.Resources.AddNewDataSource_32x32);
                 case "ZS_BTN_SortSheet":
                     return new System.Drawing.Bitmap(Properties.Resources.SortAsc_32x32);
+				case "ZS_BTN_Start_Calculator":
+					return Properties.Resources.Calculator.ToBitmap();
 
-                default:
+				default:
                     return new System.Drawing.Bitmap(Properties.Resources.settings_32);
             }
         }
@@ -666,10 +698,9 @@ namespace ZSExcelAddIn
             MessageBox.Show(msg, "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        #endregion
+		#endregion
 
-
-    }
+	}
 
 
 

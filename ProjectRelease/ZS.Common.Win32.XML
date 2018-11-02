@@ -1637,7 +1637,7 @@
             <summary>设置或获取关于链接</summary>
         </member>
         <member name="P:ZS.Common.Win32.InstalledApp.InstallLocation">
-            <summary>设置或获取版本号</summary>
+            <summary>设置或获取安装路径</summary>
         </member>
         <member name="P:ZS.Common.Win32.InstalledApp.InstallDate">
             <summary>设置或获取安装日期</summary>
@@ -1705,9 +1705,10 @@
             <param name="pMac"></param>
             <returns></returns>
         </member>
-        <member name="M:ZS.Common.Win32.Net.NetworkAdapter.GetActiveConnectionID">
+        <member name="M:ZS.Common.Win32.Net.NetworkAdapter.GetActiveConnectionID(System.String)">
             <summary>
             获取当前活动着的网络链接的名称。
+            默认通过百度的ip进行测试。也可以指定IP
             </summary>
             <returns></returns>
         </member>
@@ -1824,6 +1825,13 @@
             从注册表卸载项里获取安装的程序
             
             </summary>
+        </member>
+        <member name="M:ZS.Common.Win32.Query.ParseDateTime(System.String)">
+            <summary>
+            尝试将字符串转换为日期
+            </summary>
+            <param name="val"></param>
+            <returns></returns>
         </member>
         <member name="T:ZS.Common.Win32.RegHelper">
             <summary>
@@ -2021,6 +2029,8 @@
         <member name="M:ZS.Common.Win32.Win32Provider.Win32_NetworkAdapter.Enable">
             <summary>
             启用网卡。需要管理员权限运行
+            最低客户端系统：WindowsVista
+            最低服务器系统：Windows Server2008
             </summary>
             <returns></returns>
         </member>

@@ -38,7 +38,7 @@ namespace ZS.Common.Win32
         public String HelpLink { get; set; }
         /// <summary>设置或获取关于链接</summary>
         public String URLInfoAbout { get; set; }
-        /// <summary>设置或获取版本号</summary>
+        /// <summary>设置或获取安装路径</summary>
         public String InstallLocation { get; set; }
         /// <summary>设置或获取安装日期</summary>
         public DateTime? InstallDate { get; set; }

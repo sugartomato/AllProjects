@@ -53,29 +53,46 @@ namespace ZS.Common.Win32.Net
 
         /// <summary>
         /// 获取当前活动着的网络链接的名称。
+        /// 默认通过百度的ip进行测试。也可以指定IP
         /// </summary>
         /// <returns></returns>
-        public static string GetActiveConnectionID()
+        public static string GetActiveConnectionID(String testAddress = "123.125.115.110")
         {
-            List<Win32Provider.Win32_NetworkAdapterConfiguration> list = Win32Provider.ProviderHelper<Win32Provider.Win32_NetworkAdapterConfiguration>.GetAll();
-            if(list == null || list.Count == 0)
-                return string.Empty;
+            System.Net.Sockets.UdpClient udp = new System.Net.Sockets.UdpClient(testAddress, 1);
+            System.Net.IPAddress localAddr = ((System.Net.IPEndPoint)udp.Client.LocalEndPoint).Address;
 
-            Win32Provider.Win32_NetworkAdapterConfiguration obj = list.FirstOrDefault(o => o.IPEnabled == true);
-            if(obj == null)
-                return string.Empty;
+            foreach (System.Net.NetworkInformation.NetworkInterface nic in System.Net.NetworkInformation.NetworkInterface.GetAllNetworkInterfaces())
+            {
+                System.Net.NetworkInformation.IPInterfaceProperties ipProps = nic.GetIPProperties();
+                foreach (var ip in ipProps.UnicastAddresses)
+                {
+                    if (localAddr.Equals(ip.Address))
+                    {
+                        return nic.Name;
+                    }
+                }
+            }
+            return String.Empty;
+            // 20180719:通过IPEnable，不能准确测出来是哪个网卡能上网。多网卡情况下，可能多个网卡的IPEnable都是True
+            //List<Win32Provider.Win32_NetworkAdapterConfiguration> list = Win32Provider.ProviderHelper<Win32Provider.Win32_NetworkAdapterConfiguration>.GetAll();
+            //if(list == null || list.Count == 0)
+            //    return string.Empty;
 
-            // 根据MAC地址，找到连接的名称
+            //Win32Provider.Win32_NetworkAdapterConfiguration obj = list.FirstOrDefault(o => o.IPEnabled == true);
+            //if(obj == null)
+            //    return string.Empty;
 
-            List<Win32Provider.Win32_NetworkAdapter> listAdapters = Win32Provider.ProviderHelper<Win32Provider.Win32_NetworkAdapter>.GetAll();
-            if(listAdapters == null || listAdapters.Count == 0)
-                return string.Empty;
+            //// 根据MAC地址，找到连接的名称
 
-            Win32Provider.Win32_NetworkAdapter objAdapter = listAdapters.FirstOrDefault(o => o.MACAddress == obj.MACAddress);
-            if(obj == null)
-                return string.Empty;
+            //List<Win32Provider.Win32_NetworkAdapter> listAdapters = Win32Provider.ProviderHelper<Win32Provider.Win32_NetworkAdapter>.GetAll();
+            //if(listAdapters == null || listAdapters.Count == 0)
+            //    return string.Empty;
 
-            return objAdapter.NetConnectionID;
+            //Win32Provider.Win32_NetworkAdapter objAdapter = listAdapters.FirstOrDefault(o => o.MACAddress == obj.MACAddress);
+            //if(obj == null)
+            //    return string.Empty;
+
+            //return objAdapter.NetConnectionID;
 
         }
 

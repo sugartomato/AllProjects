@@ -64,30 +64,21 @@ namespace ZS.Common.Win32
             {
                 foreach (var app in listApps)
                 {
-                    var tmpModel = new InstalledApp()
-                    {
-                        Name = app.Name,
-                        IdentifyingNumber = app.IdentifyingNumber,
-                        IsInstallByWindowsInstaller = true,
-                        VersionString = app.Version,
-                        Caption = app.Caption,
-                        HelpLink = app.HelpLink,
-                        HelpTelephone = app.HelpTelephone,
-                        InstallLocation = app.InstallLocation,
-                        InstallSource = app.InstallSource,
-                        Publisher = app.Vendor,
-                        URLInfoAbout = app.URLInfoAbout,
+					var tmpModel = new InstalledApp()
+					{
+						Name = app.Name,
+						IdentifyingNumber = app.IdentifyingNumber,
+						IsInstallByWindowsInstaller = true,
+						VersionString = app.Version,
+						Caption = app.Caption,
+						HelpLink = app.HelpLink,
+						HelpTelephone = app.HelpTelephone,
+						InstallLocation = app.InstallLocation,
+						InstallSource = app.InstallSource,
+						Publisher = app.Vendor,
+						URLInfoAbout = app.URLInfoAbout,
+						InstallDate = ParseDateTime(app.InstallDate),
                     };
-
-                    DateTime inDate;
-                    if (!string.IsNullOrEmpty(app.InstallDate))
-                    {
-                        if (DateTime.TryParse(app.InstallDate, out inDate))
-                        {
-                            tmpModel.InstallDate = inDate;
-                        }
-                    }
-
                     result.Add(tmpModel);
                 }
             }
@@ -134,20 +125,20 @@ namespace ZS.Common.Win32
                         // 检查是否已经存在
                         if (result.FirstOrDefault(c => c.Name == displayName.ToString()) == null)
                         {
-                            var tmpModel = new InstalledApp()
-                            {
-                                Name = displayName.ToString(),
-                                VersionString = regTmp.GetValue("DisplayVersion")?.ToString(),
-                                InstallLocation = regTmp.GetValue("InstallLocation")?.ToString(),
-                                Publisher = regTmp.GetValue("Publisher")?.ToString(),
-                                UninstallString = regTmp.GetValue("UninstallString")?.ToString(),
-                                HelpLink = regTmp.GetValue("HelpLink")?.ToString(),
-                                HelpTelephone = regTmp.GetValue("HelpTelephone")?.ToString(),
-                                InstallSource = regTmp.GetValue("InstallSource")?.ToString(),
-                                ReleaseType = regTmp.GetValue("ReleaseType")?.ToString(),
-                                URLInfoAbout = regTmp.GetValue("URLInfoAbout")?.ToString(),
-                                Caption = regTmp.GetValue("Caption")?.ToString(),
-                                Comments = regTmp.GetValue("Comments")?.ToString(),
+							var tmpModel = new InstalledApp()
+							{
+								Name = displayName.ToString(),
+								VersionString = regTmp.GetValue("DisplayVersion")?.ToString(),
+								InstallLocation = regTmp.GetValue("InstallLocation")?.ToString(),
+								Publisher = regTmp.GetValue("Publisher")?.ToString(),
+								UninstallString = regTmp.GetValue("UninstallString")?.ToString(),
+								HelpLink = regTmp.GetValue("HelpLink")?.ToString(),
+								HelpTelephone = regTmp.GetValue("HelpTelephone")?.ToString(),
+								InstallSource = regTmp.GetValue("InstallSource")?.ToString(),
+								ReleaseType = regTmp.GetValue("ReleaseType")?.ToString(),
+								URLInfoAbout = regTmp.GetValue("URLInfoAbout")?.ToString(),
+								Caption = regTmp.GetValue("Caption")?.ToString(),
+								Comments = regTmp.GetValue("Comments")?.ToString(),
                             };
 
                             // 是否为系统组件
@@ -166,13 +157,9 @@ namespace ZS.Common.Win32
 
                             // 获取安装日期
                             tmpVal = regTmp.GetValue("InstallDate");
-                            if (tmpVal != null && !String.IsNullOrEmpty(tmpVal.ToString()))
+                            if (tmpVal != null)
                             {
-                                DateTime TT = DateTime.MinValue;
-                                if (DateTime.TryParse(tmpVal.ToString(), out TT))
-                                {
-                                    tmpModel.InstallDate = TT;
-                                }
+								tmpModel.InstallDate = ParseDateTime(tmpVal.ToString());
                             }
 
                             // 是否通过WindowsInstaller安装
@@ -211,6 +198,45 @@ namespace ZS.Common.Win32
             }
 
         }
+
+		/// <summary>
+		/// 尝试将字符串转换为日期
+		/// </summary>
+		/// <param name="val"></param>
+		/// <returns></returns>
+		private static DateTime? ParseDateTime(String val)
+		{
+			try
+			{
+				if (String.IsNullOrEmpty(val)) return null;
+				val = val.Trim();
+				DateTime result = DateTime.MinValue;
+
+				if (DateTime.TryParse(val, out result))
+				{
+					return result;
+				}
+
+				// 尝试转换8位数字格式
+				if (System.Text.RegularExpressions.Regex.IsMatch(val, @"\d{8}"))
+				{
+					try
+					{
+						result = DateTime.ParseExact(val, "yyyyMMdd", null);
+						return result;
+					}
+					catch (Exception)
+					{
+					}
+				}
+
+			}
+			catch (Exception)
+			{
+				return null;
+			}
+			return null;
+		}
 
         #endregion
 

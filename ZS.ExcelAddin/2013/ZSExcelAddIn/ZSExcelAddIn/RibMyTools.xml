@@ -21,7 +21,6 @@
                         getImage="Get_ControlImage"
                         getPressed="OnClick_GetPressed_ShowMainPan"
                         onAction="OnCLick_ShowMainPan"
-                        
                         />
         </group>
 
@@ -126,6 +125,12 @@
         <!-- 内容从拆分/合并组 -->
         <group id="grpMergeAndSeparate">
         </group>
+
+        <!-- 快捷启动系统工具 -->
+        <group id="ZS_GRP_Shortcut" label="快捷启动">
+          <button id="ZS_BTN_Start_Calculator" label="计算器" size="large" onAction="OnClick_Shortcut" getImage="Get_ControlImage"/>
+          <button id="ZS_BTN_Start_Notepad" label="记事本" size="large" onAction="OnClick_Shortcut" imageMso="CreateReportFromWizard"/>
+        </group>
         <!-- 调试组 -->
         <group id="ZS_GRP_Debug" imageMso="FileCompactAndRepairDatabase" label="调试">
           <button id="ZS_BTN_ListAllCommand" label="列举命令" size="large" onAction="OnClick_Debug" imageMso="DocumentPanelTemplate"/>
@@ -137,12 +142,24 @@
         <group id="ZS_GRP_Funny" imageMso="HappyFace" label="这个有趣的">
           <button id="ZS_BTN_Funny_PicToRange" label="图片转个像素" onAction="OnClick_Funny" imageMso="ViewDisplayInHighContrast" size="large" screentip="按像素读取图片并设置Excel单元格颜色。一个单元格对应一个像素。" keytip="KK"/>
         </group>
+
+        <!-- 测试组 -->
+        <group id="ZS_GRP_TEST" label="测试组">
+          <button id="ZS_BTN_Test_TestForm" label="测试窗体" onAction="OnClick_Test" imageMso="T"/>
+          <button id="ZS_BTN_Test_ShowForm" label="遮罩窗体" onAction="OnClick_Test" imageMso="T"/>
+        </group>
       </tab>
 
       <!-- 对插入选项卡增加控件 -->
       <tab idMso="TabInsert">
       </tab>
+
     </tabs>
+    <qat>
+      <sharedControls>
+        <button id="TTTTTT" label="ShowTime" getImage="Get_ControlImage" visible="0"/>
+      </sharedControls>
+    </qat>
   </ribbon>
   <!-- 
   ############################################################
@@ -164,7 +181,6 @@
         <button id="ZS_ContextMenuCell_InsertTime" getImage="Get_ControlImage" label="插入时间" onAction="OnClick_InsertDateTime"/>
       </menu>
     </contextMenu>
-
   </contextMenus>
 </customUI>
 

@@ -38,8 +38,9 @@ namespace ZSExcelAddIn.Controls
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
+			var obj = Globals.ThisAddIn.Application.COMAddIns.Item("XXX").Object;
 
-            
+			Globals.ThisAddIn.Application.Run("宏名");
         }
     }
 }

@@ -22,5 +22,10 @@ namespace ZS.DotNetForms.TestForm
             frm.Content = "private const int AW_CENTER = 0x0010;//若使用了AW_HIDE标志，则使窗口向内重叠；否则向外扩展  ";
             frm.Show();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            MessageBoxEx msg = new MessageBoxEx("这是一条执行成功的消息！！", MessageBoxEx.MessageType.Success, null);
+        }
     }
 }

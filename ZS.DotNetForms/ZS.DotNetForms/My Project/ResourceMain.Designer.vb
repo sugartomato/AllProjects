@@ -24,22 +24,26 @@ Namespace My.Resources
     '''</summary>
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0"),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
-     Global.Microsoft.VisualBasic.HideModuleNameAttribute()>  _
-    Friend Module Resources
+     Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute()>  _
+    Friend Class ResourceMain
         
-        Private resourceMan As Global.System.Resources.ResourceManager
+        Private Shared resourceMan As Global.System.Resources.ResourceManager
         
-        Private resourceCulture As Global.System.Globalization.CultureInfo
+        Private Shared resourceCulture As Global.System.Globalization.CultureInfo
+        
+        <Global.System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")>  _
+        Friend Sub New()
+            MyBase.New
+        End Sub
         
         '''<summary>
         '''  返回此类使用的缓存的 ResourceManager 实例。
         '''</summary>
         <Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>  _
-        Friend ReadOnly Property ResourceManager() As Global.System.Resources.ResourceManager
+        Friend Shared ReadOnly Property ResourceManager() As Global.System.Resources.ResourceManager
             Get
                 If Object.ReferenceEquals(resourceMan, Nothing) Then
-                    Dim temp As Global.System.Resources.ResourceManager = New Global.System.Resources.ResourceManager("ZS.DotNetForms.Resources", GetType(Resources).Assembly)
+                    Dim temp As Global.System.Resources.ResourceManager = New Global.System.Resources.ResourceManager("ZS.DotNetForms.ResourceMain", GetType(ResourceMain).Assembly)
                     resourceMan = temp
                 End If
                 Return resourceMan
@@ -51,7 +55,7 @@ Namespace My.Resources
         '''  重写当前线程的 CurrentUICulture 属性。
         '''</summary>
         <Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>  _
-        Friend Property Culture() As Global.System.Globalization.CultureInfo
+        Friend Shared Property Culture() As Global.System.Globalization.CultureInfo
             Get
                 Return resourceCulture
             End Get
@@ -63,9 +67,9 @@ Namespace My.Resources
         '''<summary>
         '''  查找 System.Drawing.Bitmap 类型的本地化资源。
         '''</summary>
-        Friend ReadOnly Property Img_Error() As System.Drawing.Bitmap
+        Friend Shared ReadOnly Property _Error() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("Img_Error", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("_Error", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -73,11 +77,31 @@ Namespace My.Resources
         '''<summary>
         '''  查找 System.Drawing.Bitmap 类型的本地化资源。
         '''</summary>
-        Friend ReadOnly Property Img_Success() As System.Drawing.Bitmap
+        Friend Shared ReadOnly Property information() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("Img_Success", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("information", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
-    End Module
+        
+        '''<summary>
+        '''  查找 System.Drawing.Bitmap 类型的本地化资源。
+        '''</summary>
+        Friend Shared ReadOnly Property Success() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Success", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  查找 System.Drawing.Bitmap 类型的本地化资源。
+        '''</summary>
+        Friend Shared ReadOnly Property Warning() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Warning", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+    End Class
 End Namespace

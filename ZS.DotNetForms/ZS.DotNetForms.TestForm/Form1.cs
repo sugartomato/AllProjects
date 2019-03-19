@@ -26,6 +26,39 @@ namespace ZS.DotNetForms.TestForm
         private void button2_Click(object sender, EventArgs e)
         {
             MessageBoxEx msg = new MessageBoxEx("这是一条执行成功的消息！！", MessageBoxEx.MessageType.Success, null);
+            msg.ShowDialog();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                try
+                {
+                    Int32 m = Convert.ToInt32("aaa");
+                }
+                catch (Exception ex)
+                {
+                    throw new ApplicationException("执行转换的时候失败！", ex);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBoxEx msg = new MessageBoxEx(ex.Message, MessageBoxEx.MessageType.Error, ex);
+                msg.ShowDialog();
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            MessageBoxEx msg = new MessageBoxEx("这是一条显示信息的消息！！", MessageBoxEx.MessageType.Info, null);
+            msg.ShowDialog();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            MessageBoxEx msg = new MessageBoxEx("这是一条显示警告的消息！！", MessageBoxEx.MessageType.Warning, null);
+            msg.ShowDialog();
         }
     }
 }

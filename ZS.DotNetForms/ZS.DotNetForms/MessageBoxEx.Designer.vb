@@ -52,13 +52,13 @@ Partial Class MessageBoxEx
         Me.txtTextInfo.ReadOnly = True
         Me.txtTextInfo.ScrollBars = System.Windows.Forms.ScrollBars.Both
         Me.txtTextInfo.ShortcutsEnabled = False
-        Me.txtTextInfo.Size = New System.Drawing.Size(390, 124)
+        Me.txtTextInfo.Size = New System.Drawing.Size(398, 129)
         Me.txtTextInfo.TabIndex = 1
         '
         'Button1
         '
         Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button1.Location = New System.Drawing.Point(313, 189)
+        Me.Button1.Location = New System.Drawing.Point(321, 194)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(80, 35)
         Me.Button1.TabIndex = 2
@@ -78,7 +78,7 @@ Partial Class MessageBoxEx
         'btnErrorDetial
         '
         Me.btnErrorDetial.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnErrorDetial.Location = New System.Drawing.Point(227, 189)
+        Me.btnErrorDetial.Location = New System.Drawing.Point(235, 194)
         Me.btnErrorDetial.Name = "btnErrorDetial"
         Me.btnErrorDetial.Size = New System.Drawing.Size(80, 35)
         Me.btnErrorDetial.TabIndex = 4
@@ -90,7 +90,7 @@ Partial Class MessageBoxEx
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(396, 236)
+        Me.ClientSize = New System.Drawing.Size(404, 241)
         Me.Controls.Add(Me.btnErrorDetial)
         Me.Controls.Add(Me.lblTitle)
         Me.Controls.Add(Me.Button1)

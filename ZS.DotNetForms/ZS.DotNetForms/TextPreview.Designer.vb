@@ -116,7 +116,7 @@ Partial Class TextPreview
         Me.Name = "TextPreview"
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "文本预览"
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()

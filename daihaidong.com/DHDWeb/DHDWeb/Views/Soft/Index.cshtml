@@ -1,0 +1,34 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model List<DHDWeb.Models.SoftwareModel>
+@{
+    ViewData["Title"] = "软件";
+}
+
+<div>
+    <p class="text-center">
+        <h3>工具</h3>
+    </p>
+    @if(Model != null && Model.Count > 0)
+    {
+    <table class="table table-dark table-striped">
+
+        @foreach (var model in Model)
+        {
+            <tr>
+                <td>
+                    <blockquote>
+                        <a href="/soft/Detial/@Html.Raw(model.ID)" target="_blank">
+                            @Html.Raw(model.Name)
+                        </a>
+                        <small>
+                            @Html.Raw(model.Author)
+                        </small>
+                    </blockquote>
+                </td>
+            </tr>
+        }
+    </table>
+    }
+</div>

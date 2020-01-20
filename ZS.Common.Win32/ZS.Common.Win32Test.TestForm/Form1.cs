@@ -141,5 +141,35 @@ namespace ZS.Common.Win32Test.TestForm
             frmMemory frm = new frmMemory();
             frm.Show();
         }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            frmListBox frm = new frmListBox();
+            frm.Show();
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            frmForm_Menu_ContextMenu_ToolBar_StatusBarcs frm = new frmForm_Menu_ContextMenu_ToolBar_StatusBarcs();
+            frm.Show();
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            frmForm_SendKeys frm = new frmForm_SendKeys();
+            frm.Show();
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            frmForm_Splitter frm = new frmForm_Splitter();
+            frm.Show();
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            frmReg frm = new frmReg();
+            frm.Show();
+        }
     }
 }

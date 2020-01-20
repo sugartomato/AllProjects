@@ -239,7 +239,7 @@ namespace ZSExcelAddIn.Controls
         // 向当前窗口的调试信息界面写入信息
         private void WriteRuntimeInfo(string text)
         {
-            if (_propRuntimeInfoControl != null) _propRuntimeInfoControl.AppendText(text);
+            if (_propRuntimeInfoControl != null) _propRuntimeInfoControl.WriteConsole(text);
         }
         private Controls.CustomPans.MainPanHost _propRuntimeInfoControl = null;
         public Controls.CustomPans.MainPanHost RuntimeInfoControl

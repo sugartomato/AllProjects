@@ -1,0 +1,2623 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ZS.Common.Win32</name>
+    </assembly>
+    <members>
+        <member name="T:ZS.Common.Win32.SystemDefinedMessages">
+            <summary>
+            系统定义的消息
+            </summary>
+            <remarks>
+            The system sends or posts a system-defined message when it communicates with an application. It uses these messages to control the operations of applications and to provide input and other information for applications to process. An application can also send or post system-defined messages. Applications generally use these messages to control the operation of control windows created by using preregistered window classes.
+            Each system-defined message has a unique message identifier and a corresponding symbolic constant (defined in the software development kit (SDK) header files) that states the purpose of the message. For example, the WM_PAINT constant requests that a window paint its contents.
+            Symbolic constants specify the category to which system-defined messages belong. The prefix of the constant identifies the type of window that can interpret and process the message. Following are the prefixes and their related message categories.
+            
+            </remarks>
+            <link>
+            https://msdn.microsoft.com/en-us/library/windows/desktop/ms644927(v=vs.85).aspx#app_defined
+            </link>
+        </member>
+        <member name="F:ZS.Common.Win32.SystemDefinedMessages.WM_LBUTTONDOWN">
+            <summary>
+            Posted when the user presses the left mouse button while the cursor is in the client area of a window. If the mouse is not captured, the message is posted to the window beneath the cursor. Otherwise, the message is posted to the window that has captured the mouse.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.SystemDefinedMessages.WM_LBUTTONUP">
+            <summary>
+            Posted when the user releases the left mouse button while the cursor is in the client area of a window. If the mouse is not captured, the message is posted to the window beneath the cursor. Otherwise, the message is posted to the window that has captured the mouse.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.SystemDefinedMessages.WM_MOUSEMOVE">
+            <summary>
+            Posted to a window when the cursor moves. If the mouse is not captured, the message is posted to the window that contains the cursor. Otherwise, the message is posted to the window that has captured the mouse.
+            Parameters
+                wParam
+                    Indicates whether various virtual keys are down. This parameter can be one or more of the following values.
+                lParam
+                    The low-order word specifies the x-coordinate of the cursor. The coordinate is relative to the upper-left corner of the client area.
+                    The high-order word specifies the y-coordinate of the cursor. The coordinate is relative to the upper-left corner of the client area.
+            Return value
+                Type: LRESULT
+                The return value is TRUE if the text is set. It is FALSE (for an edit control), LB_ERRSPACE (for a list box), or CB_ERRSPACE (for a combo box) if insufficient space is available to set the text in the edit control. It is CB_ERR if this message is sent to a combo box without an edit control.
+            </summary>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="F:ZS.Common.Win32.SystemDefinedMessages.WM_CREATE">
+            <summary>
+            Sent when an application requests that a window be created by calling the CreateWindowEx or CreateWindow function. (The message is sent before the function returns.) The window procedure of the new window receives this message after the window is created, but before the window becomes visible.
+            [Parameters]
+                wParam
+                    This parameter is not used.
+                lParam
+                    A pointer to a CREATESTRUCT structure that contains information about the window being created.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.SystemDefinedMessages.WM_SETTEXT">
+            <summary>
+            Sets the text of a window.
+            设置窗口文本
+            Parameters
+                wParam
+                    This parameter is not used.
+                lParam
+                    A pointer to a null-terminated string that is the window text.
+            Return value
+                Type: LRESULT
+                The return value is TRUE if the text is set. It is FALSE (for an edit control), LB_ERRSPACE (for a list box), or CB_ERRSPACE (for a combo box) if insufficient space is available to set the text in the edit control. It is CB_ERR if this message is sent to a combo box without an edit control.
+            </summary>
+            <remarks>
+            The DefWindowProc function sets and displays the window text. For an edit control, the text is the contents of the edit control. For a combo box, the text is the contents of the edit-control portion of the combo box. For a button, the text is the button name. For other windows, the text is the window title.
+            This message does not change the current selection in the list box of a combo box. An application should use the CB_SELECTSTRING message to select the item in a list box that matches the text in the edit control.
+            </remarks>
+        </member>
+        <member name="F:ZS.Common.Win32.SystemDefinedMessages.WM_GETTEXT">
+            <summary>
+            获取窗口文本
+            Copies the text that corresponds to a window into a buffer provided by the caller.
+            Parameters
+                wParam
+                    The maximum number of characters to be copied, including the terminating null character.
+                    ANSI applications may have the string in the buffer reduced in size (to a minimum of half that of the wParam value) due to conversion from ANSI to Unicode.
+                lParam
+                    A pointer to the buffer that is to receive the text.
+            Return value
+                Type: LRESULT
+                The return value is the number of characters copied, not including the terminating null character.
+            </summary>
+            <remarks>
+            The DefWindowProc function copies the text associated with the window into the specified buffer and returns the number of characters copied. Note, for non-text static controls this gives you the text with which the control was originally created, that is, the ID number. However, it gives you the ID of the non-text static control as originally created. That is, if you subsequently used a STM_SETIMAGE to change it the original ID would still be returned.
+            For an edit control, the text to be copied is the content of the edit control. For a combo box, the text is the content of the edit control (or static-text) portion of the combo box. For a button, the text is the button name. For other windows, the text is the window title. To copy the text of an item in a list box, an application can use the LB_GETTEXT message.
+            When the WM_GETTEXT message is sent to a static control with the SS_ICON style, a handle to the icon will be returned in the first four bytes of the buffer pointed to by lParam. This is true only if the WM_SETTEXT message has been used to set the icon.
+            Rich Edit: If the text to be copied exceeds 64K, use either the EM_STREAMOUT or EM_GETSELTEXT message.
+            Sending a WM_GETTEXT message to a non-text static control, such as a static bitmap or static icon control, does not return a string value. Instead, it returns zero. In addition, in early versions of Windows, applications could send a WM_GETTEXT message to a non-text static control to retrieve the control's ID. To retrieve a control's ID, applications can use GetWindowLong passing GWL_ID as the index value or GetWindowLongPtr using GWLP_ID.
+            </remarks>
+        </member>
+        <member name="F:ZS.Common.Win32.SystemDefinedMessages.WM_GETTEXTLENGTH">
+            <summary>
+            获取窗口文本长度
+            Determines the length, in characters, of the text associated with a window.
+            Parameters
+                wParam
+                    This parameter is not used and must be zero.
+                lParam
+                    This parameter is not used and must be zero.
+            Return value
+                Type: LRESULT
+                The return value is the length of the text in characters, not including the terminating null character.
+            </summary>
+            <remarks>
+            For an edit control, the text to be copied is the content of the edit control. For a combo box, the text is the content of the edit control (or static-text) portion of the combo box. For a button, the text is the button name. For other windows, the text is the window title. To determine the length of an item in a list box, an application can use the LB_GETTEXTLEN message.
+            When the WM_GETTEXTLENGTH message is sent, the DefWindowProc function returns the length, in characters, of the text. Under certain conditions, the DefWindowProc function returns a value that is larger than the actual length of the text. This occurs with certain mixtures of ANSI and Unicode, and is due to the system allowing for the possible existence of double-byte character set (DBCS) characters within the text. The return value, however, will always be at least as large as the actual length of the text; you can thus always use it to guide buffer allocation. This behavior can occur when an application uses both ANSI functions and common dialogs, which use Unicode.
+            To obtain the exact length of the text, use the WM_GETTEXT, LB_GETTEXT, or CB_GETLBTEXT messages, or the GetWindowText function.
+            Sending a WM_GETTEXTLENGTH message to a non-text static control, such as a static bitmap or static icon controlc, does not return a string value. Instead, it returns zero.
+            </remarks>
+        </member>
+        <member name="F:ZS.Common.Win32.SystemDefinedMessages.WM_GETICON">
+            <summary>
+            Sent to a window to retrieve a handle to the large or small icon associated with a window. The system displays the large icon in the ALT+TAB dialog, and the small icon in the window caption.
+            A window receives this message through its WindowProc function.
+            [Parameters]
+                wParam
+                    The type of icon being retrieved. This parameter can be one of the following values.
+                lParam
+                    The DPI of the icon being retrieved. This can be used to provide different icons depending on the icon size.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.SystemDefinedMessages.WM_DROPFILES">
+            <summary>
+            Sent when the user drops a file on the window of an application that has registered itself as a recipient of dropped files.
+            Parameters
+                hDrop = (WPARAM) (HDROP) hDrop
+                    A handle to an internal structure describing the dropped files. Pass this handle DragFinish, DragQueryFile, or DragQueryPoint to retrieve information about the dropped files.
+                lParam
+                    Must be zero.
+             Return Value
+                An application should return zero if it processes this message.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.SystemDefinedMessages.WM_CUT">
+            <summary>
+            An application sends a WM_CUT message to an edit control or combo box to delete (cut) the current selection, if any, in the edit control and copy the deleted text to the clipboard in CF_TEXT format.
+            </summary>
+        </member>
+        <member name="T:ZS.Common.Win32.SystemDefinedMessages.CommonControl">
+            <summary>
+            系统公共控件消息
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.SystemDefinedMessages.CommonControl.LVM_FIRST">
+            <summary>
+             ListView messages
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.SystemDefinedMessages.CommonControl.LVM_GETITEMCOUNT">
+            <summary>
+            Retrieves the number of items in a list-view control. You can send this message explicitly or by using the ListView_GetItemCount macro.
+            [wParam]
+                Must be zero.
+            [lParam]
+                Must be zero.
+            [Return value]
+                Returns the number of items.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.SystemDefinedMessages.CommonControl.LVM_GETITEMTEXT">
+            <summary>
+            Retrieves the text of a list-view item or subitem. You can send this message explicitly or by using the ListView_GetItemText macro.
+            [wParam]
+                Index of the list-view item.
+            [lParam]
+                Pointer to an LVITEM structure. To retrive the item text, set iSubItem to zero. To retrieve the text of a subitem, set iSubItem to the subitem's index. The pszText member points to a buffer that receives the text. The cchTextMax member specifies the number of characters in the buffer.
+            [Return value]
+                If you send this message explicitly, it returns the number of characters in the pszText member of the LVITEM structure.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.SystemDefinedMessages.CommonControl.LVM_GETITEM">
+            <summary>
+            Retrieves some or all of a list-view item's attributes. You can send this message explicitly or by using the ListView_GetItem macro.
+            [wParam]
+                Must be zero.
+            [lParam]
+                Pointer to an LVITEM structure that specifies the information to retrieve and receives information about the list-view item.
+            [Return value]
+                Returns TRUE if successful, or FALSE otherwise.
+            [Remarks]   
+                When the LVM_GETITEM message is sent, the iItem and iSubItem members identify the item or subitem to retrieve information about and the mask member specifies which attributes to retrieve. For a list of possible values, see the description of the LVITEM structure.
+                If the LVIF_TEXT flag is set in the mask member of the LVITEM structure, the pszText member must point to a valid buffer and the cchTextMax member must be set to the number of characters in that buffer. Applications should not assume that the text will necessarily be placed in the specified buffer. The control may instead change the pszText member of the structure to point to the new text, rather than place it in the buffer.
+                If the mask member specifies the LVIF_STATE value, the stateMask member must specify the item state bits to retrieve. On output, the state member contains the values of the specified state bits.
+            </summary>
+        </member>
+        <!-- 对于成员“F:ZS.Common.Win32.SystemDefinedMessages.CommonControl.LVM_SETITEMPOSITION”忽略有格式错误的 XML 注释 -->
+        <member name="F:ZS.Common.Win32.SystemDefinedMessages.CommonControl.LVM_GETITEMPOSITION">
+            <summary>
+            Retrieves the position of a list-view item. You can send this message explicitly or by using the ListView_GetItemPosition macro.
+            [wParam]
+                Index of the list-view item.
+            [lParam]
+                Pointer to a POINT structure that receives the position of the item's upper-left corner, in view coordinates.
+            [Return value]
+                Returns TRUE if successful, or FALSE otherwise.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.SystemDefinedMessages.CommonControl.LVM_GETSELECTEDCOUNT">
+            <summary>
+            Determines the number of selected items in a list-view control. You can send this message explicitly or by using the ListView_GetSelectedCount macro.
+            [wParam]
+                Must be zero.
+            [lParam]
+                Must be zero.
+            [Return value]
+                Returns the number of selected items.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.SystemDefinedMessages.CommonControl.LVM_SETITEMSTATE">
+            <summary>
+            Changes the state of an item in a list-view control. You can send this message explicitly or by using the ListView_SetItemState macro.
+            [wParam]
+                Index of the list-view item. If this parameter is -1, then the state change is applied to all items..
+            [lParam]
+                Pointer to an LVITEM structure. The stateMask member specifies which state bits to change, and the state member contains the new values for those bits. The other members are ignored.
+            [Return value]
+                If you send this message explicitly, it returns TRUE if successful or FALSE otherwise.
+            [Remarks]
+                An item's state value includes a set of bit flags that indicate the item's state. The state value can also include image list indexes that indicate the item's state image and overlay image.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.SystemDefinedMessages.CommonControl.LVIF_TEXT">
+            <summary>
+            The pszText member is valid or must be set.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.SystemDefinedMessages.CommonControl.LVIF_IMAGE">
+            <summary>
+            The iImage member is valid or must be set.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.SystemDefinedMessages.CommonControl.LVIF_PARAM">
+            <summary>
+            The lParam member is valid or must be set.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.SystemDefinedMessages.CommonControl.LVIF_STATE">
+            <summary>
+            The state member is valid or must be set.
+            </summary>
+        </member>
+        <member name="T:ZS.Common.Win32.API">
+            <summary>
+            Win32API接口
+            </summary>
+        </member>
+        <member name="M:ZS.Common.Win32.API.GetLastError">
+            <summary>
+            Retrieves the calling thread's last-error code value. The last-error code is maintained on a per-thread basis. Multiple threads do not overwrite each other's last-error code.
+            </summary>
+            <returns></returns>
+            <link>https://msdn.microsoft.com/en-us/library/ms679360(VS.85).aspx</link>
+        </member>
+        <member name="M:ZS.Common.Win32.API.GetModuleHandle(System.String)">
+            <summary>
+            Retrieves a module handle for the specified module. The module must have been loaded by the calling process.
+            To avoid the race conditions described in the Remarks section, use the GetModuleHandleEx function.
+            </summary>
+            <param name="lpModuleName">
+            [in, optional]
+                The name of the loaded module (either a .dll or .exe file). If the file name extension is omitted, the default library extension .dll is appended. The file name string can include a trailing point character (.) to indicate that the module name has no extension. The string does not have to specify a path. When specifying a path, be sure to use backslashes (\), not forward slashes (/). The name is compared (case independently) to the names of modules currently mapped into the address space of the calling process.
+                If this parameter is NULL, GetModuleHandle returns a handle to the file used to create the calling process (.exe file).
+                The GetModuleHandle function does not retrieve handles for modules that were loaded using the LOAD_LIBRARY_AS_DATAFILE flag. For more information, see LoadLibraryEx.
+            </param>
+            <returns></returns>
+        </member>
+        <!-- 对于成员“M:ZS.Common.Win32.API.CloseHandle(System.IntPtr)”忽略有格式错误的 XML 注释 -->
+        <member name="T:ZS.Common.Win32.API.HookProcDelegate">
+            <summary>
+            
+            </summary>
+            <param name="nCode">
+            [in][Type:int]
+                Specifies whether the hook procedure must process the message. 
+                If nCode is HC_ACTION, the hook procedure must process the message. If nCode is less than zero, the hook procedure must pass the message to the CallNextHookEx function without further processing and must return the value returned by CallNextHookEx.
+            </param>
+            <param name="wParam">
+            [in][Type:WPARAM]
+                Specifies whether the message was sent by the current thread. If the message was sent by the current thread, it is nonzero; otherwise, it is zero.
+            </param>
+            <param name="lParam">
+            [in][Type::PARAM]
+                A pointer to a CWPSTRUCT structure that contains details about the message.
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:ZS.Common.Win32.API.SetWindowsHookEx(System.Int32,ZS.Common.Win32.API.HookProcDelegate,System.IntPtr,System.Int32)">
+            <summary>
+            Installs an application-defined hook procedure into a hook chain. You would install a hook procedure to monitor the system for certain types of events. These events are associated either with a specific thread or with all threads in the same desktop as the calling thread.
+            </summary>
+            <param name="idHook">
+            [in][Type:int]
+                The type of hook procedure to be installed. This parameter can be one of the following values. 
+            </param>
+            <param name="lpfn">
+            [in][Type:HOOKPROC]
+                A pointer to the hook procedure. If the dwThreadId parameter is zero or specifies the identifier of a thread created by a different process, the lpfn parameter must point to a hook procedure in a DLL. Otherwise, lpfn can point to a hook procedure in the code associated with the current process.
+            </param>
+            <param name="hMod">
+            [in][Type:HINSTANCE]
+                A handle to the DLL containing the hook procedure pointed to by the lpfn parameter. The hMod parameter must be set to NULL if the dwThreadId parameter specifies a thread created by the current process and if the hook procedure is within the code associated with the current process.
+            </param>
+            <param name="dwThreadId">
+            [in][Type:DWORD]
+            The identifier of the thread with which the hook procedure is to be associated. For desktop apps, if this parameter is zero, the hook procedure is associated with all existing threads running in the same desktop as the calling thread. For Windows Store apps, see the Remarks section.
+            </param>
+            <returns>
+            [Type: HHOOK]
+            If the function succeeds, the return value is the handle to the hook procedure.
+            If the function fails, the return value is NULL. To get extended error information, call GetLastError.
+            </returns>
+            <link>https://msdn.microsoft.com/en-us/library/ms644990(VS.85).aspx</link>
+        </member>
+        <member name="M:ZS.Common.Win32.API.UnhookWindowsHookEx(System.Int32)">
+            <summary>
+            Removes a hook procedure installed in a hook chain by the SetWindowsHookEx function.
+            </summary>
+            <param name="hhk">
+            A handle to the hook to be removed. This parameter is a hook handle obtained by a previous call to SetWindowsHookEx.
+            </param>
+            <returns>
+            [Type: BOOL]
+                If the function succeeds, the return value is nonzero.
+                If the function fails, the return value is zero. To get extended error information, call GetLastError.
+            </returns>
+            <link>https://msdn.microsoft.com/en-us/library/ms644993(v=vs.85).aspx</link>
+        </member>
+        <member name="M:ZS.Common.Win32.API.CallNextHookEx(System.Int32,System.Int32,System.Int32,System.IntPtr)">
+            <summary>
+            Passes the hook information to the next hook procedure in the current hook chain. A hook procedure can call this function either before or after processing the hook information.
+            </summary>
+            <param name="idHook"></param>
+            <param name="nCode"></param>
+            <param name="wParam"></param>
+            <param name="lParam"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ZS.Common.Win32.API.HookTypeDef">
+            <summary>
+            钩子类型定义
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.HookTypeDef.WH_CALLWNDPROC">
+            <summary>
+            Installs a hook procedure that monitors messages before the system sends them to the destination window procedure. For more information, see the CallWndProc hook procedure.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.HookTypeDef.WH_CALLWNDPROCRET">
+            <summary>
+            Installs a hook procedure that monitors messages after they have been processed by the destination window procedure. For more information, see the CallWndRetProc hook procedure.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.HookTypeDef.WH_CBT">
+            <summary>
+            Installs a hook procedure that receives notifications useful to a CBT application. For more information, see the CBTProc hook procedure.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.HookTypeDef.WH_MSGFILTER">
+            <summary>
+            Installs a hook procedure that monitors messages generated as a result of an input event in a dialog box, message box, menu, or scroll bar. For more information, see the MessageProc hook procedure.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.HookTypeDef.WH_SHELL">
+            <summary>
+            Installs a hook procedure that receives notifications useful to shell applications. For more information, see the ShellProc hook procedure.
+            </summary>
+        </member>
+        <member name="T:ZS.Common.Win32.API.Message">
+            <summary>
+            CWPSTRUCT 
+            Defines the message parameters passed to a WH_CALLWNDPROC hook procedure, CallWndProc.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.API.Message.lParam">
+            <summary>
+            Additional information about the message. The exact meaning depends on the message value.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.API.Message.wParam">
+            <summary>
+            Additional information about the message. The exact meaning depends on the message value.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.API.Message.message">
+            <summary>
+            The message.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.API.Message.hwnd">
+            <summary>
+            A handle to the window to receive the message.
+            </summary>
+        </member>
+        <member name="M:ZS.Common.Win32.API.mouse_event(ZS.Common.Win32.API.MouseEvent,System.Int32,System.Int32,System.Int32,System.UIntPtr)">
+            <summary>
+            The mouse_event function synthesizes mouse motion and button clicks.
+            Note  This function has been superseded. Use SendInput instead.
+            </summary>
+            <param name="dwFlags">
+                [in][Type: DWORD]
+                The values that specify mouse button status are set to indicate changes in status, not ongoing conditions. For example, if the left mouse button is pressed and held down, MOUSEEVENTF_LEFTDOWN is set when the left button is first pressed, but not for subsequent motions. Similarly, MOUSEEVENTF_LEFTUP is set only when the button is first released.
+                You cannot specify both MOUSEEVENTF_WHEEL and either MOUSEEVENTF_XDOWN or MOUSEEVENTF_XUP simultaneously in the dwFlags parameter, because they both require use of the dwData field.
+            </param>
+            <param name="dx">
+                [in][Type: DWORD]
+                The mouse's absolute position along the x-axis or its amount of motion since the last mouse event was generated, depending on the setting of MOUSEEVENTF_ABSOLUTE. Absolute data is specified as the mouse's actual x-coordinate; relative data is specified as the number of mickeys moved. A mickey is the amount that a mouse has to move for it to report that it has moved.
+                鼠标x轴上的绝对位置或者从上次鼠标事件产生以来的移动数量。依赖于MOUSEEVENTF_ABSOLUTE的设置。
+            </param>
+            <param name="dy">
+                [in][Type: DWORD]
+                The mouse's absolute position along the y-axis or its amount of motion since the last mouse event was generated, depending on the setting of MOUSEEVENTF_ABSOLUTE. Absolute data is specified as the mouse's actual y-coordinate; relative data is specified as the number of mickeys moved.
+            </param>
+            <param name="dwData">
+                [in][Type: DWORD]
+                If dwFlags contains MOUSEEVENTF_WHEEL, then dwData specifies the amount of wheel movement. A positive value indicates that the wheel was rotated forward, away from the user; a negative value indicates that the wheel was rotated backward, toward the user. One wheel click is defined as WHEEL_DELTA, which is 120.
+                If dwFlags contains MOUSEEVENTF_HWHEEL, then dwData specifies the amount of wheel movement. A positive value indicates that the wheel was tilted to the right; a negative value indicates that the wheel was tilted to the left.
+                If dwFlags contains MOUSEEVENTF_XDOWN or MOUSEEVENTF_XUP, then dwData specifies which X buttons were pressed or released. This value may be any combination of the following flags.
+                If dwFlags is not MOUSEEVENTF_WHEEL, MOUSEEVENTF_XDOWN, or MOUSEEVENTF_XUP, then dwData should be zero.
+            </param>
+            <param name="dwExtraInfo">
+                [in][Type: ULONG_PTR]
+                An additional value associated with the mouse event. An application calls GetMessageExtraInfo to obtain this extra information.
+            </param>
+            <remarks>
+            If the mouse has moved, indicated by MOUSEEVENTF_MOVE being set, dx and dy hold information about that motion. The information is specified as absolute or relative integer values.
+            If MOUSEEVENTF_ABSOLUTE value is specified, dx and dy contain normalized absolute coordinates between 0 and 65,535. The event procedure maps these coordinates onto the display surface. Coordinate (0,0) maps onto the upper-left corner of the display surface, (65535,65535) maps onto the lower-right corner.
+            Relative mouse motion is subject to the settings for mouse speed and acceleration level. An end user sets these values using the Mouse application in Control Panel. An application obtains and sets these values with the SystemParametersInfo function.
+            The system applies two tests to the specified relative mouse motion when applying acceleration. If the specified distance along either the x or y axis is greater than the first mouse threshold value, and the mouse acceleration level is not zero, the operating system doubles the distance. If the specified distance along either the x- or y-axis is greater than the second mouse threshold value, and the mouse acceleration level is equal to two, the operating system doubles the distance that resulted from applying the first threshold test. It is thus possible for the operating system to multiply relatively-specified mouse motion along the x- or y-axis by up to four times.
+            Once acceleration has been applied, the system scales the resultant value by the desired mouse speed. Mouse speed can range from 1 (slowest) to 20 (fastest) and represents how much the pointer moves based on the distance the mouse moves. The default value is 10, which results in no additional modification to the mouse motion.
+            The mouse_event function is used to synthesize mouse events by applications that need to do so. It is also used by applications that need to obtain more information from the mouse than its position and button state. For example, if a tablet manufacturer wants to pass pen-based information to its own applications, it can write a DLL that communicates directly to the tablet hardware, obtains the extra information, and saves it in a queue. The DLL then calls mouse_event with the standard button and x/y position data, along with, in the dwExtraInfo parameter, some pointer or index to the queued extra information. When the application needs the extra information, it calls the DLL with the pointer or index stored in dwExtraInfo, and the DLL returns the extra information.
+            </remarks>
+            <see cref="!:https://msdn.microsoft.com/en-us/library/ms646260(VS.85).aspx"/>
+        </member>
+        <member name="T:ZS.Common.Win32.API.MouseEvent">
+            <summary>
+            鼠标事件
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.MouseEvent.MOUSEEVENTF_ABSOLUTE">
+            <summary>
+            The dx and dy parameters contain normalized absolute coordinates. If not set, those parameters contain relative data: the change in position since the last reported position. 
+            This flag can be set, or not set, regardless of what kind of mouse or mouse-like device, if any, is connected to the system. 
+            For further information about relative mouse motion, see the following Remarks section.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.MouseEvent.MOUSEEVENTF_LEFTDOWN">
+            <summary>
+            The left button is down.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.MouseEvent.MOUSEEVENTF_LEFTUP">
+            <summary>
+            The left button is up.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.MouseEvent.MOUSEEVENTF_MIDDLEDOWN">
+            <summary>
+            The middle button is down.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.MouseEvent.MOUSEEVENTF_MIDDLEUP">
+            <summary>
+            The middle button is up.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.MouseEvent.MOUSEEVENTF_MOVE">
+            <summary>
+            鼠标移动
+            Movement occurred.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.MouseEvent.MOUSEEVENTF_RIGHTDOWN">
+            <summary>
+            The right button is down.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.MouseEvent.MOUSEEVENTF_RIGHTUP">
+            <summary>
+            The right button is up.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.MouseEvent.MOUSEEVENTF_WHEEL">
+            <summary>
+            The wheel has been moved, if the mouse has a wheel. The amount of movement is specified in dwData
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.MouseEvent.MOUSEEVENTF_XDOWN">
+            <summary>
+            An X button was pressed.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.MouseEvent.MOUSEEVENTF_XUP">
+            <summary>
+            An X button was released.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.MouseEvent.MOUSEEVENTF_HWHEEL">
+            <summary>
+            The wheel button is tilted.
+            </summary>
+        </member>
+        <!-- 对于成员“M:ZS.Common.Win32.API.VirtualAllocEx(System.IntPtr,System.IntPtr,System.Int32,System.UInt32,System.UInt32)”忽略有格式错误的 XML 注释 -->
+        <!-- 对于成员“M:ZS.Common.Win32.API.VirtualFreeEx(System.IntPtr,System.IntPtr,System.Int32,System.Int32)”忽略有格式错误的 XML 注释 -->
+        <!-- 对于成员“T:ZS.Common.Win32.API.MemoryAllocationType”忽略有格式错误的 XML 注释 -->
+        <member name="F:ZS.Common.Win32.API.MemoryAllocationType.MEM_COMMIT">
+            <summary>
+            Allocates memory charges (from the overall size of memory and the paging files on disk) for the specified reserved memory pages. The function also guarantees that when the caller later initially accesses the memory, the contents will be zero. Actual physical pages are not allocated unless/until the virtual addresses are actually accessed.
+            To reserve and commit pages in one step, call VirtualAllocEx with MEM_COMMIT | MEM_RESERVE.
+            Attempting to commit a specific address range by specifying MEM_COMMIT without MEM_RESERVE and a non-NULL lpAddress fails unless the entire range has already been reserved. The resulting error code is ERROR_INVALID_ADDRESS.
+            An attempt to commit a page that is already committed does not cause the function to fail. This means that you can commit pages without first determining the current commitment state of each page.
+            If lpAddress specifies an address within an enclave, flAllocationType must be MEM_COMMIT.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.MemoryAllocationType.MEM_RESERVE">
+            <summary>
+            Reserves a range of the process's virtual address space without allocating any actual physical storage in memory or in the paging file on disk.
+            You commit reserved pages by calling VirtualAllocEx again with MEM_COMMIT. To reserve and commit pages in one step, call VirtualAllocEx with MEM_COMMIT | MEM_RESERVE.
+            Other memory allocation functions, such as malloc and LocalAlloc, cannot use reserved memory until it has been released.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.MemoryAllocationType.MEM_RESET">
+            <summary>
+            Indicates that data in the memory range specified by lpAddress and dwSize is no longer of interest. The pages should not be read from or written to the paging file. However, the memory block will be used again later, so it should not be decommitted. This value cannot be used with any other value.
+            Using this value does not guarantee that the range operated on with MEM_RESET will contain zeros. If you want the range to contain zeros, decommit the memory and then recommit it.
+            When you use MEM_RESET, the VirtualAllocEx function ignores the value of fProtect. However, you must still set fProtect to a valid protection value, such as PAGE_NOACCESS.
+            VirtualAllocEx returns an error if you use MEM_RESET and the range of memory is mapped to a file. A shared view is only acceptable if it is mapped to a paging file.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.MemoryAllocationType.MEM_RESET_UNDO">
+            <summary>
+            MEM_RESET_UNDO should only be called on an address range to which MEM_RESET was successfully applied earlier. It indicates that the data in the specified memory range specified by lpAddress and dwSize is of interest to the caller and attempts to reverse the effects of MEM_RESET. If the function succeeds, that means all data in the specified address range is intact. If the function fails, at least some of the data in the address range has been replaced with zeroes.
+            This value cannot be used with any other value. If MEM_RESET_UNDO is called on an address range which was not MEM_RESET earlier, the behavior is undefined. When you specify MEM_RESET, the VirtualAllocEx function ignores the value of flProtect. However, you must still set flProtect to a valid protection value, such as PAGE_NOACCESS.
+            Windows Server 2008 R2, Windows 7, Windows Server 2008, Windows Vista, Windows Server 2003 and Windows XP:  The MEM_RESET_UNDO flag is not supported until Windows 8 and Windows Server 2012.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.MemoryAllocationType.MEM_LARGE_PAGES">
+            <summary>
+            Allocates memory using large page support.
+            The size and alignment must be a multiple of the large-page minimum. To obtain this value, use the GetLargePageMinimum function.
+            If you specify this value, you must also specify MEM_RESERVE and MEM_COMMIT.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.MemoryAllocationType.MEM_PHYSICAL">
+            <summary>
+            Reserves an address range that can be used to map Address Windowing Extensions (AWE) pages.
+            This value must be used with MEM_RESERVE and no other values.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.MemoryAllocationType.MEM_TOP_DOWN">
+            <summary>
+            Allocates memory at the highest possible address. This can be slower than regular allocations, especially when there are many allocations.
+            </summary>
+        </member>
+        <!-- 对于成员“T:ZS.Common.Win32.API.MemoryProtectionConstants”忽略有格式错误的 XML 注释 -->
+        <member name="F:ZS.Common.Win32.API.MemoryProtectionConstants.PAGE_EXECUTE">
+            <summary>
+            Enables execute access to the committed region of pages. An attempt to write to the committed region results in an access violation.
+            This flag is not supported by the CreateFileMapping function.
+            </summary>
+        </member>
+        <member name="T:ZS.Common.Win32.API.MemoryFreeType">
+            <summary>
+            内存释放类型
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.MemoryFreeType.MEM_DECOMMIT">
+            <summary>
+            Decommits the specified region of committed pages. After the operation, the pages are in the reserved state.
+            The function does not fail if you attempt to decommit an uncommitted page. This means that you can decommit a range of pages without first determining their current commitment state.
+            Do not use this value with MEM_RELEASE.
+            The MEM_DECOMMIT value is not supported when the lpAddress parameter provides the base address for an enclave.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.MemoryFreeType.MEM_RELEASE">
+            <summary>
+            Releases the specified region of pages. After the operation, the pages are in the free state.
+            If you specify this value, dwSize must be 0 (zero), and lpAddress must point to the base address returned by the VirtualAllocEx function when the region is reserved. The function fails if either of these conditions is not met.
+            If any pages in the region are committed currently, the function first decommits, and then releases them.
+            The function does not fail if you attempt to release pages that are in different states, some reserved and some committed. This means that you can release a range of pages without first determining the current commitment state.
+            Do not use this value with MEM_DECOMMIT.
+            </summary>
+        </member>
+        <member name="M:ZS.Common.Win32.API.SendMessage(System.IntPtr,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Sends the specified message to a window or windows. The SendMessage function calls the window procedure for the specified window and does not return until the window procedure has processed the message.
+            To send a message and return immediately, use the SendMessageCallback or SendNotifyMessage function. To post a message to a thread's message queue and return immediately, use the PostMessage or PostThreadMessage function.
+            </summary>
+            <param name="hwnd">
+                [in][Type: HWND]
+                A handle to the window whose window procedure will receive the message. If this parameter is HWND_BROADCAST ((HWND)0xffff), the message is sent to all top-level windows in the system, including disabled or invisible unowned windows, overlapped windows, and pop-up windows; but the message is not sent to child windows.
+                Message sending is subject to UIPI. The thread of a process can send messages only to message queues of threads in processes of lesser or equal integrity level.
+            </param>
+            <param name="Msg">
+                [in][Type: UINT]
+                The message to be sent.
+                For lists of the system-provided messages, see System-Defined Messages.
+            </param>
+            <param name="wParam"></param>
+            <param name="lParam"></param>
+            <returns>
+               [Type: LRESULT]
+               The return value specifies the result of the message processing; it depends on the message sent.
+            </returns>
+            <link>https://msdn.microsoft.com/en-us/library/windows/desktop/ms644950(v=vs.85).aspx</link>
+        </member>
+        <member name="M:ZS.Common.Win32.API.SendMessage(System.IntPtr,System.Int32,System.Int32,System.Text.StringBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="hwnd"></param>
+            <param name="Msg"></param>
+            <param name="wParam"></param>
+            <param name="lParam"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZS.Common.Win32.API.OpenProcess(System.UInt32,System.Boolean,System.UInt32)">
+            <summary>
+            Opens an existing local process object.
+            </summary>
+            <param name="dwDesiredAccess">
+            [in]
+                The access to the process object. This access right is checked against the security descriptor for the process. This parameter can be one or more of the process access rights.
+                If the caller has enabled the SeDebugPrivilege privilege, the requested access is granted regardless of the contents of the security descriptor.
+            </param>
+            <param name="bInheritHandle">
+            [in]
+                If this value is TRUE, processes created by this process will inherit the handle. Otherwise, the processes do not inherit this handle.
+            </param>
+            <param name="dwProcessId">
+            [in]
+                The identifier of the local process to be opened.
+                If the specified process is the System Process (0x00000000), the function fails and the last error code is ERROR_INVALID_PARAMETER. If the specified process is the Idle process or one of the CSRSS processes, this function fails and the last error code is ERROR_ACCESS_DENIED because their access restrictions prevent user-level code from opening them.
+                If you are using GetCurrentProcessId as an argument to this function, consider using GetCurrentProcess instead of OpenProcess, for improved performance.
+            </param>
+            <returns>
+                If the function succeeds, the return value is an open handle to the specified process.
+                If the function fails, the return value is NULL. To get extended error information, call GetLastError.
+            </returns>
+            <remarks>
+                To open a handle to another local process and obtain full access rights, you must enable the SeDebugPrivilege privilege. For more information, see Changing Privileges in a Token.
+                The handle returned by the OpenProcess function can be used in any function that requires a handle to a process, such as the wait functions, provided the appropriate access rights were requested.
+                When you are finished with the handle, be sure to close it using the CloseHandle function.
+            </remarks>
+            <link>https://msdn.microsoft.com/en-us/library/windows/desktop/ms684320(v=vs.85).aspx</link>
+        </member>
+        <member name="T:ZS.Common.Win32.API.ProcessSecurityAccessRight">
+            <summary>
+            The Microsoft Windows security model enables you to control access to process objects. For more information about security, see Access-Control Model.
+            When a user logs in, the system collects a set of data that uniquely identifies the user during the authentication process, and stores it in an access token. This access token describes the security context of all processes associated with the user. The security context of a process is the set of credentials given to the process or the user account that created the process.
+            You can use a token to specify the current security context for a process using the CreateProcessWithTokenW function. You can specify a security descriptor for a process when you call the CreateProcess, CreateProcessAsUser, or CreateProcessWithLogonW function. If you specify NULL, the process gets a default security descriptor. The ACLs in the default security descriptor for a process come from the primary or impersonation token of the creator.
+            To retrieve a process's security descriptor, call the GetSecurityInfo function. To change a process's security descriptor, call the SetSecurityInfo function.
+            The valid access rights for process objects include the standard access rights and some process-specific access rights. The following table lists the standard access rights used by all objects.
+            </summary>
+            <link>https://msdn.microsoft.com/en-us/library/windows/desktop/ms684880(v=vs.85).aspx</link>
+        </member>
+        <member name="F:ZS.Common.Win32.API.ProcessSecurityAccessRight.PROCESS_CREATE_PROCESS">
+            <summary>
+            Required to create a process.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.ProcessSecurityAccessRight.PROCESS_CREATE_THREAD">
+            <summary>
+            Required to create a thread.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.ProcessSecurityAccessRight.PROCESS_DUP_HANDLE">
+            <summary>
+            Required to duplicate a handle using DuplicateHandle.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.ProcessSecurityAccessRight.PROCESS_QUERY_INFORMATION">
+            <summary>
+            Required to retrieve certain information about a process, such as its token, exit code, and priority class (see OpenProcessToken).
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.ProcessSecurityAccessRight.PROCESS_SET_QUOTA">
+            <summary>
+            Required to set memory limits using SetProcessWorkingSetSize.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.ProcessSecurityAccessRight.PROCESS_SUSPEND_RESUME">
+            <summary>
+            Required to suspend or resume a process.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.ProcessSecurityAccessRight.PROCESS_TERMINATE">
+            <summary>
+            Required to terminate a process using TerminateProcess.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.ProcessSecurityAccessRight.PROCESS_VM_OPERATION">
+            <summary>
+            Required to perform an operation on the address space of a process (see VirtualProtectEx and WriteProcessMemory).
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.ProcessSecurityAccessRight.PROCESS_VM_READ">
+            <summary>
+            Required to read memory in a process using ReadProcessMemory.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.ProcessSecurityAccessRight.PROCESS_VM_WRITE">
+            <summary>
+            Required to write to memory in a process using WriteProcessMemory.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.ProcessSecurityAccessRight.SYNCHRONIZE">
+            <summary>
+            Required to wait for the process to terminate using the wait functions.
+            </summary>
+        </member>
+        <member name="M:ZS.Common.Win32.API.ReadProcessMemory(System.IntPtr,System.IntPtr,System.IntPtr,System.Int32,System.UInt32@)">
+            <summary>
+            Reads data from an area of memory in a specified process. The entire area to be read must be accessible or the operation fails.
+            </summary>
+            <param name="hProcess">
+            [in]
+                A handle to the process with memory that is being read. The handle must have PROCESS_VM_READ access to the process.
+            </param>
+            <param name="lpBaseAddress">
+            [in]
+                A pointer to the base address in the specified process from which to read. Before any data transfer occurs, the system verifies that all data in the base address and memory of the specified size is accessible for read access, and if it is not accessible the function fails. 
+            </param>
+            <param name="lpBuffer">
+            [out]
+                A pointer to a buffer that receives the contents from the address space of the specified process.
+            </param>
+            <param name="nSize">
+            [in]
+                The number of bytes to be read from the specified process.
+            </param>
+            <param name="lpNumberOfBytesRead">
+            [out]
+                A pointer to a variable that receives the number of bytes transferred into the specified buffer. If lpNumberOfBytesRead is NULL, the parameter is ignored.
+            </param>
+            <returns>
+                If the function succeeds, the return value is nonzero.
+                If the function fails, the return value is 0 (zero). To get extended error information, call GetLastError.
+                The function fails if the requested read operation crosses into an area of the process that is inaccessible.
+            </returns>
+            <remarks>
+            ReadProcessMemory copies the data in the specified address range from the address space of the specified process into the specified buffer of the current process. Any process that has a handle with PROCESS_VM_READ access can call the function.
+            The entire area to be read must be accessible, and if it is not accessible, the function fails.
+            </remarks>
+            <link>https://msdn.microsoft.com/en-us/library/windows/desktop/ms680553(v=vs.85).aspx</link>
+        </member>
+        <member name="M:ZS.Common.Win32.API.WriteProcessMemory(System.IntPtr,System.IntPtr,System.IntPtr,System.Int32,System.UInt32@)">
+            <summary>
+            Writes data to an area of memory in a specified process. The entire area to be written to must be accessible or the operation fails.
+            </summary>
+            <param name="hProcess">
+            [in]
+                A handle to the process memory to be modified. The handle must have PROCESS_VM_WRITE and PROCESS_VM_OPERATION access to the process.
+            </param>
+            <param name="lpBaseAddress">
+            [in]
+                A pointer to the base address in the specified process to which data is written. Before data transfer occurs, the system verifies that all data in the base address and memory of the specified size is accessible for write access, and if it is not accessible, the function fails.
+            </param>
+            <param name="lpBuffer">
+            [in]
+                A pointer to the buffer that contains data to be written in the address space of the specified process.
+            </param>
+            <param name="nSize">
+            [in]
+                he number of bytes to be written to the specified process.
+            </param>
+            <param name="lpNumberOfBytesWritten">
+            [out]
+                A pointer to a variable that receives the number of bytes transferred into the specified process. This parameter is optional. If lpNumberOfBytesWritten is NULL, the parameter is ignored.
+            </param>
+            <returns>
+                If the function succeeds, the return value is nonzero.
+                If the function fails, the return value is 0 (zero). To get extended error information, call GetLastError. The function fails if the requested write operation crosses into an area of the process that is inaccessible.
+            </returns>
+            <remarks>
+                WriteProcessMemory copies the data from the specified buffer in the current process to the address range of the specified process. Any process that has a handle with PROCESS_VM_WRITE and PROCESS_VM_OPERATION access to the process to be written to can call the function. Typically but not always, the process with address space that is being written to is being debugged.
+                The entire area to be written to must be accessible, and if it is not accessible, the function fails.
+            </remarks>
+            <link>https://msdn.microsoft.com/en-us/library/windows/desktop/ms681674(v=vs.85).aspx</link>
+        </member>
+        <member name="T:ZS.Common.Win32.API.POINT">
+            <summary>
+            The POINT structure defines the x- and y- coordinates of a point.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.API.POINT.X">
+            <summary>
+            The x-coordinate of the point.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.API.POINT.Y">
+            <summary>
+            The y-coordinate of the point.
+            </summary>
+        </member>
+        <member name="M:ZS.Common.Win32.API.POINT.#ctor(System.Int32,System.Int32)">
+            <summary>
+            通过制定的坐标值构造一个新的POINT
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+        </member>
+        <member name="M:ZS.Common.Win32.API.POINT.#ctor(System.Drawing.Point)">
+            <summary>
+            通过System.Drawing.Point对象构造一个新的POINT
+            </summary>
+            <param name="pt"></param>
+        </member>
+        <member name="M:ZS.Common.Win32.API.POINT.op_Implicit(ZS.Common.Win32.API.POINT)~System.Drawing.Point">
+            <summary>
+            提供POINT到System.Drawing.Point的隐式转换
+            </summary>
+            <param name="p"></param>
+        </member>
+        <member name="M:ZS.Common.Win32.API.POINT.op_Implicit(System.Drawing.Point)~ZS.Common.Win32.API.POINT">
+            <summary>
+            提供System.Drawing.Point到POINT的隐式转换
+            </summary>
+            <param name="pt"></param>
+        </member>
+        <member name="M:ZS.Common.Win32.API.GetClassName(System.IntPtr,System.Text.StringBuilder,System.Int32)">
+            <summary>
+            Retrieves the name of the class to which the specified window belongs.
+            </summary>
+            <param name="hwnd">
+                [in][Type: HWND]
+                A handle to the window and, indirectly, the class to which the window belongs.
+            </param>
+            <param name="lpClassName">
+                [out][Type: LPTSTR]
+                The class name string.
+            </param>
+            <param name="nMaxCount">
+                [int][Type: int]
+                The length of the lpClassName buffer, in characters. The buffer must be large enough to include the terminating null character; otherwise, the class name string is truncated to nMaxCount-1 characters.
+            </param>
+            <returns>
+                [Type: int]
+                If the function succeeds, the return value is the number of characters copied to the buffer, not including the terminating null character.
+                If the function fails, the return value is zero. To get extended error information, call GetLastError.
+            </returns>
+            <link>
+            https://msdn.microsoft.com/en-us/library/ms633582(v=vs.85).aspx
+            </link>
+        </member>
+        <member name="M:ZS.Common.Win32.API.GetClassName(System.IntPtr)">
+            <summary>
+            获取指定句柄的Class名
+            </summary>
+            <param name="hWnd"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZS.Common.Win32.API.AnimateWindow(System.IntPtr,System.Int32,ZS.Common.Win32.API.AnimateWindowType)">
+            <summary>
+                Enables you to produce special effects when showing or hiding windows. There are four types of animation: roll, slide, collapse or expand, and alpha-blended fade.
+            </summary>
+            <param name="hwnd">
+                [in][Type: HWND]
+                A handle to the window to animate. The calling thread must own this window.
+            </param>
+            <param name="dwTime">
+                [in][Type: DWORD]
+                The time it takes to play the animation, in milliseconds. Typically, an animation takes 200 milliseconds to play.
+            </param>
+            <param name="dwFlags">
+                [in][Type: DWORD]
+                动画类型。可以组合使用，比如AW_ACTIVATE + AW_BLEND渐变显示，再用AW_HIDE + AW_BLEND渐变隐藏
+                The type of animation. This parameter can be one or more of the following values. Note that, by default, these flags take effect when showing a window. To take effect when hiding a window, use AW_HIDE and a logical OR operator with the appropriate flags.
+            </param>
+            <returns>
+                [Type: BOOL]
+                If the function succeeds, the return value is nonzero.
+                If the function fails, the return value is zero. The function will fail in the following situations:
+                    If the window is already visible and you are trying to show the window.
+                    If the window is already hidden and you are trying to hide the window.
+                    If there is no direction specified for the slide or roll animation.
+                    When trying to animate a child window with AW_BLEND.
+                    If the thread does not own the window. Note that, in this case, AnimateWindow fails but GetLastError returns ERROR_SUCCESS.
+            </returns>
+            <remarks>
+                To show or hide a window without special effects, use ShowWindow.
+                When using slide or roll animation, you must specify the direction. It can be either AW_HOR_POSITIVE, AW_HOR_NEGATIVE, AW_VER_POSITIVE, or AW_VER_NEGATIVE.
+                You can combine AW_HOR_POSITIVE or AW_HOR_NEGATIVE with AW_VER_POSITIVE or AW_VER_NEGATIVE to animate a window diagonally.
+                The window procedures for the window and its child windows should handle any WM_PRINT or WM_PRINTCLIENT messages. Dialog boxes, controls, and common controls already handle WM_PRINTCLIENT. The default window procedure already handles WM_PRINT.
+                If a child window is displayed partially clipped, when it is animated it will have holes where it is clipped.
+                AnimateWindow supports RTL windows.
+                Avoid animating a window that has a drop shadow because it produces visually distracting, jerky animations.
+            </remarks>
+            <see cref="!:https://msdn.microsoft.com/en-us/library/ms632669(VS.85).aspx"/>
+            <seealso cref="!:http://www.cnblogs.com/KeenLeung/archive/2013/05/19/3087728.html"/>
+        </member>
+        <member name="T:ZS.Common.Win32.API.AnimateWindowType">
+            <summary>
+            窗口动画效果
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.AnimateWindowType.AW_ACTIVATE">
+            <summary>
+            直接显示
+            Activates the window. Do not use this value with AW_HIDE.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.AnimateWindowType.AW_BLEND">
+            <summary>
+            淡入效果。
+            Uses a fade effect. This flag can be used only if hwnd is a top-level window.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.AnimateWindowType.AW_CENTER">
+            <summary>
+            从中间开始显示
+            Makes the window appear to collapse inward if AW_HIDE is used or expand outward if the AW_HIDE is not used. The various direction flags have no effect.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.AnimateWindowType.AW_HIDE">
+            <summary>
+            Hides the window. By default, the window is shown.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.AnimateWindowType.AW_HOR_POSITIVE">
+            <summary>
+            Animates the window from left to right. This flag can be used with roll or slide animation. It is ignored when used with AW_CENTER or AW_BLEND.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.AnimateWindowType.AW_HOR_NEGATIVE">
+            <summary>
+            Animates the window from right to left. This flag can be used with roll or slide animation. It is ignored when used with AW_CENTER or AW_BLEND.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.AnimateWindowType.AW_SLIDE">
+            <summary>
+            Uses slide animation. By default, roll animation is used. This flag is ignored when used with AW_CENTER.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.AnimateWindowType.AW_VER_POSITIVE">
+            <summary>
+            Animates the window from top to bottom. This flag can be used with roll or slide animation. It is ignored when used with AW_CENTER or AW_BLEND.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.AnimateWindowType.AW_VER_NEGATIVE">
+            <summary>
+            Animates the window from bottom to top. This flag can be used with roll or slide animation. It is ignored when used with AW_CENTER or AW_BLEND.
+            </summary>
+        </member>
+        <member name="M:ZS.Common.Win32.API.FindWindow(System.String,System.String)">
+            <summary>
+                据窗口类名或窗口标题名来获得窗口的句柄，该函数返回窗口的句柄。需要注意：如果按照窗口名称查找，则窗口类名参数应设置为null，而不是""。具体见参数解释。
+                Retrieves a handle to the top-level window whose class name and window name match the specified strings. This function does not search child windows. This function does not perform a case-sensitive search.
+                To search child windows, beginning with a specified child window, use the FindWindowEx function.
+            </summary>
+            <param name="lpClassName">
+                [in, optional]
+                [Type: LPCTSTR]
+                窗口的类名
+                The class name or a class atom created by a previous call to the RegisterClass or RegisterClassEx function. The atom must be in the low-order word of lpClassName; the high-order word must be zero.
+                If lpClassName points to a string, it specifies the window class name. The class name can be any name registered with RegisterClass or RegisterClassEx, or any of the predefined control-class names.
+                If lpClassName is NULL, it finds any window whose title matches the lpWindowName parameter.
+            </param>
+            <param name="lpWindowName">
+                [in, optional]
+                [Type: LPCTSTR]
+                窗口标题名
+                The window name (the window's title). If this parameter is NULL, all window names match.</param>
+            <returns>
+                [Type: HWND]
+                If the function succeeds, the return value is a handle to the window that has the specified class name and window name.
+                If the function fails, the return value is NULL. To get extended error information, call GetLastError.
+            </returns>
+            <remarks>
+                If the lpWindowName parameter is not NULL, FindWindow calls the GetWindowText function to retrieve the window name for comparison. For a description of a potential problem that can arise, see the Remarks for GetWindowText.
+            </remarks>
+        </member>
+        <member name="M:ZS.Common.Win32.API.FindWindowEx(System.IntPtr,System.IntPtr,System.String,System.String)">
+            <summary>
+            Retrieves a handle to a window whose class name and window name match the specified strings. The function searches child windows, beginning with the one following the specified child window. This function does not perform a case-sensitive search.
+            </summary>
+            <param name="hwndParnet">
+             [in, optional]
+             Type: HWND
+             A handle to the parent window whose child windows are to be searched.
+             If hwndParent is NULL, the function uses the desktop window as the parent window. The function searches among windows that are child windows of the desktop.
+             If hwndParent is HWND_MESSAGE, the function searches all message-only windows.
+            </param>
+            <param name="hwndChildAfter">
+            [in, optional]
+            Type: HWND
+            A handle to a child window. The search begins with the next child window in the Z order. The child window must be a direct child window of hwndParent, not just a descendant window.
+            If hwndChildAfter is NULL, the search begins with the first child window of hwndParent.
+            Note that if both hwndParent and hwndChildAfter are NULL, the function searches all top-level and message-only windows.
+            </param>
+            <param name="lpszClass">
+            [in, optional]
+            Type: LPCTSTR
+            The class name or a class atom created by a previous call to the RegisterClass or RegisterClassEx function. The atom must be placed in the low-order word of lpszClass; the high-order word must be zero.
+            If lpszClass is a string, it specifies the window class name. The class name can be any name registered with RegisterClass or RegisterClassEx, or any of the predefined control-class names, or it can be MAKEINTATOM(0x8000). In this latter case, 0x8000 is the atom for a menu class. For more information, see the Remarks section of this topic.
+            </param>
+            <param name="lpszWindow">
+            [in, optional]
+            Type: LPCTSTR
+            The window name (the window's title). If this parameter is NULL, all window names match.
+            </param>
+            <returns>
+            Type: HWND
+            If the function succeeds, the return value is a handle to the window that has the specified class and window names.
+            If the function fails, the return value is NULL. To get extended error information, call GetLastError.
+            </returns>
+            <remarks>
+            If the lpszWindow parameter is not NULL, FindWindowEx calls the GetWindowText function to retrieve the window name for comparison. For a description of a potential problem that can arise, see the Remarks section of GetWindowText.
+            An application can call this function in the following way:FindWindowEx( NULL, NULL, MAKEINTATOM(0x8000), NULL );
+            Note that 0x8000 is the atom for a menu class. When an application calls this function, the function checks whether a context menu is being displayed that the application created.
+            </remarks>
+        </member>
+        <member name="M:ZS.Common.Win32.API.GetDesktopWindow">
+            <summary>
+            Retrieves a handle to the desktop window. The desktop window covers the entire screen. The desktop window is the area on top of which other windows are painted.
+            </summary>
+            <returns>
+            Type: HWND
+            The return value is a handle to the desktop window.
+            For an example, see Initializing a Dialog Box.
+            https://msdn.microsoft.com/en-us/library/windows/desktop/ms644996(v=vs.85).aspx#init_box
+            </returns>
+        </member>
+        <member name="M:ZS.Common.Win32.API.GetForegroundWindow">
+            <summary>
+            Retrieves a handle to the foreground window (the window with which the user is currently working). The system assigns a slightly higher priority to the thread that creates the foreground window than it does to other threads.
+            </summary>
+            <returns>
+            Type: HWND
+            The return value is a handle to the foreground window. The foreground window can be NULL in certain circumstances, such as when a window is losing activation.
+            </returns>
+        </member>
+        <member name="M:ZS.Common.Win32.API.GetWindow(System.IntPtr,ZS.Common.Win32.API.GetWindowTypeEnum)">
+            <summary>
+            Retrieves a handle to a window that has the specified relationship (Z-Order or owner) to the specified window.
+            </summary>
+            <param name="hWnd">
+            [in]
+            Type: HWND
+            A handle to a window. The window handle retrieved is relative to this window, based on the value of the uCmd parameter.
+            </param>
+            <param name="uCmd">
+            [in]
+            Type: UINT
+            The relationship between the specified window and the window whose handle is to be retrieved. This parameter can be one of the following values.
+            </param>
+            <returns></returns>
+        </member>
+        <member name="T:ZS.Common.Win32.API.GetWindowTypeEnum">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.GetWindowTypeEnum.GW_CHILD">
+            <summary>
+            The retrieved handle identifies the child window at the top of the Z order, if the specified window is a parent window; otherwise, the retrieved handle is NULL. The function examines only child windows of the specified window. It does not examine descendant windows.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.GetWindowTypeEnum.GW_ENABLEDPOPUP">
+            <summary>
+            The retrieved handle identifies the enabled popup window owned by the specified window (the search uses the first such window found using GW_HWNDNEXT); otherwise, if there are no enabled popup windows, the retrieved handle is that of the specified window.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.GetWindowTypeEnum.GW_HWNDFIRST">
+            <summary>
+            The retrieved handle identifies the window of the same type that is highest in the Z order.
+            If the specified window is a topmost window, the handle identifies a topmost window. If the specified window is a top-level window, the handle identifies a top-level window. If the specified window is a child window, the handle identifies a sibling window.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.GetWindowTypeEnum.GW_HWNDLAST">
+            <summary>
+            The retrieved handle identifies the window of the same type that is lowest in the Z order.
+            If the specified window is a topmost window, the handle identifies a topmost window. If the specified window is a top-level window, the handle identifies a top-level window. If the specified window is a child window, the handle identifies a sibling window.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.GetWindowTypeEnum.GW_HWNDNEXT">
+            <summary>
+            The retrieved handle identifies the window below the specified window in the Z order.
+            If the specified window is a topmost window, the handle identifies a topmost window. If the specified window is a top-level window, the handle identifies a top-level window. If the specified window is a child window, the handle identifies a sibling window.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.GetWindowTypeEnum.GW_HWNDPREV">
+            <summary>
+            The retrieved handle identifies the window above the specified window in the Z order.
+            If the specified window is a topmost window, the handle identifies a topmost window. If the specified window is a top-level window, the handle identifies a top-level window. If the specified window is a child window, the handle identifies a sibling window.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.GetWindowTypeEnum.GW_OWNER">
+            <summary>
+            The retrieved handle identifies the specified window's owner window, if any. For more information, see Owned Windows.
+            </summary>
+        </member>
+        <member name="M:ZS.Common.Win32.API.GetWindowText(System.IntPtr,System.Text.StringBuilder,System.Int32)">
+            <summary>
+            Copies the text of the specified window's title bar (if it has one) into a buffer. If the specified window is a control, the text of the control is copied. However, GetWindowText cannot retrieve the text of a control in another application.
+            </summary>
+            <param name="hWnd">
+            [in]
+            Type: HWND
+            A handle to the window or control containing the text.
+            </param>
+            <param name="lpString">
+            [out]
+            Type: LPTSTR
+            The buffer that will receive the text. If the string is as long or longer than the buffer, the string is truncated and terminated with a null character.
+            </param>
+            <param name="nMaxCount">
+            [in]
+            Type: int
+            The maximum number of characters to copy to the buffer, including the null character. If the text exceeds this limit, it is truncated.
+            </param>
+            <returns>
+            Type: int
+            If the function succeeds, the return value is the length, in characters, of the copied string, not including the terminating null character. If the window has no title bar or text, if the title bar is empty, or if the window or control handle is invalid, the return value is zero. To get extended error information, call GetLastError.
+            This function cannot retrieve the text of an edit control in another application.
+            </returns>
+            <remarks>
+            If the target window is owned by the current process, GetWindowText causes a WM_GETTEXT message to be sent to the specified window or control. 
+            If the target window is owned by another process and has a caption, GetWindowText retrieves the window caption text. 
+            If the window does not have a caption, the return value is a null string. This behavior is by design. 
+            It allows applications to call GetWindowText without becoming unresponsive if the process that owns the target window is not responding. 
+            However, if the target window is not responding and it belongs to the calling application, GetWindowText will cause the calling application to become unresponsive.
+            To retrieve the text of a control in another process, send a WM_GETTEXT message directly instead of calling GetWindowText.
+            </remarks>
+        </member>
+        <member name="M:ZS.Common.Win32.API.GetWindowText(System.IntPtr)">
+            <summary>
+            获取指定窗口的标题
+            </summary>
+            <param name="hWnd"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZS.Common.Win32.API.GetWindowTextLength(System.IntPtr)">
+            <summary>
+            Retrieves the length, in characters, of the specified window's title bar text (if the window has a title bar). If the specified window is a control, the function retrieves the length of the text within the control. However, GetWindowTextLength cannot retrieve the length of the text of an edit control in another application.
+            </summary>
+            <param name="hWnd">
+            [in]
+            Type: HWND
+            A handle to the window or control.
+            </param>
+            <returns>
+            Type: int
+            If the function succeeds, the return value is the length, in characters, of the text. Under certain conditions, this value may actually be greater than the length of the text. For more information, see the following Remarks section.
+            If the window has no text, the return value is zero. To get extended error information, call GetLastError.
+            </returns>
+            <remarks>
+            If the target window is owned by the current process, GetWindowTextLength causes a WM_GETTEXTLENGTH message to be sent to the specified window or control.
+            Under certain conditions, the GetWindowTextLength function may return a value that is larger than the actual length of the text. This occurs with certain mixtures of ANSI and Unicode, and is due to the system allowing for the possible existence of double-byte character set (DBCS) characters within the text. The return value, however, will always be at least as large as the actual length of the text; you can thus always use it to guide buffer allocation. This behavior can occur when an application uses both ANSI functions and common dialogs, which use Unicode. It can also occur when an application uses the ANSI version of GetWindowTextLength with a window whose window procedure is Unicode, or the Unicode version of GetWindowTextLength with a window whose window procedure is ANSI. For more information on ANSI and ANSI functions, see Conventions for Function Prototypes.
+            To obtain the exact length of the text, use the WM_GETTEXT, LB_GETTEXT, or CB_GETLBTEXT messages, or the GetWindowText function.
+            </remarks>
+        </member>
+        <member name="M:ZS.Common.Win32.API.SetParent(System.IntPtr,System.IntPtr)">
+            <summary>
+            Changes the parent window of the specified child window.
+            </summary>
+            <param name="hWndChild">
+            [in]
+            Type: HWND
+            A handle to the child window.
+            </param>
+            <param name="hWndNewParent">
+            [in, optional]
+            Type: HWND
+            A handle to the new parent window. If this parameter is NULL, the desktop window becomes the new parent window. If this parameter is HWND_MESSAGE, the child window becomes a message-only window.
+            </param>
+            <returns>
+            Type: HWND
+            If the function succeeds, the return value is a handle to the previous parent window.
+            If the function fails, the return value is NULL. To get extended error information, call GetLastError.
+            </returns>
+            <remarks>
+            An application can use the SetParent function to set the parent window of a pop-up, overlapped, or child window.
+            If the window identified by the hWndChild parameter is visible, the system performs the appropriate redrawing and repainting.
+            For compatibility reasons, SetParent does not modify the WS_CHILD or WS_POPUP window styles of the window whose parent is being changed. Therefore, if hWndNewParent is NULL, you should also clear the WS_CHILD bit and set the WS_POPUP style after calling SetParent. Conversely, if hWndNewParent is not NULL and the window was previously a child of the desktop, you should clear the WS_POPUP style and set the WS_CHILD style before calling SetParent.
+            When you change the parent of a window, you should synchronize the UISTATE of both windows. For more information, see WM_CHANGEUISTATE and WM_UPDATEUISTATE.
+            </remarks>
+        </member>
+        <member name="T:ZS.Common.Win32.API.EnumChildProc">
+            <summary>
+            An application-defined callback function used with the EnumChildWindows function. It receives the child window handles. The WNDENUMPROC type defines a pointer to this callback function. EnumChildProc is a placeholder for the application-defined function name.
+            </summary>
+            <param name="hwnd">
+                [in][Type: HWND]
+                A handle to a child window of the parent window specified in EnumChildWindows.
+            </param>
+            <param name="lParam">
+                 [in]
+                 The application-defined value given in EnumChildWindows.
+            </param>
+            <returns>
+            To continue enumeration, the callback function must return TRUE; to stop enumeration, it must return FALSE.
+            </returns>
+            <remarks>
+            The callback function can carry out any desired task.
+            An application must register this callback function by passing its address to EnumChildWindows.
+            </remarks>
+            <link>https://msdn.microsoft.com/en-us/library/windows/desktop/ms633493(v=vs.85).aspx</link>
+        </member>
+        <member name="M:ZS.Common.Win32.API.EnumChildWindows(System.IntPtr,ZS.Common.Win32.API.EnumChildProc,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="hWndParent">
+                [in, optional][Type: HWND]
+                A handle to the parent window whose child windows are to be enumerated. If this parameter is NULL, this function is equivalent to EnumWindows.
+            </param>
+            <param name="lpEnumFunc">
+                [in][Type: WNDENUMPROC]
+                A pointer to an application-defined callback function. For more information, see EnumChildProc.
+            </param>
+            <param name="lParam">
+                [in][Type: LPARAM]
+                An application-defined value to be passed to the callback function.
+            </param>
+            <returns>
+            The return value is not used.
+            </returns>
+            <remarks>
+            If a child window has created child windows of its own, EnumChildWindows enumerates those windows as well.
+            A child window that is moved or repositioned in the Z order during the enumeration process will be properly enumerated. The function does not enumerate a child window that is destroyed before being enumerated or that is created during the enumeration process.
+            </remarks>
+            <link>https://msdn.microsoft.com/en-us/library/windows/desktop/ms633494(v=vs.85).aspx</link>
+        </member>
+        <member name="M:ZS.Common.Win32.API.EnumWindows(ZS.Common.Win32.API.EnumWindowsProc,System.Int32)">
+            <summary>
+            Enumerates all top-level windows on the screen by passing the handle to each window, in turn, to an application-defined callback function. EnumWindows continues until the last top-level window is enumerated or the callback function returns FALSE.
+            </summary>
+            <param name="lpEnumFunc">
+                [in][Type: WNDENUMPROC]
+                A pointer to an application-defined callback function. For more information, see EnumWindowsProc.
+            </param>
+            <param name="lParam">
+                [in][Type: LPARAM]
+                An application-defined value to be passed to the callback function.
+            </param>
+            <returns>
+                [Type: BOOL]
+                If the function succeeds, the return value is nonzero.
+                If the function fails, the return value is zero. To get extended error information, call GetLastError.
+                If EnumWindowsProc returns zero, the return value is also zero. In this case, the callback function should call SetLastError to obtain a meaningful error code to be returned to the caller of EnumWindows.
+                
+            </returns>
+            <remarks>
+            The EnumWindows function does not enumerate child windows, with the exception of a few top-level windows owned by the system that have the WS_CHILD style.
+            This function is more reliable than calling the GetWindow function in a loop. An application that calls GetWindow to perform this task risks being caught in an infinite loop or referencing a handle to a window that has been destroyed.
+            Note  For Windows 8 and later, EnumWindows enumerates only top-level windows of desktop apps.
+            </remarks>
+            <link>
+            https://msdn.microsoft.com/en-us/library/ms633497(v=vs.85).aspx
+            </link>
+        </member>
+        <member name="T:ZS.Common.Win32.API.EnumWindowsProc">
+            <summary>
+            An application-defined callback function used with the EnumWindows or EnumDesktopWindows function. It receives top-level window handles. The WNDENUMPROC type defines a pointer to this callback function. EnumWindowsProc is a placeholder for the application-defined function name.
+            </summary>
+            <param name="hwnd">
+                [in]
+                A handle to a top-level window.
+            </param>
+            <param name="lParam">
+                [in]
+                The application-defined value given in EnumWindows or EnumDesktopWindows.
+            </param>
+            <returns>
+                To continue enumeration, the callback function must return TRUE; to stop enumeration, it must return 
+            </returns>
+            <remarks>
+            An application must register this callback function by passing its address to EnumWindows or EnumDesktopWindows.
+            </remarks>
+            <link>
+            https://msdn.microsoft.com/en-us/library/ms633498(v=vs.85).aspx
+            </link>
+        </member>
+        <member name="M:ZS.Common.Win32.API.IsWindowVisible(System.IntPtr)">
+            <summary>
+            Determines the visibility state of the specified window.
+            </summary>
+            <param name="hwnd">
+                [in][Type: HWND]
+                A handle to the window to be tested.
+            </param>
+            <returns>
+                [Type: BOOL]
+                If the specified window, its parent window, its parent's parent window, and so forth, have the WS_VISIBLE style, the return value is nonzero. Otherwise, the return value is zero.
+                Because the return value specifies whether the window has the WS_VISIBLE style, it may be nonzero even if the window is totally obscured by other windows.
+            </returns>
+            <remarks>
+            The visibility state of a window is indicated by the WS_VISIBLE style bit. When WS_VISIBLE is set, the window is displayed and subsequent drawing into it is displayed as long as the window has the WS_VISIBLE style.
+            Any drawing to a window with the WS_VISIBLE style will not be displayed if the window is obscured by other windows or is clipped by its parent window.
+            </remarks>
+            <link>https://msdn.microsoft.com/en-us/library/ms633530(v=vs.85).aspx</link>
+        </member>
+        <member name="M:ZS.Common.Win32.API.BringWindowToTop(System.IntPtr)">
+            <summary>
+            Brings the specified window to the top of the Z order. If the window is a top-level window, it is activated. If the window is a child window, the top-level parent window associated with the child window is activated.
+            </summary>
+            <param name="hWnd">
+            [in][Type: HWND]
+                A handle to the window to bring to the top of the Z order.
+            </param>
+            <returns>
+            [Type: BOOL]
+                If the function succeeds, the return value is nonzero.
+                If the function fails, the return value is zero. To get extended error information, call GetLastError.
+            </returns>
+            <remarks>
+            Use the BringWindowToTop function to uncover any window that is partially or completely obscured by other windows.
+            Calling this function is similar to calling the SetWindowPos function to change a window's position in the Z order. BringWindowToTop does not make a window a top-level window.
+            </remarks>
+            <link>https://msdn.microsoft.com/en-us/library/windows/desktop/ms632673(v=vs.85).aspx</link>
+        </member>
+        <member name="M:ZS.Common.Win32.API.GetWindowThreadProcessId(System.IntPtr,System.Int32@)">
+            <summary>
+            <para>根据窗口句柄返回其进程标识符。</para>
+            Retrieves the identifier of the thread that created the specified window and, optionally, the identifier of the process that created the window.
+            </summary>
+            <param name="hWnd">
+                [in][Type: HWND]
+                A handle to the window.
+            </param>
+            <param name="lpdwProcessId">
+                [out, optional][Type: LPDWORD]
+                A pointer to a variable that receives the process identifier. If this parameter is not NULL, GetWindowThreadProcessId copies the identifier of the process to the variable; otherwise, it does not.
+            </param>
+            <returns>
+                [Type: DWORD]
+                The return value is the identifier of the thread that created the window.
+            </returns>
+            <link>https://msdn.microsoft.com/en-us/library/ms633522</link>
+        </member>
+        <member name="M:ZS.Common.Win32.API.WindowFromPhysicalPoint(ZS.Common.Win32.API.POINT)">
+            <summary>
+            Retrieves a handle to the window that contains the specified physical point.
+            </summary>
+            <param name="point">
+            [in][Type: POINT]
+                The physical coordinates of the point.
+            </param>
+            <returns>
+            [Type: HWND]
+                A handle to the window that contains the given physical point. If no window exists at the point, this value is NULL.
+            </returns>
+            <remarks>
+            The WindowFromPhysicalPoint function does not retrieve a handle to a hidden or disabled window, even if the point is within the window.
+            </remarks>
+            <link>https://msdn.microsoft.com/en-us/library/windows/desktop/aa969270(v=vs.85).aspx</link>
+        </member>
+        <member name="M:ZS.Common.Win32.API.WindowFromPoint(ZS.Common.Win32.API.POINT)">
+            <summary>
+            Retrieves a handle to the window that contains the specified point.
+            </summary>
+            <param name="point">
+            [in][Type: POINT]
+                The point to be checked.
+            </param>
+            <returns>
+            [Type: HWND]
+                The return value is a handle to the window that contains the point. If no window exists at the given point, the return value is NULL. If the point is over a static text control, the return value is a handle to the window under the static text control.
+            </returns>
+            <remarks>
+            The WindowFromPoint function does not retrieve a handle to a hidden or disabled window, even if the point is within the window. An application should use the ChildWindowFromPoint function for a nonrestrictive search.
+            </remarks>
+            <link>https://msdn.microsoft.com/en-us/library/windows/desktop/ms633558(v=vs.85).aspx</link>
+        </member>
+        <member name="M:ZS.Common.Win32.API.GetCursorPos(ZS.Common.Win32.API.POINT@)">
+            <summary>
+            Retrieves the position of the mouse cursor, in screen coordinates.
+            </summary>
+            <param name="lpPoint">
+                [out][Type: LPPOINT]
+                A pointer to a POINT structure that receives the screen coordinates of the cursor.
+            </param>
+            <returns>
+                [Type: BOOL]
+                Returns nonzero if successful or zero otherwise. To get extended error information, call GetLastError.
+            </returns>
+            <remarks>
+                The cursor position is always specified in screen coordinates and is not affected by the mapping mode of the window that contains the cursor.
+                The calling process must have WINSTA_READATTRIBUTES access to the window station.
+                The input desktop must be the current desktop when you call GetCursorPos. Call OpenInputDesktop to determine whether the current desktop is the input desktop. If it is not, call SetThreadDesktop with the HDESK returned by OpenInputDesktop to switch to that desktop.
+            </remarks>
+            <see cref="!:https://msdn.microsoft.com/en-us/library/windows/desktop/ms648390(v=vs.85).aspx"/>
+            <example>
+            https://msdn.microsoft.com/en-us/library/windows/desktop/ms648380(v=vs.85).aspx#_win32_Using_the_Keyboard_to_Move_the_Cursor
+            </example>
+        </member>
+        <member name="M:ZS.Common.Win32.API.SetCursorPos(System.Int32,System.Int32)">
+            <summary>
+            Moves the cursor to the specified screen coordinates. If the new coordinates are not within the screen rectangle set by the most recent ClipCursor function call, the system automatically adjusts the coordinates so that the cursor stays within the rectangle.
+            </summary>
+            <param name="X">
+                 [in][Type: int]
+                 The new x-coordinate of the cursor, in screen coordinates.
+            </param>
+            <param name="Y">
+                [in][Type: int]
+                The new y-coordinate of the cursor, in screen coordinates.
+            </param>
+            <returns>
+            Returns nonzero if successful or zero otherwise. To get extended error information, call GetLastError.
+            </returns>
+            <remarks>
+            The cursor is a shared resource. A window should move the cursor only when the cursor is in the window's client area.
+            The calling process must have WINSTA_WRITEATTRIBUTES access to the window station.
+            The input desktop must be the current desktop when you call SetCursorPos. Call OpenInputDesktop to determine whether the current desktop is the input desktop. If it is not, call SetThreadDesktop with the HDESK returned by OpenInputDesktop to switch to that desktop.
+            </remarks>
+            <see cref="!:https://msdn.microsoft.com/en-us/library/ms648394(VS.85).aspx"/>
+            <example>
+            https://msdn.microsoft.com/en-us/library/ms648380(v=vs.85).aspx#_win32_Using_the_Keyboard_to_Move_the_Cursor
+            </example>
+        </member>
+        <member name="M:ZS.Common.Win32.API.sndPlaySound(System.String,ZS.Common.Win32.API.PlaySoundFlags)">
+            <summary>
+            The sndPlaySound function plays a waveform sound specified either by a file name or by an entry in the registry or the WIN.INI file. This function offers a subset of the functionality of the PlaySound function; sndPlaySound is being maintained for backward compatibility.
+            </summary>
+            <param name="lpszSound">
+                [in]
+                A string that specifies the sound to play. This parameter can be either an entry in the registry or in WIN.INI that identifies a system sound, or it can be the name of a waveform-audio file. (If the function does not find the entry, the parameter is treated as a file name.) If this parameter is NULL, any currently playing sound is stopped.
+            </param>
+            <param name="fuSound">
+                [in]
+                声音播放方式。可多项并存。如SND_SYNC|SND_LOOP
+                Flags for playing the sound. The following values are defined.
+            </param>
+            <returns>
+            Returns TRUE if successful or FALSE otherwise.
+            </returns>
+            <remarks>
+            If the specified sound cannot be found, sndPlaySound plays the system default sound. If there is no system default entry in the registry or WIN.INI file, or if the default sound cannot be found, the function makes no sound and returns FALSE.
+            The specified sound must fit in available physical memory and be playable by an installed waveform-audio device driver. If sndPlaySound does not find the sound in the current directory, the function searches for it using the standard directory-search order.
+            </remarks>
+            <see cref="!:https://msdn.microsoft.com/en-us/library/dd798676(v=vs.85).aspx"/>
+        </member>
+        <member name="T:ZS.Common.Win32.API.PlaySoundFlags">
+            <summary>
+            声音播放方式。
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.PlaySoundFlags.SND_ASYNC">
+            <summary>
+            The sound is played asynchronously and PlaySound returns immediately after beginning the sound. To terminate an asynchronously played waveform sound, call PlaySound with pszSound set to NULL.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.PlaySoundFlags.SND_LOOP">
+            <summary>
+            循环播放声音，直到再次调用sndPlaySound并且将lpszSound参数设置为null。循环播放必须指定SND_ASYNC
+            The sound plays repeatedly until sndPlaySound is called again with the lpszSound parameter set to NULL. You must also specify the SND_ASYNC flag to loop sounds.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.PlaySoundFlags.SND_MEMORY">
+            <summary>
+            The parameter specified by lpszSound points to an image of a waveform sound in memory. The data passed must be trusted by the application.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.PlaySoundFlags.SND_NODEFAULT">
+            <summary>
+            如果找不到声音文件，不播放默认声音。
+            If the sound cannot be found, the function returns silently without playing the default sound.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.PlaySoundFlags.SND_NOSTOP">
+            <summary>
+            If a sound is currently playing in the same process, the function immediately returns FALSE, without playing the requested sound.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.PlaySoundFlags.SND_SENTRY">
+            <summary>
+            Note  Requires Windows Vista or later.
+            If this flag is set, the function triggers a SoundSentry event when the sound is played. For more information, see PlaySound.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.PlaySoundFlags.SND_SYNC">
+            <summary>
+            The sound is played synchronously and the function does not return until the sound ends.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.PlaySoundFlags.SND_SYSTEM">
+            <summary>
+            Note  Requires Windows Vista or later.
+            If this flag is set, the sound is assigned to the audio session for system notification sounds. For more information, see PlaySound.
+            </summary>
+        </member>
+        <member name="M:ZS.Common.Win32.ContextMenu.ContextMenu.AddToDirBackgroundShell(ZS.Common.Win32.ContextMenu.ContextMenu)">
+            <summary>
+            添加右键菜单到目录背景的Shell，既在目录空白处点击右键出现的菜单中。
+            </summary>
+            <param name="cm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZS.Common.Win32.ContextMenu.ContextMenu.#ctor">
+            <summary>
+            构造一个新的实例
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.ContextMenu.ContextMenu.Command">
+            <summary>
+            命令行
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.ContextMenu.ContextMenu.Icon">
+            <summary>
+            图标路径
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.ContextMenu.ContextMenu.ShowName">
+            <summary>
+            菜单中显示名称
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.ContextMenu.ContextMenu.RegName">
+            <summary>
+            注册表中键名。默认以GUID命名
+            </summary>
+        </member>
+        <member name="T:ZS.Common.Win32.Desktop">
+            <summary>
+            桌面
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Desktop.m_DesktopPtr">
+            <summary>桌面窗口句柄</summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Desktop.m_ListViewPtr">
+            <summary>ListView控件句柄</summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Desktop.m_ProcessID">
+            <summary>桌面ListView所属的进程ID</summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Desktop.DesktopPtr">
+            <summary>
+            获取桌面句柄
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Desktop.DesktopProcessID">
+            <summary>
+            获取桌面进程ID
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Desktop.DesktopListViewPtr">
+            <summary>
+            获取桌面ListView控件句柄
+            </summary>
+        </member>
+        <member name="M:ZS.Common.Win32.Desktop.#ctor(System.IntPtr)">
+            <summary>
+            通过指定的句柄构造
+            </summary>
+            <param name="hWnd"></param>
+        </member>
+        <member name="M:ZS.Common.Win32.Desktop.#ctor">
+            <summary>
+            自动监测桌面句柄构造一个新的桌面操作
+            </summary>
+        </member>
+        <member name="M:ZS.Common.Win32.Desktop.GetSelectedCount">
+            <summary>
+            获取桌面上的选择的数量
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ZS.Common.Win32.Desktop.GetItemsCount">
+            <summary>
+            获取桌面上的图标数量
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ZS.Common.Win32.Desktop.GetItemText(System.Int32)">
+            <summary>
+            获取制定图标的文本
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ZS.Common.Win32.Desktop.GetItemLocation(System.Int32)">
+            <summary>
+            获取指定图标的坐标
+            </summary>
+            <param name="itemIndex"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZS.Common.Win32.Desktop.SetItemLocation(System.Int32,System.Drawing.Point)">
+            <summary>
+            设置图标坐标
+            </summary>
+            <param name="itemIndex"></param>
+            <param name="location"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZS.Common.Win32.Desktop.SelectItem(System.Int32)">
+            <summary>
+            选择指定项
+            </summary>
+            <param name="itemIndex"></param>
+        </member>
+        <member name="M:ZS.Common.Win32.Desktop.GetDefaultIntptr">
+            <summary>
+            获取默认桌面句柄
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:ZS.Common.Win32.InstalledApp.AssignmentType">
+            <summary>设置或获取标识符</summary>
+        </member>
+        <member name="P:ZS.Common.Win32.InstalledApp.IdentifyingNumber">
+            <summary>设置或获取标识符</summary>
+        </member>
+        <member name="P:ZS.Common.Win32.InstalledApp.Name">
+            <summary>设置或获取程序名</summary>
+        </member>
+        <member name="P:ZS.Common.Win32.InstalledApp.VersionString">
+            <summary>设置或获取版本号字符串</summary>
+        </member>
+        <member name="P:ZS.Common.Win32.InstalledApp.Caption">
+            <summary>设置或获取版本号</summary>
+        </member>
+        <member name="P:ZS.Common.Win32.InstalledApp.Description">
+            <summary>设置或获取软件描述</summary>
+        </member>
+        <member name="P:ZS.Common.Win32.InstalledApp.Publisher">
+            <summary>设置或获取制作公司</summary>
+        </member>
+        <member name="P:ZS.Common.Win32.InstalledApp.UninstallString">
+            <summary>设置或获取卸载路径</summary>
+        </member>
+        <member name="P:ZS.Common.Win32.InstalledApp.HelpTelephone">
+            <summary>设置或获取支持电话</summary>
+        </member>
+        <member name="P:ZS.Common.Win32.InstalledApp.HelpLink">
+            <summary>设置或获取支持网站</summary>
+        </member>
+        <member name="P:ZS.Common.Win32.InstalledApp.URLInfoAbout">
+            <summary>设置或获取关于链接</summary>
+        </member>
+        <member name="P:ZS.Common.Win32.InstalledApp.InstallLocation">
+            <summary>设置或获取版本号</summary>
+        </member>
+        <member name="P:ZS.Common.Win32.InstalledApp.InstallDate">
+            <summary>设置或获取安装日期</summary>
+        </member>
+        <member name="P:ZS.Common.Win32.InstalledApp.InstallSource">
+            <summary>设置或获取安装源</summary>
+        </member>
+        <member name="P:ZS.Common.Win32.InstalledApp.IsSystemComponent">
+            <summary>设置或获取是否为系统组件</summary>
+        </member>
+        <member name="P:ZS.Common.Win32.InstalledApp.IsInstallByWindowsInstaller">
+            <summary>设置或获取通过WindowsInstaller安装的程序</summary>
+        </member>
+        <member name="P:ZS.Common.Win32.InstalledApp.IsUpdate">
+            <summary>是否为更新。例如Windows更新或者Office更新</summary>
+        </member>
+        <member name="P:ZS.Common.Win32.InstalledApp.IsWindowsUpdate">
+            <summary>设置或获取是否为系统更新</summary>
+        </member>
+        <member name="P:ZS.Common.Win32.InstalledApp.ReleaseType">
+            <summary>设置或获取发布类型</summary>
+        </member>
+        <member name="P:ZS.Common.Win32.InstalledApp.Comments">
+            <summary>设置或获取说明</summary>
+        </member>
+        <member name="P:ZS.Common.Win32.InstalledApp.RegKeyPath">
+            <summary>获取该程序的注册表查找位置</summary>
+        </member>
+        <member name="T:ZS.Common.Win32.Mouse">
+            <summary>
+            鼠标
+            </summary>
+        </member>
+        <member name="M:ZS.Common.Win32.Mouse.MoveTo(System.Drawing.Point)">
+            <summary>
+            将鼠标从当前坐标移动到指定坐标。以[]毫秒的移动速度作为间隔。
+            </summary>
+            <param name="pt"></param>
+        </member>
+        <member name="M:ZS.Common.Win32.Mouse.MoveTo(System.Drawing.Point,System.Int32)">
+            <summary>
+            按照指定的速度将鼠标从当前坐标移动到指定坐标
+            </summary>
+            <param name="targetPt"></param>
+            <param name="delay">移动延迟。单位为毫秒</param>
+        </member>
+        <member name="T:ZS.Common.Win32.Net.NetworkAdapter">
+            <summary>
+            网卡操作
+            </summary>
+        </member>
+        <member name="M:ZS.Common.Win32.Net.NetworkAdapter.GetAdapterIndex_ByNetConnectionID(System.String)">
+            <summary>
+            根据网卡的连接名称获取网卡的序号。
+            如果指定的连接名称不存在，返回-1。
+            </summary>
+            <param name="pConnID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZS.Common.Win32.Net.NetworkAdapter.GetAdapterIndex_ByMacAddress(System.String)">
+            <summary>
+            根据网卡MAC地址获取网卡序号。mac的格式为xx:xx:xx:xx:xx:xx
+            如果指定的连接名称不存在，返回-1。
+            </summary>
+            <param name="pMac"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZS.Common.Win32.Net.NetworkAdapter.GetActiveConnectionID(System.String)">
+            <summary>
+            获取当前活动着的网络链接的名称。
+            默认通过百度的ip进行测试。也可以指定IP
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ZS.Common.Win32.Net.NetworkAdapter.GetAllConnectionID">
+            <summary>
+            获取所有不为空的网络连接ID。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ZS.Common.Win32.Net.NetworkAdapter.ModifyMacAddress(System.Int32,System.String)">
+            <summary>
+            修改指定序号的网卡的MAC地址。
+            </summary>
+            <param name="pAdapterIndex">网卡序号</param>
+            <param name="pMacAddress">网卡MAC地址</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZS.Common.Win32.Net.NetworkAdapter.ModifyMacAddress_ByConnectionID(System.String,System.String)">
+            <summary>
+            修改指定连接名称的网卡的MAC地址
+            </summary>
+            <param name="pConnID">连接名称</param>
+            <param name="pMacAddress">MAC地址</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZS.Common.Win32.Net.NetworkAdapter.GetMACAddress(System.String)">
+            <summary>
+            根据连接名称获取MAC地址
+            </summary>
+            <param name="pConnID">网卡连接名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZS.Common.Win32.Net.NetworkAdapter.GetIPV4Addresses(System.String)">
+            <summary>
+            获取指定连接名称的IPv4地址
+            </summary>
+            <param name="pConnID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZS.Common.Win32.Net.NetworkAdapter.GetIPV4Addresses">
+            <summary>
+            获取本机活动网卡的IPv4地址
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ZS.Common.Win32.Net.NetworkAdapter.Enable_ByConnectionID(System.String)">
+            <summary>
+            根据网卡连接ID启用网卡
+            </summary>
+            <param name="pConnID">网卡连接ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZS.Common.Win32.Net.NetworkAdapter.Disable_ByConnectionID(System.String)">
+            <summary>
+            根据网卡连接ID禁用网卡
+            </summary>
+            <param name="pConnID">网卡连接ID</param>
+            <returns></returns>
+        </member>
+        <member name="T:ZS.Common.Win32.Net.VPN">
+            <summary>
+            管理本机VPN
+            </summary>
+        </member>
+        <member name="T:ZS.Common.Win32.ObjectBase">
+            <summary>
+            对象基础类
+            </summary>
+        </member>
+        <member name="M:ZS.Common.Win32.ObjectBase.ToDebugString">
+            <summary>
+            输出该类的所有属性的名称、值、类型
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ZS.Common.Win32.ObjectBase.ToDebugString(System.String[])">
+            <summary>
+            输出该类中指定属性的的所有属性的名称、值、类型
+            </summary>
+            <param name="displayProps"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ZS.Common.Win32.Query">
+            <summary>
+            信息查询
+            </summary>
+        </member>
+        <member name="M:ZS.Common.Win32.Query.GetIdentifyingNumber">
+            <summary>
+            获取计算机的厂家序列号
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ZS.Common.Win32.Query.GetComputerName">
+            <summary>
+            获取计算机名
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ZS.Common.Win32.Query.GetComputerDescription">
+            <summary>
+            获取计算机描述
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ZS.Common.Win32.Query.GetInstalledApps">
+            <summary>
+            获取已安装的软件列表。不包含系统组件与Windows更新
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ZS.Common.Win32.Query.GetAppsFromUninstallRegKey(Microsoft.Win32.RegistryKey,System.Collections.Generic.List{ZS.Common.Win32.InstalledApp}@)">
+            <summary>
+            从注册表卸载项里获取安装的程序
+            
+            </summary>
+        </member>
+        <member name="T:ZS.Common.Win32.RegHelper">
+            <summary>
+            注册表操作
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.RegHelper.RegPath_Uninstall">
+            <summary>注册表【程序列表】路径</summary>
+        </member>
+        <member name="F:ZS.Common.Win32.RegHelper.RegPath_Uninstall64">
+            <summary>注册表【程序列表64位】路径</summary>
+        </member>
+        <member name="M:ZS.Common.Win32.RegHelper.Export(System.String,System.String,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="regPath">要导出的注册表路径。需要包含根路径。跟路径简写为：HKLM\,HKCU\,HKCR\,HKU\,HKCC\</param>
+            <param name="savePath">注册表保存路径。包含完整文件名</param>
+            <param name="overwrite">是否覆盖已存在的文件</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZS.Common.Win32.RegHelper.GetValue(Microsoft.Win32.RegistryKey,System.String)">
+            <summary>
+            获取指定键值下的指定
+            </summary>
+            <param name="reg"></param>
+            <param name="valName"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ZS.Common.Win32.Win32Provider.NetConnectionStatus">
+            <summary>
+            网络连接状态枚举
+            </summary>
+        </member>
+        <member name="T:ZS.Common.Win32.Win32Provider.ProviderHelper`1">
+            <summary>
+            Win32 Provider信息查询
+            </summary>
+        </member>
+        <member name="M:ZS.Common.Win32.Win32Provider.ProviderHelper`1.GetAll">
+            <summary>
+            获取指定的Win32类型的所有集合
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ZS.Common.Win32.Win32Provider.ProviderHelper`1.GetManagementObjectPropertiesNames(System.Management.ManagementBaseObject)">
+            <summary>
+            获取ManagementObject的属性的名称集合
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ZS.Common.Win32.Win32Provider.ProviderHelper`1.GetPropertyTable">
+            <summary>
+            获取该Win32类型中的所有字段与数据类型对照表
+            </summary>
+            <param name="o"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ZS.Common.Win32.Win32Provider.Win32ClassBindAttribute">
+            <summary>
+            win32 Class特性绑定
+            </summary>
+        </member>
+        <member name="M:ZS.Common.Win32.Win32Provider.Win32ClassBindAttribute.#ctor(System.String,System.String)">
+            <summary>
+            构造一个新的特性
+            </summary>
+            <param name="nameSpace">命名空间</param>
+            <param name="className">类名称</param>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32ClassBindAttribute.Namespace">
+            <summary>
+            命名空间
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32ClassBindAttribute.ClassName">
+            <summary>
+            类名
+            </summary>
+        </member>
+        <member name="T:ZS.Common.Win32.Win32Provider.Win32FieldsBindAttribute">
+            <summary>
+            win32字段特性绑定
+            </summary>
+        </member>
+        <member name="M:ZS.Common.Win32.Win32Provider.Win32FieldsBindAttribute.#ctor(System.String)">
+            <summary>
+            构造一个新的特性
+            </summary>
+            <param name="name">字段名称</param>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32FieldsBindAttribute.Name">
+            <summary>
+            字段名
+            </summary>
+        </member>
+        <member name="T:ZS.Common.Win32.Win32Provider.Win32ProviderBase">
+            <summary>
+            基础类
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32ProviderBase.ManageObject">
+            <summary>
+            改类型的ManagementObject数据
+            </summary>
+        </member>
+        <member name="M:ZS.Common.Win32.Win32Provider.Win32ProviderBase.ToDebugString">
+            <summary>
+            输出该类的所有属性的名称、值、类型
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ZS.Common.Win32.Win32Provider.Win32_ComputerSystemProduct">
+            <summary>
+            The Win32_ComputerSystemProduct WMI class represents a product. This includes software and hardware used on this computer system.
+            </summary>
+            <remarks>
+            The Win32_ComputerSystemProduct class is derived from CIM_Product.
+            </remarks>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_ComputerSystemProduct.Caption">
+            <summary>
+            Short textual description for the product.
+            This property is inherited from CIM_Product.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_ComputerSystemProduct.Description">
+            <summary>
+            Textual description of the product.
+            This property is inherited from CIM_Product.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_ComputerSystemProduct.IdentifyingNumber">
+            <summary>
+            Product identification, such as a serial number on software, a die number on a hardware chip, or (for noncommercial products) a project number.
+            This property is inherited from CIM_Product.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_ComputerSystemProduct.Name">
+            <summary>
+            Product's stock-keeping unit (SKU) information.
+            This property is inherited from CIM_Product.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_ComputerSystemProduct.SKUNumber">
+            <summary>
+            Product's stock-keeping unit (SKU) information.
+            This property is inherited from CIM_Product.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_ComputerSystemProduct.Vendor">
+            <summary>
+            Name of the product's supplier, or the entity selling the product (the manufacturer, reseller, OEM, and so on).
+            This property is inherited from CIM_Product.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_ComputerSystemProduct.Version">
+            <summary>
+            Product version information.
+            This property is inherited from CIM_Product.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_ComputerSystemProduct.UUID">
+            <summary>
+            Universally unique identifier (UUID) for this product. A UUID is a 128-bit identifier that is guaranteed to be different from other generated UUIDs. If a UUID is not available, a UUID of all zeros is used.
+            This value comes from the UUID member of the System Information structure in the SMBIOS information.
+            </summary>
+        </member>
+        <member name="T:ZS.Common.Win32.Win32Provider.Win32_NetworkAdapter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_NetworkAdapter.AdapterType">
+            <summary>
+            适配器类型
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_NetworkAdapter.AdapterTypeID">
+            <summary>
+            适配器类型ID
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_NetworkAdapter.MACAddress">
+            <summary>
+            MAC地址
+            </summary>
+        </member>
+        <member name="M:ZS.Common.Win32.Win32Provider.Win32_NetworkAdapter.Disable">
+            <summary>
+            禁用网卡。需要管理员权限运行
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ZS.Common.Win32.Win32Provider.Win32_NetworkAdapter.Enable">
+            <summary>
+            启用网卡。需要管理员权限运行
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_NetworkAdapter.AdapterType_Ethernet8023">
+            <summary>Ethernet 802.3</summary>
+        </member>
+        <member name="T:ZS.Common.Win32.Win32Provider.Win32_NetworkAdapterConfiguration">
+            <summary>
+            网卡配置信息
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_NetworkAdapterConfiguration.Caption">
+            <summary>
+            Short textual description of the current object.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_NetworkAdapterConfiguration.DHCPEnabled">
+            <summary>
+            If TRUE, the dynamic host configuration protocol (DHCP) server automatically assigns an IP address to the computer system when establishing a network connection.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_NetworkAdapterConfiguration.DHCPLeaseExpires">
+            <summary>
+            Expiration date and time for a leased IP address that was assigned to the computer by the dynamic host configuration protocol (DHCP) server.
+            Example: 20521201000230.000000000
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_NetworkAdapterConfiguration.DHCPLeaseObtained">
+            <summary>
+            Date and time the lease was obtained for the IP address assigned to the computer by the dynamic host configuration protocol (DHCP) server.
+            Example: 19521201000230.000000000
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_NetworkAdapterConfiguration.DHCPServer">
+            <summary>
+            IP address of the dynamic host configuration protocol (DHCP) server.
+            Example: "10.55.34.2"
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_NetworkAdapterConfiguration.DNSDomain">
+            <summary>
+            Organization name followed by a period and an extension that indicates the type of organization, such as "microsoft.com". 
+            The name can be any combination of the letters A through Z, the numerals 0 through 9, and the hyphen (-), plus the period (.) character used as a separator.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_NetworkAdapterConfiguration.DNSHostName">
+            <summary>
+            Host name used to identify the local computer for authentication by some utilities. 
+            Other TCP/IP-based utilities can use this value to acquire the name of the local computer. 
+            Host names are stored on DNS servers in a table that maps names to IP addresses for use by DNS. 
+            The name can be any combination of the letters A through Z, the numerals 0 through 9, and the hyphen (-), plus the period (.) character used as a separator. 
+            By default, this value is the Microsoft networking computer name, but the network administrator can assign another host name without affecting the computer name.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_NetworkAdapterConfiguration.GatewayCostMetric">
+            <summary>
+            Array of integer cost metric values (ranging from 1 to 9999) to be used in calculating the fastest, most reliable, or least resource-intensive routes. 
+            This argument has a one-to-one correspondence with the DefaultIPGateway property.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_NetworkAdapterConfiguration.Index">
+            <summary>
+            Index number of the Windows network adapter configuration. 
+            The index number is used when there is more than one configuration available.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_NetworkAdapterConfiguration.InterfaceIndex">
+            <summary>
+            Index value that uniquely identifies the local network interface. 
+            The value in this property is the same as the value in the InterfaceIndex property in the instance of Win32_IP4RouteTable that represents the network interface in the route table.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_NetworkAdapterConfiguration.IPAddress">
+            <summary>
+            Array of all of the IP addresses associated with the current network adapter. 
+            This property can contain either IPv6 addresses or IPv4 addresses. 
+            For more information, see IPv6 and IPv4 Support in WMI.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_NetworkAdapterConfiguration.IPConnectionMetric">
+            <summary>
+            Cost of using the configured routes for the IP bound adapter and is the weighted value for those routes in the IP routing table. 
+            If there are multiple routes to a destination in the IP routing table, the route with the lowest metric is used. 
+            The default value is 1.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_NetworkAdapterConfiguration.IPEnabled">
+            <summary>
+            If TRUE, TCP/IP is bound and enabled on this network adapter.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_NetworkAdapterConfiguration.IPSubnet">
+            <summary>
+            Array of all of the subnet masks associated with the current network adapter.
+            Example: "255.255.0.0"
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_NetworkAdapterConfiguration.KeepAliveInterval">
+            <summary>
+            Interval separating Keep Alive Retransmissions until a response is received.
+            After a response is received, the delay until the next Keep Alive Transmission is again controlled by the value of KeepAliveTime. 
+            The connection will be aborted after the number of retransmissions specified by TcpMaxDataRetransmissions have gone unanswered. 
+            Default: 1000, Valid Range: 1 - 0xFFFFFFFF.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_NetworkAdapterConfiguration.KeepAliveTime">
+            <summary>
+            The KeepAliveTime property indicates how often the TCP attempts to verify that an idle connection is still intact by sending a Keep Alive Packet. 
+            A remote system that is reachable will acknowledge the keep alive transmission. Keep Alive packets are not sent by default. 
+            This feature may be enabled in a connection by an application. Default: 7,200,000 (two hours).
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_NetworkAdapterConfiguration.MACAddress">
+            <summary>
+            Media Access Control (MAC) address of the network adapter. A MAC address is assigned by the manufacturer to uniquely identify the network adapter.
+            Example: "00:80:C7:8F:6C:96"
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_NetworkAdapterConfiguration.MTU">
+            <summary>
+            Overrides the default Maximum Transmission Unit (MTU) for a network interface. 
+            The MTU is the maximum packet size (including the transport header) that the transport will transmit over the underlying network. 
+            The IP datagram can span multiple packets. The range of this value spans the minimum packet size (68) to the MTU supported by the underlying network.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_NetworkAdapterConfiguration.ServiceName">
+            <summary>
+            Service name of the network adapter. This name is usually shorter than the full product name.
+            Example: "Elnkii"
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_NetworkAdapterConfiguration.SettingID">
+            <summary>
+            Identifier by which the current object is known.
+            </summary>
+        </member>
+        <member name="T:ZS.Common.Win32.Win32Provider.Win32_OperatingSystem">
+            <summary>
+            The Win32_OperatingSystem WMI class represents a Windows-based operating system installed on a computer.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_OperatingSystem.BootDevice">
+            <summary>
+            Name of the disk drive from which the Windows operating system starts.
+            Example: "\\Device\Harddisk0"
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_OperatingSystem.BuildNumber">
+            <summary>
+            Build number of an operating system. It can be used for more precise version information than product release version numbers.
+            Example: "1381"
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_OperatingSystem.Caption">
+            <summary>
+            Short description of the object—a one-line string. The string includes the operating system version. For example, "Microsoft Windows 7 Enterprise ". This property can be localized.
+            Windows Vista and Windows 7:  This property may contain trailing characters. For example, the string "Microsoft Windows 7 Enterprise " (trailing space included) may be necessary to retrieve information using this property.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_OperatingSystem.CSDVersion">
+            <summary>
+            NULL-terminated string that indicates the latest service pack installed on a computer. If no service pack is installed, the string is NULL.
+            Example: "Service Pack 3"
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_OperatingSystem.CSName">
+            <summary>
+            Name of the scoping computer system.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_OperatingSystem.Description">
+            <summary>
+            Description of the Windows operating system. Some user interfaces for example, those that allow editing of this description, limit its length to 48 characters.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_OperatingSystem.InstallDate">
+            <summary>
+            Date object was installed. This property does not require a value to indicate that the object is installed.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_OperatingSystem.LastBootUpTime">
+            <summary>
+            Date and time the operating system was last restarted.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_OperatingSystem.Name">
+            <summary>
+            Operating system instance within a computer system.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_OperatingSystem.SerialNumber">
+            <summary>
+            Operating system product serial identification number.
+            Example: "10497-OEM-0031416-71674"
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_OperatingSystem.SuiteMask">
+            <summary>
+            Version number of the operating system.
+            Example: "4.0"
+            </summary>
+        </member>
+        <member name="T:ZS.Common.Win32.Win32Provider.Win32_OperatingSystem_SuiteMaskEnum">
+            <summary>
+            Bit flags that identify the product suites available on the system.
+            </summary>
+        </member>
+        <member name="T:ZS.Common.Win32.Win32Provider.Win32_Product">
+            <summary>
+            The Win32_Product WMI class represents products as they are installed by Windows Installer. A product generally correlates to one installation package.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Product.InstallDate2">
+            <summary>
+            Date that this product was installed on the system. This property does not require a value to indicate that the object is installed. For more information about WMI dates and times, see Date and Time Format.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Product.InstallLocation">
+            <summary>
+            Location of the installed product.
+            </summary>
+        </member>
+        <member name="T:ZS.Common.Win32.Win32Provider.Win32_Service">
+            <summary>
+             represents a service on a computer system running Windows.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.AcceptPause">
+            <summary>
+            获取服务是否可以被暂停
+            Indicates whether the service can be paused.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.AcceptStop">
+            <summary>
+            获取服务是否可以被停止
+            Indicates whether the service can be stopped.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.Caption">
+            <summary>
+            Short description of the service —a one-line string.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.CheckPoint">
+            <summary>
+            Value that the service increments periodically to report its progress during a long start, stop, pause, or continue operation. For example, the service increments this value as it completes each step of its initialization when it is starting up. The user interface program that invokes the operation on the service uses this value to track the progress of the service during a lengthy operation. This value is not valid and should be zero when the service does not have a start, stop, pause, or continue operation pending.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.CreationClassName">
+            <summary>
+            Name of the first concrete class to appear in the inheritance chain used in the creation of an instance. When used with the other key properties of the class, this property allows all instances of this class and its subclasses to be uniquely identified.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.DelayedAutoStart">
+            <summary>
+            If True, the service is started after other auto-start services are started plus a short delay.
+            </summary>
+            <remarks>
+            Windows Server 2012 R2, Windows 8.1, Windows Server 2012, Windows 8, Windows Server 2008 R2, Windows 7, Windows Server 2008, and Windows Vista:  This property is not supported before Windows Server 2016 Technical Preview and Windows 10.
+            </remarks>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.Description">
+            <summary>
+            Description of the object.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.DesktopInteract">
+            <summary>
+            Indicates whether the service can create or communicate with windows on the desktop, and thus interact in some way with a user. Interactive services must run under the Local System account. Most services are not interactive; that is, they do not communicate with the user in any way.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.DisplayName">
+            <summary>
+            Name of the service as viewed in the Services snap-in. 
+            This string has a maximum length of 256 characters. Note that the display name and the service name (which is stored in the registry) are not always the same. For example, the DHCP Client service has the service name Dhcp but the display name DHCP Client. The name is case-preserved in the Service Control Manager. However, DisplayName comparisons are always case-insensitive.
+            Constraint: Accepts the same value as the Name property.
+            Example: "Atdisk"
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.ErrorControl">
+            <summary>
+            Severity of the error if this service fails to start during startup. The value indicates the action taken by the startup program if failure occurs. All errors are logged by the computer system.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.ExitCode">
+            <summary>
+            Windows error code that defines errors encountered in starting or stopping the service. This property is set to ERROR_SERVICE_SPECIFIC_ERROR (1066) when the error is unique to the service represented by this class, and information about the error is available in the ServiceSpecificExitCode property. The service sets this value to NO_ERROR when running, and again upon normal termination.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.InstallDate">
+            <summary>
+            Date object is installed. This property does not require a value to indicate that the object is installed.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.Name">
+            <summary>
+            Unique identifier of the service that provides an indication of the functionality that is managed.This functionality is described in the Description property of the object.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.PathName">
+            <summary>
+            Fully qualified path to the service binary file that implements the service.
+            Example: "\SystemRoot\System32\drivers\afd.sys"
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.ProcessId">
+            <summary>
+            Process identifier of the service.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.ServiceSpecificExitCode">
+            <summary>
+            Service-specific error code for errors that occur while the service is either starting or stopping. The exit codes are defined by the service represented by this class. This value is only set when the ExitCode property value is ERROR_SERVICE_SPECIFIC_ERROR (1066).
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.ServiceType">
+            <summary>
+            Type of service provided to calling processes.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.Started">
+            <summary>
+            Indicates whether or not the service is started.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.StartMode">
+            <summary>
+            Start mode of the Windows base service.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.StartName">
+            <summary>
+            Account name under which a service runs. Depending on the service type, the account name may be in the form of "DomainName\Username" or UPN format ("Username@DomainName"). The service process is logged by using one of these two forms when it runs. If the account belongs to the built-in domain, then ".\Username" can be specified. For kernel or system-level drivers, StartName contains the driver object name (that is, "\FileSystem\Rdr" or "\Driver\Xns") which the I/O system uses to load the device driver. Additionally, if NULL is specified, the driver runs with a default object name created by the I/O system based on the service name.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.State">
+            <summary>
+            Current state of the base service.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.Status">
+            <summary>
+            Current status of the object. 
+            Various operational and nonoperational statuses can be defined. 
+            Operational statuses include: "OK", "Degraded", and "Pred Fail" (an element, such as a SMART-enabled hard disk drive, may be functioning properly but predicting a failure in the near future). Nonoperational statuses include: "Error", "Starting", "Stopping", and "Service". The latter, "Service", could apply during mirror-resilvering of a disk, reload of a user permissions list, or other administrative work. Not all such work is online, yet the managed element is neither "OK" nor in one of the other states.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.SystemCreationClassName">
+            <summary>
+            Type name of the system that hosts this service.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.SystemName">
+            <summary>
+            Name of the system that hosts this service.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.TagId">
+            <summary>
+            Unique tag value for this service in the group. A value of 0 (zero) indicates that the service does not have a tag. A tag can be used to order service startup within a load order group by specifying a tag order vector in the registry located at:
+            HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\    GroupOrderList
+            Tags are only evaluated for Kernel Driver and File System Driver start type services that have Boot or System start modes.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_Service.WaitHint">
+            <summary>
+            Estimated time required, in milliseconds, for a pending start, stop, pause, or continue operation. After the specified time has elapsed, the service makes its next call to the SetServiceStatus method with either an incremented CheckPoint value or a change in CurrentState. If the amount of time specified by WaitHint passes, and CheckPoint has not been incremented, or CurrentState has not changed, the service control manager or service control program assumes that an error has occurred.
+            </summary>
+        </member>
+        <member name="T:ZS.Common.Win32.Win32Provider.Win32_Service.ServiceTypeDef">
+            <summary>
+            服务类型定义
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.ServiceTypeDef.KernelDriver">
+            <summary></summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.ServiceTypeDef.FileSystemDriver">
+            <summary></summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.ServiceTypeDef.Adapter">
+            <summary></summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.ServiceTypeDef.RecognizerDriver">
+            <summary></summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.ServiceTypeDef.OwnProcess">
+            <summary></summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.ServiceTypeDef.ShareProcess">
+            <summary></summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.ServiceTypeDef.InteractiveProcess">
+            <summary></summary>
+        </member>
+        <member name="T:ZS.Common.Win32.Win32Provider.Win32_Service.StartModeDef">
+            <summary>
+            服务启动模式定义
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StartModeDef.Boot">
+            <summary>Device driver started by the operating system loader (valid only for driver services).</summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StartModeDef.System">
+            <summary>Device driver started by the operating system initialization process. This value is valid only for driver services.</summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StartModeDef.Auto">
+            <summary>Service to be started automatically by the service control manager during system startup. Auto services are started even if a user does not log on.</summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StartModeDef.Manual">
+            <summary>ervice to be started by the Service Control Manager when a process calls the StartService method. These services do not start unless a user logs on and starts them.</summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StartModeDef.Disabled">
+            <summary>Service that cannot be started until its StartMode is changed to either Auto or Manual.</summary>
+        </member>
+        <member name="T:ZS.Common.Win32.Win32Provider.Win32_Service.StateDef">
+            <summary>
+            服务state定义
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StateDef.Stopped">
+            <summary>已停止</summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StateDef.StartPending">
+            <summary></summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StateDef.StopPending">
+            <summary></summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StateDef.Running">
+            <summary></summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StateDef.Continue_Pending">
+            <summary></summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StateDef.PausePending">
+            <summary></summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StateDef.Paused">
+            <summary></summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StateDef.Unknown">
+            <summary></summary>
+        </member>
+        <member name="T:ZS.Common.Win32.Win32Provider.Win32_Service.StatusDef">
+            <summary>
+            服务status定义
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StatusDef.OK">
+            <summary></summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StatusDef.Error">
+            <summary></summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StatusDef.Degraded">
+            <summary></summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StatusDef.Unknown">
+            <summary></summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StatusDef.PredFail">
+            <summary></summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StatusDef.Starting">
+            <summary></summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StatusDef.Stopping">
+            <summary></summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StatusDef.Service">
+            <summary></summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StatusDef.Stressed">
+            <summary></summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StatusDef.NonRecover">
+            <summary></summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StatusDef.NoContact">
+            <summary></summary>
+        </member>
+        <member name="F:ZS.Common.Win32.Win32Provider.Win32_Service.StatusDef.LostComm">
+            <summary></summary>
+        </member>
+        <member name="T:ZS.Common.Win32.Win32Provider.Win32_StartupCommand">
+            <summary>
+            represents a command that runs automatically when a user logs onto the computer system.
+            </summary>
+            <remarks>
+            Computer startup does not end after the operating system has been loaded. 
+            Instead, the Windows operating system can be configured so that startup commands are run each time Windows starts. 
+            Startup commands are stored in the registry or as part of the user profile and are used to automatically start specified scripts or applications each time Windows is loaded.
+            In most cases, autostart programs are useful; they ensure that certain applications, such as antivirus tools, are automatically started and run each time Windows is loaded. However, autostart programs also can be responsible for problems such as:
+                Computers that take an exceptionally long time to start. This might be the result of a large number of applications that must be started each time Windows starts.
+                Applications that are represented in the Taskbar or in Task Manager, even though the user did not start them. Although these applications do not necessarily cause problems, they can result in help desk calls from users who are confused as to where these programs came from and why they are running.
+                Computers experiencing problems even when they seem idle. These problems are often traced to startup commands that are running when no one is aware that they are running.
+            
+            Identifying the applications and scripts that automatically run at startup is an important but difficult administrative task, because startup commands can be stored in many different locations:
+                HKLM\Software\Microsoft\Windows\CurrentVersion\Run
+                HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnce
+                HKCU\Software\Microsoft\Windows\CurrentVersion\Run
+                HKCU\Software\Microsoft\Windows\CurrentVersion\RunOnce
+                HKU\ProgID\Software\Microsoft\Windows\CurrentVersion\Run
+                systemdrive\Documents and Settings\All Users\Start Menu\Programs\Startup
+                systemdrive\Documents and Settings\username\Start Menu\Programs\Startup
+                
+            You can use the WMI Win32_StartupCommand class to enumerate autostart programs regardless of where the information is stored.
+            The calling process that uses this class must have the SE_RESTORE_NAME privilege on the computer in which the registry resides. For example, if you enumerate this class on the local computer, the account under which your application runs must have this privilege. For more information, see Executing Privileged Operations.
+            You can change the registry values where Win32_StartupCommand obtains data by calling the WMI System Registry Provider methods in script or in C++. For more information, see Modifying the System Registry.
+            </remarks>
+            <link>
+            https://msdn.microsoft.com/en-us/library/aa394464(v=vs.85).aspx
+            </link>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_StartupCommand.Caption">
+            <summary>
+            Short textual description of the current object.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_StartupCommand.Command">
+            <summary>
+            Command run by the startup command.
+            WMI obtains this data from the registry key
+            HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_StartupCommand.Description">
+            <summary>
+            Textual description of the current object.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_StartupCommand.SettingID">
+            <summary>
+            Identifier by which the current object is known.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_StartupCommand.Location">
+            <summary>
+            Path where the startup command resides on the disk file system.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_StartupCommand.Name">
+            <summary>
+            File name of the startup command.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_StartupCommand.User">
+            <summary>
+            User name for whom this startup command will run.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_StartupCommand.UserSID">
+            <summary>
+            The UserSID property indicates the SID of the user for whom this startup command will run. That User property may be empty but UserSID still has a value if the user name can't be resolved (like in the case of a deleted user). The property is helpful to distinguish between commands associated w/ two different users with unresolved names. It may be NULL when the command is associated with items not actually identifying a user like All Users.
+            </summary>
+        </member>
+        <member name="T:ZS.Common.Win32.WinCtrlAPI.ListView.LVITEM">
+            <summary>
+            Specifies or receives the attributes of a list-view item. This structure has been updated to support a new mask value (LVIF_INDENT) that enables item indenting. This structure supersedes the LV_ITEM structure.
+            </summary>
+            <link>https://msdn.microsoft.com/en-us/library/windows/desktop/bb774760(v=vs.85).aspx</link>
+        </member>
+        <member name="F:ZS.Common.Win32.WinCtrlAPI.ListView.LVITEM.mask">
+            <summary>
+            Set of flags that specify which members of this structure contain data to be set or which members are being requested. This member can have one or more of the following flags set:
+            LVIF_COLFMT,LVIF_COLUMNS,LVIF_DI_SETITEM,LVIF_GROUPID,LVIF_IMAGE,LVIF_INDENT,LVIF_NORECOMPUTE,LVIF_PARAM,LVIF_STATE,LVIF_TEXT
+            
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.WinCtrlAPI.ListView.LVITEM.iItem">
+            <summary>
+            Zero-based index of the item to which this structure refers.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.WinCtrlAPI.ListView.LVITEM.pszText">
+            <summary>
+            If the structure specifies item attributes, pszText is a pointer to a null-terminated string containing the item text. When responding to an LVN_GETDISPINFO notification, be sure that this pointer remains valid until after the next notification has been received.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.WinCtrlAPI.ListView.LVITEM.cchTextMax">
+            <summary>
+            Number of TCHARs in the buffer pointed to by pszText, including the terminating NULL.
+            This member is only used when the structure receives item attributes. It is ignored when the structure specifies item attributes. For example, cchTextMax is ignored during LVM_SETITEM and LVM_INSERTITEM. It is read-only during LVN_GETDISPINFO and other LVN_ notifications.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.WinCtrlAPI.ListView.LVITEM.lParam">
+            <summary>
+            Value specific to the item. If you use the LVM_SORTITEMS message, the list-view control passes this value to the application-defined comparison function. You can also use the LVM_FINDITEM message to search a list-view control for an item with a specified lParam value.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.WinCtrlAPI.ListView.LVITEM.iIndent">
+            <summary>
+            Version 4.70. Number of image widths to indent the item. A single indentation equals the width of an item image. Therefore, the value 1 indents the item by the width of one image, the value 2 indents by two images, and so on. Note that this field is supported only for items. Attempting to set subitem indentation will cause the calling function to fail.
+            </summary>
+        </member>
+    </members>
+</doc>

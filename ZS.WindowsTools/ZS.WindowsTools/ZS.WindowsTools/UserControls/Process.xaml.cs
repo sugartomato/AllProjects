@@ -49,5 +49,10 @@ namespace ZS.WindowsTools.UserControls
 
             Clipboard.SetText(txtConsole.Text);
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(Environment.CurrentDirectory);
+        }
     }
 }

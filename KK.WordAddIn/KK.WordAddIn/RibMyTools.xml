@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui" onLoad="Ribbon_Load">
+  <ribbon>
+    <tabs>
+      <tab id="TabKKWordAddIn" label="[KK工具箱]">
+        <group id="KK_GRP_IMAGE" label="图片处理">
+          <button id="KK_BTN_SaveAllImage" label="另存所有" onAction="OnClick_Image" imageMso="FileSaveAs" size="large" supertip="将所有图片保存到指定目录。"/>
+          <button id="KK_BTN_FormatImage" label="格式化" onAction="OnClick_Image" imageMso="PictureEffectsSoftEdgesGallery" size="large"/>
+        </group>
+        <group id="KK_GRP_TEST" label="测试组">
+          <button id="KK_BTN_GetOutLine" label="获取大纲结构" onAction="OnClick_Test" imageMso="T"></button>
+        </group>
+      </tab>
+    </tabs>
+  </ribbon>
+</customUI>
+

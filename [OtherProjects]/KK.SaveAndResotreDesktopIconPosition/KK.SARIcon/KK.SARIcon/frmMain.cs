@@ -26,9 +26,8 @@ namespace KK.SARIcon
                 lblState.Text = String.Empty;
                 toolStripStatusLabel1.Alignment = ToolStripItemAlignment.Right;
 
-                WriteConsole("xml文件路径：" + Common.XMLPath);
-                //WriteConsole("桌面句柄：" + Desktop.GetDefaultIntptr());
-                if (!System.IO.File.Exists(Common.XMLPath))
+                WriteConsole("默认xml文件路径：" + Common.DefaultXmlPath);
+                if (!System.IO.File.Exists(Common.DefaultXmlPath))
                 {
                     WriteConsole("记录文件不存在。点击保存按钮生成新的文件");
                     btnRestoreIcon.Enabled = false;
@@ -47,14 +46,9 @@ namespace KK.SARIcon
         {
             try
             {
-                this.Icon = Properties.Resources.friendly_icons;
-                List<IconItem> icons = GetIcons();
-
-
-                WriteConsole("获取到【" + icons.Count + "】个图标数据！");
 
                 // 保存图标数据到xml文件
-                Boolean result = WriteItemsToXML(icons);
+                Boolean result = SaveIconsToXml(Common.DefaultXmlPath);
                 if (result)
                 {
                     lblState.Text = "保存完成！";
@@ -78,38 +72,8 @@ namespace KK.SARIcon
         {
             try
             {
-                this.Icon = Properties.Resources.hello_;
 
-                List<IconItem> icons = GetIcons();
-
-                if (!System.IO.File.Exists(Common.XMLPath))
-                {
-                    MessageBox.Show("配置文件[" + Common.XMLPath + "]不存在！先保存图标设置！");
-                    return;
-                }
-
-                // 读取XML文件，转化为集合
-                XElement root = XElement.Load(Common.XMLPath);
-                IEnumerable<XElement> nodes = root.Elements();
-                if (nodes != null && nodes.Count() > 0)
-                {
-                    foreach (var node in nodes)
-                    {
-                        String iconText = node.Attribute("text").Value;
-                        Int32 locationX = Int32.Parse(node.Attribute("x").Value);
-                        Int32 locationY = Int32.Parse(node.Attribute("y").Value);
-
-                        // 检查图标是否存在，存在则设置位置，不存在就跳过
-                        IconItem tmpIcon = icons.FirstOrDefault(x => x.Text == iconText);
-                        if (tmpIcon != null)
-                        {
-                            m_Desktop.SetItemLocation(tmpIcon.Index, new Point(locationX, locationY));
-                        }
-                    }
-                }
-
-                lblState.Text = "恢复完成!";
-
+                RestoreIcons(Common.DefaultXmlPath);
             }
             catch (Exception ex)
             {
@@ -132,14 +96,48 @@ namespace KK.SARIcon
             catch (Exception ex)
             {
                 WriteConsole("列举图标失败：" + ex.Message);
-            }
-        }
+            }      }
 
         private void btnClearConsole_Click(object sender, EventArgs e)
         {
             txtConsole.Clear();
         }
 
+        private void RestoreIcons( string xmlPath)
+        {
+            this.Icon = Properties.Resources.hello_;
+
+            List<IconItem> icons = GetIcons();
+
+            if (!System.IO.File.Exists(xmlPath))
+            {
+                MessageBox.Show("配置文件[" + xmlPath + "]不存在！先保存图标设置！");
+                return;
+            }
+
+            // 读取XML文件，转化为集合
+            XElement root = XElement.Load(xmlPath);
+            IEnumerable<XElement> nodes = root.Elements();
+            if (nodes != null && nodes.Count() > 0)
+            {
+                foreach (var node in nodes)
+                {
+                    String iconText = node.Attribute("text").Value;
+                    Int32 locationX = Int32.Parse(node.Attribute("x").Value);
+                    Int32 locationY = Int32.Parse(node.Attribute("y").Value);
+
+                    // 检查图标是否存在，存在则设置位置，不存在就跳过
+                    IconItem tmpIcon = icons.FirstOrDefault(x => x.Text == iconText);
+                    if (tmpIcon != null)
+                    {
+                        m_Desktop.SetItemLocation(tmpIcon.Index, new Point(locationX, locationY));
+                    }
+                }
+            }
+
+            lblState.Text = "恢复完成!";
+
+        }
 
         #region 公共处理
         private List<IconItem> GetIcons()
@@ -176,14 +174,20 @@ namespace KK.SARIcon
         /// </summary>
         /// <param name="items"></param>
         /// <returns></returns>
-        private Boolean WriteItemsToXML(List<IconItem> items)
+        private Boolean SaveIconsToXml(String xmlPath)
         {
+            this.Icon = Properties.Resources.friendly_icons;
+            List<IconItem> items = GetIcons();
+
+
+            WriteConsole("获取到【" + items.Count + "】个图标数据！");
+
             if (items == null || items.Count == 0)
                 return false;
             // 删除现有文件
-            if (System.IO.File.Exists(Common.XMLPath))
+            if (System.IO.File.Exists(xmlPath))
             {
-                System.IO.File.Delete(Common.XMLPath);
+                System.IO.File.Delete(xmlPath);
             }
 
             // 生成xml文件
@@ -196,11 +200,63 @@ namespace KK.SARIcon
                 tmpItem.SetAttributeValue("y", items[i].Location.Y.ToString());
                 root.Add(tmpItem);
             }
-            root.Save(Common.XMLPath);
+            root.Save(xmlPath);
 
             return true;
         }
 
         #endregion
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // (x^2 + z^2 - 1)^3 - x^2*Z^3 = 0
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // 另存配置
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.InitialDirectory = Common.AppRoot;
+                sfd.DefaultExt = "xml";
+                sfd.OverwritePrompt = true;
+                sfd.RestoreDirectory = true;
+                sfd.AddExtension = true;
+                sfd.FileName = "桌面图标位置配置" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".xml";
+                sfd.Filter = "xml文件(*.xml)|*.xml";
+                sfd.Title = "另存图标配置文件";
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    SaveIconsToXml(sfd.FileName);
+                    MessageBox.Show("保存成功！");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("保存异常：" + ex.Message);
+            }
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenFileDialog ofd = new OpenFileDialog();
+                ofd.InitialDirectory = Common.AppRoot;
+                ofd.Multiselect = false;
+                ofd.Title = "选择图标配置文件";
+                ofd.Filter = "xml文件(*.xml)|*.xml";
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    RestoreIcons(ofd.FileName);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("加载异常：" + ex.Message);
+            }
+        }
     }
 }

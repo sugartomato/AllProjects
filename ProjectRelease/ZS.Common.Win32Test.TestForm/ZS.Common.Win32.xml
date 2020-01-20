@@ -44,6 +44,11 @@
             <remarks>
             </remarks>
         </member>
+        <member name="F:ZS.Common.Win32.SystemDefinedMessages.MK_LBUTTON">
+            <summary>
+            The left mouse button is down.
+            </summary>
+        </member>
         <member name="F:ZS.Common.Win32.SystemDefinedMessages.WM_CREATE">
             <summary>
             Sent when an application requests that a window be created by calling the CreateWindowEx or CreateWindow function. (The message is sent before the function returns.) The window procedure of the new window receives this message after the window is created, but before the window becomes visible.
@@ -123,6 +128,16 @@
                     The type of icon being retrieved. This parameter can be one of the following values.
                 lParam
                     The DPI of the icon being retrieved. This can be used to provide different icons depending on the icon size.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.SystemDefinedMessages.WH_MOUSE">
+            <summary>
+            Installs a hook procedure that monitors mouse messages. For more information, see the MouseProc hook procedure.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.SystemDefinedMessages.WH_MOUSE_LL">
+            <summary>
+            Installs a hook procedure that monitors low-level mouse input events. For more information, see the LowLevelMouseProc hook procedure.
             </summary>
         </member>
         <member name="F:ZS.Common.Win32.SystemDefinedMessages.WM_DROPFILES">
@@ -290,7 +305,7 @@
             </param>
             <returns></returns>
         </member>
-        <member name="M:ZS.Common.Win32.API.SetWindowsHookEx(System.Int32,ZS.Common.Win32.API.HookProcDelegate,System.IntPtr,System.Int32)">
+        <member name="M:ZS.Common.Win32.API.SetWindowsHookEx(ZS.Common.Win32.API.WindowsHookType,ZS.Common.Win32.API.HookProcDelegate,System.IntPtr,System.Int32)">
             <summary>
             Installs an application-defined hook procedure into a hook chain. You would install a hook procedure to monitor the system for certain types of events. These events are associated either with a specific thread or with all threads in the same desktop as the calling thread.
             </summary>
@@ -341,32 +356,39 @@
             <param name="lParam"></param>
             <returns></returns>
         </member>
-        <member name="T:ZS.Common.Win32.API.HookTypeDef">
+        <member name="T:ZS.Common.Win32.API.WindowsHookType">
             <summary>
             钩子类型定义
             </summary>
         </member>
-        <member name="F:ZS.Common.Win32.API.HookTypeDef.WH_CALLWNDPROC">
+        <member name="F:ZS.Common.Win32.API.WindowsHookType.WH_CALLWNDPROC">
             <summary>
             Installs a hook procedure that monitors messages before the system sends them to the destination window procedure. For more information, see the CallWndProc hook procedure.
             </summary>
         </member>
-        <member name="F:ZS.Common.Win32.API.HookTypeDef.WH_CALLWNDPROCRET">
+        <member name="F:ZS.Common.Win32.API.WindowsHookType.WH_CALLWNDPROCRET">
             <summary>
             Installs a hook procedure that monitors messages after they have been processed by the destination window procedure. For more information, see the CallWndRetProc hook procedure.
             </summary>
         </member>
-        <member name="F:ZS.Common.Win32.API.HookTypeDef.WH_CBT">
+        <member name="F:ZS.Common.Win32.API.WindowsHookType.WH_CBT">
             <summary>
             Installs a hook procedure that receives notifications useful to a CBT application. For more information, see the CBTProc hook procedure.
             </summary>
         </member>
-        <member name="F:ZS.Common.Win32.API.HookTypeDef.WH_MSGFILTER">
+        <member name="F:ZS.Common.Win32.API.WindowsHookType.WH_GETMESSAGE">
+            <summary>
+            Installs a hook procedure that monitors messages posted to a message queue. 
+            For more information, see the GetMsgProc hook procedure.
+            https://msdn.microsoft.com/en-us/library/ms644981(v=VS.85).aspx
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.WindowsHookType.WH_MSGFILTER">
             <summary>
             Installs a hook procedure that monitors messages generated as a result of an input event in a dialog box, message box, menu, or scroll bar. For more information, see the MessageProc hook procedure.
             </summary>
         </member>
-        <member name="F:ZS.Common.Win32.API.HookTypeDef.WH_SHELL">
+        <member name="F:ZS.Common.Win32.API.WindowsHookType.WH_SHELL">
             <summary>
             Installs a hook procedure that receives notifications useful to shell applications. For more information, see the ShellProc hook procedure.
             </summary>
@@ -504,6 +526,19 @@
             <summary>
             The wheel button is tilted.
             </summary>
+        </member>
+        <member name="M:ZS.Common.Win32.API.GetFocus">
+            <summary>
+            	Retrieves the handle to the window that has the keyboard focus, 
+            	if the window is attached to the calling thread's message queue.
+            </summary>
+            <returns>
+            	The return value is the handle to the window with the keyboard focus. 
+            	If the calling thread's message queue does not have an associated window with the keyboard focus, the return value is NULL.
+            </returns>
+            <link>
+            https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-getfocus
+            </link>
         </member>
         <!-- 对于成员“M:ZS.Common.Win32.API.VirtualAllocEx(System.IntPtr,System.IntPtr,System.Int32,System.UInt32,System.UInt32)”忽略有格式错误的 XML 注释 -->
         <!-- 对于成员“M:ZS.Common.Win32.API.VirtualFreeEx(System.IntPtr,System.IntPtr,System.Int32,System.Int32)”忽略有格式错误的 XML 注释 -->
@@ -823,6 +858,11 @@
             </summary>
             <param name="pt"></param>
         </member>
+        <member name="T:ZS.Common.Win32.API.RECT">
+            <summary>
+            The RECT structure defines the coordinates of the upper-left and lower-right corners of a rectangle.
+            </summary>
+        </member>
         <member name="M:ZS.Common.Win32.API.GetClassName(System.IntPtr,System.Text.StringBuilder,System.Int32)">
             <summary>
             Retrieves the name of the class to which the specified window belongs.
@@ -989,7 +1029,8 @@
             <param name="hwndChildAfter">
             [in, optional]
             Type: HWND
-            A handle to a child window. The search begins with the next child window in the Z order. The child window must be a direct child window of hwndParent, not just a descendant window.
+            A handle to a child window. The search begins with the next child window in the Z order. 
+            The child window must be a direct child window of hwndParent, not just a descendant window.
             If hwndChildAfter is NULL, the search begins with the first child window of hwndParent.
             Note that if both hwndParent and hwndChildAfter are NULL, the function searches all top-level and message-only windows.
             </param>
@@ -1017,14 +1058,19 @@
         </member>
         <member name="M:ZS.Common.Win32.API.GetDesktopWindow">
             <summary>
-            Retrieves a handle to the desktop window. The desktop window covers the entire screen. The desktop window is the area on top of which other windows are painted.
+                Retrieves a handle to the desktop window. 
+                The desktop window covers the entire screen. 
+                The desktop window is the area on top of which other windows are painted.
             </summary>
             <returns>
-            Type: HWND
-            The return value is a handle to the desktop window.
-            For an example, see Initializing a Dialog Box.
-            https://msdn.microsoft.com/en-us/library/windows/desktop/ms644996(v=vs.85).aspx#init_box
+                Type: HWND
+                The return value is a handle to the desktop window.
+                For an example, see Initializing a Dialog Box.
+                https://msdn.microsoft.com/en-us/library/windows/desktop/ms644996(v=vs.85).aspx#init_box
             </returns>
+            <link>
+                https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-getdesktopwindow
+            </link>
         </member>
         <member name="M:ZS.Common.Win32.API.GetForegroundWindow">
             <summary>
@@ -1181,6 +1227,20 @@
             When you change the parent of a window, you should synchronize the UISTATE of both windows. For more information, see WM_CHANGEUISTATE and WM_UPDATEUISTATE.
             </remarks>
         </member>
+        <member name="M:ZS.Common.Win32.API.MoveWindow(System.IntPtr,System.Int32,System.Int32,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Changes the position and dimensions of the specified window. 
+            For a top-level window, the position and dimensions are relative to the upper-left corner of the screen. 
+            For a child window, they are relative to the upper-left corner of the parent window's client area.
+            </summary>
+            <param name="hwnd"></param>
+            <param name="X"></param>
+            <param name="Y"></param>
+            <param name="nWidht"></param>
+            <param name="nHeight"></param>
+            <param name="bRepaint"></param>
+            <returns></returns>
+        </member>
         <member name="T:ZS.Common.Win32.API.EnumChildProc">
             <summary>
             An application-defined callback function used with the EnumChildWindows function. It receives the child window handles. The WNDENUMPROC type defines a pointer to this callback function. EnumChildProc is a placeholder for the application-defined function name.
@@ -1315,6 +1375,139 @@
             </remarks>
             <link>https://msdn.microsoft.com/en-us/library/windows/desktop/ms632673(v=vs.85).aspx</link>
         </member>
+        <member name="M:ZS.Common.Win32.API.SetWindowPos(System.IntPtr,System.IntPtr,System.Int32,System.Int32,System.Int32,System.Int32,ZS.Common.Win32.API.SetWindowPosFlags)">
+            <summary>
+                Changes the size, position, and Z order of a child, pop-up, or top-level window. 
+                These windows are ordered according to their appearance on the screen. 
+                The topmost window receives the highest rank and is the first window in the Z order.
+            </summary>
+            <param name="hWnd">
+                A handle to the window.
+            </param>
+            <param name="hWndInsertAfter">
+                A handle to the window to precede the positioned window in the Z order. 
+                This parameter must be a window handle or one of the following values.
+            </param>
+            <param name="X">
+                The new position of the left side of the window, in client coordinates.
+            </param>
+            <param name="Y">
+                The new position of the top of the window, in client coordinates.
+            </param>
+            <param name="cx">
+                The new width of the window, in pixels.
+            </param>
+            <param name="cy">
+                The new height of the window, in pixels.
+            </param>
+            <param name="uFlags">
+                The window sizing and positioning flags. This parameter can be a combination of the following values.
+            </param>
+            <returns></returns>
+        </member>
+        <member name="T:ZS.Common.Win32.API.SetWindowPosFlags">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.SetWindowPosFlags.SWP_ASYNCWINDOWPOS">
+            <summary>
+            If the calling thread and the thread that owns the window are attached to different input queues, 
+            the system posts the request to the thread that owns the window. 
+            This prevents the calling thread from blocking its execution while other threads process the request.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.SetWindowPosFlags.SWP_DEFERERASE">
+            <summary>
+            Prevents generation of the WM_SYNCPAINT message.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.SetWindowPosFlags.SWP_DRAWFRAME">
+            <summary>
+            Draws a frame (defined in the window's class description) around the window.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.SetWindowPosFlags.SWP_FRAMECHANGED">
+            <summary>
+            Applies new frame styles set using the SetWindowLong function. 
+            Sends a WM_NCCALCSIZE message to the window, even if the window's size is not being changed. 
+            If this flag is not specified, WM_NCCALCSIZE is sent only when the window's size is being changed.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.SetWindowPosFlags.SWP_HIDEWINDOW">
+            <summary>
+            Hides the window.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.SetWindowPosFlags.SWP_NOACTIVATE">
+            <summary>
+            Does not activate the window. 
+            If this flag is not set, the window is activated and moved to the top of either the topmost or non-topmost group (depending on the setting of the hWndInsertAfter parameter).
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.SetWindowPosFlags.SWP_NOCOPYBITS">
+            <summary>
+            Discards the entire contents of the client area. 
+            If this flag is not specified, the valid contents of the client area are saved and copied back into the client area after the window is sized or repositioned.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.SetWindowPosFlags.SWP_NOMOVE">
+            <summary>
+            Retains the current position (ignores X and Y parameters).
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.SetWindowPosFlags.SWP_NOOWNERZORDER">
+            <summary>
+            Does not change the owner window's position in the Z order.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.SetWindowPosFlags.SWP_NOREDRAW">
+            <summary>
+            Does not redraw changes. If this flag is set, no repainting of any kind occurs. 
+            This applies to the client area, the nonclient area (including the title bar and scroll bars), 
+            and any part of the parent window uncovered as a result of the window being moved. 
+            When this flag is set, the application must explicitly invalidate or redraw any parts of the window and parent window that need redrawing.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.SetWindowPosFlags.SWP_NOREPOSITION">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.SetWindowPosFlags.SWP_NOSENDCHANGING">
+            <summary>
+            Prevents the window from receiving the WM_WINDOWPOSCHANGING message.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.SetWindowPosFlags.SWP_NOSIZE">
+            <summary>
+            Retains the current size (ignores the cx and cy parameters).
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.SetWindowPosFlags.SWP_NOZORDER">
+            <summary>
+            Retains the current Z order (ignores the hWndInsertAfter parameter).
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.SetWindowPosFlags.SWP_SHOWWINDOW">
+            <summary>
+            Displays the window.
+            </summary>
+        </member>
+        <member name="M:ZS.Common.Win32.API.SetForegroundWindow(System.IntPtr)">
+            <summary>
+                Brings the thread that created the specified window into the foreground and activates the window. 
+                Keyboard input is directed to the window, and various visual cues are changed for the user. 
+                The system assigns a slightly higher priority to the thread that created the foreground window than it does to other threads.
+            </summary>
+            <param name="hwnd">
+                A handle to the window that should be activated and brought to the foreground.
+            </param>
+            <returns></returns>
+            <link>
+                https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-setforegroundwindow
+            </link>
+        </member>
         <member name="M:ZS.Common.Win32.API.GetWindowThreadProcessId(System.IntPtr,System.Int32@)">
             <summary>
             <para>根据窗口句柄返回其进程标识符。</para>
@@ -1368,6 +1561,231 @@
             </remarks>
             <link>https://msdn.microsoft.com/en-us/library/windows/desktop/ms633558(v=vs.85).aspx</link>
         </member>
+        <member name="M:ZS.Common.Win32.API.ChildWindowFromPoint(System.IntPtr,ZS.Common.Win32.API.POINT)">
+            <summary>
+            Determines which, if any, of the child windows belonging to a parent window contains the specified point. The search is restricted to immediate child windows. Grandchildren, and deeper descendant windows are not searched.
+            To skip certain child windows, use the ChildWindowFromPointEx function.
+            </summary>
+            <param name="hwndParent">
+                A handle to the parent window.
+            </param>
+            <param name="point">
+                A structure that defines the client coordinates, relative to hWndParent, of the point to be checked.
+            </param>
+            <returns>
+                The return value is a handle to the child window that contains the point, even if the child window is hidden or disabled. 
+                If the point lies outside the parent window, the return value is NULL. 
+                If the point is within the parent window but not within any child window, the return value is a handle to the parent window.
+            </returns>
+            <remarks>
+                The system maintains an internal list, containing the handles of the child windows associated with a parent window. The order of the handles in the list depends on the Z order of the child windows. If more than one child window contains the specified point, the system returns a handle to the first window in the list that contains the point.
+                ChildWindowFromPoint treats an HTTRANSPARENT area of a standard control the same as other parts of the control. In contrast, RealChildWindowFromPoint treats an HTTRANSPARENT area differently; it returns the child window behind a transparent area of a control. For example, if the point is in a transparent area of a groupbox, ChildWindowFromPoint returns the groupbox while RealChildWindowFromPoint returns the child window behind the groupbox. However, both APIs return a static field, even though it, too, returns HTTRANSPARENT.
+            </remarks>
+            <link>
+                https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-childwindowfrompoint
+            </link>
+        </member>
+        <member name="M:ZS.Common.Win32.API.ChildWindowFromPointEx(System.IntPtr,ZS.Common.Win32.API.POINT,System.Int32)">
+            <summary>
+                Determines which, if any, of the child windows belonging to the specified parent window contains the specified point. 
+                The function can ignore invisible, disabled, and transparent child windows. 
+                The search is restricted to immediate child windows. Grandchildren and deeper descendants are not searched.
+            </summary>
+            <param name="hwnd">
+                A handle to the parent window.
+            </param>
+            <param name="pt">
+                A structure that defines the client coordinates (relative to hwndParent) of the point to be checked.
+            </param>
+            <param name="flags">
+                The child windows to be skipped. This parameter can be one or more of the following values.
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:ZS.Common.Win32.API.RealChildWindowFromPoint(System.IntPtr,ZS.Common.Win32.API.POINT)">
+            <summary>
+                Retrieves a handle to the child window at the specified point. 
+                The search is restricted to immediate child windows; 
+                grandchildren and deeper descendant windows are not searched.
+            </summary>
+            <param name="hwnd">
+                A handle to the window whose child is to be retrieved.
+            </param>
+            <param name="ptParentClientCoords">
+                A POINT structure that defines the client coordinates of the point to be checked.
+            </param>
+            <returns></returns>
+            <remarks>
+                RealChildWindowFromPoint treats HTTRANSPARENT areas of a standard control differently from other areas of the control; 
+                it returns the child window behind a transparent part of a control. 
+                In contrast, ChildWindowFromPoint treats HTTRANSPARENT areas of a control the same as other areas. 
+                For example, if the point is in a transparent area of a groupbox, RealChildWindowFromPoint returns the child window behind a groupbox, whereas ChildWindowFromPoint returns the groupbox. 
+                However, both APIs return a static field, even though it, too, returns HTTRANSPARENT.
+            </remarks>
+            <link>
+               https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-realchildwindowfrompoint 
+            </link>
+        </member>
+        <member name="M:ZS.Common.Win32.API.IsWindow(System.IntPtr)">
+            <summary>
+                Determines whether the specified window handle identifies an existing window.
+            </summary>
+            <param name="hwnd">
+                A handle to the window to be tested.
+            </param>
+            <returns>
+                If the window handle identifies an existing window, the return value is nonzero.
+                If the window handle does not identify an existing window, the return value is zero.
+            </returns>
+            <remarks>
+                A thread should not use IsWindow for a window that it did not create because the window could be destroyed after this function was called. 
+                Further, because window handles are recycled the handle could even point to a different window.
+            </remarks>
+        </member>
+        <member name="M:ZS.Common.Win32.API.GetWindowRect(System.IntPtr,ZS.Common.Win32.API.RECT@)">
+            <summary>
+            Retrieves the dimensions of the bounding rectangle of the specified window. 
+            The dimensions are given in screen coordinates that are relative to the upper-left corner of the screen.
+            </summary>
+            <param name="hwnd"></param>
+            <param name="lpRect"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZS.Common.Win32.API.GetParent(System.IntPtr)">
+            <summary>
+            	Retrieves a handle to the specified window's parent or owner.
+            	To retrieve a handle to a specified ancestor, use the GetAncestor function.
+            </summary>
+            <param name="hwnd">
+            	A handle to the window whose parent window handle is to be retrieved.
+            </param>
+            <returns>
+            	If the window is a child window, the return value is a handle to the parent window. 
+            	If the window is a top-level window with the WS_POPUP style, the return value is a handle to the owner window.
+            </returns>
+            <link>
+            	https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-getparent
+            </link>
+        </member>
+        <member name="M:ZS.Common.Win32.API.GetMenu(System.IntPtr)">
+            <summary>
+            Retrieves a handle to the menu assigned to the specified window.
+            </summary>
+            <param name="hwnd">
+                A handle to the window whose menu handle is to be retrieved.
+            </param>
+            <returns>
+                The return value is a handle to the menu. If the specified window has no menu, the return value is NULL. 
+                If the window is a child window, the return value is undefined.
+            </returns>
+            <remarks>
+                GetMenu does not work on floating menu bars. 
+                Floating menu bars are custom controls that mimic standard menus; they are not menus. 
+                To get the handle on a floating menu bar, use the Active Accessibility APIs.
+            </remarks>
+            <link>
+                https://docs.microsoft.com/en-us/windows/desktop/api/Winuser/nf-winuser-getmenu
+            </link>
+        </member>
+        <member name="M:ZS.Common.Win32.API.FlashWindowEx(System.IntPtr)">
+            <summary>
+                Flashes the specified window. It does not change the active state of the window.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ZS.Common.Win32.API.FlashWindowEx(System.IntPtr,ZS.Common.Win32.API.FlashWindowType,System.Int32,System.Int32)">
+            <summary>
+                闪烁窗口
+            </summary>
+            <param name="hwnd">
+                要闪烁的窗口句柄
+            </param>
+            <param name="flashType">
+                闪烁类型
+            </param>
+            <param name="rate">
+                闪烁的频率。单位为毫秒。
+            </param>
+            <param name="count">
+                闪烁的次数
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:ZS.Common.Win32.API.FlashWindowEx(System.IntPtr,ZS.Common.Win32.API.FlashWindowType)">
+            <summary>
+                闪烁指定的窗口
+            </summary>
+            <param name="hwnd"></param>
+            <param name="flashType"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ZS.Common.Win32.API.FlashInfoStruct">
+            <summary>
+                窗口闪烁参数结构体
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.FlashInfoStruct.cbSize">
+            <summary>
+                The size of the structure, in bytes.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.FlashInfoStruct.hwnd">
+            <summary>
+                A handle to the window to be flashed. The window can be either opened or minimized.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.FlashInfoStruct.dwFlags">
+            <summary>
+                The flash status. This parameter can be one or more of the following values.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.FlashInfoStruct.uCount">
+            <summary>
+                The number of times to flash the window.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.FlashInfoStruct.dwTimeout">
+            <summary>
+                The rate at which the window is to be flashed, in milliseconds. 
+                If dwTimeoutis zero, the function uses the default cursor blink rate.
+            </summary>
+        </member>
+        <member name="T:ZS.Common.Win32.API.FlashWindowType">
+            <summary>
+                窗口闪烁类型枚举
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.FlashWindowType.FLASHW_ALL">
+            <summary>
+                Flash both the window caption and taskbar button. 
+                This is equivalent to setting the FLASHW_CAPTION | FLASHW_TRAY flags.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.FlashWindowType.FLASHW_CAPTION">
+            <summary>
+                Flash the window caption.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.FlashWindowType.FLASHW_STOP">
+            <summary>
+                Stop flashing. The system restores the window to its original state.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.FlashWindowType.FLASHW_TIMER">
+            <summary>
+                Flash continuously, until the FLASHW_STOP flag is set.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.FlashWindowType.FLASHW_TIMERNOFG">
+            <summary>
+                Flash continuously until the window comes to the foreground.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.FlashWindowType.FLASHW_TRAY">
+            <summary>
+                Flash the taskbar button.
+            </summary>
+        </member>
         <member name="M:ZS.Common.Win32.API.GetCursorPos(ZS.Common.Win32.API.POINT@)">
             <summary>
             Retrieves the position of the mouse cursor, in screen coordinates.
@@ -1414,6 +1832,14 @@
             <example>
             https://msdn.microsoft.com/en-us/library/ms648380(v=vs.85).aspx#_win32_Using_the_Keyboard_to_Move_the_Cursor
             </example>
+        </member>
+        <member name="M:ZS.Common.Win32.API.ScreenToClient(System.IntPtr,ZS.Common.Win32.API.POINT@)">
+            <summary>
+            The ScreenToClient function converts the screen coordinates of a specified point on the screen to client-area coordinates.
+            </summary>
+            <param name="hwnd"></param>
+            <param name="lpPoint"></param>
+            <returns></returns>
         </member>
         <member name="M:ZS.Common.Win32.API.sndPlaySound(System.String,ZS.Common.Win32.API.PlaySoundFlags)">
             <summary>
@@ -1484,6 +1910,118 @@
             <summary>
             Note  Requires Windows Vista or later.
             If this flag is set, the sound is assigned to the audio session for system notification sounds. For more information, see PlaySound.
+            </summary>
+        </member>
+        <member name="M:ZS.Common.Win32.API.RegOpenKeyEx(System.IntPtr,System.String,System.Int32,ZS.Common.Win32.API.RegSamEnum,System.IntPtr@)">
+            <summary>
+                Opens the specified registry key. Note that key names are not case sensitive.
+                To perform transacted registry operations on a key, call the RegOpenKeyTransacted function.
+            </summary>
+            <param name="hKey">
+                A handle to an open registry key. This handle is returned by the RegCreateKeyEx or RegOpenKeyEx function, 
+                or it can be one of the following predefined keys:
+                HKEY_CLASSES_ROOT HKEY_CURRENT_CONFIG HKEY_CURRENT_USER HKEY_LOCAL_MACHINE HKEY_USERS
+            </param>
+            <param name="lpSubKey"></param>
+            <param name="ulOptions">
+                Specifies the option to apply when opening the key. Set this parameter to zero or the following:
+            </param>
+            <param name="samDesired">
+                A mask that specifies the desired access rights to the key to be opened. 
+                The function fails if the security descriptor of the key does not permit the requested access for the calling process. 
+                For more information, see Registry Key Security and Access Rights.
+            </param>
+            <param name="phkResult"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZS.Common.Win32.API.RegCloseKey(System.IntPtr)">
+            <summary>
+                Closes a handle to the specified registry key.
+            </summary>
+            <param name="hKey">
+                A handle to the open key to be closed. The handle must have been opened by the RegCreateKeyEx, RegCreateKeyTransacted, RegOpenKeyEx, RegOpenKeyTransacted, or RegConnectRegistry function.
+            </param>
+            <returns>
+                If the function succeeds, the return value is ERROR_SUCCESS.
+                If the function fails, the return value is a nonzero error code defined in Winerror.h. 
+                You can use the FormatMessage function with the FORMAT_MESSAGE_FROM_SYSTEM flag to get a generic description of the error.
+            </returns>
+            <remarks>
+                The handle for a specified key should not be used after it has been closed, because it will no longer be valid. Key handles should not be left open any longer than necessary.
+                The RegCloseKey function does not necessarily write information to the registry before returning; it can take as much as several seconds for the cache to be flushed to the hard disk. If an application must explicitly write registry information to the hard disk, it can use the RegFlushKey function. RegFlushKey, however, uses many system resources and should be called only when necessary.
+            </remarks>
+        </member>
+        <member name="T:ZS.Common.Win32.API.RegSamEnum">
+            <summary>
+                The Windows security model enables you to control access to registry keys. For more information about security, see Access-Control Model.
+                You can specify a security descriptor for a registry key when you call the RegCreateKeyEx or RegSetKeySecurity function. If you specify NULL, the key gets a default security descriptor. The ACLs in a default security descriptor for a key are inherited from its direct parent key.
+                To get the security descriptor of a registry key, call the RegGetKeySecurity, GetNamedSecurityInfo, or GetSecurityInfo function.
+                The valid access rights for registry keys include the DELETE, READ_CONTROL, WRITE_DAC, and WRITE_OWNER standard access rights. Registry keys do not support the SYNCHRONIZE standard access right.
+                When you call the RegOpenKeyEx function, the system checks the requested access rights against the key's security descriptor. If the user does not have the correct access to the registry key, the open operation fails. If an administrator needs access to the key, the solution is to enable the SE_TAKE_OWNERSHIP_NAME privilege and open the registry key with WRITE_OWNER access. For more information, see Enabling and Disabling Privileges.
+                You can request the ACCESS_SYSTEM_SECURITY access right to a registry key if you want to read or write the key's system access control list (SACL). For more information, see Access-Control Lists (ACLs) and SACL Access Right.
+                To view the current access rights for a key, including the predefined keys, use the Registry Editor (Regedt32.exe). After navigating to the desired key, go to the Edit menu and select Permissions.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.RegSamEnum.KEY_ALL_ACCESS">
+            <summary>
+                Combines the STANDARD_RIGHTS_REQUIRED, KEY_QUERY_VALUE, KEY_SET_VALUE, KEY_CREATE_SUB_KEY, KEY_ENUMERATE_SUB_KEYS, KEY_NOTIFY, and KEY_CREATE_LINK access rights.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.RegSamEnum.KEY_CREATE_LINK">
+            <summary>
+                Reserved for system use.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.RegSamEnum.KEY_CREATE_SUB_KEY">
+            <summary>
+                Required to create a subkey of a registry key.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.RegSamEnum.KEY_ENUMERATE_SUB_KEYS">
+            <summary>
+            Required to enumerate the subkeys of a registry key.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.RegSamEnum.KEY_EXECUTE">
+            <summary>
+                Equivalent to KEY_READ.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.RegSamEnum.KEY_NOTIFY">
+            <summary>
+                Required to request change notifications for a registry key or for subkeys of a registry key.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.RegSamEnum.KEY_QUERY_VALUE">
+            <summary>
+                Required to query the values of a registry key.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.RegSamEnum.KEY_READ">
+            <summary>
+                Combines the STANDARD_RIGHTS_READ, KEY_QUERY_VALUE, KEY_ENUMERATE_SUB_KEYS, and KEY_NOTIFY values.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.RegSamEnum.KEY_SET_VALUE">
+            <summary>
+                Required to create, delete, or set a registry value.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.RegSamEnum.KEY_WOW64_32KEY">
+            <summary>
+                Indicates that an application on 64-bit Windows should operate on the 32-bit registry view. This flag is ignored by 32-bit Windows. For more information, see Accessing an Alternate Registry View.
+                This flag must be combined using the OR operator with the other flags in this table that either query or access registry values.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.RegSamEnum.KEY_WOW64_64KEY">
+            <summary>
+                Indicates that an application on 64-bit Windows should operate on the 64-bit registry view. This flag is ignored by 32-bit Windows. For more information, see Accessing an Alternate Registry View.
+                This flag must be combined using the OR operator with the other flags in this table that either query or access registry values.
+            </summary>
+        </member>
+        <member name="F:ZS.Common.Win32.API.RegSamEnum.KEY_WRITE">
+            <summary>
+                Combines the STANDARD_RIGHTS_WRITE, KEY_SET_VALUE, and KEY_CREATE_SUB_KEY access rights.
             </summary>
         </member>
         <member name="M:ZS.Common.Win32.ContextMenu.ContextMenu.AddToDirBackgroundShell(ZS.Common.Win32.ContextMenu.ContextMenu)">
@@ -1861,6 +2399,14 @@
             <param name="valName"></param>
             <returns></returns>
         </member>
+        <member name="M:ZS.Common.Win32.RegHelper.GetRegKeyLastWritetime(Microsoft.Win32.RegistryHive,System.String)">
+            <summary>
+            获取指定注册表项的最后修改时间
+            </summary>
+            <param name="rootKey">注册表根项</param>
+            <param name="subKey">注册表子健</param>
+            <returns></returns>
+        </member>
         <member name="T:ZS.Common.Win32.Win32Provider.NetConnectionStatus">
             <summary>
             网络连接状态枚举
@@ -2236,6 +2782,27 @@
         <member name="T:ZS.Common.Win32.Win32Provider.Win32_OperatingSystem_SuiteMaskEnum">
             <summary>
             Bit flags that identify the product suites available on the system.
+            </summary>
+        </member>
+        <member name="T:ZS.Common.Win32.Win32Provider.Win32_PhysicalMedia">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_PhysicalMedia.Caption">
+            <summary>
+                Short, one-line textual description of the object.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_PhysicalMedia.Name">
+            <summary>
+                Label by which the object is known. 
+                When subclassed, the Name property can be overridden to be a Key property.
+            </summary>
+        </member>
+        <member name="P:ZS.Common.Win32.Win32Provider.Win32_PhysicalMedia.CleanerMedia">
+            <summary>
+                If TRUE, the physical media is used for cleaning purposes and not data storage.
             </summary>
         </member>
         <member name="T:ZS.Common.Win32.Win32Provider.Win32_Product">
@@ -2627,6 +3194,14 @@
             <summary>
             Version 4.70. Number of image widths to indent the item. A single indentation equals the width of an item image. Therefore, the value 1 indents the item by the width of one image, the value 2 indents by two images, and so on. Note that this field is supported only for items. Attempting to set subitem indentation will cause the calling function to fail.
             </summary>
+        </member>
+        <member name="M:ZS.Common.Win32.Window.FindWindow(System.IntPtr,System.String)">
+            <summary>
+            模糊查找某个窗口下的包含指定名称的子窗口
+            </summary>
+            <param name="parent"></param>
+            <param name="title"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>

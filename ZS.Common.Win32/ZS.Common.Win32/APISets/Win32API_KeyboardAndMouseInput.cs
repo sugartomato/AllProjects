@@ -104,5 +104,21 @@
             /// </summary>
             MOUSEEVENTF_HWHEEL= 0x01000
         }
-    }
+
+		/// <summary>
+		///		Retrieves the handle to the window that has the keyboard focus, 
+		///		if the window is attached to the calling thread's message queue.
+		/// </summary>
+		/// <returns>
+		///		The return value is the handle to the window with the keyboard focus. 
+		///		If the calling thread's message queue does not have an associated window with the keyboard focus, the return value is NULL.
+		/// </returns>
+		/// <link>
+		/// https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-getfocus
+		/// </link>
+		[DllImport("User32.dll")]
+		public static extern IntPtr GetFocus();
+
+
+	}
 }

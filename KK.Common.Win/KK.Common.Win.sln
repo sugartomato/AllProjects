@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2003
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KK.Common.Win", "KK.Common.Win\KK.Common.Win.csproj", "{DB074343-E5B5-469E-9DD8-A628AE37746C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KK.Common.WinTests", "KK.Common.WinTests\KK.Common.WinTests.csproj", "{BFC3AF20-94E2-4F82-8318-2A8B4D1B3991}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DB074343-E5B5-469E-9DD8-A628AE37746C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB074343-E5B5-469E-9DD8-A628AE37746C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB074343-E5B5-469E-9DD8-A628AE37746C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB074343-E5B5-469E-9DD8-A628AE37746C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFC3AF20-94E2-4F82-8318-2A8B4D1B3991}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFC3AF20-94E2-4F82-8318-2A8B4D1B3991}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFC3AF20-94E2-4F82-8318-2A8B4D1B3991}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFC3AF20-94E2-4F82-8318-2A8B4D1B3991}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FE383305-91C5-4610-ACEF-72D6135413B0}
+	EndGlobalSection
+EndGlobal

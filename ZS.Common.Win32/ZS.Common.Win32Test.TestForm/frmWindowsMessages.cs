@@ -97,5 +97,26 @@ namespace ZS.Common.Win32Test.TestForm
         {
 
         }
-    }
+
+		// 发送鼠标左键点击-
+		private void button4_Click(object sender, EventArgs e)
+		{
+
+			if (rbtByHandle.Checked)
+			{
+				IntPtr handle = new IntPtr(Int32.Parse(txtWindowHandle.Text));
+				// 获取控件的坐标
+				Win32.API.RECT rec = new Win32.API.RECT();
+				Win32.API.GetWindowRect(handle, ref rec);
+
+				Win32.API.SendMessage(handle, Win32.SystemDefinedMessages.WM_LBUTTONDOWN, Win32.SystemDefinedMessages.MK_LBUTTON, rec.left + (rec.top << 16));
+				//Win32.API.SendMessage(handle, Win32.SystemDefinedMessages.WM_LBUTTONUP,0, rec.left + (rec.top << 16));
+			}
+		}
+
+		private void radioButton2_CheckedChanged(object sender, EventArgs e)
+		{
+
+		}
+	}
 }

@@ -1,0 +1,54 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model DHDWeb.Models.SoftwareModel
+@{
+    Layout = "~/Views/Shared/_LayoutMin.cshtml";
+    ViewData["Title"] = "添加软件";
+}
+
+<div>
+    <div class="panel panel-primary" style="max-width:800px;margin:auto;">
+        <div class="panel-heading">
+            <h3>软件添加</h3>
+        </div>
+        <div class="panel-body">
+            <form class="form-horizontal" role="form" action="AddCommit" method="post">
+                <div class="form-group">
+                    <label class="col-sm-1 control-label" asp-for="Name"></label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" placeholder="软件名称" asp-for="Name" />
+                    </div>
+                    <span asp-validation-for="Name" class="col-sm-5 text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-1 control-label" asp-for="Description"></label>
+                    <div class="col-sm-5">
+                        <textarea asp-for="Description"></textarea>
+                    </div>
+                    <span asp-validation-for="Description" class="col-sm-5 text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-1 control-label" asp-for="Name"></label>
+                    <div class="col-sm-5">
+                        <input type="file" name="soft_file" id="soft_file" asp-for="Name" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <button class="btn btn-default" role="button" type="submit">提交</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/lib/ckeditor/ckeditor.js"></script>
+    <script>
+        $(function(){
+            CKEDITOR.replace("Description")
+        });
+    </script>
+}

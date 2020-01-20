@@ -32,15 +32,11 @@
                   screentip="将当前文档另存为pdf格式文件。"
                   supertip="默认存储于文档同目录下，同名的pdf文件。如果文档路径获取不到，则存储在桌面。"/>
         </group>
+        <group id="DHD_GRP_TEST" label="测试">
+          <button id="DHD_BTN_TEST_GETOUTLINE" label="获取文档大纲" onAction="OnClick_Test" imageMso="T"/>
+        </group>
       </tab>
     </tabs>
-    <qat>
-      <documentControls>
-        <separator/>
-        <control idMso="GridSettings"/>
-        <control idMso="GridSettings"/>
-      </documentControls>
-    </qat>
   </ribbon>
 </customUI>
 

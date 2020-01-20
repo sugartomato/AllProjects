@@ -116,7 +116,7 @@ namespace ZS.Common.Win32.Tests
             if (ptr != IntPtr.Zero)
             {
                 Int32 txtLength = API.GetWindowTextLength(ptr);
-                StringBuilder sb = new StringBuilder("",txtLength + 2);
+                StringBuilder sb = new StringBuilder("", txtLength + 2);
                 Int32 tCount = API.GetWindowText(ptr, sb, sb.Capacity);
                 Console.WriteLine(sb.ToString());
                 Console.WriteLine("获取文本数：" + tCount);
@@ -146,6 +146,12 @@ namespace ZS.Common.Win32.Tests
             {
                 Console.WriteLine("未找到窗口！");
             }
+        }
+
+        [TestMethod()]
+        public void FileTimeToSystemTimeTest()
+        {
+            Assert.Fail();
         }
     }
 }

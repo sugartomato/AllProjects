@@ -70,6 +70,7 @@
                     </StackPanel>
                 </TabItem.Content>
             </TabItem>
+            <Button Content="Button" Height="100" Width="75"/>
         </TabControl>
 
     </Grid>

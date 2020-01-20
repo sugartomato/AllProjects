@@ -80,5 +80,95 @@ namespace ZS.Common.Win32
         }
 
 
+        #region VSTO 信息
+
+        public static MSWin32.RegistryKey GetVstoRegKey(String vstoName)
+        {
+            // 64位系统，先搜索HKLM
+            throw new ApplicationException("未实现的方法");
+            //Microsoft.Win32.Registry.SetValue()
+        }
+
+        public static String GetVstoLocation(String vstoName)
+        {
+            throw new ApplicationException("未实现的方法");
+        }
+
+        public static Boolean RegVSTO()
+        {
+            //Microsoft.Win32.Registry.SetValue();
+            throw new ApplicationException("未实现的方法");
+        }
+
+
+
+        #endregion
+
+
+        #region 公共方法
+
+        /// <summary>
+        /// 获取指定注册表项的最后修改时间
+        /// </summary>
+        /// <param name="rootKey">注册表根项</param>
+        /// <param name="subKey">注册表子健</param>
+        /// <returns></returns>
+        public static DateTime GetRegKeyLastWritetime(Microsoft.Win32.RegistryHive rootKey, String subKey)
+        {
+            DateTime result = default(DateTime);
+            IntPtr keyHandle = IntPtr.Zero;
+            Int32 openResult = 0;
+
+            if (!String.IsNullOrEmpty(subKey))
+            {
+                subKey = subKey.TrimStart('\\').TrimStart('/');
+            }
+
+            if (System.Environment.Is64BitOperatingSystem)
+            {
+                openResult = API.RegOpenKeyEx((IntPtr)rootKey, subKey, 0, API.RegSamEnum.KEY_READ | API.RegSamEnum.KEY_WOW64_64KEY, ref keyHandle);
+
+                // 尝试64位
+                if (openResult != 0)
+                {
+                    // 尝试32位
+                    openResult = API.RegOpenKeyEx((IntPtr)rootKey, subKey, 0, API.RegSamEnum.KEY_READ | API.RegSamEnum.KEY_WOW64_32KEY, ref keyHandle);
+                    if (openResult != 0)
+                    {
+                        throw new ApplicationException("通过64位/32位均尝试打开注册表项目失败，错误代码：" + openResult.ToString());
+                    }
+                }
+            }
+            else
+            {
+                openResult = API.RegOpenKeyEx((IntPtr)rootKey, subKey, 0, API.RegSamEnum.KEY_READ, ref keyHandle);
+                if (openResult != 0)
+                {
+                    throw new ApplicationException("通过64位/32位均尝试打开注册表项目失败，错误代码：" + openResult.ToString());
+                }
+            }
+
+            System.Runtime.InteropServices.ComTypes.FILETIME fTime = default(System.Runtime.InteropServices.ComTypes.FILETIME);
+
+            Int32 queryInfoResult = API.RegQueryInfoKey((IntPtr)keyHandle, null, 0, (IntPtr)0, (IntPtr)0, (IntPtr)0, (IntPtr)0, (IntPtr)0, (IntPtr)0, (IntPtr)0, (IntPtr)0, ref fTime);
+            if (queryInfoResult != 0)
+            {
+                // 关闭注册表项
+                API.RegCloseKey(keyHandle);
+                throw new ApplicationException("尝试获取注册表信息失败，错误代码：" + openResult.ToString());
+            }
+
+            long hft2 = (((long)fTime.dwHighDateTime) << 32) | ((uint)fTime.dwLowDateTime);
+            result = DateTime.FromFileTimeUtc(hft2);
+
+            // 关闭注册表项
+            API.RegCloseKey(keyHandle);
+
+            return result;
+        }
+
+
+        #endregion
+
     }
 }

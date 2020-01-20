@@ -139,7 +139,8 @@ namespace ZS.Common.Win32
         /// <param name="hwndChildAfter">
         /// [in, optional]
         /// Type: HWND
-        /// A handle to a child window. The search begins with the next child window in the Z order. The child window must be a direct child window of hwndParent, not just a descendant window.
+        /// A handle to a child window. The search begins with the next child window in the Z order. 
+		/// The child window must be a direct child window of hwndParent, not just a descendant window.
         /// If hwndChildAfter is NULL, the search begins with the first child window of hwndParent.
         /// Note that if both hwndParent and hwndChildAfter are NULL, the function searches all top-level and message-only windows.
         /// </param>
@@ -167,18 +168,25 @@ namespace ZS.Common.Win32
         [DllImport("User32.dll")]
         public static extern IntPtr FindWindowEx(IntPtr hwndParnet, IntPtr hwndChildAfter, String lpszClass, String lpszWindow);
 
+
         // ############################################################
         /// <summary>
-        /// Retrieves a handle to the desktop window. The desktop window covers the entire screen. The desktop window is the area on top of which other windows are painted.
+        ///     Retrieves a handle to the desktop window. 
+        ///     The desktop window covers the entire screen. 
+        ///     The desktop window is the area on top of which other windows are painted.
         /// </summary>
         /// <returns>
-        /// Type: HWND
-        /// The return value is a handle to the desktop window.
-        /// For an example, see Initializing a Dialog Box.
-        /// https://msdn.microsoft.com/en-us/library/windows/desktop/ms644996(v=vs.85).aspx#init_box
+        ///     Type: HWND
+        ///     The return value is a handle to the desktop window.
+        ///     For an example, see Initializing a Dialog Box.
+        ///     https://msdn.microsoft.com/en-us/library/windows/desktop/ms644996(v=vs.85).aspx#init_box
         /// </returns>
+        /// <link>
+        ///     https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-getdesktopwindow
+        /// </link>
         [DllImport("User32.dll")]
         public static extern IntPtr GetDesktopWindow();
+
 
         // ############################################################
         /// <summary>
@@ -348,6 +356,22 @@ namespace ZS.Common.Win32
 
         // ############################################################
         /// <summary>
+        /// Changes the position and dimensions of the specified window. 
+        /// For a top-level window, the position and dimensions are relative to the upper-left corner of the screen. 
+        /// For a child window, they are relative to the upper-left corner of the parent window's client area.
+        /// </summary>
+        /// <param name="hwnd"></param>
+        /// <param name="X"></param>
+        /// <param name="Y"></param>
+        /// <param name="nWidht"></param>
+        /// <param name="nHeight"></param>
+        /// <param name="bRepaint"></param>
+        /// <returns></returns>
+        [DllImport("User32.dll")]
+        public static extern Boolean MoveWindow(IntPtr hwnd, Int32 X, Int32 Y, Int32 nWidht, Int32 nHeight, Boolean bRepaint);
+
+        // ############################################################
+        /// <summary>
         /// An application-defined callback function used with the EnumChildWindows function. It receives the child window handles. The WNDENUMPROC type defines a pointer to this callback function. EnumChildProc is a placeholder for the application-defined function name.
         /// </summary>
         /// <param name="hwnd">
@@ -490,6 +514,134 @@ namespace ZS.Common.Win32
         [DllImport("User32.dll")]
         public static extern Boolean BringWindowToTop(IntPtr hWnd);
 
+
+        // ############################################################
+        /// <summary>
+        ///     Changes the size, position, and Z order of a child, pop-up, or top-level window. 
+        ///     These windows are ordered according to their appearance on the screen. 
+        ///     The topmost window receives the highest rank and is the first window in the Z order.
+        /// </summary>
+        /// <param name="hWnd">
+        ///     A handle to the window.
+        /// </param>
+        /// <param name="hWndInsertAfter">
+        ///     A handle to the window to precede the positioned window in the Z order. 
+        ///     This parameter must be a window handle or one of the following values.
+        /// </param>
+        /// <param name="X">
+        ///     The new position of the left side of the window, in client coordinates.
+        /// </param>
+        /// <param name="Y">
+        ///     The new position of the top of the window, in client coordinates.
+        /// </param>
+        /// <param name="cx">
+        ///     The new width of the window, in pixels.
+        /// </param>
+        /// <param name="cy">
+        ///     The new height of the window, in pixels.
+        /// </param>
+        /// <param name="uFlags">
+        ///     The window sizing and positioning flags. This parameter can be a combination of the following values.
+        /// </param>
+        /// <returns></returns>
+        [DllImport("User32.dll")]
+        public static extern Boolean SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, Int32 X, Int32 Y, Int32 cx, Int32 cy, SetWindowPosFlags uFlags);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public enum SetWindowPosFlags
+        {
+            /// <summary>
+            /// If the calling thread and the thread that owns the window are attached to different input queues, 
+            /// the system posts the request to the thread that owns the window. 
+            /// This prevents the calling thread from blocking its execution while other threads process the request.
+            /// </summary>
+            SWP_ASYNCWINDOWPOS = 0x4000,
+            /// <summary>
+            /// Prevents generation of the WM_SYNCPAINT message.
+            /// </summary>
+            SWP_DEFERERASE = 0x2000,
+            /// <summary>
+            /// Draws a frame (defined in the window's class description) around the window.
+            /// </summary>
+            SWP_DRAWFRAME = 0x0020,
+            /// <summary>
+            /// Applies new frame styles set using the SetWindowLong function. 
+            /// Sends a WM_NCCALCSIZE message to the window, even if the window's size is not being changed. 
+            /// If this flag is not specified, WM_NCCALCSIZE is sent only when the window's size is being changed.
+            /// </summary>
+            SWP_FRAMECHANGED = 0x0020,
+            /// <summary>
+            /// Hides the window.
+            /// </summary>
+            SWP_HIDEWINDOW = 0x0080,
+            /// <summary>
+            /// Does not activate the window. 
+            /// If this flag is not set, the window is activated and moved to the top of either the topmost or non-topmost group (depending on the setting of the hWndInsertAfter parameter).
+            /// </summary>
+            SWP_NOACTIVATE = 0x0010,
+            /// <summary>
+            /// Discards the entire contents of the client area. 
+            /// If this flag is not specified, the valid contents of the client area are saved and copied back into the client area after the window is sized or repositioned.
+            /// </summary>
+            SWP_NOCOPYBITS = 0x0100,
+            /// <summary>
+            /// Retains the current position (ignores X and Y parameters).
+            /// </summary>
+            SWP_NOMOVE = 0x0002,
+            /// <summary>
+            /// Does not change the owner window's position in the Z order.
+            /// </summary>
+            SWP_NOOWNERZORDER = 0x0200,
+            /// <summary>
+            /// Does not redraw changes. If this flag is set, no repainting of any kind occurs. 
+            /// This applies to the client area, the nonclient area (including the title bar and scroll bars), 
+            /// and any part of the parent window uncovered as a result of the window being moved. 
+            /// When this flag is set, the application must explicitly invalidate or redraw any parts of the window and parent window that need redrawing.
+            /// </summary>
+            SWP_NOREDRAW = 0x0008,
+            /// <summary>
+            /// 
+            /// </summary>
+            SWP_NOREPOSITION = 0x0200,
+            /// <summary>
+            /// Prevents the window from receiving the WM_WINDOWPOSCHANGING message.
+            /// </summary>
+            SWP_NOSENDCHANGING = 0x0400,
+            /// <summary>
+            /// Retains the current size (ignores the cx and cy parameters).
+            /// </summary>
+            SWP_NOSIZE = 0x0001,
+            /// <summary>
+            /// Retains the current Z order (ignores the hWndInsertAfter parameter).
+            /// </summary>
+            SWP_NOZORDER = 0x0004,
+            /// <summary>
+            /// Displays the window.
+            /// </summary>
+            SWP_SHOWWINDOW = 0x0040
+
+        }
+
+
+        // ############################################################
+        /// <summary>
+        ///     Brings the thread that created the specified window into the foreground and activates the window. 
+        ///     Keyboard input is directed to the window, and various visual cues are changed for the user. 
+        ///     The system assigns a slightly higher priority to the thread that created the foreground window than it does to other threads.
+        /// </summary>
+        /// <param name="hwnd">
+        ///     A handle to the window that should be activated and brought to the foreground.
+        /// </param>
+        /// <returns></returns>
+        /// <link>
+        ///     https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-setforegroundwindow
+        /// </link>
+        [DllImport("User32.dll")]
+        public static extern Boolean SetForegroundWindow(IntPtr hwnd);
+
+
         // ############################################################
         /// <summary>
         /// <para>根据窗口句柄返回其进程标识符。</para>
@@ -551,5 +703,267 @@ namespace ZS.Common.Win32
         public static extern IntPtr WindowFromPoint(POINT point);
 
 
+        // ############################################################
+        /// <summary>
+        /// Determines which, if any, of the child windows belonging to a parent window contains the specified point. The search is restricted to immediate child windows. Grandchildren, and deeper descendant windows are not searched.
+        /// To skip certain child windows, use the ChildWindowFromPointEx function.
+        /// </summary>
+        /// <param name="hwndParent">
+        ///     A handle to the parent window.
+        /// </param>
+        /// <param name="point">
+        ///     A structure that defines the client coordinates, relative to hWndParent, of the point to be checked.
+        /// </param>
+        /// <returns>
+        ///     The return value is a handle to the child window that contains the point, even if the child window is hidden or disabled. 
+        ///     If the point lies outside the parent window, the return value is NULL. 
+        ///     If the point is within the parent window but not within any child window, the return value is a handle to the parent window.
+        /// </returns>
+        /// <remarks>
+        ///     The system maintains an internal list, containing the handles of the child windows associated with a parent window. The order of the handles in the list depends on the Z order of the child windows. If more than one child window contains the specified point, the system returns a handle to the first window in the list that contains the point.
+        ///     ChildWindowFromPoint treats an HTTRANSPARENT area of a standard control the same as other parts of the control. In contrast, RealChildWindowFromPoint treats an HTTRANSPARENT area differently; it returns the child window behind a transparent area of a control. For example, if the point is in a transparent area of a groupbox, ChildWindowFromPoint returns the groupbox while RealChildWindowFromPoint returns the child window behind the groupbox. However, both APIs return a static field, even though it, too, returns HTTRANSPARENT.
+        /// </remarks>
+        /// <link>
+        ///     https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-childwindowfrompoint
+        /// </link>
+        [DllImport("User32.dll")]
+        public static extern IntPtr ChildWindowFromPoint(IntPtr hwndParent, POINT point);
+
+
+        // ############################################################
+        /// <summary>
+        ///     Determines which, if any, of the child windows belonging to the specified parent window contains the specified point. 
+        ///     The function can ignore invisible, disabled, and transparent child windows. 
+        ///     The search is restricted to immediate child windows. Grandchildren and deeper descendants are not searched.
+        /// </summary>
+        /// <param name="hwnd">
+        ///     A handle to the parent window.
+        /// </param>
+        /// <param name="pt">
+        ///     A structure that defines the client coordinates (relative to hwndParent) of the point to be checked.
+        /// </param>
+        /// <param name="flags">
+        ///     The child windows to be skipped. This parameter can be one or more of the following values.
+        /// </param>
+        /// <returns></returns>
+        [DllImport("User32.dll")]
+        public static extern IntPtr ChildWindowFromPointEx(IntPtr hwnd, POINT pt, Int32 flags);
+
+
+        // ############################################################
+        /// <summary>
+        ///     Retrieves a handle to the child window at the specified point. 
+        ///     The search is restricted to immediate child windows; 
+        ///     grandchildren and deeper descendant windows are not searched.
+        /// </summary>
+        /// <param name="hwnd">
+        ///     A handle to the window whose child is to be retrieved.
+        /// </param>
+        /// <param name="ptParentClientCoords">
+        ///     A POINT structure that defines the client coordinates of the point to be checked.
+        /// </param>
+        /// <returns></returns>
+        /// <remarks>
+        ///     RealChildWindowFromPoint treats HTTRANSPARENT areas of a standard control differently from other areas of the control; 
+        ///     it returns the child window behind a transparent part of a control. 
+        ///     In contrast, ChildWindowFromPoint treats HTTRANSPARENT areas of a control the same as other areas. 
+        ///     For example, if the point is in a transparent area of a groupbox, RealChildWindowFromPoint returns the child window behind a groupbox, whereas ChildWindowFromPoint returns the groupbox. 
+        ///     However, both APIs return a static field, even though it, too, returns HTTRANSPARENT.
+        /// </remarks>
+        /// <link>
+        ///    https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-realchildwindowfrompoint 
+        /// </link>
+        [DllImport("User32.dll")]
+        public static extern IntPtr RealChildWindowFromPoint(IntPtr hwnd, POINT ptParentClientCoords);
+
+        // ############################################################
+        /// <summary>
+        ///     Determines whether the specified window handle identifies an existing window.
+        /// </summary>
+        /// <param name="hwnd">
+        ///     A handle to the window to be tested.
+        /// </param>
+        /// <returns>
+        ///     If the window handle identifies an existing window, the return value is nonzero.
+        ///     If the window handle does not identify an existing window, the return value is zero.
+        /// </returns>
+        /// <remarks>
+        ///     A thread should not use IsWindow for a window that it did not create because the window could be destroyed after this function was called. 
+        ///     Further, because window handles are recycled the handle could even point to a different window.
+        /// </remarks>
+        [DllImport("User32.dll")]
+        public static extern Boolean IsWindow(IntPtr hwnd);
+
+        /// <summary>
+        /// Retrieves the dimensions of the bounding rectangle of the specified window. 
+        /// The dimensions are given in screen coordinates that are relative to the upper-left corner of the screen.
+        /// </summary>
+        /// <param name="hwnd"></param>
+        /// <param name="lpRect"></param>
+        /// <returns></returns>
+        [DllImport("User32.dll")]
+		public static extern Boolean GetWindowRect(IntPtr hwnd, ref RECT lpRect);
+
+        // ############################################################
+        /// <summary>
+        ///		Retrieves a handle to the specified window's parent or owner.
+        ///		To retrieve a handle to a specified ancestor, use the GetAncestor function.
+        /// </summary>
+        /// <param name="hwnd">
+        ///		A handle to the window whose parent window handle is to be retrieved.
+        /// </param>
+        /// <returns>
+        ///		If the window is a child window, the return value is a handle to the parent window. 
+        ///		If the window is a top-level window with the WS_POPUP style, the return value is a handle to the owner window.
+        /// </returns>
+        /// <link>
+        ///		https://docs.microsoft.com/en-us/windows/desktop/api/winuser/nf-winuser-getparent
+        /// </link>
+        [DllImport("User32.dll")]
+		public static extern IntPtr GetParent(IntPtr hwnd);
+
+
+        #region 菜单
+
+        /// <summary>
+        /// Retrieves a handle to the menu assigned to the specified window.
+        /// </summary>
+        /// <param name="hwnd">
+        ///     A handle to the window whose menu handle is to be retrieved.
+        /// </param>
+        /// <returns>
+        ///     The return value is a handle to the menu. If the specified window has no menu, the return value is NULL. 
+        ///     If the window is a child window, the return value is undefined.
+        /// </returns>
+        /// <remarks>
+        ///     GetMenu does not work on floating menu bars. 
+        ///     Floating menu bars are custom controls that mimic standard menus; they are not menus. 
+        ///     To get the handle on a floating menu bar, use the Active Accessibility APIs.
+        /// </remarks>
+        /// <link>
+        ///     https://docs.microsoft.com/en-us/windows/desktop/api/Winuser/nf-winuser-getmenu
+        /// </link>
+        [DllImport("User32.dll")]
+        public static extern IntPtr GetMenu(IntPtr hwnd);
+
+
+        #endregion
+
+
+        #region 效果
+
+        // ############################################################
+        /// <summary>
+        ///     Flashes the specified window. It does not change the active state of the window.
+        /// </summary>
+        /// <returns></returns>
+        [DllImport("User32.dll")]
+        internal static extern Boolean FlashWindowEx(IntPtr FlashWindowEx);
+
+        /// <summary>
+        ///     闪烁窗口
+        /// </summary>
+        /// <param name="hwnd">
+        ///     要闪烁的窗口句柄
+        /// </param>
+        /// <param name="flashType">
+        ///     闪烁类型
+        /// </param>
+        /// <param name="rate">
+        ///     闪烁的频率。单位为毫秒。
+        /// </param>
+        /// <param name="count">
+        ///     闪烁的次数
+        /// </param>
+        /// <returns></returns>
+        public static Boolean FlashWindowEx(IntPtr hwnd, FlashWindowType flashType, Int32 rate, Int32 count)
+        {
+            if (rate <= 0) rate = 1000;
+            if (count <= 0) count = 1000;
+            FlashInfoStruct s = new FlashInfoStruct();
+            s.hwnd = hwnd;
+            s.dwFlags = flashType;
+            s.dwTimeout = rate;
+            s.uCount = (UInt32)count;
+            s.cbSize = (UInt32)Marshal.SizeOf(s);
+            IntPtr add = IntPtr.Zero;
+            add = Marshal.AllocHGlobal((Int32)s.cbSize);
+            Marshal.StructureToPtr(s, add, true);
+            return FlashWindowEx(add);
+        }
+
+        /// <summary>
+        ///     闪烁指定的窗口
+        /// </summary>
+        /// <param name="hwnd"></param>
+        /// <param name="flashType"></param>
+        /// <returns></returns>
+        public static Boolean FlashWindowEx(IntPtr hwnd, FlashWindowType flashType)
+        {
+            return FlashWindowEx(hwnd, flashType, 1000, 1000);
+        }
+
+        /// <summary>
+        ///     窗口闪烁参数结构体
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential)]
+        public class FlashInfoStruct
+        {
+            /// <summary>
+            ///     The size of the structure, in bytes.
+            /// </summary>
+            public UInt32 cbSize;
+            /// <summary>
+            ///     A handle to the window to be flashed. The window can be either opened or minimized.
+            /// </summary>
+            public IntPtr hwnd;
+            /// <summary>
+            ///     The flash status. This parameter can be one or more of the following values.
+            /// </summary>
+            public FlashWindowType dwFlags;
+            /// <summary>
+            ///     The number of times to flash the window.
+            /// </summary>
+            public UInt32 uCount;
+            /// <summary>
+            ///     The rate at which the window is to be flashed, in milliseconds. 
+            ///     If dwTimeoutis zero, the function uses the default cursor blink rate.
+            /// </summary>
+            public Int32 dwTimeout;
+        }
+
+        /// <summary>
+        ///     窗口闪烁类型枚举
+        /// </summary>
+        public enum FlashWindowType
+        {
+            /// <summary>
+            ///     Flash both the window caption and taskbar button. 
+            ///     This is equivalent to setting the FLASHW_CAPTION | FLASHW_TRAY flags.
+            /// </summary>
+            FLASHW_ALL = 0x00000003,
+            /// <summary>
+            ///     Flash the window caption.
+            /// </summary>
+            FLASHW_CAPTION = 0x00000001,
+            /// <summary>
+            ///     Stop flashing. The system restores the window to its original state.
+            /// </summary>
+            FLASHW_STOP = 0,
+            /// <summary>
+            ///     Flash continuously, until the FLASHW_STOP flag is set.
+            /// </summary>
+            FLASHW_TIMER = 0x00000004,
+            /// <summary>
+            ///     Flash continuously until the window comes to the foreground.
+            /// </summary>
+            FLASHW_TIMERNOFG = 0x0000000C,
+            /// <summary>
+            ///     Flash the taskbar button.
+            /// </summary>
+            FLASHW_TRAY = 0x00000002
+        }
+
+        #endregion
     }
 }

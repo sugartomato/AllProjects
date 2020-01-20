@@ -182,8 +182,10 @@ namespace ZS.Common.Win32Test.TestForm
         {
             ZS.Common.Win32.API.POINT pt = new Win32.API.POINT(0, 0);
             ZS.Common.Win32.API.GetCursorPos(ref pt);
-            label1.Text = "X:" + pt.X;
-            label1.Location = new Point(pt.X - this.Left,pt.Y - this.Top);
+			String loc = "X:" + pt.X + ",Y:" + pt.Y;
+			label1.Text = loc;
+			label1.Location = new Point(pt.X - this.Left,pt.Y - this.Top);
+			lblCursorPointStick.Text = loc;
         }
 
         private void btnTarget2_Click(Object sender, EventArgs e)
@@ -208,5 +210,19 @@ namespace ZS.Common.Win32Test.TestForm
                 ZS.Common.Win32.Mouse.MoveTo(pt1,(Int32)numericUpDown1.Value);
             }
         }
-    }
+
+		private void label2_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void button6_Click(object sender, EventArgs e)
+		{
+		}
+
+		private void Mouse_MouseMove(object sender, Win32.Mouse.MouseEventArgs args)
+		{
+			lblCursorPointGlobal.Text = args.X.ToString();
+		}
+	}
 }

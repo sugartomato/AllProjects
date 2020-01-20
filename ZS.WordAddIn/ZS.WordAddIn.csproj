@@ -124,11 +124,10 @@
     <Reference Include="WindowsBase" />
     <Reference Include="WindowsFormsIntegration" />
     <Reference Include="ZS.Common">
-      <HintPath>..\..\Bin\ZS.Common.dll</HintPath>
+      <HintPath>..\ProjectRelease\ZS.Common.dll</HintPath>
     </Reference>
-    <Reference Include="ZS.WPFControls, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Bin\ZS.WPFControls.dll</HintPath>
+    <Reference Include="ZS.WPFControls">
+      <HintPath>..\ProjectRelease\ZS.WPFControls.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -167,10 +166,14 @@
     can be found.
   -->
   <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Common.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="CustomPans.cs" />
     <Compile Include="MyTools.cs" />
+    <Compile Include="MyTools_Test.cs" />
     <Compile Include="Notify.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -206,9 +209,6 @@
       <DependentUpon>ucMapSearch.cs</DependentUpon>
     </Compile>
     <Compile Include="DocumentHelper.cs" />
-    <EmbeddedResource Include="Notify.resx">
-      <DependentUpon>Notify.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -254,6 +254,7 @@
       <DependentUpon>ThisAddIn.Designer.xml</DependentUpon>
     </Compile>
     <AppDesigner Include="Properties\" />
+    <None Include="ZS.WordAddin.pfx" />
     <None Include="ZS.WordAddIn_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -262,6 +263,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Styles\brushes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -291,7 +296,13 @@
     <ManifestKeyFile>ZS.WordAddIn_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>2C16D70BB7EF1E2436A957DE186B8E2787A5C30E</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>9A5E490F3901FA35879995C12ABE709684709A45</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>ZS.WordAddin.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <!-- Include the build rules for a C# project. -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

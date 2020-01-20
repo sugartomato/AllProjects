@@ -58,7 +58,25 @@ namespace ZS.Common.Win32
             }
         }
 
+		/// <summary>
+		/// The RECT structure defines the coordinates of the upper-left and lower-right corners of a rectangle.
+		/// </summary>
+		[StructLayout(LayoutKind.Sequential)]
+		public struct RECT
+		{
+			public Int32 left;
+			public Int32 top;
+			public Int32 right;
+			public Int32 bottom;
+
+			public override string ToString()
+			{
+				return String.Format("left:{0},top:{1},right:{2},bottom:{3}", this.left, this.top,this.right, this.bottom);
+			}
+		}
 
 
-    }
+
+
+	}
 }

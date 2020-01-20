@@ -19,8 +19,16 @@ namespace ZSExcelAddIn.Controls.CustomPans
             rf = new MainPan();
             elementHost1.Child = rf;
         }
+        
+        public Microsoft.Office.Interop.Excel.Workbook BindWorkbook
+        {
+            set
+            {
+                rf.BindWorkbook = value;
+            }
+        }
 
-        public void AppendText(string info)
+        public void WriteConsole(string info)
         {
             if (rf != null)
             {

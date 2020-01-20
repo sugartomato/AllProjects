@@ -1,0 +1,680 @@
+REGEDIT4
+
+[HKEY_CLASSES_ROOT\ZSExcelAddIn.Common]
+@="ZSExcelAddIn.Common"
+
+[HKEY_CLASSES_ROOT\ZSExcelAddIn.Common\CLSID]
+@="{05DE5116-6693-320B-920B-D282E80D4684}"
+
+[HKEY_CLASSES_ROOT\CLSID\{05DE5116-6693-320B-920B-D282E80D4684}]
+@="ZSExcelAddIn.Common"
+
+[HKEY_CLASSES_ROOT\CLSID\{05DE5116-6693-320B-920B-D282E80D4684}\InprocServer32]
+@="mscoree.dll"
+"ThreadingModel"="Both"
+"Class"="ZSExcelAddIn.Common"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{05DE5116-6693-320B-920B-D282E80D4684}\InprocServer32\1.0.0.0]
+"Class"="ZSExcelAddIn.Common"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{05DE5116-6693-320B-920B-D282E80D4684}\ProgId]
+@="ZSExcelAddIn.Common"
+
+[HKEY_CLASSES_ROOT\CLSID\{05DE5116-6693-320B-920B-D282E80D4684}\Implemented Categories\{62C8FE65-4EBB-45E7-B440-6E39B2CDBF29}]
+
+[HKEY_CLASSES_ROOT\ZSExcelAddIn.Config]
+@="ZSExcelAddIn.Config"
+
+[HKEY_CLASSES_ROOT\ZSExcelAddIn.Config\CLSID]
+@="{E5990B5E-731E-3167-AB68-1322AA2CF8CC}"
+
+[HKEY_CLASSES_ROOT\CLSID\{E5990B5E-731E-3167-AB68-1322AA2CF8CC}]
+@="ZSExcelAddIn.Config"
+
+[HKEY_CLASSES_ROOT\CLSID\{E5990B5E-731E-3167-AB68-1322AA2CF8CC}\InprocServer32]
+@="mscoree.dll"
+"ThreadingModel"="Both"
+"Class"="ZSExcelAddIn.Config"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{E5990B5E-731E-3167-AB68-1322AA2CF8CC}\InprocServer32\1.0.0.0]
+"Class"="ZSExcelAddIn.Config"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{E5990B5E-731E-3167-AB68-1322AA2CF8CC}\ProgId]
+@="ZSExcelAddIn.Config"
+
+[HKEY_CLASSES_ROOT\CLSID\{E5990B5E-731E-3167-AB68-1322AA2CF8CC}\Implemented Categories\{62C8FE65-4EBB-45E7-B440-6E39B2CDBF29}]
+
+[HKEY_CLASSES_ROOT\ZSExcelAddIn.Msg]
+@="ZSExcelAddIn.Msg"
+
+[HKEY_CLASSES_ROOT\ZSExcelAddIn.Msg\CLSID]
+@="{599BF602-C28D-336D-A6BD-1B1763E23129}"
+
+[HKEY_CLASSES_ROOT\CLSID\{599BF602-C28D-336D-A6BD-1B1763E23129}]
+@="ZSExcelAddIn.Msg"
+
+[HKEY_CLASSES_ROOT\CLSID\{599BF602-C28D-336D-A6BD-1B1763E23129}\InprocServer32]
+@="mscoree.dll"
+"ThreadingModel"="Both"
+"Class"="ZSExcelAddIn.Msg"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{599BF602-C28D-336D-A6BD-1B1763E23129}\InprocServer32\1.0.0.0]
+"Class"="ZSExcelAddIn.Msg"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{599BF602-C28D-336D-A6BD-1B1763E23129}\ProgId]
+@="ZSExcelAddIn.Msg"
+
+[HKEY_CLASSES_ROOT\CLSID\{599BF602-C28D-336D-A6BD-1B1763E23129}\Implemented Categories\{62C8FE65-4EBB-45E7-B440-6E39B2CDBF29}]
+
+[HKEY_CLASSES_ROOT\ZSExcelAddIn.MyFunctions]
+@="ZSExcelAddIn.MyFunctions"
+
+[HKEY_CLASSES_ROOT\ZSExcelAddIn.MyFunctions\CLSID]
+@="{293C0D68-1272-46E1-BC41-CA07EECC37CF}"
+
+[HKEY_CLASSES_ROOT\CLSID\{293C0D68-1272-46E1-BC41-CA07EECC37CF}]
+@="ZSExcelAddIn.MyFunctions"
+
+[HKEY_CLASSES_ROOT\CLSID\{293C0D68-1272-46E1-BC41-CA07EECC37CF}\InprocServer32]
+@="mscoree.dll"
+"ThreadingModel"="Both"
+"Class"="ZSExcelAddIn.MyFunctions"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{293C0D68-1272-46E1-BC41-CA07EECC37CF}\InprocServer32\1.0.0.0]
+"Class"="ZSExcelAddIn.MyFunctions"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{293C0D68-1272-46E1-BC41-CA07EECC37CF}\ProgId]
+@="ZSExcelAddIn.MyFunctions"
+
+[HKEY_CLASSES_ROOT\CLSID\{293C0D68-1272-46E1-BC41-CA07EECC37CF}\Implemented Categories\{62C8FE65-4EBB-45E7-B440-6E39B2CDBF29}]
+
+[HKEY_CLASSES_ROOT\ZSExcelAddIn.RibMyTools]
+@="ZSExcelAddIn.RibMyTools"
+
+[HKEY_CLASSES_ROOT\ZSExcelAddIn.RibMyTools\CLSID]
+@="{5889E543-6AFC-3DFA-8880-B1305A773684}"
+
+[HKEY_CLASSES_ROOT\CLSID\{5889E543-6AFC-3DFA-8880-B1305A773684}]
+@="ZSExcelAddIn.RibMyTools"
+
+[HKEY_CLASSES_ROOT\CLSID\{5889E543-6AFC-3DFA-8880-B1305A773684}\InprocServer32]
+@="mscoree.dll"
+"ThreadingModel"="Both"
+"Class"="ZSExcelAddIn.RibMyTools"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{5889E543-6AFC-3DFA-8880-B1305A773684}\InprocServer32\1.0.0.0]
+"Class"="ZSExcelAddIn.RibMyTools"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{5889E543-6AFC-3DFA-8880-B1305A773684}\ProgId]
+@="ZSExcelAddIn.RibMyTools"
+
+[HKEY_CLASSES_ROOT\CLSID\{5889E543-6AFC-3DFA-8880-B1305A773684}\Implemented Categories\{62C8FE65-4EBB-45E7-B440-6E39B2CDBF29}]
+
+[HKEY_CLASSES_ROOT\ZSExcelAddIn.Controls.ExecuteProgress]
+@="ZSExcelAddIn.Controls.ExecuteProgress"
+
+[HKEY_CLASSES_ROOT\ZSExcelAddIn.Controls.ExecuteProgress\CLSID]
+@="{11187DB2-9448-3E1D-A651-212C525123EF}"
+
+[HKEY_CLASSES_ROOT\CLSID\{11187DB2-9448-3E1D-A651-212C525123EF}]
+@="ZSExcelAddIn.Controls.ExecuteProgress"
+
+[HKEY_CLASSES_ROOT\CLSID\{11187DB2-9448-3E1D-A651-212C525123EF}\InprocServer32]
+@="mscoree.dll"
+"ThreadingModel"="Both"
+"Class"="ZSExcelAddIn.Controls.ExecuteProgress"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{11187DB2-9448-3E1D-A651-212C525123EF}\InprocServer32\1.0.0.0]
+"Class"="ZSExcelAddIn.Controls.ExecuteProgress"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{11187DB2-9448-3E1D-A651-212C525123EF}\ProgId]
+@="ZSExcelAddIn.Controls.ExecuteProgress"
+
+[HKEY_CLASSES_ROOT\CLSID\{11187DB2-9448-3E1D-A651-212C525123EF}\Implemented Categories\{62C8FE65-4EBB-45E7-B440-6E39B2CDBF29}]
+
+[HKEY_CLASSES_ROOT\ZSExcelAddIn.Controls.ExportSheetsToSingleFile]
+@="ZSExcelAddIn.Controls.ExportSheetsToSingleFile"
+
+[HKEY_CLASSES_ROOT\ZSExcelAddIn.Controls.ExportSheetsToSingleFile\CLSID]
+@="{D35CBA9A-9894-3FA5-8A1F-18C027AC317D}"
+
+[HKEY_CLASSES_ROOT\CLSID\{D35CBA9A-9894-3FA5-8A1F-18C027AC317D}]
+@="ZSExcelAddIn.Controls.ExportSheetsToSingleFile"
+
+[HKEY_CLASSES_ROOT\CLSID\{D35CBA9A-9894-3FA5-8A1F-18C027AC317D}\InprocServer32]
+@="mscoree.dll"
+"ThreadingModel"="Both"
+"Class"="ZSExcelAddIn.Controls.ExportSheetsToSingleFile"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{D35CBA9A-9894-3FA5-8A1F-18C027AC317D}\InprocServer32\1.0.0.0]
+"Class"="ZSExcelAddIn.Controls.ExportSheetsToSingleFile"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{D35CBA9A-9894-3FA5-8A1F-18C027AC317D}\ProgId]
+@="ZSExcelAddIn.Controls.ExportSheetsToSingleFile"
+
+[HKEY_CLASSES_ROOT\CLSID\{D35CBA9A-9894-3FA5-8A1F-18C027AC317D}\Implemented Categories\{62C8FE65-4EBB-45E7-B440-6E39B2CDBF29}]
+
+[HKEY_CLASSES_ROOT\ZSExcelAddIn.Controls.frmFocus]
+@="ZSExcelAddIn.Controls.frmFocus"
+
+[HKEY_CLASSES_ROOT\ZSExcelAddIn.Controls.frmFocus\CLSID]
+@="{D9699F83-3502-33D3-932D-BEDE3AABA93B}"
+
+[HKEY_CLASSES_ROOT\CLSID\{D9699F83-3502-33D3-932D-BEDE3AABA93B}]
+@="ZSExcelAddIn.Controls.frmFocus"
+
+[HKEY_CLASSES_ROOT\CLSID\{D9699F83-3502-33D3-932D-BEDE3AABA93B}\InprocServer32]
+@="mscoree.dll"
+"ThreadingModel"="Both"
+"Class"="ZSExcelAddIn.Controls.frmFocus"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{D9699F83-3502-33D3-932D-BEDE3AABA93B}\InprocServer32\1.0.0.0]
+"Class"="ZSExcelAddIn.Controls.frmFocus"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{D9699F83-3502-33D3-932D-BEDE3AABA93B}\ProgId]
+@="ZSExcelAddIn.Controls.frmFocus"
+
+[HKEY_CLASSES_ROOT\CLSID\{D9699F83-3502-33D3-932D-BEDE3AABA93B}\Implemented Categories\{62C8FE65-4EBB-45E7-B440-6E39B2CDBF29}]
+
+[HKEY_CLASSES_ROOT\ZSExcelAddIn.Controls.frmMergeCellText]
+@="ZSExcelAddIn.Controls.frmMergeCellText"
+
+[HKEY_CLASSES_ROOT\ZSExcelAddIn.Controls.frmMergeCellText\CLSID]
+@="{59C9621A-AD57-37DF-A4F1-A8EE7ACA08DE}"
+
+[HKEY_CLASSES_ROOT\CLSID\{59C9621A-AD57-37DF-A4F1-A8EE7ACA08DE}]
+@="ZSExcelAddIn.Controls.frmMergeCellText"
+
+[HKEY_CLASSES_ROOT\CLSID\{59C9621A-AD57-37DF-A4F1-A8EE7ACA08DE}\InprocServer32]
+@="mscoree.dll"
+"ThreadingModel"="Both"
+"Class"="ZSExcelAddIn.Controls.frmMergeCellText"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{59C9621A-AD57-37DF-A4F1-A8EE7ACA08DE}\InprocServer32\1.0.0.0]
+"Class"="ZSExcelAddIn.Controls.frmMergeCellText"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{59C9621A-AD57-37DF-A4F1-A8EE7ACA08DE}\ProgId]
+@="ZSExcelAddIn.Controls.frmMergeCellText"
+
+[HKEY_CLASSES_ROOT\CLSID\{59C9621A-AD57-37DF-A4F1-A8EE7ACA08DE}\Implemented Categories\{62C8FE65-4EBB-45E7-B440-6E39B2CDBF29}]
+
+[HKEY_CLASSES_ROOT\ZSExcelAddIn.Controls.frmSeparateCellText]
+@="ZSExcelAddIn.Controls.frmSeparateCellText"
+
+[HKEY_CLASSES_ROOT\ZSExcelAddIn.Controls.frmSeparateCellText\CLSID]
+@="{460BBEED-793F-3D3B-AFD2-6E637818B34D}"
+
+[HKEY_CLASSES_ROOT\CLSID\{460BBEED-793F-3D3B-AFD2-6E637818B34D}]
+@="ZSExcelAddIn.Controls.frmSeparateCellText"
+
+[HKEY_CLASSES_ROOT\CLSID\{460BBEED-793F-3D3B-AFD2-6E637818B34D}\InprocServer32]
+@="mscoree.dll"
+"ThreadingModel"="Both"
+"Class"="ZSExcelAddIn.Controls.frmSeparateCellText"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{460BBEED-793F-3D3B-AFD2-6E637818B34D}\InprocServer32\1.0.0.0]
+"Class"="ZSExcelAddIn.Controls.frmSeparateCellText"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{460BBEED-793F-3D3B-AFD2-6E637818B34D}\ProgId]
+@="ZSExcelAddIn.Controls.frmSeparateCellText"
+
+[HKEY_CLASSES_ROOT\CLSID\{460BBEED-793F-3D3B-AFD2-6E637818B34D}\Implemented Categories\{62C8FE65-4EBB-45E7-B440-6E39B2CDBF29}]
+
+[HKEY_CLASSES_ROOT\ZSExcelAddIn.Controls.frmTest]
+@="ZSExcelAddIn.Controls.frmTest"
+
+[HKEY_CLASSES_ROOT\ZSExcelAddIn.Controls.frmTest\CLSID]
+@="{0BF68E67-FE5C-3C43-B3E6-C860EB10A6DF}"
+
+[HKEY_CLASSES_ROOT\CLSID\{0BF68E67-FE5C-3C43-B3E6-C860EB10A6DF}]
+@="ZSExcelAddIn.Controls.frmTest"
+
+[HKEY_CLASSES_ROOT\CLSID\{0BF68E67-FE5C-3C43-B3E6-C860EB10A6DF}\InprocServer32]
+@="mscoree.dll"
+"ThreadingModel"="Both"
+"Class"="ZSExcelAddIn.Controls.frmTest"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{0BF68E67-FE5C-3C43-B3E6-C860EB10A6DF}\InprocServer32\1.0.0.0]
+"Class"="ZSExcelAddIn.Controls.frmTest"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{0BF68E67-FE5C-3C43-B3E6-C860EB10A6DF}\ProgId]
+@="ZSExcelAddIn.Controls.frmTest"
+
+[HKEY_CLASSES_ROOT\CLSID\{0BF68E67-FE5C-3C43-B3E6-C860EB10A6DF}\Implemented Categories\{62C8FE65-4EBB-45E7-B440-6E39B2CDBF29}]
+
+[HKEY_CLASSES_ROOT\ZSExcelAddIn.Controls.MergeSheets]
+@="ZSExcelAddIn.Controls.MergeSheets"
+
+[HKEY_CLASSES_ROOT\ZSExcelAddIn.Controls.MergeSheets\CLSID]
+@="{06936543-5941-32EB-B90B-C5E4C91998C1}"
+
+[HKEY_CLASSES_ROOT\CLSID\{06936543-5941-32EB-B90B-C5E4C91998C1}]
+@="ZSExcelAddIn.Controls.MergeSheets"
+
+[HKEY_CLASSES_ROOT\CLSID\{06936543-5941-32EB-B90B-C5E4C91998C1}\InprocServer32]
+@="mscoree.dll"
+"ThreadingModel"="Both"
+"Class"="ZSExcelAddIn.Controls.MergeSheets"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{06936543-5941-32EB-B90B-C5E4C91998C1}\InprocServer32\1.0.0.0]
+"Class"="ZSExcelAddIn.Controls.MergeSheets"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{06936543-5941-32EB-B90B-C5E4C91998C1}\ProgId]
+@="ZSExcelAddIn.Controls.MergeSheets"
+
+[HKEY_CLASSES_ROOT\CLSID\{06936543-5941-32EB-B90B-C5E4C91998C1}\Implemented Categories\{62C8FE65-4EBB-45E7-B440-6E39B2CDBF29}]
+
+[HKEY_CLASSES_ROOT\ZSExcelAddIn.Controls.DateTimePicker]
+@="ZSExcelAddIn.Controls.DateTimePicker"
+
+[HKEY_CLASSES_ROOT\ZSExcelAddIn.Controls.DateTimePicker\CLSID]
+@="{9D783108-4BA7-33F8-955C-974612B2771F}"
+
+[HKEY_CLASSES_ROOT\CLSID\{9D783108-4BA7-33F8-955C-974612B2771F}]
+@="ZSExcelAddIn.Controls.DateTimePicker"
+
+[HKEY_CLASSES_ROOT\CLSID\{9D783108-4BA7-33F8-955C-974612B2771F}\InprocServer32]
+@="mscoree.dll"
+"ThreadingModel"="Both"
+"Class"="ZSExcelAddIn.Controls.DateTimePicker"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{9D783108-4BA7-33F8-955C-974612B2771F}\InprocServer32\1.0.0.0]
+"Class"="ZSExcelAddIn.Controls.DateTimePicker"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{9D783108-4BA7-33F8-955C-974612B2771F}\ProgId]
+@="ZSExcelAddIn.Controls.DateTimePicker"
+
+[HKEY_CLASSES_ROOT\CLSID\{9D783108-4BA7-33F8-955C-974612B2771F}\Implemented Categories\{62C8FE65-4EBB-45E7-B440-6E39B2CDBF29}]
+
+[HKEY_CLASSES_ROOT\ZSExcelAddIn.Controls.PreSuffixInsert]
+@="ZSExcelAddIn.Controls.PreSuffixInsert"
+
+[HKEY_CLASSES_ROOT\ZSExcelAddIn.Controls.PreSuffixInsert\CLSID]
+@="{7C1D1A9F-CA14-3BD5-8067-44AF4C32F711}"
+
+[HKEY_CLASSES_ROOT\CLSID\{7C1D1A9F-CA14-3BD5-8067-44AF4C32F711}]
+@="ZSExcelAddIn.Controls.PreSuffixInsert"
+
+[HKEY_CLASSES_ROOT\CLSID\{7C1D1A9F-CA14-3BD5-8067-44AF4C32F711}\InprocServer32]
+@="mscoree.dll"
+"ThreadingModel"="Both"
+"Class"="ZSExcelAddIn.Controls.PreSuffixInsert"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{7C1D1A9F-CA14-3BD5-8067-44AF4C32F711}\InprocServer32\1.0.0.0]
+"Class"="ZSExcelAddIn.Controls.PreSuffixInsert"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{7C1D1A9F-CA14-3BD5-8067-44AF4C32F711}\ProgId]
+@="ZSExcelAddIn.Controls.PreSuffixInsert"
+
+[HKEY_CLASSES_ROOT\CLSID\{7C1D1A9F-CA14-3BD5-8067-44AF4C32F711}\Implemented Categories\{62C8FE65-4EBB-45E7-B440-6E39B2CDBF29}]
+
+[HKEY_CLASSES_ROOT\ZSExcelAddIn.Controls.RangeSelector]
+@="ZSExcelAddIn.Controls.RangeSelector"
+
+[HKEY_CLASSES_ROOT\ZSExcelAddIn.Controls.RangeSelector\CLSID]
+@="{F2AA4586-2A3D-304E-9EDA-4B56D71316D6}"
+
+[HKEY_CLASSES_ROOT\CLSID\{F2AA4586-2A3D-304E-9EDA-4B56D71316D6}]
+@="ZSExcelAddIn.Controls.RangeSelector"
+
+[HKEY_CLASSES_ROOT\CLSID\{F2AA4586-2A3D-304E-9EDA-4B56D71316D6}\InprocServer32]
+@="mscoree.dll"
+"ThreadingModel"="Both"
+"Class"="ZSExcelAddIn.Controls.RangeSelector"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{F2AA4586-2A3D-304E-9EDA-4B56D71316D6}\InprocServer32\1.0.0.0]
+"Class"="ZSExcelAddIn.Controls.RangeSelector"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{F2AA4586-2A3D-304E-9EDA-4B56D71316D6}\ProgId]
+@="ZSExcelAddIn.Controls.RangeSelector"
+
+[HKEY_CLASSES_ROOT\CLSID\{F2AA4586-2A3D-304E-9EDA-4B56D71316D6}\Implemented Categories\{62C8FE65-4EBB-45E7-B440-6E39B2CDBF29}]
+
+[HKEY_CLASSES_ROOT\Record\{F9D09C14-83A7-324C-B5BF-4FBC7C6DCA19}\1.0.0.0]
+"Class"="ZSExcelAddIn.Controls.RefEditState"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\ZSExcelAddIn.Controls.RefEdit__]
+@="ZSExcelAddIn.Controls.RefEdit__"
+
+[HKEY_CLASSES_ROOT\ZSExcelAddIn.Controls.RefEdit__\CLSID]
+@="{0195566B-99F5-3415-90CE-6B574EF95C7B}"
+
+[HKEY_CLASSES_ROOT\CLSID\{0195566B-99F5-3415-90CE-6B574EF95C7B}]
+@="ZSExcelAddIn.Controls.RefEdit__"
+
+[HKEY_CLASSES_ROOT\CLSID\{0195566B-99F5-3415-90CE-6B574EF95C7B}\InprocServer32]
+@="mscoree.dll"
+"ThreadingModel"="Both"
+"Class"="ZSExcelAddIn.Controls.RefEdit__"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{0195566B-99F5-3415-90CE-6B574EF95C7B}\InprocServer32\1.0.0.0]
+"Class"="ZSExcelAddIn.Controls.RefEdit__"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{0195566B-99F5-3415-90CE-6B574EF95C7B}\ProgId]
+@="ZSExcelAddIn.Controls.RefEdit__"
+
+[HKEY_CLASSES_ROOT\CLSID\{0195566B-99F5-3415-90CE-6B574EF95C7B}\Implemented Categories\{62C8FE65-4EBB-45E7-B440-6E39B2CDBF29}]
+
+[HKEY_CLASSES_ROOT\ZSExcelAddIn.Controls.AfterResizeEventArgs]
+@="ZSExcelAddIn.Controls.AfterResizeEventArgs"
+
+[HKEY_CLASSES_ROOT\ZSExcelAddIn.Controls.AfterResizeEventArgs\CLSID]
+@="{4EC8B7A8-3B94-3431-B37A-49012000FF3C}"
+
+[HKEY_CLASSES_ROOT\CLSID\{4EC8B7A8-3B94-3431-B37A-49012000FF3C}]
+@="ZSExcelAddIn.Controls.AfterResizeEventArgs"
+
+[HKEY_CLASSES_ROOT\CLSID\{4EC8B7A8-3B94-3431-B37A-49012000FF3C}\InprocServer32]
+@="mscoree.dll"
+"ThreadingModel"="Both"
+"Class"="ZSExcelAddIn.Controls.AfterResizeEventArgs"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{4EC8B7A8-3B94-3431-B37A-49012000FF3C}\InprocServer32\1.0.0.0]
+"Class"="ZSExcelAddIn.Controls.AfterResizeEventArgs"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{4EC8B7A8-3B94-3431-B37A-49012000FF3C}\ProgId]
+@="ZSExcelAddIn.Controls.AfterResizeEventArgs"
+
+[HKEY_CLASSES_ROOT\CLSID\{4EC8B7A8-3B94-3431-B37A-49012000FF3C}\Implemented Categories\{62C8FE65-4EBB-45E7-B440-6E39B2CDBF29}]
+
+[HKEY_CLASSES_ROOT\ZSExcelAddIn.Controls.BeforeResizeEventArgs]
+@="ZSExcelAddIn.Controls.BeforeResizeEventArgs"
+
+[HKEY_CLASSES_ROOT\ZSExcelAddIn.Controls.BeforeResizeEventArgs\CLSID]
+@="{3CBE9624-D34C-3762-803A-801834506317}"
+
+[HKEY_CLASSES_ROOT\CLSID\{3CBE9624-D34C-3762-803A-801834506317}]
+@="ZSExcelAddIn.Controls.BeforeResizeEventArgs"
+
+[HKEY_CLASSES_ROOT\CLSID\{3CBE9624-D34C-3762-803A-801834506317}\InprocServer32]
+@="mscoree.dll"
+"ThreadingModel"="Both"
+"Class"="ZSExcelAddIn.Controls.BeforeResizeEventArgs"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{3CBE9624-D34C-3762-803A-801834506317}\InprocServer32\1.0.0.0]
+"Class"="ZSExcelAddIn.Controls.BeforeResizeEventArgs"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{3CBE9624-D34C-3762-803A-801834506317}\ProgId]
+@="ZSExcelAddIn.Controls.BeforeResizeEventArgs"
+
+[HKEY_CLASSES_ROOT\CLSID\{3CBE9624-D34C-3762-803A-801834506317}\Implemented Categories\{62C8FE65-4EBB-45E7-B440-6E39B2CDBF29}]
+
+[HKEY_CLASSES_ROOT\ZSExcelAddIn.Controls.Setting]
+@="ZSExcelAddIn.Controls.Setting"
+
+[HKEY_CLASSES_ROOT\ZSExcelAddIn.Controls.Setting\CLSID]
+@="{F611D704-98AF-3D4C-B0B5-12F2F2304AD1}"
+
+[HKEY_CLASSES_ROOT\CLSID\{F611D704-98AF-3D4C-B0B5-12F2F2304AD1}]
+@="ZSExcelAddIn.Controls.Setting"
+
+[HKEY_CLASSES_ROOT\CLSID\{F611D704-98AF-3D4C-B0B5-12F2F2304AD1}\InprocServer32]
+@="mscoree.dll"
+"ThreadingModel"="Both"
+"Class"="ZSExcelAddIn.Controls.Setting"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{F611D704-98AF-3D4C-B0B5-12F2F2304AD1}\InprocServer32\1.0.0.0]
+"Class"="ZSExcelAddIn.Controls.Setting"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{F611D704-98AF-3D4C-B0B5-12F2F2304AD1}\ProgId]
+@="ZSExcelAddIn.Controls.Setting"
+
+[HKEY_CLASSES_ROOT\CLSID\{F611D704-98AF-3D4C-B0B5-12F2F2304AD1}\Implemented Categories\{62C8FE65-4EBB-45E7-B440-6E39B2CDBF29}]
+
+[HKEY_CLASSES_ROOT\ZSExcelAddIn.Controls.SortWorkSheets]
+@="ZSExcelAddIn.Controls.SortWorkSheets"
+
+[HKEY_CLASSES_ROOT\ZSExcelAddIn.Controls.SortWorkSheets\CLSID]
+@="{C01B750B-1C9F-391B-8B9C-2D39B90BB695}"
+
+[HKEY_CLASSES_ROOT\CLSID\{C01B750B-1C9F-391B-8B9C-2D39B90BB695}]
+@="ZSExcelAddIn.Controls.SortWorkSheets"
+
+[HKEY_CLASSES_ROOT\CLSID\{C01B750B-1C9F-391B-8B9C-2D39B90BB695}\InprocServer32]
+@="mscoree.dll"
+"ThreadingModel"="Both"
+"Class"="ZSExcelAddIn.Controls.SortWorkSheets"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{C01B750B-1C9F-391B-8B9C-2D39B90BB695}\InprocServer32\1.0.0.0]
+"Class"="ZSExcelAddIn.Controls.SortWorkSheets"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{C01B750B-1C9F-391B-8B9C-2D39B90BB695}\ProgId]
+@="ZSExcelAddIn.Controls.SortWorkSheets"
+
+[HKEY_CLASSES_ROOT\CLSID\{C01B750B-1C9F-391B-8B9C-2D39B90BB695}\Implemented Categories\{62C8FE65-4EBB-45E7-B440-6E39B2CDBF29}]
+
+[HKEY_CLASSES_ROOT\ZSExcelAddIn.Controls.CustomPans.MainPan]
+@="ZSExcelAddIn.Controls.CustomPans.MainPan"
+
+[HKEY_CLASSES_ROOT\ZSExcelAddIn.Controls.CustomPans.MainPan\CLSID]
+@="{7F8E2EEE-3C71-3B99-A6D5-5648F38D3A3E}"
+
+[HKEY_CLASSES_ROOT\CLSID\{7F8E2EEE-3C71-3B99-A6D5-5648F38D3A3E}]
+@="ZSExcelAddIn.Controls.CustomPans.MainPan"
+
+[HKEY_CLASSES_ROOT\CLSID\{7F8E2EEE-3C71-3B99-A6D5-5648F38D3A3E}\InprocServer32]
+@="mscoree.dll"
+"ThreadingModel"="Both"
+"Class"="ZSExcelAddIn.Controls.CustomPans.MainPan"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{7F8E2EEE-3C71-3B99-A6D5-5648F38D3A3E}\InprocServer32\1.0.0.0]
+"Class"="ZSExcelAddIn.Controls.CustomPans.MainPan"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{7F8E2EEE-3C71-3B99-A6D5-5648F38D3A3E}\ProgId]
+@="ZSExcelAddIn.Controls.CustomPans.MainPan"
+
+[HKEY_CLASSES_ROOT\CLSID\{7F8E2EEE-3C71-3B99-A6D5-5648F38D3A3E}\Implemented Categories\{62C8FE65-4EBB-45E7-B440-6E39B2CDBF29}]
+
+[HKEY_CLASSES_ROOT\ZSExcelAddIn.Controls.CustomPans.XLSheets]
+@="ZSExcelAddIn.Controls.CustomPans.XLSheets"
+
+[HKEY_CLASSES_ROOT\ZSExcelAddIn.Controls.CustomPans.XLSheets\CLSID]
+@="{4BF5EE55-E45C-3A64-B928-9C9152BD0693}"
+
+[HKEY_CLASSES_ROOT\CLSID\{4BF5EE55-E45C-3A64-B928-9C9152BD0693}]
+@="ZSExcelAddIn.Controls.CustomPans.XLSheets"
+
+[HKEY_CLASSES_ROOT\CLSID\{4BF5EE55-E45C-3A64-B928-9C9152BD0693}\InprocServer32]
+@="mscoree.dll"
+"ThreadingModel"="Both"
+"Class"="ZSExcelAddIn.Controls.CustomPans.XLSheets"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{4BF5EE55-E45C-3A64-B928-9C9152BD0693}\InprocServer32\1.0.0.0]
+"Class"="ZSExcelAddIn.Controls.CustomPans.XLSheets"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{4BF5EE55-E45C-3A64-B928-9C9152BD0693}\ProgId]
+@="ZSExcelAddIn.Controls.CustomPans.XLSheets"
+
+[HKEY_CLASSES_ROOT\CLSID\{4BF5EE55-E45C-3A64-B928-9C9152BD0693}\Implemented Categories\{62C8FE65-4EBB-45E7-B440-6E39B2CDBF29}]
+
+[HKEY_CLASSES_ROOT\ZSExcelAddIn.Controls.CustomPans.MainPanHost]
+@="ZSExcelAddIn.Controls.CustomPans.MainPanHost"
+
+[HKEY_CLASSES_ROOT\ZSExcelAddIn.Controls.CustomPans.MainPanHost\CLSID]
+@="{1D7E70BC-A612-332E-9BC7-0A9676069DA6}"
+
+[HKEY_CLASSES_ROOT\CLSID\{1D7E70BC-A612-332E-9BC7-0A9676069DA6}]
+@="ZSExcelAddIn.Controls.CustomPans.MainPanHost"
+
+[HKEY_CLASSES_ROOT\CLSID\{1D7E70BC-A612-332E-9BC7-0A9676069DA6}\InprocServer32]
+@="mscoree.dll"
+"ThreadingModel"="Both"
+"Class"="ZSExcelAddIn.Controls.CustomPans.MainPanHost"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{1D7E70BC-A612-332E-9BC7-0A9676069DA6}\InprocServer32\1.0.0.0]
+"Class"="ZSExcelAddIn.Controls.CustomPans.MainPanHost"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{1D7E70BC-A612-332E-9BC7-0A9676069DA6}\ProgId]
+@="ZSExcelAddIn.Controls.CustomPans.MainPanHost"
+
+[HKEY_CLASSES_ROOT\CLSID\{1D7E70BC-A612-332E-9BC7-0A9676069DA6}\Implemented Categories\{62C8FE65-4EBB-45E7-B440-6E39B2CDBF29}]
+
+[HKEY_CLASSES_ROOT\Record\{521242DE-451B-3A66-95DC-6ACC23D33C0B}\1.0.0.0]
+"Class"="Microsoft.Office.Core.MsoCTPDockPosition"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\Record\{131B99FF-1156-37C4-8E62-5FCDA60A4BA3}\1.0.0.0]
+"Class"="Microsoft.Office.Core.MsoCTPDockPositionRestrict"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\Record\{AEB31093-5D88-3A09-AC83-4F21F5D1CE77}\1.0.0.0]
+"Class"="Microsoft.Office.Interop.Excel.XlCmdType"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\Record\{DEC4FDE3-6B1F-3929-BB34-0A4EEA0D9BDF}\1.0.0.0]
+"Class"="Microsoft.Office.Interop.Excel.XlFileFormat"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\Record\{6308A6EB-9A98-30D8-9233-57320E2ECC8B}\1.0.0.0]
+"Class"="Microsoft.Office.Interop.Excel.XlFormatConditionType"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\Record\{87653BC4-9903-3687-ACB8-131209A03FB3}\1.0.0.0]
+"Class"="Microsoft.Office.Interop.Excel.XlListObjectSourceType"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\Record\{6753091E-96EF-3ED4-9D9E-FBF93A32A583}\1.0.0.0]
+"Class"="Microsoft.Office.Interop.Excel.XlReferenceStyle"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\Record\{79095E5F-E63F-32CE-A793-C0E4F2DF810D}\1.0.0.0]
+"Class"="Microsoft.Office.Interop.Excel.XlSaveAsAccessMode"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\Record\{23176FF3-58EB-3972-ABB0-3334FBE09478}\1.0.0.0]
+"Class"="Microsoft.Office.Interop.Excel.XlWindowState"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\Record\{66A42111-8339-3F5C-A0B0-805A4555E39E}\1.0.0.0]
+"Class"="Microsoft.Office.Interop.Excel.XlYesNoGuess"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\ZSExcelAddIn.Common+TreeViewItemBase]
+@="ZSExcelAddIn.Common+TreeViewItemBase"
+
+[HKEY_CLASSES_ROOT\ZSExcelAddIn.Common+TreeViewItemBase\CLSID]
+@="{2E9EBCF8-5928-3FD2-9EF6-0D086173263B}"
+
+[HKEY_CLASSES_ROOT\CLSID\{2E9EBCF8-5928-3FD2-9EF6-0D086173263B}]
+@="ZSExcelAddIn.Common+TreeViewItemBase"
+
+[HKEY_CLASSES_ROOT\CLSID\{2E9EBCF8-5928-3FD2-9EF6-0D086173263B}\InprocServer32]
+@="mscoree.dll"
+"ThreadingModel"="Both"
+"Class"="ZSExcelAddIn.Common+TreeViewItemBase"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{2E9EBCF8-5928-3FD2-9EF6-0D086173263B}\InprocServer32\1.0.0.0]
+"Class"="ZSExcelAddIn.Common+TreeViewItemBase"
+"Assembly"="ZSExcelAddIn, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e01f89ff5b89c2fa"
+"RuntimeVersion"="v4.0.30319"
+
+[HKEY_CLASSES_ROOT\CLSID\{2E9EBCF8-5928-3FD2-9EF6-0D086173263B}\ProgId]
+@="ZSExcelAddIn.Common+TreeViewItemBase"
+
+[HKEY_CLASSES_ROOT\CLSID\{2E9EBCF8-5928-3FD2-9EF6-0D086173263B}\Implemented Categories\{62C8FE65-4EBB-45E7-B440-6E39B2CDBF29}]

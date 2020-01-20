@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using MSExcel = Microsoft.Office.Interop.Excel;
 
 #region Office
 using Excel = Microsoft.Office.Interop.Excel;
@@ -18,10 +19,10 @@ namespace ZSExcelAddIn
         /// 将当前活动工作簿的指定名称的工作表设置为活动
         /// </summary>
         /// <param name="sheetName"></param>
-        public static void ActiveSheet(string sheetName)
+        public static void ActiveSheetByName(string sheetName)
         {
 
-            Microsoft.Office.Interop.Excel.Workbook book = Globals.ThisAddIn.Application.ActiveWorkbook;
+            MSExcel.Workbook book = Globals.ThisAddIn.Application.ActiveWorkbook;
             Microsoft.Office.Interop.Excel.Worksheet sheet = null;
             if (book == null) return;
             Int32 i = 0;
@@ -34,6 +35,13 @@ namespace ZSExcelAddIn
                 }
             }
         }
+
+        public static MSExcel.Worksheet ActiveSheet { get { return (MSExcel.Worksheet)App.ActiveSheet; } }
+        public static MSExcel.Application App { get { return (MSExcel.Application)Globals.ThisAddIn.Application; } }
+        public static MSExcel.Workbook ActiveBook { get { return (MSExcel.Workbook)App.ActiveWorkbook; } }
+        public static MSExcel.Range ActiveCell { get { return (MSExcel.Range)App.ActiveCell; } }
+
+
 
         public static string GetActiveSheetName()
         {
@@ -86,11 +94,66 @@ namespace ZSExcelAddIn
             }
         }
 
+		/// <summary>
+		/// 向当前活动窗口的面板写入消息
+		/// </summary>
+		/// <param name="text"></param>
+		public static void WriteConsole(String text)
+		{
+			// 获取当前活动窗口的主taskpan
+			// 如果有，获取控件，写入消息
+			String key = string.Format("{0}({1})", "RuntimeInfo", Globals.ThisAddIn.Application.ActiveWindow.Hwnd);
+			if (Config.TaskPans.ContainsKey(key))
+			{
+				var ctrl = Config.TaskPans[key].Control as Controls.CustomPans.MainPanHost;
+				ctrl.WriteConsole(text);
+			}
+		}
 
+		/// <summary>
+		/// 向指定窗口的面板写入消息
+		/// </summary>
+		/// <param name="text"></param>
+		/// <param name="window"></param>
+		public static void WriteConsole(String text, Int32 hwnd)
+		{
+			// 获取当前活动窗口的主taskpan
+			// 如果有，获取控件，写入消息
+			String key = string.Format("{0}({1})", "RuntimeInfo", hwnd);
+			if (Config.TaskPans.ContainsKey(key))
+			{
+				var ctrl = Config.TaskPans[key].Control as Controls.CustomPans.MainPanHost;
+				ctrl.WriteConsole(text);
+			}
+		}
+
+        /// <summary>
+        /// 是否显示聚光灯
+        /// </summary>
+        public static Boolean IsShowFocusForm { get; set; } = false;
+
+
+        /// <summary>
+        /// 主工具栏
+        /// </summary>
+        public static RibMyTools MainRibbon { get; set; }
+
+
+        #region 提示消息
+
+        public static void ShowError(String msg)
+        {
+            System.Windows.Forms.MessageBox.Show(msg, "提示", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+        }
+
+        public static void ShowSuccess(String msg)
+        {
+            System.Windows.Forms.MessageBox.Show(msg, "提示", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
+        }
+
+        #endregion
 
     }
-
-
 
 
 }

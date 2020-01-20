@@ -47,27 +47,30 @@ namespace ZS.Common.Win32
         /// </remarks>
         public const Int32 WM_MOUSEMOVE = 0x0200;
 
+		/// <summary>
+		/// The left mouse button is down.
+		/// </summary>
+		public const Int32 MK_LBUTTON = 0x0001;
+
+		#endregion
+
+		#region Scroll Bar Notifications
 
 
-        #endregion
 
-        #region Scroll Bar Notifications
+		#endregion
 
+		#region Window Messages
 
-
-        #endregion
-
-        #region Window Messages
-
-        /// <summary>
-        /// Sent when an application requests that a window be created by calling the CreateWindowEx or CreateWindow function. (The message is sent before the function returns.) The window procedure of the new window receives this message after the window is created, but before the window becomes visible.
-        /// [Parameters]
-        ///     wParam
-        ///         This parameter is not used.
-        ///     lParam
-        ///         A pointer to a CREATESTRUCT structure that contains information about the window being created.
-        /// </summary>
-        public const Int32 WM_CREATE = 0x0001;
+		/// <summary>
+		/// Sent when an application requests that a window be created by calling the CreateWindowEx or CreateWindow function. (The message is sent before the function returns.) The window procedure of the new window receives this message after the window is created, but before the window becomes visible.
+		/// [Parameters]
+		///     wParam
+		///         This parameter is not used.
+		///     lParam
+		///         A pointer to a CREATESTRUCT structure that contains information about the window being created.
+		/// </summary>
+		public const Int32 WM_CREATE = 0x0001;
 
         /// <summary>
         /// Sets the text of a window.
@@ -139,6 +142,32 @@ namespace ZS.Common.Win32
         ///         The DPI of the icon being retrieved. This can be used to provide different icons depending on the icon size.
         /// </summary>
         public const Int32 WM_GETICON = 0x007F;
+
+		#endregion
+
+		#region 钩子
+
+		public const Int32 WH_CALLWNDPROC = 4;
+		public const Int32 WH_CALLWNDPROCRET = 12;
+		public const Int32 WH_CBT = 5;
+		public const Int32 WH_DEBUG = 9;
+		public const Int32 WH_FOREGROUNDIDLE = 11;
+		public const Int32 WH_GETMESSAGE = 3;
+		public const Int32 WH_JOURNALPLAYBACK = 1;
+		public const Int32 WH_JOURNALRECORD = 0;
+		public const Int32 WH_KEYBOARD = 2;
+		public const Int32 WH_KEYBOARD_LL = 13;
+		/// <summary>
+		/// Installs a hook procedure that monitors mouse messages. For more information, see the MouseProc hook procedure.
+		/// </summary>
+		public const Int32 WH_MOUSE = 7;
+		/// <summary>
+		/// Installs a hook procedure that monitors low-level mouse input events. For more information, see the LowLevelMouseProc hook procedure.
+		/// </summary>
+		public const Int32 WH_MOUSE_LL = 14;
+		public const Int32 WH_MSGFILTER = -1;
+		public const Int32 WH_SHELL = 10;
+		public const Int32 WH_SYSMSGFILTER = 6;
 
 		#endregion
 

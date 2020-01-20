@@ -119,6 +119,8 @@ namespace ZS.Common.Win32
                 foreach (var keyName in _subKeyNames)
                 {
                     Microsoft.Win32.RegistryKey regTmp = regKey.OpenSubKey(keyName);
+
+                    
                     object displayName = regTmp.GetValue("DisplayName");
                     if (displayName != null)
                     {

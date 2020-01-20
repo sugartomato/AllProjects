@@ -53,6 +53,8 @@ namespace KK.ModifyMacAddress
         {
             try
             {
+                tsslSystemInfo.Text = "系统版本：" + System.Environment.OSVersion.Version.ToString();
+
                 String[] connIDs = ZS.Common.Win32.Net.NetworkAdapter.GetAllConnectionID();
                 for (Int32 i = 0; i < connIDs.Length; i++)
                 {
@@ -70,7 +72,7 @@ namespace KK.ModifyMacAddress
                             if (listConnIDS.Items[i].ToString() == activeConnID)
                             {
                                 listConnIDS.SelectedIndex = i;
-                                return;
+                                break;
                             }
                         }
                     }
@@ -78,6 +80,7 @@ namespace KK.ModifyMacAddress
                 catch (Exception)
                 {
                 }
+
 
             }
             catch (Exception ex)
@@ -151,18 +154,27 @@ namespace KK.ModifyMacAddress
                 Boolean result = ZS.Common.Win32.Net.NetworkAdapter.ModifyMacAddress_ByConnectionID(connID, mac);
                 if (result)
                 {
-                    result =ZS.Common.Win32.Net.NetworkAdapter.Disable_ByConnectionID(connID);
-                    System.Threading.Thread.Sleep(3000);
-                    result = ZS.Common.Win32.Net.NetworkAdapter.Enable_ByConnectionID(connID);
-                    if (result)
+                    if (System.Environment.OSVersion.Version.Major >= 6)
                     {
-                        ShowInfo("修改完成！");
-                        LoadSelectedConnMAC();
+                        result = ZS.Common.Win32.Net.NetworkAdapter.Disable_ByConnectionID(connID);
+                        System.Threading.Thread.Sleep(3000);
+                        result = ZS.Common.Win32.Net.NetworkAdapter.Enable_ByConnectionID(connID);
+                        if (result)
+                        {
+                            ShowInfo("修改MAC并重新连接网络完成！");
+                            LoadSelectedConnMAC();
+                        }
+                        else
+                        {
+                            ShowError("MAC地址修改成功，但重启网卡失败！");
+                        }
                     }
                     else
                     {
-                        ShowError("MAC地址修改成功，但重启网卡失败！");
+                        ShowInfo("MAC地址修改完成。XP系统需要手动禁用启用网卡！");
                     }
+
+                    ShowNetCpl();
                 }
                 else
                 {
@@ -178,6 +190,15 @@ namespace KK.ModifyMacAddress
             {
                 this.Enabled = true;
             }
+        }
+
+        private void ShowNetCpl()
+        {
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/c Control ncpa.cpl";
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            System.Diagnostics.Process.Start(startInfo);
         }
 
         private void LoadSelectedConnMAC()
@@ -202,6 +223,35 @@ namespace KK.ModifyMacAddress
         {
             frmHelp frm = new frmHelp();
             frm.ShowDialog();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                String connID = listConnIDS.SelectedItem.ToString();
+                String mac = String.Empty;
+
+                this.Enabled = false;
+                Boolean result = ZS.Common.Win32.Net.NetworkAdapter.ModifyMacAddress_ByConnectionID(connID, mac);
+                if (result)
+                {
+                    ShowInfo("MAC地址恢复到初始！重启电脑后生效。");
+                }
+                else
+                {
+                    ShowError("MAC地址修改失败！");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                ShowError("修改失败：" + ex.Message);
+            }
+            finally
+            {
+                this.Enabled = true;
+            }
         }
     }
 }

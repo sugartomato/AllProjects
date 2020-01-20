@@ -24,11 +24,10 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
 
             <Border Grid.Row="0">
-                <TabControl Style="{StaticResource TabControl_Left}">
+                <TabControl Name="ZS_Tab_Main" Style="{StaticResource TabControl_Left}" SelectionChanged="TabControl_SelectionChanged">
                     <TabControl.Resources>
                         <Style TargetType="TabItem" BasedOn="{StaticResource TabItem_Left}"></Style>
                     </TabControl.Resources>
@@ -43,9 +42,7 @@
                             <DockPanel Margin="1">
                                 <ToolBarTray DockPanel.Dock="Bottom" >
                                     <ToolBar  Height="25">
-                                        <Button>刷新</Button>
-                                        <Button>刷新</Button>
-                                        <Button>刷新</Button>
+                                        <Button>XX</Button>
                                         <Button Command="Copy">复制</Button>
                                     </ToolBar>
                                 </ToolBarTray>
@@ -79,7 +76,9 @@
                     <!--#endregion 信息输出选项卡-->
                     <TabItem Name="ZS_Tab_Console">
                         <TabItem.Header>
-                            <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Name="ZS_Text_InfoCount">
+                                </TextBlock>
                                 <TextBlock>
                                 消息
                                 </TextBlock>

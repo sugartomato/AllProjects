@@ -77,14 +77,14 @@ namespace ZS.Common.Test
         [TestMethod]
         public void CompressFileAndSaveTest()
         {
-            string imgPath = @"D:\Camera\倒流香\";
+            string imgPath = @"C:\Users\sugar\Desktop\配套\2";
 
             String[] files = System.IO.Directory.GetFiles(imgPath);
             foreach (var file in files)
             {
                 if (file.EndsWith(".jpg"))
                 {
-                    if (ImageHelper.Compress(file, 90))
+                    if (ImageHelper.Compress(file, @"C:\Users\sugar\Desktop\配套\1\", 60))
                     {
                         Console.WriteLine("成功");
                     }

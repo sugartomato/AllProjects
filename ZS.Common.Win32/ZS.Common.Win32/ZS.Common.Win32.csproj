@@ -31,6 +31,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>ZS.Common.Win32.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -43,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="APISets\DLLNameDef.cs" />
     <Compile Include="APISets\SystemDefinedMessages.cs" />
     <Compile Include="APISets\Win32API_Common.cs" />
     <Compile Include="APISets\Win32API_DynamicLinkLibrary.cs" />
@@ -53,10 +60,13 @@
     <Compile Include="APISets\Win32API_MessageAndMessageQueues.cs" />
     <Compile Include="APISets\Win32API_ProcessAndThread.cs" />
     <Compile Include="APISets\Win32API_Rectangles.cs" />
+    <Compile Include="APISets\Win32API_Timezone.cs" />
     <Compile Include="APISets\Win32API_WindowClass.cs" />
     <Compile Include="APISets\Win32API_Windows.cs" />
     <Compile Include="APISets\Win32API_Cursors.cs" />
+    <Compile Include="APISets\Win32API_WindowsGDI.cs" />
     <Compile Include="APISets\Win32API_WindowsMultimedia.cs" />
+    <Compile Include="APISets\Win32API_WinReg.cs" />
     <Compile Include="ContextMenu\ContextMenu.cs" />
     <Compile Include="Desktop.cs" />
     <Compile Include="InstalledApp.cs" />
@@ -76,14 +86,19 @@
     <Compile Include="Win32Provider\Win32_NetworkAdapter.cs" />
     <Compile Include="Win32Provider\Win32_NetworkAdapterConfiguration.cs" />
     <Compile Include="Win32Provider\Win32_OperatingSystem.cs" />
+    <Compile Include="Win32Provider\Win32_PhysicalMedia.cs" />
     <Compile Include="Win32Provider\Win32_Product.cs" />
     <Compile Include="Win32Provider\Win32_Service.cs" />
     <Compile Include="Win32Provider\Win32_StartupCommand.cs" />
     <Compile Include="WinCtrlAPI\ListView.cs" />
+    <Compile Include="Window.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="API参考资料.txt" />
     <Content Include="API类型与CLR类型对照表.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ZS.Common.Win32.pfx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

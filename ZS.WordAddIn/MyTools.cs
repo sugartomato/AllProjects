@@ -33,8 +33,7 @@ using ZS.Common;
 
 namespace ZS.WordAddIn
 {
-    [ComVisible(true)]
-    public class MyTools : Office.IRibbonExtensibility
+    public partial class MyTools : Office.IRibbonExtensibility
     {
         private Office.IRibbonUI ribbon;
         private Word.Application m_App;
@@ -239,32 +238,6 @@ namespace ZS.WordAddIn
 
         #endregion
 
-        #region 测试选项卡回调函数
-
-        /// <summary>
-        /// 测试功能
-        /// </summary>
-        /// <param name="ctrl"></param>
-        public void OnClick_Test(Office.IRibbonControl ctrl)
-        {
-            switch (ctrl.Id)
-            {
-                case "btnTest_Form_Size":
-                    TestForms.frmTest_WindowsSize frm = new TestForms.frmTest_WindowsSize();
-                    frm.DocumentFullName = Globals.ThisAddIn.Application.ActiveDocument.FullName;
-                    frm.BringToFront();
-                    frm.Show();
-                    break;
-                case "qatbtnTest":
-                    WinForm.MessageBox.Show("TTT");
-                    break;
-                default:
-                    break;
-            }
-
-        }
-
-        #endregion
 
         #region 文字处理
 

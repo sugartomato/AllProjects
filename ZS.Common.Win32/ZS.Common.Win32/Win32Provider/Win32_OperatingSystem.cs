@@ -8,7 +8,7 @@ namespace ZS.Common.Win32.Win32Provider
     /// <summary>
     /// The Win32_OperatingSystem WMI class represents a Windows-based operating system installed on a computer.
     /// </summary>
-    public class Win32_OperatingSystem:Win32ProviderBase
+    public class Win32_OperatingSystem : Win32ProviderBase
     {
         /// <summary>
         /// Name of the disk drive from which the Windows operating system starts.
@@ -77,7 +77,7 @@ namespace ZS.Common.Win32.Win32Provider
     /// <summary>
     /// Bit flags that identify the product suites available on the system.
     /// </summary>
-    public enum Win32_OperatingSystem_SuiteMaskEnum:UInt32
+    public enum Win32_OperatingSystem_SuiteMaskEnum : UInt32
     {
         Small_Business = 1,
         Enterprise = 2,

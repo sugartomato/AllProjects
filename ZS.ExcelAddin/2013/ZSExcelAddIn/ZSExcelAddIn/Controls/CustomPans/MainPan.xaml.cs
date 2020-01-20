@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Excel = Microsoft.Office.Interop.Excel;
+using MSExcel = Microsoft.Office.Interop.Excel;
 
 namespace ZSExcelAddIn.Controls.CustomPans
 {
@@ -21,19 +21,28 @@ namespace ZSExcelAddIn.Controls.CustomPans
     /// </summary>
     public partial class MainPan : UserControl
     {
+
+        #region 初始化
         public MainPan()
         {
             InitializeComponent();
-
             // 注册一个事件，让工作表活动时，刷新工作表列表
             Globals.ThisAddIn.Application.SheetActivate += Application_SheetActivate;
             Globals.ThisAddIn.Application.SheetDeactivate += Application_SheetDeactivate;
             //Globals.ThisAddIn.Application.SheetSelectionChange += Application_SheetSelectionChange;
         }
 
-        private void Application_SheetSelectionChange(object Sh, Excel.Range Target)
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
+            //ZS_Text_Console.Document.text;
             LoadSheetsList();
+            ZS_Tab_Console.IsSelected = false;
+        }
+        #endregion
+
+        private void Application_SheetSelectionChange(object Sh, MSExcel.Range Target)
+        {
+            //LoadSheetsList();
         }
 
         private void Application_SheetDeactivate(object Sh)
@@ -43,8 +52,10 @@ namespace ZSExcelAddIn.Controls.CustomPans
 
         private void Application_SheetActivate(object Sh)
         {
-            LoadSheetsList();
+            //LoadSheetsList();
         }
+
+        Int32 _newMessageCount = 0;
 
         public string ConsoleText
         {
@@ -81,16 +92,16 @@ namespace ZSExcelAddIn.Controls.CustomPans
 
                 // 将内容滚动到最新的地方
                 ZS_Text_Console.ScrollToEnd();
+
+                if (!ZS_Tab_Console.IsSelected)
+                {
+                    _newMessageCount += 1;
+                    ZS_Text_InfoCount.Text = _newMessageCount.ToString();
+                }
+
             }
         }
 
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            //ZS_Text_Console.Document.text;
-
-            LoadSheetsList();
-
-        }
 
         #region 工作表列表
 
@@ -98,18 +109,19 @@ namespace ZSExcelAddIn.Controls.CustomPans
         {
             try
             {
-                Excel._Worksheet xlSheet = null;
+                MSExcel._Worksheet xlSheet = null;
                 XLSheets sheetList = new XLSheets();
-                sheetList.SheetName = Globals.ThisAddIn.Application.ActiveWorkbook.Name;
+                if (_propBindWorkbook == null) return;
+                sheetList.SheetName = _propBindWorkbook.Name;
 
                 //MessageBox.Show(Globals.ThisAddIn.Application.ActiveWorkbook.Worksheets.Count.ToString());
-                if (Globals.ThisAddIn.Application.ActiveWorkbook.Worksheets.Count > 0)
+                if (_propBindWorkbook.Worksheets.Count > 0)
                 {
 
                     int i = 0;
-                    for (i = 1; i <= Globals.ThisAddIn.Application.ActiveWorkbook.Worksheets.Count; ++i)
+                    for (i = 1; i <= _propBindWorkbook.Worksheets.Count; ++i)
                     {
-                        xlSheet = (Excel._Worksheet)Globals.ThisAddIn.Application.ActiveWorkbook.Worksheets[i];
+                        xlSheet = (MSExcel._Worksheet)_propBindWorkbook.Worksheets[i];
                         string name = xlSheet.Name;
                         XLSheets tmpObj = new XLSheets();
                         tmpObj.SheetName = name;
@@ -167,11 +179,45 @@ namespace ZSExcelAddIn.Controls.CustomPans
             }
             catch (Exception ex)
             {
-                WriteConsole(ex.Message, true);
+                WriteConsole(ex.Message + ex.StackTrace, true);
             }
 
         }
 
+        /// <summary>
+        /// 工作表列表菜单树双击
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ZS_Tree_SheetList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                object o = ZS_Tree_SheetList.SelectedItem;
+                if (o != null)
+                {
+                    XLSheets x = o as XLSheets;
+                    ((MSExcel.Worksheet)_propBindWorkbook.Worksheets[x.SheetName]).Activate();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                WriteConsole(ex.Message + ex.StackTrace, true);
+            }
+        }
+
+        private MSExcel.Workbook _propBindWorkbook = null;
+        /// <summary>
+        /// 该面板控件绑定的工作簿对象。
+        /// </summary>
+        public MSExcel.Workbook BindWorkbook
+        {
+            set
+            {
+                _propBindWorkbook = value;
+            }
+        } 
 
         #endregion
 
@@ -188,21 +234,13 @@ namespace ZSExcelAddIn.Controls.CustomPans
 
         #endregion
 
-        private void ZS_Tree_SheetList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            try
+            TabItem item = (TabItem)ZS_Tab_Main.SelectedItem;
+            if (item.Name == "ZS_Tab_Console")
             {
-                object o = ZS_Tree_SheetList.SelectedItem;
-                if (o != null)
-                {
-                    XLSheets x = o as XLSheets;
-                    Common.ActiveSheet(x.SheetName);
-                }
-
-            }
-            catch (Exception ex)
-            {
-                WriteConsole(ex.Message, true);
+                ZS_Text_InfoCount.Text = "";
+                _newMessageCount = 0;
             }
         }
     }

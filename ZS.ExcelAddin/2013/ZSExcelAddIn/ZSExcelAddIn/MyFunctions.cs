@@ -6,12 +6,14 @@ using System.Runtime.InteropServices;
 using Microsoft.Office.Interop.Excel;
 using Microsoft.Win32;
 
+using MSExcel = Microsoft.Office.Interop.Excel;
 
 namespace ZSExcelAddIn
 {
 	[Guid("293c0d68-1272-46e1-bc41-ca07eecc37cf")]
 	[ClassInterface(ClassInterfaceType.AutoDual)]
 	[ComVisible(true)]
+    //[ProgId("ZSExcelFunctions")]
 	public class MyFunctions:UDFBase
 	{
 
@@ -37,9 +39,41 @@ namespace ZSExcelAddIn
 			Range r = range as Range;
 			return r.Value + val + Globals.ThisAddIn.Application.ActiveWorkbook.Name;
 		}
-	}
 
-	public abstract class UDFBase
+        public Object ZSAddPrefix(MSExcel.Range rng, String prefix)
+        {
+            try
+            {
+                if (rng != null && rng.Value2 !=null && !String.IsNullOrEmpty(prefix))
+                {
+                    return prefix + Convert.ToString(rng.Value2);
+                }
+                return rng?.Value2;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+       
+        public Object ZSAddSufix(MSExcel.Range rng, String sufix)
+        {
+            try
+            {
+                if (rng != null && rng.Value2 != null && !String.IsNullOrEmpty(sufix))
+                {
+                    return Convert.ToString(rng.Value2) + sufix;
+                }
+                return rng?.Value2;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+    }
+
+    public abstract class UDFBase
 	{
 		/// <summary>
 		/// 解决在某些机器的Excel提示找不到mscoree.dll的问题

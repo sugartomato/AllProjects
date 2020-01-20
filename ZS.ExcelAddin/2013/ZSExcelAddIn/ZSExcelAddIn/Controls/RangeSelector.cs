@@ -58,13 +58,17 @@ namespace ZSExcelAddIn.Controls
 
             if (rng != null)
             {
-                this.txtAddress.Text = (rng as Microsoft.Office.Interop.Excel.Range).Address;
+
+                _propSheetName = (rng as Microsoft.Office.Interop.Excel.Range).Worksheet.Name;
+                _propAddress = (rng as Microsoft.Office.Interop.Excel.Range).Address;
+                this.txtAddress.Text = _propSheetName + "!" + _propAddress;
             }
 
             parentFrm.Visible = true;
         }
 
 
+        private String _propAddress = String.Empty;
         /// <summary>
         /// 所选择区域
         /// </summary>
@@ -72,15 +76,32 @@ namespace ZSExcelAddIn.Controls
         {
             get
             {
-                return txtAddress.Text;
+                return _propAddress;
             }
 
             set
             {
                 if (value != null)
                 {
-                    txtAddress.Text = value;
+                    _propAddress = value;
+                    txtAddress.Text = _propAddress;
                 }
+            }
+        }
+
+        private String _propSheetName = String.Empty;
+        /// <summary>
+        /// 获取所选择区域所在的工作表名
+        /// </summary>
+        public String SheetName
+        {
+            get
+            {
+                return _propSheetName;
+            }
+            set
+            {
+                _propSheetName = value;
             }
         }
 

@@ -17,6 +17,7 @@
             <TextBlock Name="txtConsole" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto"  ScrollViewer.HorizontalScrollBarVisibility="Auto" >
 
             </TextBlock>
+            <Button Content="获取环境变量" Width="Auto" d:LayoutOverrides="Height" Click="Button_Click_1"/>
         </StackPanel>
     </Grid>
 </UserControl>

@@ -84,7 +84,8 @@ namespace ZS.Common.Win32.Win32Provider.Tests
             {
                 foreach (var o in list)
                 {
-                    Console.WriteLine(o.ToDebugString());
+                    //Console.WriteLine(o.ToDebugString());
+                    Console.WriteLine(o.ToDebugString(new List<string>() { "Name", "DisplayName" }));
                 }
             }
         }
@@ -101,6 +102,20 @@ namespace ZS.Common.Win32.Win32Provider.Tests
                 }
             }
         }
+
+        [TestMethod()]
+        public void GetAllTest_Win32_PhysicalMedia()
+        {
+            List<Win32Provider.Win32_PhysicalMedia> list = Win32.Win32Provider.ProviderHelper<Win32Provider.Win32_PhysicalMedia>.GetAll();
+            if (list != null && list.Count > 0)
+            {
+                foreach (var o in list)
+                {
+                    Console.WriteLine(o.ToDebugString(new List<string>() { "Name"}));
+                }
+            }
+        }
+
 
     }
 }
